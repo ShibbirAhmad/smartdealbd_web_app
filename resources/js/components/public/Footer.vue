@@ -136,7 +136,7 @@
           </div>
         </div>
       </div>
-      <div class="row footer_info_row">
+      <!-- <div class="row footer_info_row">
           <div class="end_footer" >
                 <p class="f_info_left">
                   {{ footer_setting.copyright_info  }}
@@ -145,7 +145,7 @@
                 Design & Developed by Mohasagor it Solution
               </p>
           </div>
-      </div>
+      </div> -->
     </footer>
   </div>
 </template>
@@ -192,7 +192,7 @@ export default {
         .catch();
     },
 
-  
+
   },
   computed:{
 

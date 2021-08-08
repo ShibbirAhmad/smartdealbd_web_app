@@ -43,63 +43,36 @@
           </li>
         </div>
         <div class="main-header-right">
-          <li v-if="Object.keys(user).length">
-            <div class="dropdown">
-              <a
-                class="btn btn-secondary dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                {{ user.mobile_no }}
-              </a>
-              <div
-                class="dropdown-menu"
-                aria-labelledby="dropdownMenuButton"
-                style="padding: 15px 15px"
-              >
-                <router-link
-                  :to="{ name: 'UserDashboard' }"
-                  class="dropdown-item"
-                  href="#"
-                  >Dashboard</router-link
-                ><br /><br />
-                <router-link
-                  :to="{ name: 'PasswordEdit' }"
-                  class="dropdown-item"
-                  href="#"
-                  >Change Password</router-link
-                ><br /><br />
-                <router-link
-                  :to="{ name: 'user_new_password_set' }"
-                  class="dropdown-item"
-                  href="#"
-                  >Set New Password</router-link
-                ><br /><br />
 
-                <a class="dropdown-item" href="#" @click="Logout">Logout</a>
-              </div>
-            </div>
+          <li>
+             <a class="contact_no_heading" :href="'tel:'+general_setting.header_contact_number"><i class="fa fa-phone "></i> {{ general_setting.header_contact_number }}</a>
           </li>
-         <li v-else>
 
-            <router-link   :to="{name:'otpLogin'}">
-              <i class="fa fa-user"></i> User
-            </router-link>
-
-          </li>
-           <li>
-             <router-link  target="_blank" :to="{name : 'merchant_login' }" > <i class="fa fa-users"></i> Merchant</router-link>
-          </li>
         </div>
       </div>
     </div>
+     <!-- code here -->
+
     <div class="menu" id="navbar">
+
+     <!-- left menus start  -->
+        <div class="left_menu_container">
+          <h4 class="left_menu_headidng" > <i class="fa fa-bars" id="left_menu_icon"></i>  Categories </h4>
+          <ul class="left_category_menu">
+                <li v-for="(left_category,l_c_index) in categories" :key="l_c_index" >
+                      <img :src="base_url+left_category.icon_image" class="c_icon_image">
+                      <router-link :to="{ name: 'PublcaCategory', params: { slug: left_category.slug } }">
+                        {{ left_category.name }}
+                      </router-link>
+                </li>
+          </ul>
+        </div>
+
+      <!-- left menus end  -->
+
       <ul class="menu-list" id="menu_list">
-        <li v-for="category in categories" :key="category.id" class="menu-item">
-          <router-link
+        <li v-for="(category,category_index) in categories" :key="category_index" class="menu-item">
+          <router-link v-if="category_index < 10"
             :to="{ name: 'PublcaCategory', params: { slug: category.slug } }"
             class="menu-item-link"
           >

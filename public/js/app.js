@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "chunks/" + ({"0":"category_slider_add","6":"slider_add","AddSaleExchange":"AddSaleExchange","accoun_purpose_edit":"accoun_purpose_edit","account_purpose_add":"account_purpose_add","addCompany":"addCompany","addCompanySale":"addCompanySale","addFabricsSupplier":"addFabricsSupplier","addLoan":"addLoan","addOrder":"addOrder","addPurchase":"addPurchase","addPurchasefabrics":"addPurchasefabrics","addSale":"addSale","add_factory":"add_factory","add_merchant":"add_merchant","add_sale_campaign":"add_sale_campaign","add_selling_offer":"add_selling_offer","add_team_member":"add_team_member","addwholesale":"addwholesale","adminAdd":"adminAdd","adminProfile":"adminProfile","admin_dashboard":"admin_dashboard","AccountReport":"AccountReport","DeliveredOrder":"DeliveredOrder","OrderProfite":"OrderProfite","ReturnOrder":"ReturnOrder","SaleProfite":"SaleProfite","approvedOrder":"approvedOrder","cancelOrder":"cancelOrder","newOrder":"newOrder","officesaleReport":"officesaleReport","order":"order","orderReport":"orderReport","pendingOrder":"pendingOrder","profiteReport":"profiteReport","purchaseReport":"purchaseReport","shipmentOrder":"shipmentOrder","sub_category":"sub_category","sub_sub_category":"sub_sub_category","supplier_Report":"supplier_Report","wholesaleOrder":"wholesaleOrder","assign_admin_permission":"assign_admin_permission","assingRoleAdmin":"assingRoleAdmin","attributeAdd":"attributeAdd","balance_add":"balance_add","banner":"banner","bill_statement_add":"bill_statement_add","buy_one_get_one":"buy_one_get_one","categoryAdd":"categoryAdd","category_slider_edit":"category_slider_edit","categoryedit":"categoryedit","checkout":"checkout","cityAdd":"cityAdd","cityEdit":"cityEdit","code_verified":"code_verified","commentAdd":"commentAdd","companysale":"companysale","contact_messgae_reply":"contact_messgae_reply","coupon_add":"coupon_add","coupon_edit":"coupon_edit","courierAdd":"courierAdd","creditAdd":"creditAdd","creditEdit":"creditEdit","customer":"customer","debitEdit":"debitEdit","editAdmin":"editAdmin","editComment":"editComment","editCompany":"editCompany","editCourier":"editCourier","editPermission":"editPermission","edit_factory":"edit_factory","edit_merchant":"edit_merchant","edit_offer":"edit_offer","edit_sale_campaign":"edit_sale_campaign","edit_selling_offer":"edit_selling_offer","edit_sub_city":"edit_sub_city","edit_team_member":"edit_team_member","flash_deals":"flash_deals","fondtransferAdd":"fondtransferAdd","investment_add":"investment_add","investment_edit":"investment_edit","merchant_order_view":"merchant_order_view","merchant_password_edit":"merchant_password_edit","merchant_profile":"merchant_profile","merchant_profile_edit":"merchant_profile_edit","occasional_campaign":"occasional_campaign","offerAdd":"offerAdd","orderEdit":"orderEdit","otp_login":"otp_login","passwordChange":"passwordChange","print_house_add":"print_house_add","print_product_add":"print_product_add","productStock":"productStock","product_transfer_add":"product_transfer_add","purchaseEdit":"purchaseEdit","purchaseView":"purchaseView","receieve_printed_product":"receieve_printed_product","resellerAdd":"resellerAdd","resellerEdit":"resellerEdit","roleAdd":"roleAdd","sale_campaign":"sale_campaign","seasonal campaign":"seasonal campaign","showroom_add":"showroom_add","showroom_edit":"showroom_edit","showroom_manager_add":"showroom_manager_add","showroom_manager_edit":"showroom_manager_edit","slider_edit":"slider_edit","sms_campaign":"sms_campaign","sub_category_add":"sub_category_add","sub_category_edit":"sub_category_edit","sub_city_add":"sub_city_add","sub_sub_category_add":"sub_sub_category_add","sub_sub_category_edit":"sub_sub_category_edit","supplierAdd":"supplierAdd","supplierEdit":"supplierEdit","user":"user","userLogin":"userLogin","admin_login":"admin_login","merchant_password_reset":"merchant_password_reset","merchant_register":"merchant_register","merchnat_code_verified":"merchnat_code_verified","merchnat_login":"merchnat_login","new_password_merchant":"new_password_merchant","user_password":"user_password","user_password_reset":"user_password_reset","user_profile_edit":"user_profile_edit","user_register":"user_register","variaantAdd":"variaantAdd","vendors~about_and_contact~add_carrier~company_assets_add~company_assets_edit~edit_carrier~footer_set~ac1e2ab6":"vendors~about_and_contact~add_carrier~company_assets_add~company_assets_edit~edit_carrier~footer_set~ac1e2ab6","about_and_contact":"about_and_contact","add_carrier":"add_carrier","company_assets_add":"company_assets_add","company_assets_edit":"company_assets_edit","edit_carrier":"edit_carrier","footer_setting":"footer_setting","generl setting":"generl setting","merchant_product_add":"merchant_product_add","merchant_product_edit":"merchant_product_edit","order_shipment_return":"order_shipment_return","productAdd":"productAdd","productEdit":"productEdit","show_carrier":"show_carrier","theme_setting":"theme_setting","vendors~debitAdd":"vendors~debitAdd","debitAdd":"debitAdd","vendors~merchant_order~merchnat_product_manage~product":"vendors~merchant_order~merchnat_product_manage~product","merchant_order":"merchant_order","merchnat_product_manage":"merchnat_product_manage","product":"product","viewOrder":"viewOrder","viewSale":"viewSale","Loan":"Loan","LoanDetails":"LoanDetails","SupplierAmount":"SupplierAmount","about_seller":"about_seller","about_us":"about_us","account_purpose":"account_purpose","admin":"admin","attribute":"attribute","category":"category","category_slider":"category_slider","company_sale_details":"company_sale_details","managefabricsPurchase":"managefabricsPurchase","officesale":"officesale","purchase":"purchase","slider":"slider","variant":"variant","applied_user":"applied_user","balance":"balance","bill_statement":"bill_statement","bill_statement_details":"bill_statement_details","city":"city","comment":"comment","company":"company","company_assets":"company_assets","company_payment_details":"company_payment_details","contact_messgae":"contact_messgae","contact_us":"contact_us","coupon":"coupon","courier":"courier","credit":"credit","creditDue":"creditDue","debit":"debit","fabricsSupplier":"fabricsSupplier","factory_list":"factory_list","fondtransfer":"fondtransfer","home_carrier":"home_carrier","how_to_buy":"how_to_buy","investment":"investment","investor_details":"investor_details","merchant":"merchant","merchant_dashboard":"merchant_dashboard","offer":"offer","order_details":"order_details","order_history":"order_history","paidPayment":"paidPayment","paymentInvoice":"paymentInvoice","paymnetDetails":"paymnetDetails","print_details":"print_details","print_house":"print_house","print_house_details":"print_house_details","product_transfer":"product_transfer","product_transfer_details":"product_transfer_details","public_category":"public_category","public_product_search":"public_product_search","public_sub_category":"public_sub_category","public_sub_sub_category":"public_sub_sub_category","receive_print_details":"receive_print_details","resellerHome":"resellerHome","return_policy":"return_policy","role":"role","salaryDetails":"salaryDetails","selling_offer":"selling_offer","shipment":"shipment","showroom":"showroom","showroom_manager":"showroom_manager","sub_city":"sub_city","subscriber_list":"subscriber_list","supplier":"supplier","team":"team","team_member":"team_member","teamsalary":"teamsalary","unpaidPayment":"unpaidPayment","user_dashboard":"user_dashboard","user_profile":"user_profile","vendors~single_product":"vendors~single_product","single_product":"single_product"}[chunkId]||chunkId) + ".bundle.js"
+/******/ 		return __webpack_require__.p + "chunks/" + ({"0":"slider_edit","6":"product","AddSaleExchange":"AddSaleExchange","accoun_purpose_edit":"accoun_purpose_edit","account_purpose_add":"account_purpose_add","addCompany":"addCompany","addCompanySale":"addCompanySale","addFabricsSupplier":"addFabricsSupplier","addLoan":"addLoan","addOrder":"addOrder","addPurchase":"addPurchase","addPurchasefabrics":"addPurchasefabrics","addSale":"addSale","add_factory":"add_factory","add_merchant":"add_merchant","add_sale_campaign":"add_sale_campaign","add_selling_offer":"add_selling_offer","add_team_member":"add_team_member","addwholesale":"addwholesale","adminAdd":"adminAdd","adminProfile":"adminProfile","admin_dashboard":"admin_dashboard","AccountReport":"AccountReport","DeliveredOrder":"DeliveredOrder","OrderProfite":"OrderProfite","ReturnOrder":"ReturnOrder","SaleProfite":"SaleProfite","approvedOrder":"approvedOrder","cancelOrder":"cancelOrder","newOrder":"newOrder","officesaleReport":"officesaleReport","order":"order","orderReport":"orderReport","pendingOrder":"pendingOrder","profiteReport":"profiteReport","purchaseReport":"purchaseReport","shipmentOrder":"shipmentOrder","sub_category":"sub_category","sub_sub_category":"sub_sub_category","supplier_Report":"supplier_Report","wholesaleOrder":"wholesaleOrder","assign_admin_permission":"assign_admin_permission","assingRoleAdmin":"assingRoleAdmin","attributeAdd":"attributeAdd","balance_add":"balance_add","banner":"banner","bill_statement_add":"bill_statement_add","buy_one_get_one":"buy_one_get_one","categoryAdd":"categoryAdd","category_slider_add":"category_slider_add","category_slider_edit":"category_slider_edit","categoryedit":"categoryedit","checkout":"checkout","cityAdd":"cityAdd","cityEdit":"cityEdit","code_verified":"code_verified","commentAdd":"commentAdd","companysale":"companysale","contact_messgae_reply":"contact_messgae_reply","coupon_add":"coupon_add","coupon_edit":"coupon_edit","courierAdd":"courierAdd","creditAdd":"creditAdd","creditEdit":"creditEdit","customer":"customer","debitEdit":"debitEdit","editAdmin":"editAdmin","editComment":"editComment","editCompany":"editCompany","editCourier":"editCourier","editPermission":"editPermission","edit_factory":"edit_factory","edit_merchant":"edit_merchant","edit_offer":"edit_offer","edit_sale_campaign":"edit_sale_campaign","edit_selling_offer":"edit_selling_offer","edit_sub_city":"edit_sub_city","edit_team_member":"edit_team_member","flash_deals":"flash_deals","fondtransferAdd":"fondtransferAdd","investment_add":"investment_add","investment_edit":"investment_edit","merchant_order_view":"merchant_order_view","merchant_password_edit":"merchant_password_edit","merchant_profile":"merchant_profile","merchant_profile_edit":"merchant_profile_edit","occasional_campaign":"occasional_campaign","offerAdd":"offerAdd","orderEdit":"orderEdit","otp_login":"otp_login","passwordChange":"passwordChange","print_house_add":"print_house_add","print_product_add":"print_product_add","productStock":"productStock","product_transfer_add":"product_transfer_add","purchaseEdit":"purchaseEdit","purchaseView":"purchaseView","receieve_printed_product":"receieve_printed_product","resellerAdd":"resellerAdd","resellerEdit":"resellerEdit","roleAdd":"roleAdd","sale_campaign":"sale_campaign","seasonal campaign":"seasonal campaign","showroom_add":"showroom_add","showroom_edit":"showroom_edit","showroom_manager_add":"showroom_manager_add","showroom_manager_edit":"showroom_manager_edit","slider_add":"slider_add","sms_campaign":"sms_campaign","sub_category_add":"sub_category_add","sub_category_edit":"sub_category_edit","sub_city_add":"sub_city_add","sub_sub_category_add":"sub_sub_category_add","sub_sub_category_edit":"sub_sub_category_edit","supplierAdd":"supplierAdd","supplierEdit":"supplierEdit","user":"user","userLogin":"userLogin","admin_login":"admin_login","merchant_password_reset":"merchant_password_reset","merchant_register":"merchant_register","merchnat_code_verified":"merchnat_code_verified","merchnat_login":"merchnat_login","new_password_merchant":"new_password_merchant","user_password":"user_password","user_password_reset":"user_password_reset","user_profile_edit":"user_profile_edit","user_register":"user_register","variaantAdd":"variaantAdd","vendors~about_and_contact~add_carrier~company_assets_add~company_assets_edit~edit_carrier~footer_set~ac1e2ab6":"vendors~about_and_contact~add_carrier~company_assets_add~company_assets_edit~edit_carrier~footer_set~ac1e2ab6","about_and_contact":"about_and_contact","add_carrier":"add_carrier","company_assets_add":"company_assets_add","company_assets_edit":"company_assets_edit","edit_carrier":"edit_carrier","footer_setting":"footer_setting","generl setting":"generl setting","merchant_product_add":"merchant_product_add","merchant_product_edit":"merchant_product_edit","order_shipment_return":"order_shipment_return","productAdd":"productAdd","productEdit":"productEdit","show_carrier":"show_carrier","theme_setting":"theme_setting","vendors~debitAdd":"vendors~debitAdd","debitAdd":"debitAdd","vendors~merchant_order~merchnat_product_manage~product":"vendors~merchant_order~merchnat_product_manage~product","merchant_order":"merchant_order","merchnat_product_manage":"merchnat_product_manage","viewOrder":"viewOrder","viewSale":"viewSale","Loan":"Loan","LoanDetails":"LoanDetails","SupplierAmount":"SupplierAmount","about_seller":"about_seller","about_us":"about_us","account_purpose":"account_purpose","admin":"admin","attribute":"attribute","category":"category","category_slider":"category_slider","company_sale_details":"company_sale_details","managefabricsPurchase":"managefabricsPurchase","officesale":"officesale","purchase":"purchase","slider":"slider","variant":"variant","applied_user":"applied_user","balance":"balance","bill_statement":"bill_statement","bill_statement_details":"bill_statement_details","city":"city","comment":"comment","company":"company","company_assets":"company_assets","company_payment_details":"company_payment_details","contact_messgae":"contact_messgae","contact_us":"contact_us","coupon":"coupon","courier":"courier","credit":"credit","creditDue":"creditDue","debit":"debit","fabricsSupplier":"fabricsSupplier","factory_list":"factory_list","fondtransfer":"fondtransfer","home_carrier":"home_carrier","how_to_buy":"how_to_buy","investment":"investment","investor_details":"investor_details","merchant":"merchant","merchant_dashboard":"merchant_dashboard","offer":"offer","order_details":"order_details","order_history":"order_history","paidPayment":"paidPayment","paymentInvoice":"paymentInvoice","paymnetDetails":"paymnetDetails","print_details":"print_details","print_house":"print_house","print_house_details":"print_house_details","product_transfer":"product_transfer","product_transfer_details":"product_transfer_details","public_category":"public_category","public_product_search":"public_product_search","public_sub_category":"public_sub_category","public_sub_sub_category":"public_sub_sub_category","receive_print_details":"receive_print_details","resellerHome":"resellerHome","return_policy":"return_policy","role":"role","salaryDetails":"salaryDetails","selling_offer":"selling_offer","shipment":"shipment","showroom":"showroom","showroom_manager":"showroom_manager","sub_city":"sub_city","subscriber_list":"subscriber_list","supplier":"supplier","team":"team","team_member":"team_member","teamsalary":"teamsalary","unpaidPayment":"unpaidPayment","user_dashboard":"user_dashboard","user_profile":"user_profile","vendors~single_product":"vendors~single_product","single_product":"single_product"}[chunkId]||chunkId) + ".bundle.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -2819,33 +2819,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "main-header",
   //props: ["categories"],
@@ -3066,34 +3039,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -66973,24 +66918,6 @@ var render = function() {
             ])
           ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row footer_info_row" }, [
-        _c("div", { staticClass: "end_footer" }, [
-          _c("p", { staticClass: "f_info_left" }, [
-            _vm._v(
-              "\n                " +
-                _vm._s(_vm.footer_setting.copyright_info) +
-                "\n              "
-            )
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "f_info_right" }, [
-            _vm._v(
-              "\n              Design & Developed by Mohasagor it Solution\n            "
-            )
-          ])
-        ])
       ])
     ])
   ])
@@ -67149,142 +67076,97 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "main-header-right" }, [
-            Object.keys(_vm.user).length
-              ? _c("li", [
-                  _c("div", { staticClass: "dropdown" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-secondary dropdown-toggle",
-                        attrs: {
-                          type: "button",
-                          id: "dropdownMenuButton",
-                          "data-toggle": "dropdown",
-                          "aria-haspopup": "true",
-                          "aria-expanded": "false"
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n              " +
-                            _vm._s(_vm.user.mobile_no) +
-                            "\n            "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "dropdown-menu",
-                        staticStyle: { padding: "15px 15px" },
-                        attrs: { "aria-labelledby": "dropdownMenuButton" }
-                      },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "dropdown-item",
-                            attrs: { to: { name: "UserDashboard" }, href: "#" }
-                          },
-                          [_vm._v("Dashboard")]
-                        ),
-                        _c("br"),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "dropdown-item",
-                            attrs: { to: { name: "PasswordEdit" }, href: "#" }
-                          },
-                          [_vm._v("Change Password")]
-                        ),
-                        _c("br"),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "dropdown-item",
-                            attrs: {
-                              to: { name: "user_new_password_set" },
-                              href: "#"
-                            }
-                          },
-                          [_vm._v("Set New Password")]
-                        ),
-                        _c("br"),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "dropdown-item",
-                            attrs: { href: "#" },
-                            on: { click: _vm.Logout }
-                          },
-                          [_vm._v("Logout")]
-                        )
-                      ],
-                      1
-                    )
-                  ])
-                ])
-              : _c(
-                  "li",
-                  [
-                    _c("router-link", { attrs: { to: { name: "otpLogin" } } }, [
-                      _c("i", { staticClass: "fa fa-user" }),
-                      _vm._v(" User\n          ")
-                    ])
-                  ],
-                  1
-                ),
-            _vm._v(" "),
-            _c(
-              "li",
-              [
-                _c(
-                  "router-link",
-                  {
-                    attrs: { target: "_blank", to: { name: "merchant_login" } }
-                  },
-                  [_c("i", { staticClass: "fa fa-users" }), _vm._v(" Merchant")]
-                )
-              ],
-              1
-            )
+            _c("li", [
+              _c(
+                "a",
+                {
+                  staticClass: "contact_no_heading",
+                  attrs: {
+                    href: "tel:" + _vm.general_setting.header_contact_number
+                  }
+                },
+                [
+                  _c("i", { staticClass: "fa fa-phone " }),
+                  _vm._v(
+                    " " + _vm._s(_vm.general_setting.header_contact_number)
+                  )
+                ]
+              )
+            ])
           ])
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "menu", attrs: { id: "navbar" } }, [
+        _c("div", { staticClass: "left_menu_container" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "ul",
+            { staticClass: "left_category_menu" },
+            _vm._l(_vm.categories, function(left_category, l_c_index) {
+              return _c(
+                "li",
+                { key: l_c_index },
+                [
+                  _c("img", {
+                    staticClass: "c_icon_image",
+                    attrs: { src: _vm.base_url + left_category.icon_image }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      attrs: {
+                        to: {
+                          name: "PublcaCategory",
+                          params: { slug: left_category.slug }
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                      " +
+                          _vm._s(left_category.name) +
+                          "\n                    "
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
         _c(
           "ul",
           { staticClass: "menu-list", attrs: { id: "menu_list" } },
-          _vm._l(_vm.categories, function(category) {
+          _vm._l(_vm.categories, function(category, category_index) {
             return _c(
               "li",
-              { key: category.id, staticClass: "menu-item" },
+              { key: category_index, staticClass: "menu-item" },
               [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "menu-item-link",
-                    attrs: {
-                      to: {
-                        name: "PublcaCategory",
-                        params: { slug: category.slug }
-                      }
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n          " + _vm._s(category.name) + "\n        "
+                category_index < 10
+                  ? _c(
+                      "router-link",
+                      {
+                        staticClass: "menu-item-link",
+                        attrs: {
+                          to: {
+                            name: "PublcaCategory",
+                            params: { slug: category.slug }
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n          " + _vm._s(category.name) + "\n        "
+                        )
+                      ]
                     )
-                  ]
-                ),
+                  : _vm._e(),
                 _vm._v(" "),
                 category.sub_category.length > 0
                   ? _c("i", {
@@ -67571,7 +67453,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "__footer_nav" }, [
       _c("ul", [
-        _vm._m(1),
+        _vm._m(2),
         _vm._v(" "),
         _c("li", [
           _c(
@@ -67646,6 +67528,15 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("button", { staticClass: "search-btn" }, [
       _c("i", { staticClass: "fa fa-search" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "left_menu_headidng" }, [
+      _c("i", { staticClass: "fa fa-bars", attrs: { id: "left_menu_icon" } }),
+      _vm._v("  Categories ")
     ])
   },
   function() {
@@ -67817,13 +67708,16 @@ var render = function() {
                                     item.discount > 0
                                       ? _c(
                                           "span",
-                                          {
-                                            staticClass: "best_selling_discount"
-                                          },
+                                          { staticClass: "top_s_discount" },
                                           [
                                             _c("i", {
                                               staticClass:
-                                                "fa fa-star best_s_star"
+                                                "fa fa-star discount_star1"
+                                            }),
+                                            _vm._v(" "),
+                                            _c("i", {
+                                              staticClass:
+                                                "fa fa-star discount_star2"
                                             }),
                                             _vm._v(
                                               "\n                        " +
@@ -68010,17 +67904,19 @@ var render = function() {
                                       campaign_product.discount > 0
                                         ? _c(
                                             "span",
-                                            {
-                                              staticClass:
-                                                "flas_selling_discount"
-                                            },
+                                            { staticClass: "flas_p_discount" },
                                             [
                                               _c("i", {
                                                 staticClass:
-                                                  "fa fa-star flash_s_star"
+                                                  "fa fa-star discount_star1"
+                                              }),
+                                              _vm._v(" "),
+                                              _c("i", {
+                                                staticClass:
+                                                  "fa fa-star discount_star2"
                                               }),
                                               _vm._v(
-                                                "\n                        " +
+                                                "\n                    " +
                                                   _vm._s(
                                                     (
                                                       (campaign_product.discount /
@@ -68056,86 +67952,40 @@ var render = function() {
               ? _c(
                   "div",
                   [
-                    _vm._l(_vm.home_page_products, function(sub_category, idx) {
-                      return sub_category.products.length
+                    _vm._l(_vm.home_page_products, function(category, idx) {
+                      return category.products.length
                         ? _c("div", { key: idx, staticClass: "c-product" }, [
                             _c("div", { staticClass: "c-product-header" }, [
                               _c("h4", { staticClass: "category-heading" }, [
-                                _vm._v(_vm._s(sub_category.name))
+                                _vm._v(_vm._s(category.name))
                               ]),
                               _vm._v(" "),
-                              sub_category.sub_sub_category.length > 0
-                                ? _c("div", { staticClass: "s-category" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass: "sub_category_view",
-                                        attrs: {
-                                          id:
-                                            "subCategoryNameView" +
-                                            sub_category.id
+                              _c(
+                                "div",
+                                { staticClass: "category_view_all" },
+                                [
+                                  _c(
+                                    "router-link",
+                                    {
+                                      staticClass: "c-v-all",
+                                      attrs: {
+                                        to: {
+                                          name: "PublcaCategory",
+                                          params: { slug: category.slug }
                                         }
-                                      },
-                                      [
-                                        _vm._l(
-                                          sub_category.sub_sub_category,
-                                          function(sub_sub_category, index) {
-                                            return index <= 7
-                                              ? _c(
-                                                  "router-link",
-                                                  {
-                                                    key: index,
-                                                    staticClass:
-                                                      "sub-category-name",
-                                                    attrs: {
-                                                      to: {
-                                                        name:
-                                                          "PublicSubSUbCategory",
-                                                        params: {
-                                                          slug:
-                                                            sub_sub_category.slug
-                                                        }
-                                                      }
-                                                    }
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      _vm._s(
-                                                        sub_sub_category.name
-                                                      )
-                                                    )
-                                                  ]
-                                                )
-                                              : _vm._e()
-                                          }
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "router-link",
-                                          {
-                                            staticClass: "c-v-all",
-                                            attrs: {
-                                              to: {
-                                                name: "PublicSubCategory",
-                                                params: {
-                                                  slug: sub_category.slug
-                                                }
-                                              }
-                                            }
-                                          },
-                                          [_vm._v("View All\n                ")]
-                                        )
-                                      ],
-                                      2
-                                    )
-                                  ])
-                                : _vm._e()
+                                      }
+                                    },
+                                    [_vm._v("View All\n                ")]
+                                  )
+                                ],
+                                1
+                              )
                             ]),
                             _vm._v(" "),
                             _c(
                               "div",
                               { staticClass: "row" },
-                              _vm._l(sub_category.products, function(
+                              _vm._l(category.products, function(
                                 product,
                                 index
                               ) {
@@ -68145,7 +67995,7 @@ var render = function() {
                                       {
                                         key: index,
                                         staticClass:
-                                          "col-lg-2 col-sm-4 col-md-2 col-xs-6 width-20 small_width"
+                                          "col-lg-3 col-sm-4 col-md-3 col-xs-6 width_20 small_width"
                                       },
                                       [
                                         _c(
@@ -68259,47 +68109,6 @@ var render = function() {
                                                                     _vm._s(
                                                                       product.sale_price
                                                                     )
-                                                                )
-                                                              ]
-                                                            )
-                                                          : _vm._e(),
-                                                        _vm._v(" "),
-                                                        product.discount > 0
-                                                          ? _c(
-                                                              "span",
-                                                              {
-                                                                staticClass:
-                                                                  "discount"
-                                                              },
-                                                              [
-                                                                _c("i", {
-                                                                  staticClass:
-                                                                    "fa fa-star discount_star"
-                                                                }),
-                                                                _vm._v(
-                                                                  "\n                        " +
-                                                                    _vm._s(
-                                                                      (
-                                                                        (product.discount /
-                                                                          product.sale_price) *
-                                                                        100
-                                                                      ).toFixed(
-                                                                        0
-                                                                      )
-                                                                    ) +
-                                                                    "% "
-                                                                ),
-                                                                _c(
-                                                                  "span",
-                                                                  {
-                                                                    staticClass:
-                                                                      "d_off"
-                                                                  },
-                                                                  [
-                                                                    _vm._v(
-                                                                      "off"
-                                                                    )
-                                                                  ]
                                                                 )
                                                               ]
                                                             )
@@ -87100,7 +86909,7 @@ var routes = [{
 }, {
   path: '/backend/sliderAdd',
   component: function component() {
-    return Promise.all(/*! import() | slider_add */[__webpack_require__.e(7), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./components/admin/slider/Add */ "./resources/js/components/admin/slider/Add.vue"));
+    return Promise.all(/*! import() | slider_add */[__webpack_require__.e(7), __webpack_require__.e("slider_add")]).then(__webpack_require__.bind(null, /*! ./components/admin/slider/Add */ "./resources/js/components/admin/slider/Add.vue"));
   },
   name: "sliderAdd",
   meta: {
@@ -87110,7 +86919,7 @@ var routes = [{
 }, {
   path: '/backend/sliderEdit/:id',
   component: function component() {
-    return Promise.all(/*! import() | slider_edit */[__webpack_require__.e(7), __webpack_require__.e("slider_edit")]).then(__webpack_require__.bind(null, /*! ./components/admin/slider/Edit */ "./resources/js/components/admin/slider/Edit.vue"));
+    return Promise.all(/*! import() | slider_edit */[__webpack_require__.e(7), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/admin/slider/Edit */ "./resources/js/components/admin/slider/Edit.vue"));
   },
   name: 'sliderEdit',
   meta: {
@@ -87130,7 +86939,7 @@ var routes = [{
 }, {
   path: '/backend/category/slider/add',
   component: function component() {
-    return Promise.all(/*! import() | category_slider_add */[__webpack_require__.e(7), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/admin/Category_slider/Add */ "./resources/js/components/admin/Category_slider/Add.vue"));
+    return Promise.all(/*! import() | category_slider_add */[__webpack_require__.e(7), __webpack_require__.e("category_slider_add")]).then(__webpack_require__.bind(null, /*! ./components/admin/Category_slider/Add */ "./resources/js/components/admin/Category_slider/Add.vue"));
   },
   name: "category_slider_add",
   meta: {
@@ -87745,7 +87554,7 @@ var routes = [{
 }, {
   path: '/backend/product',
   component: function component() {
-    return Promise.all(/*! import() | product */[__webpack_require__.e(7), __webpack_require__.e("vendors~merchant_order~merchnat_product_manage~product"), __webpack_require__.e("product")]).then(__webpack_require__.bind(null, /*! ./components/admin/product/Product */ "./resources/js/components/admin/product/Product.vue"));
+    return Promise.all(/*! import() | product */[__webpack_require__.e(7), __webpack_require__.e("vendors~merchant_order~merchnat_product_manage~product"), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./components/admin/product/Product */ "./resources/js/components/admin/product/Product.vue"));
   },
   name: 'product',
   meta: {

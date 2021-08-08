@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["slider_add"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/slider/Add.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************!*\
@@ -153,7 +153,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
       }).then(function (resp) {
         console.log(resp);
 
-        if (resp.data.status == "OK") {
+        if (resp.data.status == "SUCCESS") {
           _this2.$router.push({
             name: "slider"
           });
@@ -164,12 +164,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
             duration: 4000
           });
         } else {
-          _this2.error = "some thing want to wrong";
+          _this2.error = "something want to wrong";
         }
       })["catch"](function (error) {
         _this2.error = error.response.data.errors;
 
-        _this2.$toasted.show("some thing want to wrong", {
+        _this2.$toasted.show("something want to wrong", {
           type: "error",
           position: "top-center",
           duration: 5000

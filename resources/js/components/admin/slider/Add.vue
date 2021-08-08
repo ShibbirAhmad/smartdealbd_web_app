@@ -120,7 +120,7 @@ export default {
       error: "",
       loading: true,
       image: "",
-      disabled: true, 
+      disabled: true,
       image_width: 1360,
       image_height: 365,
       imagae_size:1024,
@@ -140,7 +140,7 @@ export default {
         })
         .then((resp) => {
           console.log(resp)
-          if (resp.data.status == "OK") {
+          if (resp.data.status == "SUCCESS") {
             this.$router.push({ name: "slider" });
             this.$toasted.show(resp.data.message, {
               type: "success",
@@ -148,12 +148,12 @@ export default {
               duration: 4000,
             });
           } else {
-            this.error = "some thing want to wrong";
+            this.error = "something want to wrong";
           }
         })
         .catch((error) => {
           this.error = error.response.data.errors;
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something want to wrong", {
             type: "error",
             position: "top-center",
             duration: 5000,

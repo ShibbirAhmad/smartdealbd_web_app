@@ -60,16 +60,16 @@ class HomeController extends Controller
     }
        public function products(Request $request){
 
-        $sub_categories =SubCategory::orderBy('id','desc')->where('status',1)->with(['subSubCategory'])->paginate(2);
+        $categories =Category::orderBy('id','desc')->where('status',1)->paginate(3);
 
-        foreach($sub_categories as $sub_category){
-             $sub_category->{'products'}=Product::where('sub_category_id',$sub_category->id)->with('productImage')
+        foreach($categories as $category){
+             $category->{'products'}=Product::where('sub_category_id',$category->id)->with('productImage')
                                            ->where('status',1)
                                            ->select('id','name','price','sale_price','slug','discount')
                                           ->get()
                                           ->take(10);
         }
-         return response()->json($sub_categories);
+         return response()->json($categories);
     }
 
     public function flashSale(){

@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["product"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/product/Product.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************!*\
@@ -283,19 +283,22 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       var copy_items = prompt(" item of copy ?");
-      axios.get('/api/copy/product/' + $product_id + '/' + copy_items).then(function (resp) {
-        console.log(resp);
 
-        if (resp.data.status == 'success') {
-          _this3.$toasted.show(resp.data.message, {
-            type: 'success',
-            position: 'top-center',
-            duration: 3000
-          });
+      if (copy_items > 0) {
+        axios.get('/api/copy/product/' + $product_id + '/' + copy_items).then(function (resp) {
+          console.log(resp);
 
-          _this3.productList();
-        }
-      });
+          if (resp.data.status == 'success') {
+            _this3.$toasted.show(resp.data.message, {
+              type: 'success',
+              position: 'top-center',
+              duration: 3000
+            });
+
+            _this3.productList();
+          }
+        });
+      }
     },
     approved: function approved(product) {
       var _this4 = this;
@@ -914,20 +917,6 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("td", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "badge badge-info" },
-                                        [
-                                          _vm._v(
-                                            " " +
-                                              _vm._s(product.wallet_point) +
-                                              " "
-                                          )
-                                        ]
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("td", [
                                       _c("i", {
                                         staticClass: "fa fa-bars",
                                         on: {
@@ -1142,19 +1131,17 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { width: "10%" } }, [_vm._v("barcode")]),
         _vm._v(" "),
-        _c("th", { attrs: { width: "5%" } }, [_vm._v("image")]),
+        _c("th", { attrs: { width: "10%" } }, [_vm._v("image")]),
         _vm._v(" "),
-        _c("th", { attrs: { width: "5%" } }, [_vm._v("sale price")]),
+        _c("th", { attrs: { width: "5%" } }, [_vm._v("price")]),
         _vm._v(" "),
         _c("th", { attrs: { width: "5%" } }, [_vm._v("discount")]),
         _vm._v(" "),
-        _c("th", { attrs: { width: "5%" } }, [_vm._v("price")]),
+        _c("th", { attrs: { width: "5%" } }, [_vm._v("sale price")]),
         _vm._v(" "),
         _c("th", { attrs: { width: "5%" } }, [_vm._v("stock")]),
         _vm._v(" "),
         _c("th", { attrs: { width: "5%" } }, [_vm._v("status")]),
-        _vm._v(" "),
-        _c("th", { attrs: { width: "5%" } }, [_vm._v("wallet point")]),
         _vm._v(" "),
         _c("th", { attrs: { width: "10%" } }, [_vm._v("action")])
       ])

@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["slider_edit"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/slider/Edit.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************!*\
@@ -149,7 +149,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
       var _this2 = this;
 
       axios.get('/get/edit/slider/' + this.$route.params.id).then(function (resp) {
-        if (resp.data.success == "OK") {
+        console.log(resp);
+
+        if (resp.data.status == "OK") {
           _this2.form.url = resp.data.slider.url;
           _this2.form.position = resp.data.slider.position;
           _this2.form.file = _this2.$store.state.image_base_link + resp.data.slider.image;

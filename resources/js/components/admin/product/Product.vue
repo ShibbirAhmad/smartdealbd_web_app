@@ -67,13 +67,13 @@
                         <th width="5%">#</th>
                         <th width="10%">name</th>
                         <th width="10%">barcode</th>
-                        <th width="5%">image</th>
-                        <th width="5%">sale price</th>
-                        <th width="5%">discount</th>
+                        <th width="10%">image</th>
                         <th width="5%">price</th>
+                        <th width="5%">discount</th>
+                        <th width="5%">sale price</th>
                         <th width="5%">stock</th>
                         <th width="5%">status</th>
-                        <th width="5%">wallet point</th>
+                        <!-- <th width="5%">wallet point</th> -->
                         <th width="10%">action</th>
                       </tr>
                     </thead>
@@ -135,7 +135,7 @@
                           <span class="badge badge-warning" v-else>Deny</span>
                         </td>
 
-                           <td><span class="badge badge-info" > {{ product.wallet_point }} </span> </td>
+                           <!-- <td><span class="badge badge-info" > {{ product.wallet_point }} </span> </td> -->
 
                         <td>
                           <i
@@ -275,18 +275,20 @@ export default {
         let copy_items = prompt(
         " item of copy ?"
       );
-      axios.get('/api/copy/product/'+$product_id+'/'+copy_items)
-      .then(resp =>{
-        console.log(resp);
-        if (resp.data.status=='success') {
-            this.$toasted.show(resp.data.message,{
-              type : 'success',
-              position: 'top-center',
-               duration :3000
+      if (copy_items > 0) {
+           axios.get('/api/copy/product/'+$product_id+'/'+copy_items)
+            .then(resp =>{
+              console.log(resp);
+              if (resp.data.status=='success') {
+                  this.$toasted.show(resp.data.message,{
+                    type : 'success',
+                    position: 'top-center',
+                    duration :3000
+                  })
+                  this.productList();
+              }
             })
-            this.productList();
-        }
-      })
+      }
 
     }
 ,

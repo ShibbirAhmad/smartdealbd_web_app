@@ -57,17 +57,19 @@
                         >
 
                         <span
-                          v-if="item.discount > 0"
-                          class="best_selling_discount"
+                          v-if=" item.discount > 0"
+                          class="top_s_discount"
                         >
-                          <i class="fa fa-star best_s_star"> </i>
+                          <i class="fa fa-star discount_star1"> </i>
+                          <i class="fa fa-star discount_star2"> </i>
                           {{
                             (
-                              (item.discount / item.sale_price) *
+                              ( item.discount /  item.sale_price) *
                               100
                             ).toFixed(0)
                           }}% <span class="d_off">off</span>
                         </span>
+
                       </p>
                     </div>
                   </div>
@@ -145,18 +147,19 @@
                     &#2547; {{ campaign_product.sale_price }}</span
                   >
 
-                       <span
-                          v-if="campaign_product.discount > 0"
-                          class="flas_selling_discount"
-                        >
-                          <i class="fa fa-star flash_s_star"> </i>
-                          {{
-                            (
-                              (campaign_product.discount / campaign_product.sale_price) *
-                              100
-                            ).toFixed(0)
-                          }}% <span class="d_off">off</span>
-                        </span>
+                      <span
+                      v-if="campaign_product.discount > 0"
+                      class="flas_p_discount"
+                    >
+                      <i class="fa fa-star discount_star1"> </i>
+                      <i class="fa fa-star discount_star2"> </i>
+                      {{
+                        (
+                          (campaign_product.discount / campaign_product.sale_price) *
+                          100
+                        ).toFixed(0)
+                      }}% <span class="d_off">off</span>
+                    </span>
                 </p>
               </div>
             </div>
@@ -167,50 +170,31 @@
         <div v-if="isScroll > 0">
           <div
             class="c-product"
-            v-for="(sub_category, idx) in home_page_products"
+            v-for="(category, idx) in home_page_products"
             :key="idx"
-            v-if="sub_category.products.length"
+            v-if="category.products.length"
           >
             <div class="c-product-header">
-              <h4 class="category-heading">{{ sub_category.name }}</h4>
-              <div
-                class="s-category"
-                v-if="sub_category.sub_sub_category.length > 0"
-              >
+              <h4 class="category-heading">{{ category.name }}</h4>
                 <div
-                  :id="'subCategoryNameView' + sub_category.id"
-                  class="sub_category_view"
+                  class="category_view_all"
                 >
                   <router-link
                     :to="{
-                      name: 'PublicSubSUbCategory',
-                      params: { slug: sub_sub_category.slug },
-                    }"
-                    class="sub-category-name"
-                    v-for="(
-                      sub_sub_category, index
-                    ) in sub_category.sub_sub_category"
-                    :key="index"
-                    v-if="index <= 7"
-                    >{{ sub_sub_category.name }}</router-link
-                  >
-
-                  <router-link
-                    :to="{
-                      name: 'PublicSubCategory',
-                      params: { slug: sub_category.slug },
+                      name: 'PublcaCategory',
+                      params: { slug: category.slug },
                     }"
                     class="c-v-all"
                     >View All
                   </router-link>
                 </div>
-              </div>
+
             </div>
 
             <div class="row">
               <div
-                class="col-lg-2 col-sm-4 col-md-2 col-xs-6 width-20 small_width"
-                v-for="(product, index) in sub_category.products"
+                class="col-lg-3 col-sm-4 col-md-3 col-xs-6 width_20 small_width"
+                v-for="(product, index) in category.products"
                 :key="index"
                 v-if="index < 10"
               >
@@ -242,18 +226,6 @@
                         >
                         <span class="price-old" v-if="product.discount">
                           &#2547;{{ product.sale_price }}</span>
-                        <span
-                          v-if="product.discount > 0"
-                          class="discount"
-                        >
-                          <i class="fa fa-star discount_star"> </i>
-                          {{
-                            (
-                              (product.discount / product.sale_price) *
-                              100
-                            ).toFixed(0)
-                          }}% <span class="d_off">off</span>
-                        </span>
                       </p>
                     </div>
                   </div>

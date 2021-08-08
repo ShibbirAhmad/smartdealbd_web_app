@@ -78,7 +78,7 @@
                     </div>
                   </div>
 
-     
+
                   <br />
                   <button
                     :disabled="form.busy || disabled"
@@ -136,7 +136,8 @@ export default {
 
             axios.get('/get/edit/slider/'+this.$route.params.id)
             .then(resp => {
-                if (resp.data.success== "OK") {
+                console.log(resp);
+                if (resp.data.status== "OK") {
                     this.form.url=resp.data.slider.url ;
                     this.form.position=resp.data.slider.position ;
                     this.form.file= this.$store.state.image_base_link+resp.data.slider.image ;
@@ -215,7 +216,7 @@ export default {
         img.src = evt.target.result;
       };
     },
-    
+
     setImage(file, evt) {
       this.disabled = false;
       this.form.image = file;
