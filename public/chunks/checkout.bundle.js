@@ -239,7 +239,6 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    this.user();
     this.getCity();
     this.getCartContent();
     this.$store.dispatch('general_setting');
@@ -290,21 +289,17 @@ __webpack_require__.r(__webpack_exports__);
         console.log(resp);
 
         if (resp.data.status == "SUCCESS") {
-          localStorage.setItem("user_token", resp.data.token);
-
-          _this2.$store.dispatch("user");
-
           _this2.$router.push({
-            name: "UserDashboard"
+            name: "welcome"
           });
 
           _this2.$toasted.show(resp.data.message, {
             type: "success",
             position: "top-center",
-            duration: 2000
+            duration: 5000
           });
         } else {
-          _this2.$toasted.show("some thing want to wrong", {
+          _this2.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 2000
@@ -313,7 +308,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
 
-        _this2.$toasted.show("some thing want to wrong", {
+        _this2.$toasted.show("something went to wrong", {
           type: "error",
           position: "top-center",
           duration: 2000
@@ -339,41 +334,13 @@ __webpack_require__.r(__webpack_exports__);
       this.subCity();
       this.validation();
     },
-    user: function user(context) {
-      var _this4 = this;
-
-      axios.get("/_public/userToCheck").then(function (resp) {
-        //   console.log(resp);
-        if (resp.data.status == "AUTHORIZED") {
-          _this4.form.mobile_no = resp.data.user.mobile_no;
-          _this4.form.name = resp.data.user.name;
-          _this4.form.address = resp.data.user.address;
-          _this4.customer_wallet_point = resp.data.customer_wallet.point;
-          _this4.member_type = resp.data.member_type;
-          _this4.member_discount = resp.data.member_discount;
-          _this4.product_discount = resp.data.product_discount;
-        } else {
-          localStorage.removeItem("user_token");
-
-          _this4.$route.push({
-            name: "welocme"
-          });
-
-          _this4.$toasted.show("sorry! you are unautorized", {
-            type: "error",
-            position: "top-center",
-            duration: 2000
-          });
-        }
-      });
-    },
     getCartContent: function getCartContent(context) {
-      var _this5 = this;
+      var _this4 = this;
 
       axios.get("/_public/cartToContent").then(function (resp) {
         // console.log(resp.data)
-        _this5.cart.total = resp.data.cart_total;
-        _this5.form.total = resp.data.cart_total;
+        _this4.cart.total = resp.data.cart_total;
+        _this4.form.total = resp.data.cart_total;
       });
     },
     validation: function validation() {
@@ -405,40 +372,40 @@ __webpack_require__.r(__webpack_exports__);
       this.disabled = false;
     },
     subCity: function subCity() {
-      var _this6 = this;
+      var _this5 = this;
 
       if (this.form.city) {
         this.isLoading = true;
         axios.get('/api/city/wise/sub/city/' + this.form.city).then(function (resp) {
           if (resp.data.length) {
-            if (_this6.sub_cities.length > 0) {
-              _this6.sub_cities = "";
+            if (_this5.sub_cities.length > 0) {
+              _this5.sub_cities = "";
             }
 
-            if (_this6.form.sub_city) {
-              _this6.form.sub_city = "";
+            if (_this5.form.sub_city) {
+              _this5.form.sub_city = "";
             }
 
-            _this6.sub_cities = resp.data;
+            _this5.sub_cities = resp.data;
           } else {
-            _this6.form.sub_city = "";
-            _this6.sub_cities = "";
+            _this5.form.sub_city = "";
+            _this5.sub_cities = "";
             alert('No Sub City Under Selected Under City');
           }
 
-          _this6.isLoading = false;
+          _this5.isLoading = false;
 
-          _this6.validation();
+          _this5.validation();
 
           console.log(resp);
         })["catch"](function (e) {
           console.log(e);
-          _this6.isLoading = false;
+          _this5.isLoading = false;
         });
       }
     },
     applyCoupon: function applyCoupon() {
-      var _this7 = this;
+      var _this6 = this;
 
       if (this.coupon_code.length <= 0) {
         alert("Coupon Code Is Empty");
@@ -460,7 +427,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(resp);
           var discount = 0;
           var coupon = resp.data.coupon;
-          var total = _this7.form.total;
+          var total = _this6.form.total;
 
           if (coupon.discount_type == "percentage") {
             discount = parseInt(total) / parseInt(100) * parseInt(coupon.discount_amount);
@@ -468,25 +435,25 @@ __webpack_require__.r(__webpack_exports__);
             discount = parseInt(coupon.discount_amount);
           }
 
-          _this7.form.coupon_discount = discount.toFixed(2);
-          _this7.form.coupon_id = coupon.id;
+          _this6.form.coupon_discount = discount.toFixed(2);
+          _this6.form.coupon_id = coupon.id;
 
-          _this7.$toasted.show(resp.data.message, {
+          _this6.$toasted.show(resp.data.message, {
             type: "success",
             position: "top-center",
             duration: 2000
           });
 
-          _this7.coupon_code = "";
+          _this6.coupon_code = "";
         } else {
-          _this7.$toasted.show(resp.data, {
+          _this6.$toasted.show(resp.data, {
             type: "error",
             position: "top-center",
             duration: 2000
           });
         }
       })["catch"](function (e) {
-        _this7.$toasted.show("something went to Wrong ", {
+        _this6.$toasted.show("something went to Wrong ", {
           type: "error",
           position: "top-center",
           duration: 2000
@@ -523,10 +490,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var _this8 = this;
+    var _this7 = this;
 
     setTimeout(function () {
-      _this8.selectCity();
+      _this7.selectCity();
     }, 1000);
   }
 });
@@ -706,9 +673,9 @@ var render = function() {
                                     "label",
                                     {
                                       staticClass: "control-label",
-                                      attrs: { for: "input-email" }
+                                      attrs: { for: "mobile_no" }
                                     },
-                                    [_vm._v("Mobile_no")]
+                                    [_vm._v("Mobile Number")]
                                   ),
                                   _vm._v(" "),
                                   _c("input", {

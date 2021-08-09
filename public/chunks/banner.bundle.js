@@ -161,8 +161,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
         status: ""
       }),
       disabled: false,
-      image_width: 300,
-      image_height: 195,
+      image_width: 670,
+      image_height: 150,
       imagae_size: 1024,
       error: "",
       loading: true,
@@ -343,7 +343,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.box_container[data-v-27941e4c] {\r\n  margin-left: -14%;\r\n  margin-top: 2%;\n}\n.code_input[data-v-27941e4c] {\r\n  width:70%;\n}\n#uploadLogo_1[data-v-27941e4c] {\r\n  display: none;\n}\n#uploadLogo_2[data-v-27941e4c] {\r\n  display: none;\n}\n#campaignBackground[data-v-27941e4c] {\r\n  border: 1px solid #ddd;\r\n  padding: 5px;\r\n  cursor: pointer;\r\n  margin-left: 25px;\r\n  width: 300px;\r\n  height:195px;\n}\r\n", ""]);
+exports.push([module.i, "\n.box_container[data-v-27941e4c] {\r\n  margin-left: -14%;\r\n  margin-top: 2%;\n}\n.code_input[data-v-27941e4c] {\r\n  width:70%;\n}\n#uploadLogo_1[data-v-27941e4c] {\r\n  display: none;\n}\n#uploadLogo_2[data-v-27941e4c] {\r\n  display: none;\n}\n#campaignBackground[data-v-27941e4c] {\r\n  border: 1px solid #ddd;\r\n  padding: 5px;\r\n  cursor: pointer;\r\n  margin-left: 25px;\r\n  width: 300px;\r\n  height:150;\n}\r\n", ""]);
 
 // exports
 
@@ -691,7 +691,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "banner" } }, [
       _vm._v("Upload Banner "),
-      _c("span", [_vm._v(" width*height(300px*195px) ")])
+      _c("span", [_vm._v(" width*height(670px*150) ")])
     ])
   },
   function() {
@@ -710,7 +710,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "banner" } }, [
       _vm._v("Upload Banner "),
-      _c("span", [_vm._v(" width*height(300px*195px) ")])
+      _c("span", [_vm._v(" width*height(670px*150) ")])
     ])
   }
 ]

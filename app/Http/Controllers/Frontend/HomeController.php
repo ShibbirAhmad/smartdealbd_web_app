@@ -139,7 +139,6 @@ class HomeController extends Controller
     public function slider()
     {
          $slider = Slider::where('status',1)->where('position',1)->get();
-         $new_rendom_products=Product::latest()->where('status','>=','1')->with('productImage')->inRandomOrder()->take(20)->get();
          $best_selling_product_id=OrderItem::select('product_id',DB::raw('count(*) as total'))
                                                 ->groupBy('product_id')
                                                 ->orderBy('total','DESC')
@@ -149,10 +148,9 @@ class HomeController extends Controller
         $banner=Banner::latest()->first();
         return response()->json([
             'status' => 'SUCCESS',
-            'sliders' => $slider,
+             'sliders' => $slider,
              'banner' => $banner,
             'best_selling_produtcs'=>$best_selling_produtcs,
-            'new_rendom_products'=>$new_rendom_products,
         ]);
 
     }

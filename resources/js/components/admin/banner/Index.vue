@@ -54,7 +54,7 @@
 
                      </div>
                   <div class="form-group text-center">
-                    <label for="banner">Upload Banner <span> width*height(300px*195px) </span> </label>
+                    <label for="banner">Upload Banner <span> width*height(670px*150) </span> </label>
                     <img
                       @click="clickImage_1"
                       id="campaignBackground"
@@ -87,7 +87,7 @@
 
                      </div>
                   <div class="form-group text-center">
-                    <label for="banner">Upload Banner <span> width*height(300px*195px) </span> </label>
+                    <label for="banner">Upload Banner <span> width*height(670px*150) </span> </label>
                     <img
                       @click="clickImage_2"
                       id="campaignBackground"
@@ -147,8 +147,8 @@ export default {
         status:"",
       }),
       disabled: false,
-      image_width:300,
-      image_height:195,
+      image_width:670,
+      image_height:150,
       imagae_size:1024,
       error: "",
       loading: true,
@@ -342,6 +342,6 @@ export default {
   cursor: pointer;
   margin-left: 25px;
   width: 300px;
-  height:195px;
+  height:150;
 }
 </style>

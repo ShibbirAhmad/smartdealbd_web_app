@@ -30,7 +30,7 @@
                     </div>
                     <br />
                     <div class="form-grop">
-                      <label class="control-label" for="input-email">Mobile_no</label>
+                      <label class="control-label" for="mobile_no">Mobile Number</label>
                       <input
                         type="text"
                         name="mobile_no"
@@ -222,7 +222,6 @@ import { Form, HasError } from "vform";
 export default {
   props: ["categories"],
   created() {
-    this.user();
     this.getCity();
     this.getCartContent();
     this.$store.dispatch('general_setting');
@@ -271,16 +270,14 @@ export default {
         .then((resp) => {
           console.log(resp);
           if (resp.data.status == "SUCCESS") {
-            localStorage.setItem("user_token", resp.data.token);
-            this.$store.dispatch("user");
-            this.$router.push({ name: "UserDashboard" });
+            this.$router.push({ name: "welcome" });
             this.$toasted.show(resp.data.message, {
               type: "success",
               position: "top-center",
-              duration: 2000,
+              duration: 5000,
             });
           } else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
                 type: "error",
                 position: "top-center",
                 duration: 2000,
@@ -289,7 +286,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 2000,
@@ -316,28 +313,6 @@ export default {
       }
      this.subCity();
       this.validation();
-    },
-    user(context) {
-      axios.get("/_public/userToCheck").then((resp) => {
-     //   console.log(resp);
-        if (resp.data.status == "AUTHORIZED") {
-          this.form.mobile_no = resp.data.user.mobile_no;
-          this.form.name = resp.data.user.name;
-          this.form.address = resp.data.user.address;
-          this.customer_wallet_point = resp.data.customer_wallet.point;
-          this.member_type = resp.data.member_type;
-          this.member_discount = resp.data.member_discount;
-          this.product_discount = resp.data.product_discount;
-        } else {
-          localStorage.removeItem("user_token");
-          this.$route.push({ name: "welocme" });
-          this.$toasted.show("sorry! you are unautorized", {
-            type: "error",
-            position: "top-center",
-            duration: 2000,
-          });
-        }
-      });
     },
 
     getCartContent(context) {

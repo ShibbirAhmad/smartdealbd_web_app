@@ -4,9 +4,9 @@
     <div class="main-header">
       <div class="container flex">
         <div class="main-header-left">
-          <!-- <li >
-            <i class="fa fa-bars" id="__icon_fa_menu"></i>
-          </li> -->
+          <li >
+            <i @click.prevent="menuShow" class="fa fa-bars mobile_menu_bar" id="__icon_fa_menu"></i>
+          </li>
           <li>
             <a href="/">
             <img :src="base_url+general_setting.logo" class="site-logo" />
@@ -29,13 +29,22 @@
                     v-for="(product, index) in search_products"
                     :key="index"
                   >
-                    <router-link
+                     <router-link
                       :to="{ name: 'single', params: { slug: product.slug } }"
                       class="search-router-link"
-                      >{{
-                        product.name + "-" + product.product_code
-                      }}</router-link
-                    >
+                      >
+                        <div class="__search_porducts_details">
+                        <img :src="base_url+product.product_image[0].product_image" class="search_result_img">
+                          <div class="search_name_price">
+                            <p> {{ product.name }} </p>
+                          <p>
+                             &#2547;{{ product.price }}
+                            <small><del>&#2547;{{ product.sale_price }} </del></small></p>
+                          </div>
+                         </div>
+
+                      </router-link >
+
                   </li>
                 </ul>
               </div>
@@ -188,10 +197,9 @@
         <p>Your cart is empty</p>
       </div>
       <div class="cart-footer">
-        <router-link v-if="Object.keys(user).length" :to="{name:'Chekout'}" class="btn btn-block placebtn"
+        <router-link  :to="{name:'Chekout'}" class="btn btn-block placebtn"
           >Place Order | <span> {{ cart.total }}</span></router-link>
-           <router-link v-else :to="{name:'otpLogin'}" class="btn btn-block placebtn"
-          >Place Order | <span> {{ cart.total }}</span></router-link>
+
       </div>
     </div>
 
@@ -207,15 +215,12 @@
 
   <div class="__footer_nav">
     <ul>
-      <li> <a href="/"><i class="fa fa-home footer_icon"></i></a> </li>
-      <li> <a  @click.prevent="menuShow" href="/"><i class="fa fa-th-large footer_icon"></i></a> </li>
-      <li> <a @click="cartOpen" > <sup class="customize_c_item">{{cart.itemCount}}</sup> <i class="fa fa-shopping-cart footer_icon"></i></a> </li>
-      <li>
-            <router-link v-if="Object.keys(user).length"  :to="{name:'UserDashboard'}"> <i class="fa fa-user footer_icon"></i> </router-link>
-            <router-link v-else  :to="{name:'otpLogin'}"> <i class="fa fa-user footer_icon"></i> </router-link>
-      </li>
-      <li> <a ><i @click="searchToggle"   class="fa fa-search footer_icon"></i></a> </li>
-      <li>  <a :href="'tel:'+general_setting.header_contact_number"><i class="fa fa-phone footer_icon"></i></a> </li>
+      <li> <a href="/"> Home   </a> </li>
+
+      <li> <a @click="cartOpen" >  Cart <sup>{{cart.itemCount}}</sup> </a> </li>
+
+      <li>  <a :href="'tel:'+general_setting.header_contact_number">Call Now</a> </li>
+
     </ul>
   </div>
 
@@ -341,7 +346,7 @@ export default {
         axios
           .get("/_public/search/products/" + this.search)
           .then((resp) => {
-            if (resp.data.length > 1 ) {
+            if (resp.data.length > 0 ) {
               this.search_products = [];
               this.search_products.push(...resp.data);
             } else {
@@ -365,15 +370,15 @@ export default {
       let clickMenu = document.getElementById("toggle-menu");
       let main_menu = document.getElementById("menu_list");
       main_menu.classList.toggle("collapse-manu");
-      //let menu_icon = document.getElementById("__icon_fa_menu");
+      let menu_icon = document.getElementById("__icon_fa_menu");
 
-      // if (menu_icon.classList.contains("fa-bars")) {
-      //   menu_icon.classList.remove("fa-bars");
-      //   menu_icon.classList.add("fa-close");
-      // } else {
-      //   menu_icon.classList.add("fa-bars");
-      //   menu_icon.classList.remove("fa-close");
-      // }
+      if (menu_icon.classList.contains("fa-bars")) {
+        menu_icon.classList.remove("fa-bars");
+        menu_icon.classList.add("fa-close");
+      } else {
+        menu_icon.classList.add("fa-bars");
+        menu_icon.classList.remove("fa-close");
+      }
     },
     cartOpen() {
       document.getElementById("s-cart").classList.toggle("colapse-cart");

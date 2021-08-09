@@ -38,7 +38,7 @@
                     <div class="col-lg-3">
                       <select name="" id="" v-model="bulkActionType" class="form-control">
                         <option  value="0" selected  disabled>Select Action</option>
-                        
+
                            <option value="LABEL PRINT">Label Print</option>
                          <option value="INVOICE PRINT">Invoice Print</option>
                         <option value="PENDING ALL">Pending All</option>
@@ -133,13 +133,13 @@
                         v-model="item"
                         v-if="start_date.length > 0"
                         @change="filterOrder"
-                       > 
+                       >
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
                       </select>
                        <select  class="form-control" v-model="item" v-else @change="ordersList">
-                     
+
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
@@ -187,12 +187,14 @@
                             :value="order.id"
                           />
                         </td>
-                        <td class="three-percent">{{ order.customer ? order.customer.name : '' }}</td>
-                        <td class="three-percent">
-                          {{  order.cutomer_phone  }}
+                     <td class="three-percent">
+                          {{ order.customer_name }}
                         </td>
                         <td class="three-percent">
-                          {{  order.customer ? order.customer.address : "" }}
+                          {{ order.cutomer_phone }}
+                        </td>
+                        <td class="three-percent">
+                          {{ order.customer_address ? order.customer_address : 'null' }}
                         </td>
                         <td class="two-percent">{{ order.invoice_no }}</td>
                         <td class="two-percent">
@@ -329,10 +331,10 @@
                           <span class="badge" if="order.memo_no">{{
                             order.memo_no
                           }}</span>
-                         
-                         
+
+
                             <i class="fa fa-edit"  @click="courierModal(order, index)"></i>
-                        
+
                         </td>
                         <td>
                            <small v-if="order.comment">{{order.comment}}</small>
@@ -345,7 +347,7 @@
                 <div class="box-footer">
                   <div class="row">
                     <div class="col-lg-6">
-                     
+
 
                       <pagination
                         :data="orders"
@@ -687,7 +689,7 @@ export default {
       alert('please select a courier')
       return;
     }
-    
+
     if(!this.orders.data[index].memo_no){
       alert('Must Be Need Memo Number')
       return;
@@ -945,7 +947,7 @@ export default {
          text:'Please select at least one row'
        })
        return ;
-       
+
      }
      let action_type=this.bulkActionType;
       if(action_type=='LABEL PRINT'){
@@ -998,7 +1000,7 @@ export default {
     labelPrint(){
       window.open('','_self',"width=600,height=600");
     },
- 
+
    pendingAll(order_id){
     axios.get('/pending/all/order/'+order_id)
          .then(resp=>{
@@ -1096,7 +1098,7 @@ export default {
   },
   comment(order_id,order_index,comment){
 
-    
+
     console.log(comment);
      let options ={};
      this.comments.forEach(element => {
@@ -1131,8 +1133,8 @@ export default {
         })
     },
 
-   
-    
+
+
   },
 
   watch: {
@@ -1175,7 +1177,7 @@ export default {
 
   },
 
- 
+
 };
 </script>
 

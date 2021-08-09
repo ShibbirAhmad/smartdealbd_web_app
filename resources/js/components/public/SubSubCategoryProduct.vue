@@ -110,7 +110,7 @@
           <div id="content" class="col-sm-9">
             <div class="row">
               <div
-                class="col-lg-3 col-sm-6 col-md-3 col-xs-6  small_width  "
+                class="col-lg-3 custom_padding col-sm-6 col-md-3 col-xs-6  small_width  "
                 v-for="product in products"
                 :key="product.id"
               >

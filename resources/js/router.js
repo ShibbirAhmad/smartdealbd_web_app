@@ -12,7 +12,7 @@ const routes = [
         name: 'welcome',
         props: true,
         meta: {
-            title: "Online Shopping In Bangladesh: men and women Fashion madinafashion.com.bd"
+            title: "Online Shopping In Bangladesh"
         }
 
     },
@@ -209,8 +209,6 @@ const routes = [
         name: 'Chekout',
         meta: {
             title: 'Checkout || User',
-            requiresAuthUser: true,
-
         }
 
     },

@@ -227,6 +227,5 @@
     "/chunks/vendors~single_product.bundle.js": "/chunks/vendors~single_product.bundle.js",
     "/chunks/viewOrder.bundle.js": "/chunks/viewOrder.bundle.js",
     "/chunks/viewSale.bundle.js": "/chunks/viewSale.bundle.js",
-    "/chunks/wholesaleOrder.bundle.js": "/chunks/wholesaleOrder.bundle.js",
-    "/chunks/vendors~merchant_order~merchnat_product_manage.bundle.js": "/chunks/vendors~merchant_order~merchnat_product_manage.bundle.js"
+    "/chunks/wholesaleOrder.bundle.js": "/chunks/wholesaleOrder.bundle.js"
 }

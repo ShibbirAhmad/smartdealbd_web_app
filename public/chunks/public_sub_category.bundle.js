@@ -642,7 +642,7 @@ var render = function() {
                       {
                         key: product.id,
                         staticClass:
-                          "col-lg-3 col-sm-6 col-md-3 col-xs-6 small_width "
+                          "col-lg-3 custom_padding col-sm-6 col-md-3 col-xs-6 small_width "
                       },
                       [
                         _c("div", { staticClass: "product-card " }, [
@@ -748,7 +748,7 @@ var render = function() {
                                   }
                                 }
                               },
-                              [_vm._v("quick view")]
+                              [_vm._v("view")]
                             )
                           ])
                         ])

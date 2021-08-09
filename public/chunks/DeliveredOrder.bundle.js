@@ -1802,11 +1802,7 @@ var render = function() {
                                   _c("td", { staticClass: "three-percent" }, [
                                     _vm._v(
                                       "\n                        " +
-                                        _vm._s(
-                                          order.customer
-                                            ? order.customer.name
-                                            : ""
-                                        ) +
+                                        _vm._s(order.customer_name) +
                                         "\n                      "
                                     )
                                   ]),
@@ -1823,9 +1819,9 @@ var render = function() {
                                     _vm._v(
                                       "\n                        " +
                                         _vm._s(
-                                          order.customer
-                                            ? order.customer.address
-                                            : ""
+                                          order.customer_address
+                                            ? order.customer_address
+                                            : "null"
                                         ) +
                                         "\n                      "
                                     )

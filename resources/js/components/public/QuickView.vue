@@ -41,13 +41,6 @@
                             <span itemprop="mpn">{{ quick_view_product.product_code }}</span>
                           </h4>
                         </li>
-                            <li>
-                              <h4>
-                                <b>Availability:</b>
-                                <span class="instock" v-if="quick_view_product.stock > 0">Stock In <small>({{quick_view_product.stock }})</small></span>
-                                <span class="outstcok" v-else>Stock Out</span>
-                              </h4>
-                            </li>
                           </ul>
                           <ul class="price-box">
                           <li class="price">

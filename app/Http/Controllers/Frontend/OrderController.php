@@ -41,24 +41,6 @@ class OrderController extends Controller
 
         DB::transaction(function() use($request){
 
-            $user=User::where('id',Auth::user()->id)->first();
-           //update user city and address
-            $user->city_id=$request->city;
-            $user->address=$request->address;
-            $user->name=$request->name;
-            $user->save();
-            //if customer not exit then user storing to customer table
-            $customer=Customer::where('phone',$user->mobile_no)->first();
-            if(!$customer){
-                $customer=new Customer();
-                $customer->user_id=$user->id;
-                $customer->name=$request->name;
-                $customer->phone=$request->mobile_no;
-                $customer->address=$request->address;
-                $customer->city_id=$request->city;
-                $customer->customer_type=1;
-                $customer->save();
-            }
                $total=Cart::total();
                $discount=0 ;
                 if( $request->coupon_discount > 0 || $request->premium_member_discount > 0 ){
@@ -70,8 +52,9 @@ class OrderController extends Controller
                 $id = Order::max('id') ?? 0;
                 $invoice = 100 + $id;
                 $order=new Order();
-                $order->customer_id=$customer->id;
+                $order->customer_name=$request->name;
                 $order->cutomer_phone=$request->mobile_no;
+                $order->cutomer_address=$request->address;
                 $order->invoice_no=$invoice;
                 $order->order_type=1;
                 $order->city_id=$request->city;
@@ -101,9 +84,9 @@ class OrderController extends Controller
                 }
             //sending message
              $invoice=$order->invoice_no;
-             $name=$customer->name;
+             $name=$request->name;
              $number=$order->cutomer_phone;
-             Order::SendMessageCustomer($number,$name,$invoice);
+            //  Order::SendMessageCustomer($number,$name,$invoice);
              Cart::destroy() ;
         });
              return \response()->json([

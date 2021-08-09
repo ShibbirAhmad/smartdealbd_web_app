@@ -208,12 +208,14 @@
                             :value="order.id"
                           />
                         </td>
-                        <td class="three-percent">{{ order.customer.name }}</td>
-                        <td class="three-percent">
-                          {{ order.customer.phone }}
+                   <td class="three-percent">
+                          {{ order.customer_name }}
                         </td>
                         <td class="three-percent">
-                          {{ order.customer.address }}
+                          {{ order.cutomer_phone }}
+                        </td>
+                        <td class="three-percent">
+                          {{ order.customer_address ? order.customer_address : 'null' }}
                         </td>
                         <td class="two-percent">{{ order.invoice_no }}</td>
                         <td class="two-percent">

@@ -116,7 +116,7 @@ Route::group([
 //:::::authnticate user router::::::
 
 Route::group([
-     'middleware' => 'auth',
+    //  'middleware' => 'auth',
     'namespace' => 'Frontend',
     'prefix' => '_public/'
 ], function () {
@@ -132,12 +132,12 @@ Route::group([
     Route::post('user/password/update', 'AuthController@updatePassword');
     //logout route
     Route::get('user/logout', 'AuthController@logout');
-     Route::post('user/set/new/password', 'AuthController@user_set_new_password');
+    Route::post('user/set/new/password', 'AuthController@user_set_new_password');
 
 });
 
 //others route
-Route::get('_public/others', 'Admin\OthersController@others')->middleware('auth');
+Route::get('_public/others', 'Admin\OthersController@others');
 
 
 //:::::start the backend route::::::

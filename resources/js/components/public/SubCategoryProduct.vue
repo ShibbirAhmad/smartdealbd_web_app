@@ -85,7 +85,7 @@
           <div id="content" class="col-sm-9">
 
             <div class="row">
-            <div class="col-lg-3 col-sm-6 col-md-3 col-xs-6 small_width " v-for="product in products" :key="product.id">
+            <div class="col-lg-3 custom_padding col-sm-6 col-md-3 col-xs-6 small_width " v-for="product in products" :key="product.id">
             <div class="product-card ">
               <div class="product-card-body">
                 <router-link :to="{name: 'single', params: { slug: product.slug } }">
@@ -108,7 +108,7 @@
                 </div>
               </div>
               <div class="product-card-footer">
-                 <button class="btn btn-primary btnQuick" style="cursor:pointer" @click="quick_v_product_id=product.id"  >quick view</button>
+                 <button class="btn btn-primary btnQuick" style="cursor:pointer" @click="quick_v_product_id=product.id" >view</button>
               </div>
             </div>
               </div>

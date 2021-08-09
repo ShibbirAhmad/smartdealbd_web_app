@@ -418,6 +418,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1839,11 +1841,9 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("td", { staticClass: "three-percent" }, [
                                     _vm._v(
-                                      _vm._s(
-                                        order.customer
-                                          ? order.customer.name
-                                          : ""
-                                      )
+                                      "\n                        " +
+                                        _vm._s(order.customer_name) +
+                                        "\n                      "
                                     )
                                   ]),
                                   _vm._v(" "),
@@ -1859,9 +1859,9 @@ var render = function() {
                                     _vm._v(
                                       "\n                        " +
                                         _vm._s(
-                                          order.customer
-                                            ? order.customer.address
-                                            : ""
+                                          order.customer_address
+                                            ? order.customer_address
+                                            : "null"
                                         ) +
                                         "\n                      "
                                     )

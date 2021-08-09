@@ -31,9 +31,6 @@ const state = {
     //store best selling products
     best_selling_produtcs: [],
 
-   //store best selling products
-    new_rendom_products: [],
-
     //slider banner
     banner: '',
 
@@ -46,9 +43,6 @@ const state = {
     //sub sub category slider
     sub_sub_category_sliders: '',
 
-
-    //store offer banner
-    offer_banner: {},
 
      //for campaign sale products
      sale_campaign: {},
@@ -104,9 +98,7 @@ const getters = {
     sliders(state) {
         return state.sliders;
     },
-    new_rendom_products(state) {
-        return state.new_rendom_products;
-    },
+
     best_selling_produtcs(state){
         return state.best_selling_produtcs;
     },
@@ -123,10 +115,6 @@ const getters = {
     sub_sub_category_sliders(state) {
         return state.sub_sub_category_sliders;
     },
-    offer_banner(state) {
-        return state.offer_banner;
-    },
-
     sub_categories(state) {
         return state.sub_categories;
     },
@@ -262,8 +250,6 @@ const actions = {
                 context.commit('sliders', resp.data.sliders);
                 context.commit('banner', resp.data.banner);
                 context.commit('best_selling_produtcs', resp.data.best_selling_produtcs);
-                context.commit('new_rendom_products', resp.data.new_rendom_products);
-
             })
 
     },
@@ -294,16 +280,6 @@ const actions = {
                 // console.log(resp);
                 context.commit('sub_sub_category_sliders', resp.data.sub_sub_category_sliders);
             })
-    },
-
-
-    //get offer_banner
-    offer_banner(context) {
-        axios.get("/_public/offers")
-            .then((resp) => {
-                context.commit('offer_banner', resp.data.offers)
-            })
-            .catch((error) => { });
     },
 
        //method initial for get campaign sale
@@ -396,9 +372,6 @@ const mutations = {
     sliders(state, payload) {
         return state.sliders = payload;
     },
-    new_rendom_products(state,payload) {
-        return state.new_rendom_products = payload;
-    },
     best_selling_produtcs(state,payload) {
         return state.best_selling_produtcs = payload;
     },
@@ -417,10 +390,6 @@ const mutations = {
 
     sub_sub_category_sliders(state, payload) {
         return state.sub_sub_category_sliders = payload;
-    },
-
-    offer_banner(state, payload) {
-        return state.offer_banner = payload;
     },
 
     sale_campaign(state, payload) {

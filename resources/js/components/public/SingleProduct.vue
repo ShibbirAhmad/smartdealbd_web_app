@@ -6,6 +6,7 @@
       <div class="container">
         <div class="single-product-box" >
           <div class="row">
+
             <div class="col-lg-4">
                 <div>
               <div class="row product-info">
@@ -19,6 +20,7 @@
               </div>
              </div>
             </div>
+
             <div class="col-lg-4">
                <ul class="list-unstyled description">
                   <li>
@@ -31,72 +33,79 @@
                         <span itemprop="mpn">{{ product.product_code }}</span>
                       </h4>
                     </li>
-                    <li>
-                      <h4>
-                        <b>Availability:</b>
-                        <span class="instock" v-if="product.stock > 0">Stock In <small>({{product.stock }})</small></span>
-                        <span class="outstcok" v-else>Stock Out</span>
-                      </h4>
-                    </li>
+
                   </ul>
-                  <ul class="price-box">
-                    <li class="price  ">
-                     <h3>
-                      <span class="price-old single_p_price" v-if="product.discount">&#2547; {{product.sale_price}}</span>
-                      <span class="price-new single_p_price">&#2547; {{product.price}}</span>
-                     </h3>
-                    </li>
-                    <li></li>
-                  </ul>
+
                   <div id="product">
                     <div class="row">
-                 <div class="col-lg-6" v-if="product.product_variant.length>0 && product.product_attribute">
-                          <div>
-                      <!-- <h3 class="subtitle">Available Options</h3> -->
-                      <div class="form-group required">
-                        <h4 class="control-label">
-                          <b>{{ product.product_attribute.attribute.name }}</b>
-                        </h4>
-                        <select
-                          class="form-control"
-                          v-model="variant_index"
-                          @change="SelectVaraint"
-                          name="option[200]"
-                        >
-                          <option value disabled>--- Please Select ---</option>
-                           <option
-                            value
-                            v-for="(variant,v) in product.product_variant"
-                            :key="v"
-                            :value="v"
-                          >{{variant.variant ? variant.variant.name : ''}}</option>
-                        </select>
+                      <div class="col-lg-12 col-md-12 col-xs-12">
+                            <div class="s_price_container">
+                              <h4> Price </h4>
+                              <p >
+                                    <span class="price-old" v-if="product.discount">&#2547; {{product.sale_price}}</span>
+                                    <span class="price-new">&#2547; {{product.price}}</span>
+                               </p>
+                          </div>
                       </div>
-                    </div>
-                   </div>
-                       <div class="col-lg-6">
-                        <div class>
-                          <h4 class="control-label" for="input-quantity">
+                      <div class="col-lg-12 col-md-12" v-if="product.product_variant.length>0 && product.product_attribute">
+
+                        <div class="ps-product__variations">
+                            <div class="pr_switch_wrap">
+                                <div class="product-attributes">
+
+                                            <div v-if="product.product_attribute.attribute.name.toLowerCase()=='size'" class="text-swatches-wrapper attribute-swatches-wrapper attribute-swatches-wrapper form-group product__attribute product__color"
+                                                data-type="text">
+                                                <label class="attribute-name">Size</label>
+                                                <div class="attribute-values">
+                                                    <ul class="text-swatch attribute-swatch color-swatch">
+                                                            <li v-for="(variant,index) in product.product_variant" :key="index"
+                                                                class="attribute-swatch-item pe-none">
+                                                                <div>
+                                                                    <label>
+                                                                        <input class="product-filter-item variant_size"
+                                                                            type="radio" v-model="cart.variant_id" name="size"
+                                                                            :value="variant.variant.id" >
+                                                                        <span>{{ variant.variant.name }}</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                      </div>
+                       <div class="col-lg-12 col-md-12">
+                        <div class="qty_container">
+                          <h4>
                             <b>Quantity</b>
                           </h4>
-                                <input
-                            type="number"
-                            name="quantity"
-                            v-model="cart.quantity"
-                            value="1"
-                            class="form-control input_qty"
-                            @change="validation"
-                            @keyup="validation"
-                          />
 
-                          <div @click="cart.quantity += 1" class="incrementor_plus">
+                          <div @click="dicrementQty" class="incrementor_plus">
                              <i  class="fa fa-plus"></i>
                           </div>
-                           <div v-if="cart.quantity > 1" @click=" cart.quantity -= 1 " class="incrementor_minus">
+
+                              <input
+                              type="text"
+                              name="quantity"
+                              v-model="cart.quantity"
+                              value="1"
+                              style="height: 36px !important;width:210px;"
+                              class="form-control input_qty"
+                              @change="validation"
+                              @keyup="validation"
+                            />
+                           <div @click="incrementQty" class="incrementor_minus">
                              <i  class="fa fa-minus"></i>
                           </div>
 
-                          <div class="clear"></div>
                         </div>
                       </div>
                     </div>
@@ -111,25 +120,38 @@
                           id="button-cart"
                           class="btn btn-primary btn-lg btn-block"
                           style="margin-top:38px;"
-
-
-                        >Add to Bag </button>
+                          >
+                         <span>Add To Cart</span>
+                        </button>
                       </div>
 
                          <div class="col-lg-6">
                         <button
                           @click.prevent="buyNow"
                           type="button"
-                          id="button-cart"
                           class="btn btn-primary btn-lg btn-block"
                           style="margin-top:38px;background:#000;"
-
-
-                        >Buy Now</button>
+                          >Buy Now</button>
                       </div>
                     </div>
+
                   </div>
             </div>
+
+            <div class="col-lg-4">
+
+                <div class="order_now_container">
+                       <p> <i class="fa fa-check"></i>  Order today and receive it within 02 - 05 days</p>
+                 </div>
+
+                 <div class="call_now_container">
+                       <p>  Have question about this product ? please call</p>
+                      <h1> <a  :href="'tel:'+general_setting.header_contact_number"><i class="fa fa-phone "></i> {{ general_setting.header_contact_number }}</a> </h1>
+                 </div>
+
+
+            </div>
+
          </div>
         </div>
 
@@ -164,7 +186,7 @@
 
         <div class="row realted-producs">
             <h3 class="title" >Related Products</h3>
-             <div class="col-lg-2 col-sm-6 col-md-6 col-xs-6 width-20 small_width" v-for="(product,index) in related_products" :key="index">
+             <div class="col-lg-3 col-sm-4 col-md-3 col-xs-6 width_20 small_width" v-for="(product,index) in related_products" :key="index">
             <div class="product-card ">
               <div class="product-card-body">
                 <router-link :to="{name: 'single', params: { slug: product.slug } }">
@@ -214,11 +236,13 @@
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import imageZoom from 'vue-image-zoomer';
-import 'lazysizes'
+import 'lazysizes' ;
+import Swal from 'sweetalert2' ;
 
 export default {
   beforeCreated() {
     this.validation();
+    this.$store.dispatch("general_setting");
     window.scrollTo(0, 0);
     setTimeout(() => {
       this.validation();
@@ -258,7 +282,31 @@ export default {
   },
   methods: {
 
+    incrementQty(){
+      if (this.cart.quantity > 1) {
+          let qty = this.cart.quantity
+          this.cart.quantity= qty - 1 ;
+      }
+    },
+    dicrementQty(){
+           let qty = this.cart.quantity
+          this.cart.quantity= qty + 1 ;
+    },
+
     CartToAdd() {
+         if (this.product.product_variant ) {
+         this.cart.attrribute_id = this.product.product_attribute.attribute.id ;
+        if (this.cart.variant_id < 1) {
+             Swal.fire({
+                position: 'top-center',
+                icon: 'error',
+                title: 'please,select product '+this.product.product_attribute.attribute.name,
+                showConfirmButton: false,
+                timer: 1500
+              })
+            return ;
+        }
+      }
       axios
         .get("/_public/addToCart", {
           params: {
@@ -290,6 +338,19 @@ export default {
         });
     },
      buyNow() {
+       if (this.product.product_variant ) {
+         this.cart.attrribute_id = this.product.product_attribute.attribute.id ;
+        if (this.cart.variant_id < 1) {
+             Swal.fire({
+                position: 'top-center',
+                icon: 'error',
+                title: 'please,select product '+this.product.product_attribute.attribute.name,
+                showConfirmButton: false,
+                timer: 1500
+              })
+            return ;
+        }
+      }
       axios
         .get("/_public/addToCart", {
           params: {
@@ -308,14 +369,7 @@ export default {
               type: "success",
               duration: 2000,
             });
-
-             let user=this.user;
-              if(user.mobile_no){
-                  this.$router.push({ name: "Chekout" });
-              }else{
-                this.$router.push({ name: "otpLogin" });
-              }
-
+           this.$router.push({ name: "Chekout" });
           } else if (resp.data.status == "error") {
             this.$toasted.show(resp.data.message, {
               position: "top-center",
@@ -395,6 +449,10 @@ export default {
     product() {
       return this.$store.getters.single_product;
     },
+     general_setting() {
+      return this.$store.getters.general_setting;
+    },
+
     product_images(){
 
       return this.$store.getters.product_images;

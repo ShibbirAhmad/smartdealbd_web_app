@@ -17,6 +17,29 @@
       </div>
     </div>
 
+
+      <div v-if="banner" class="row advertise_banner_row">
+        <div class="col-lg-6 col-md-6 col-xs-6">
+          <a :href="banner.url_1" target="_blank">
+            <img
+              class="advertise_banner_1"
+              :src="base_url + banner.banner_1"
+            />
+          </a>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-xs-6">
+          <a :href="banner.url_2" target="_blank">
+            <img
+              class="advertise_banner_2"
+              :src="base_url + banner.banner_2"
+            />
+          </a>
+        </div>
+      </div>
+
+
+
     <div class="container">
       <div class="new_arrival_section">
         <h4 class="arrival_heading">Top Selling Products</h4>
@@ -395,11 +418,13 @@ export default {
     window.addEventListener("scroll", this.handleScrol);
     this.$store.dispatch("category");
     this.$store.dispatch("sliders");
-    this.$store.dispatch("offer_banner");
     this.$store.dispatch("sale_campaign");
   },
 
   computed: {
+    banner() {
+      return this.$store.getters.banner;
+    },
     category() {
       return this.$store.getters.categories;
     },
@@ -411,9 +436,6 @@ export default {
     },
     sliders() {
       return this.$store.getters.sliders;
-    },
-    getOffers() {
-      return this.$store.getters.offer_banner;
     },
 
     sale_campaign() {
