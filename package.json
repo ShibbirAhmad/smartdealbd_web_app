@@ -45,6 +45,7 @@
         "vue-router": "^3.4.3",
         "vue-signature": "^2.4.7",
         "vue-toasted": "^1.1.28",
+        "vue-typer": "^1.2.0",
         "vue2-flip-countdown": "^0.11.1",
         "vuex": "^3.5.1"
     }

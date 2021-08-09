@@ -28,7 +28,7 @@
 
                   </li>
                     <li>
-                      <h4>
+                      <h4 class="p_code">
                         <b>Product Code:</b>
                         <span itemprop="mpn">{{ product.product_code }}</span>
                       </h4>
@@ -42,12 +42,12 @@
                             <div class="s_price_container">
                               <h4> Price </h4>
                               <p >
-                                    <span class="price-old" v-if="product.discount">&#2547; {{product.sale_price}}</span>
-                                    <span class="price-new">&#2547; {{product.price}}</span>
+                                    <span class="price-old price_in_small" v-if="product.discount">&#2547; {{product.sale_price}}</span>
+                                    <span class="price-new price_in_small">&#2547; {{product.price}}</span>
                                </p>
                           </div>
                       </div>
-                      <div class="col-lg-12 col-md-12" v-if="product.product_variant.length>0 && product.product_attribute">
+                      <div class="col-lg-12 col-md-12 col-xs-12" v-if="product.product_variant.length>0 && product.product_attribute">
 
                         <div class="ps-product__variations">
                             <div class="pr_switch_wrap">
@@ -82,9 +82,9 @@
 
 
                       </div>
-                       <div class="col-lg-12 col-md-12">
+                       <div class="col-lg-12 col-md-12 col-xs-12">
                         <div class="qty_container">
-                          <h4>
+                          <h4 >
                             <b>Quantity</b>
                           </h4>
 
@@ -206,8 +206,7 @@
                       v-if="product.discount"
                       >&#2547; {{ product.sale_price }}</span
                     >
-                    <span v-if="product.discount > 0" class="discount"> <i class="fa fa-star discount_star"> </i> {{ ((product.discount/product.sale_price)*100).toFixed(0) }}%  <span class="d_off">off</span> </span>
-
+                  
                   </p>
                 </div>
               </div>

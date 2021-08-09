@@ -214,7 +214,7 @@
 
             </div>
 
-            <div class="row">
+            <div class="row landing_page_all_p_row">
               <div
                 class="col-lg-3 col-sm-4 col-md-3 col-xs-6 width_20 small_width"
                 v-for="(product, index) in category.products"

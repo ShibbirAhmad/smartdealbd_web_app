@@ -13,12 +13,14 @@
             </a>
           </li>
           <li>
-            <form id="search_form" class="header_search_form"  @submit.prevent="subMitAutoComppleteForm">
+            <form   id="search_form"  @submit.prevent="subMitAutoComppleteForm">
+             <vue-typer id="type_writer" class="auto_writer" text=' HOME, LIVING KITCHEN, GADGET, ELECTRONICS '></vue-typer>
               <input
                 type="text"
-                placeholder="search products "
                 class="search-input"
                 @keyup="autocomplteSearch"
+                @mouseover="hideAutoWriting"
+                @mouseout="displayAutoWriting"
                 v-model="search"
               />
               <button class="search-btn"><i class="fa fa-search"></i></button>
@@ -230,6 +232,7 @@
 </template>
 
 <script>
+import { VueTyper } from 'vue-typer' ;
 export default {
   name: "main-header",
   //props: ["categories"],
@@ -246,9 +249,15 @@ export default {
     };
   },
   methods: {
-    searchToggle(){
-       document.getElementById("search_form").classList.toggle("search_toggle");
+
+   hideAutoWriting(){
+       document.getElementById("type_writer").style.display="none";
+   },
+
+  displayAutoWriting(){
+        document.getElementById("type_writer").style.display="block";
     },
+
     category() {
       axios
         .get("_public/category")
@@ -409,6 +418,9 @@ export default {
     this.$store.dispatch("general_setting");
    window.addEventListener("scroll", this.handleScrol);
 
+  },
+  components : {
+    'vue-typer': VueTyper
   },
   computed: {
     user() {

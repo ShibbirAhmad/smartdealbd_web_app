@@ -108,11 +108,6 @@
                   <i class="fa fa-lg fa-twitter f-icon"></i>
                 </a>
 
-
-               <a href="https://mohadesh.com/" class="social-wrape"  target="_blank" >
-                  <i class="fa fa-newspaper-o f-icon"></i>
-                </a>
-
                   </div>
                 </div>
               </div>

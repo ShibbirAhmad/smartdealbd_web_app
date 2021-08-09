@@ -47,6 +47,18 @@ body{
     padding-right: 5px !important;
 }
 
+.auto_writer {
+    position: absolute;
+    z-index: 11111;
+    top: 26px;
+    left: 32%;
+    opacity: .6;
+
+}
+
+.type_writer_toggle  {
+    display: none;
+}
 
 .custom_padding {
     padding-left: 5px !important;
@@ -971,6 +983,7 @@ img.site-logo {
 
 
 .search-input {
+    cursor: pointer;
     width: 38%;
     height: 35px;
     padding: 0 17px;
@@ -2188,6 +2201,11 @@ span.price-new {
           margin-left: 10px;
         }
 
+    .attribute-name {
+        font-size: 18px ;
+        font-weight: bold ;
+    }
+
 @media only screen and (max-width: 900px) {
 
 
@@ -3066,26 +3084,42 @@ span.price-new {
 
 @media screen and (max-width:600px) {
 
+    .landing_page_all_p_row {
+        margin-left: -5px !important;
+    }
 
-      .input_qty {
-               padding: 10px 130px !important;
-           }
-           .incrementor_plus {
-                display: block ;
-                position: absolute;
-                margin-top: -8%;
-                margin-left: 81%;
-                font-size: 20px;
-                color: var(--primary-color);
-           }
-           .incrementor_minus {
-                display: block ;
-                position: absolute;
-                margin-top: -8%;
-                margin-left: 5%;
-                font-size: 20px;
-                color: var(--primary-color);
-            }
+    .realted-producs {
+            margin-left: -5px !important;
+        }
+        
+    .price_in_small {
+       font-size: 16px !important;
+       padding-right: 10px  ;
+    }
+
+     .p_code {
+         font-size: 16px;
+     }
+
+    .s_price_container h4 {
+        font-size: 16px;
+    }
+
+    .attribute-name {
+        font-size: 16px;
+    }
+
+    .qty_container h4 {
+        font-size: 16px ;
+    }
+
+    .incrementor_plus {
+        margin-left: 25%;
+    }
+
+    .incrementor_minus {
+        margin-left: 82%;
+    }
 
 
 
@@ -3112,12 +3146,9 @@ span.price-new {
        margin:10px;
     }
 
-
         .cart-empy img {
             height: 130px;
         }
-
-
 
 
     }
@@ -3128,7 +3159,14 @@ span.price-new {
 
 @media screen and (max-width: 450px) {
 
-
+    .auto_writer {
+        position: absolute;
+        z-index: 11111;
+        top: 75px;
+        left: 3%;
+        opacity: .6;
+        font-size: 9px;
+    }
 
      .advertise_banner_row {
        margin-top: -10px ;
@@ -3359,7 +3397,7 @@ span.price-new {
 
 
         .small_width {
-            width: 47.5% !important;
+            width: 48% !important;
             padding-left: 15px;
             padding-right: 0px;
         }

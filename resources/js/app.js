@@ -12,6 +12,8 @@ import VModal from 'vue-js-modal';
 import datePicker from 'vue-bootstrap-datetimepicker';
 import Permissions from "./components/admin/Permissions/Permissions.vue";
 
+
+
 Vue.use(datePicker);
 Vue.mixin(Permissions);
 
