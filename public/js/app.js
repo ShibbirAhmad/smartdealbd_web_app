@@ -2516,13 +2516,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.$store.dispatch('footer_setting');
@@ -2590,6 +2583,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+//
 //
 //
 //
@@ -2899,7 +2893,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     cartRemove: function cartRemove(cartContent) {
       var _this4 = this;
 
-      if (confirm("are you sure remove this item?")) {
+      if (confirm("are you sure to remove?")) {
         axios.get("/_public/cartToDestroy", {
           params: {
             rowId: cartContent.rowId
@@ -2997,6 +2991,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     this.$store.dispatch("user");
     this.$store.dispatch("category");
     this.$store.dispatch("general_setting");
+    this.$store.dispatch('footer_setting');
     window.addEventListener("scroll", this.handleScrol);
   },
   components: {
@@ -3014,6 +3009,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     general_setting: function general_setting() {
       return this.$store.getters.general_setting;
+    },
+    footer_setting: function footer_setting() {
+      return this.$store.getters.footer_setting;
     }
   }
 });
@@ -66708,20 +66706,6 @@ var render = function() {
                   _c("div", { staticClass: "line" }),
                   _vm._v(" "),
                   _c("ul", { staticClass: "link_line" }, [
-                    _vm._m(0),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c(
-                          "router-link",
-                          { attrs: { to: { name: "carrier_public" } } },
-                          [_vm._v("Carrier")]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
                     _c(
                       "li",
                       [
@@ -66869,7 +66853,7 @@ var render = function() {
                             }
                           }),
                           _vm._v(" "),
-                          _vm._m(1)
+                          _vm._m(0)
                         ]
                       )
                     ])
@@ -66953,16 +66937,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "https://mohadesh.com", target: "_blank" } }, [
-        _vm._v(" News ")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c(
       "button",
       { staticClass: "btn email_icon_container", attrs: { type: "submit" } },
@@ -67015,7 +66989,19 @@ var render = function() {
                   staticClass: "site-logo",
                   attrs: { src: _vm.base_url + _vm.general_setting.logo }
                 })
-              ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "header_facebook",
+                  attrs: {
+                    href: _vm.footer_setting.facebook_url,
+                    target: "_blank"
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-lg fa-facebook " })]
+              )
             ]),
             _vm._v(" "),
             _c("li", [

@@ -264,6 +264,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -312,6 +317,20 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     };
   },
   methods: {
+    displayeImageFromBox: function displayeImageFromBox(e) {
+      var target_element = e.target;
+      var active_images = document.getElementsByClassName("__active_border");
+
+      if (active_images.length > 0) {
+        for (var i = 0; i < active_images.length; i++) {
+          active_images[i].classList.remove("__active_border");
+        }
+      }
+
+      target_element.classList.add("__active_border");
+      var big_image = document.getElementsByClassName("single_product_image");
+      big_image[0].setAttribute("src", target_element.src);
+    },
     incrementQty: function incrementQty() {
       if (this.cart.quantity > 1) {
         var qty = this.cart.quantity;
@@ -591,34 +610,52 @@ var render = function() {
             _c("div", { staticClass: "container" }, [
               _c("div", { staticClass: "single-product-box" }, [
                 _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-lg-4" }, [
-                    _c("div", [
-                      _c("div", { staticClass: "row product-info" }, [
-                        _c(
+                  _c("div", { staticClass: "col-lg-4 col-md-4 col-xs-12" }, [
+                    _c(
+                      "div",
+                      { staticClass: "product-image-viewer" },
+                      [
+                        _vm.product_images.length
+                          ? _c("image-zoom", {
+                              attrs: {
+                                regular:
+                                  _vm.base_url +
+                                  _vm.product_images[0].product_image,
+                                "img-class": "single_product_image"
+                              }
+                            })
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "preview_img_box_container" },
+                      _vm._l(_vm.product_images, function(image, index) {
+                        return _c(
                           "div",
                           {
-                            staticClass:
-                              "col-lg-6 col-md-6 product-image-viewer"
+                            key: index,
+                            staticClass: "__preview_image_box",
+                            class: { __active_border: index == 0 }
                           },
                           [
-                            _vm.product_images.length
-                              ? _c("image-zoom", {
-                                  attrs: {
-                                    regular:
-                                      _vm.base_url +
-                                      _vm.product_images[0].product_image,
-                                    "img-class": "single_product_image"
-                                  }
-                                })
-                              : _vm._e()
-                          ],
-                          1
+                            _c("img", {
+                              staticClass: "__preview_img",
+                              attrs: {
+                                src: _vm.base_url + image.product_image
+                              },
+                              on: { click: _vm.displayeImageFromBox }
+                            })
+                          ]
                         )
-                      ])
-                    ])
+                      }),
+                      0
+                    )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-4" }, [
+                  _c("div", { staticClass: "col-lg-4 col-md-4 col-xs-12" }, [
                     _c("ul", { staticClass: "list-unstyled description" }, [
                       _c("li", [
                         _c(
@@ -945,7 +982,7 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-4" }, [
+                  _c("div", { staticClass: "col-lg-4 col-md-4 col-xs-12" }, [
                     _vm._m(1),
                     _vm._v(" "),
                     _c("div", { staticClass: "call_now_container" }, [

@@ -19,14 +19,7 @@
                 <h5>Quick Links</h5>
                 <div class="line"></div>
                 <ul class="link_line">
-                <li>
-                    <a href="https://mohadesh.com" target="_blank"> News </a>
-                  </li>
-                  <li>
-                    <router-link :to="{ name: 'carrier_public' }"
-                      >Carrier</router-link
-                    >
-                  </li>
+      
                   <li>
                     <router-link :to="{ name: 'welcome' }">Home</router-link>
                   </li>

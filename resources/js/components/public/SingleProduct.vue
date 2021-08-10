@@ -7,21 +7,26 @@
         <div class="single-product-box" >
           <div class="row">
 
-            <div class="col-lg-4">
-                <div>
-              <div class="row product-info">
-                <div class="col-lg-6 col-md-6 product-image-viewer"  >
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <div class="product-image-viewer"  >
                   <image-zoom v-if="product_images.length"
                     :regular="base_url+product_images[0].product_image"
                     img-class="single_product_image"
                     >
                   </image-zoom>
+
                   </div>
+              <div class="preview_img_box_container">
+               <div v-for="(image,index) in product_images" :key="index" :class="{__active_border :index==0}" class="__preview_image_box">
+                  <img   @click="displayeImageFromBox"  class="__preview_img"
+                        :src="base_url+image.product_image"
+                    />
               </div>
+
              </div>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-4 col-md-4 col-xs-12">
                <ul class="list-unstyled description">
                   <li>
                  <h2 class="title" itemprop="name">{{ product.name }}</h2>
@@ -138,7 +143,7 @@
                   </div>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-4 col-md-4 col-xs-12">
 
                 <div class="order_now_container">
                        <p> <i class="fa fa-check"></i>  Order today and receive it within 02 - 05 days</p>
@@ -206,7 +211,7 @@
                       v-if="product.discount"
                       >&#2547; {{ product.sale_price }}</span
                     >
-                  
+
                   </p>
                 </div>
               </div>
@@ -280,6 +285,21 @@ export default {
     };
   },
   methods: {
+
+    displayeImageFromBox(e){
+      let target_element = e.target;
+      let active_images = document.getElementsByClassName("__active_border");
+
+      if (active_images.length > 0) {
+        for (let i = 0; i < active_images.length; i++) {
+          active_images[i].classList.remove("__active_border");
+        }
+      }
+
+      target_element.classList.add("__active_border");
+        let big_image = document.getElementsByClassName("single_product_image");
+         big_image[0].setAttribute("src",target_element.src);
+    },
 
     incrementQty(){
       if (this.cart.quantity > 1) {

@@ -136,7 +136,6 @@
                       v-if="product.discount"
                       > &#2547; {{ product.sale_price }}</span
                     >
-                    <span v-if="product.discount > 0" class="discount"> <i class="fa fa-star discount_star"> </i> {{ ((product.discount/product.sale_price)*100).toFixed(0) }}%  <span class="d_off">off</span> </span>
 
                   </p>
                 </div>

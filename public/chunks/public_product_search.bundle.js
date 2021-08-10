@@ -265,7 +265,7 @@ var render = function() {
                       {
                         key: product.id,
                         staticClass:
-                          "col-lg-2 col-sm-6 col-md-6 col-xs-6 width-20"
+                          "col-lg-3 custom_padding col-sm-6 col-md-3 col-xs-6 width_20 small_width"
                       },
                       [
                         _c("div", { staticClass: "product-card small-card" }, [
@@ -331,29 +331,6 @@ var render = function() {
                                         _vm._v(
                                           "৳ " + _vm._s(product.sale_price)
                                         )
-                                      ])
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  product.discount > 0
-                                    ? _c("span", { staticClass: "discount" }, [
-                                        _c("i", {
-                                          staticClass:
-                                            "fa fa-star discount_star"
-                                        }),
-                                        _vm._v(
-                                          " " +
-                                            _vm._s(
-                                              (
-                                                (product.discount /
-                                                  product.sale_price) *
-                                                100
-                                              ).toFixed(0)
-                                            ) +
-                                            "%  "
-                                        ),
-                                        _c("span", { staticClass: "d_off" }, [
-                                          _vm._v("off")
-                                        ])
                                       ])
                                     : _vm._e()
                                 ])

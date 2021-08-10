@@ -27,7 +27,7 @@
         <div class="row" style="margin-top:15px;">
 
           <div
-            class="col-lg-2 col-sm-6 col-md-6 col-xs-6 width-20"
+            class="col-lg-3 custom_padding col-sm-6 col-md-3 col-xs-6 width_20 small_width"
            v-for="product in products" v-if="products"
             :key="product.id"
           >
@@ -56,7 +56,7 @@
                       product.sale_price
                     }}</span>
 
-                    <span v-if="product.discount > 0" class="discount"> <i class="fa fa-star discount_star"> </i> {{ ((product.discount/product.sale_price)*100).toFixed(0) }}%  <span class="d_off">off</span> </span>
+
                   </p>
                 </div>
               </div>

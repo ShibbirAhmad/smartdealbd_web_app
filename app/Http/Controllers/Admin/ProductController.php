@@ -148,17 +148,12 @@ class ProductController extends Controller
 
            return response()->json([
                 'status' => 'SUCCESS',
-                'message' => 'product add successfully'
+                'message' => 'added successfully'
             ]);
 
 
     }
 
-
-    public function show($id)
-    {
-        //
-    }
 
 
     public function edit($id)
@@ -181,16 +176,6 @@ class ProductController extends Controller
     }
 
 
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-
-    public function destroy($id)
-    {
-
-    }
 
     public function search($search)
     {
@@ -295,15 +280,7 @@ class ProductController extends Controller
                 'updated_at' => Carbon::now(),
                 'created' => Carbon::now(),
             ]);
-//            $product->name = $request->name;
-//            $product->category_id = $request->category;
-//            $product->sub_category_id = $request->sub_category ?? null;
-//            $product->sub_sub_category_id = $request->sub_sub_category ?? null;
-//            $product->sale_price = $request->sale_price;
-//            $product->price = $request->price;
-//            $product->discount = $request->discount ?? null;
-//            $product->details = $request->details;
-//            if($product->save()){
+
             return response()->json([
                 'status' => 'SUCCESS',
                 'message' => 'Product information was updated'
@@ -317,7 +294,6 @@ class ProductController extends Controller
     public function updateProperties(Request $request, $id)
     {
 
-
         //return $request->all();
         $validatedData = $request->validate([
             'attribute' => 'required ',
@@ -326,7 +302,6 @@ class ProductController extends Controller
 
         if (Product::find($id)) {
             //find product old attribute
-
             if (isset($request->attribute) && !empty($request->attribute)) {
                     $product_attribute =ProductAttribute::where('product_id',$id)->first();
                     if($product_attribute){
@@ -484,12 +459,11 @@ class ProductController extends Controller
 
                          $c_product_variants=ProductVariant::where('product_id',$c_product->id)->get();
                          if (!empty($c_product_variants)) {
-                             $variant_length =  count($c_product_variants);
-                                    foreach ($c_product_variants as  $item) {
-                                        $product_variant = new ProductVariant();
-                                        $product_variant->product_id = $product->id;
-                                        $product_variant->variant_id = $item->variant_id;
-                                        $product_variant->save();
+                             foreach ($c_product_variants as  $item) {
+                                $product_variant = new ProductVariant();
+                                $product_variant->product_id = $product->id;
+                                $product_variant->variant_id = $item->variant_id;
+                                $product_variant->save();
                             }
                          }
 
@@ -510,7 +484,6 @@ class ProductController extends Controller
 
 
 
-
     public function productStock(Request $request){
 
           $item=$request->item??20;
@@ -518,13 +491,9 @@ class ProductController extends Controller
           return response()->json($products);
 
 
-
-
-
 }
 
     public function printBarcode($id,$howmany){
-
 
         $product_barcode=ProductBarcode::where('product_id',$id)->first();
         $pdf=PDF::loadView('admin.pdf.barcode',compact('product_barcode','howmany'));

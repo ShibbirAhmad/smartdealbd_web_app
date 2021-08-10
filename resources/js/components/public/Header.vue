@@ -11,6 +11,7 @@
             <a href="/">
             <img :src="base_url+general_setting.logo" class="site-logo" />
             </a>
+            <a :href="footer_setting.facebook_url" target="_blank" class="header_facebook" > <i class="fa fa-lg fa-facebook "></i> </a>
           </li>
           <li>
             <form   id="search_form"  @submit.prevent="subMitAutoComppleteForm">
@@ -312,7 +313,7 @@ export default {
         });
     },
     cartRemove(cartContent) {
-      if (confirm("are you sure remove this item?")) {
+      if (confirm("are you sure to remove?")) {
         axios
           .get("/_public/cartToDestroy", {
             params: {
@@ -416,6 +417,7 @@ export default {
     this.$store.dispatch("user");
     this.$store.dispatch("category");
     this.$store.dispatch("general_setting");
+    this.$store.dispatch('footer_setting');
    window.addEventListener("scroll", this.handleScrol);
 
   },
@@ -434,6 +436,10 @@ export default {
     },
     general_setting(){
        return this.$store.getters.general_setting;
+    },
+
+    footer_setting(){
+      return this.$store.getters.footer_setting ;
     }
   },
 };

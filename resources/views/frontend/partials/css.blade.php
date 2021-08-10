@@ -2019,6 +2019,7 @@ span.price-new {
         .product__attribute>label {
         margin-bottom: 0;
         max-width: 60px;
+        margin-right: 27px;
         }
 
 
@@ -2168,7 +2169,7 @@ span.price-new {
     /* end attribute and variant awesome css  */
 
     .advertise_banner_row {
-       margin-bottom: 30px ;
+       margin-bottom: 50px ;
     }
 
     .advertise_banner_1 {
@@ -2204,6 +2205,32 @@ span.price-new {
     .attribute-name {
         font-size: 18px ;
         font-weight: bold ;
+    }
+
+    /* preview images of products  */
+    .preview_img_box_container{
+        display: flex;
+    }
+    .__preview_image_box {
+        width: 70px;
+        height: 70px;
+        border-radius: 10px;
+        margin: 5px 5px;
+    }
+     .__preview_img {
+        cursor: pointer;
+        width: 65px ;
+        height: 65px;
+        border-radius: 5px;
+    }
+    .__active_border{
+        border: 1px solid var(--primary-color);
+    }
+
+    /* preview images of products  */
+
+    .header_facebook {
+        display: none;
     }
 
 @media only screen and (max-width: 900px) {
@@ -2358,6 +2385,27 @@ span.price-new {
 
 
 @media screen and (max-width: 768px) {
+
+    .header_facebook {
+        position: absolute;
+        display: block;
+        left: 83%;
+        top: 34%;
+        font-size: 18px;
+        border: 1px dashed;
+        padding: 7px 10px;
+        border-radius: 50%;
+    }
+
+    .__preview_image_box {
+        width: 58px;
+        height: 58px;
+    }
+     .__preview_img {
+        cursor: pointer;
+        width: 55px ;
+        height: 55px;
+    }
 
 
     .menu-list {
@@ -3091,7 +3139,7 @@ span.price-new {
     .realted-producs {
             margin-left: -5px !important;
         }
-        
+
     .price_in_small {
        font-size: 16px !important;
        padding-right: 10px  ;
@@ -3170,7 +3218,6 @@ span.price-new {
 
      .advertise_banner_row {
        margin-top: -10px ;
-       margin-bottom: 50px ;
     }
 
     .advertise_banner_1 {
