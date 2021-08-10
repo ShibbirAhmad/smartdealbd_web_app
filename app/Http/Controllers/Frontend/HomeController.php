@@ -60,12 +60,12 @@ class HomeController extends Controller
     }
        public function products(Request $request){
 
-        $categories =Category::orderBy('id','desc')->where('status',1)->paginate(3);
+        $categories =Category::where('status',1)->orderBy('position','asc')->paginate(3);
 
         foreach($categories as $category){
-             $category->{'products'}=Product::where('sub_category_id',$category->id)->with('productImage')
+             $category->{'products'}=Product::where('category_id',$category->id)
                                            ->where('status',1)
-                                           ->select('id','name','price','sale_price','slug','discount')
+                                           ->select('id','name','thumbnail_img','price','sale_price','slug','discount')
                                           ->get()
                                           ->take(10);
         }
@@ -73,19 +73,14 @@ class HomeController extends Controller
     }
 
     public function flashSale(){
-        $flash_sale_products=Product::where(['status'=>1,'product_placement'=>1])->orderBy('product_position','DESC')->with('productImage')->get();
+        $flash_sale_products=Product::where(['status'=>1,'product_placement'=>1])->orderBy('product_position','DESC')->get();
         return \response()->json($flash_sale_products);
     }
 
 
     public function product(Request $request,$slug)
     {
-         //this slug with encoding for any language
-
-
-
         $product = Product::where('slug', $slug)->with(['productAttribute.attribute','productVariant.variant'])->first();
-
        if ($product) {
           return response()->json([
                 'status' => "SUCCESS",
@@ -106,7 +101,7 @@ class HomeController extends Controller
 
     public function relatedProduct(Request $request){
      $product_find=Product::where('slug',$request->product_slug)->first();
-     $products=Product::where('sub_sub_category_id',$product_find->sub_sub_category_id)->where('id','!=',$product_find->id)->with('productImage')->paginate(5);
+     $products=Product::where('sub_sub_category_id',$product_find->sub_sub_category_id)->where('id','!=',$product_find->id)->paginate(5);
     return response()->json($products);
  }
 
@@ -122,14 +117,14 @@ class HomeController extends Controller
     public function categoryWiseProduct(Request $request)
     {
       $category=Category::where('slug',$request->slug)->first();
-      $products=Product::where('category_id',$category->id)->with('productImage')->paginate(12);
+      $products=Product::where('category_id',$category->id)->paginate(12);
       return response()->json($products);
     }
 
     public function categoryWiseProductPriceFilter(Request $request){
 
         $category=Category::where('slug',$request->slug)->first();
-        $products=Product::where('category_id',$category->id)->where('price','>=',$request->min_price)->where('price','<=',$request->max_price)->with('productImage')->paginate(20);
+        $products=Product::where('category_id',$category->id)->where('price','>=',$request->min_price)->where('price','<=',$request->max_price)->paginate(20);
         return response()->json([
             "status" => "OK",
             "products" => $products ,
@@ -144,7 +139,7 @@ class HomeController extends Controller
                                                 ->orderBy('total','DESC')
                                                 ->take(12)
                                                 ->pluck('product_id');
-        $best_selling_produtcs =Product::WhereIn('id',$best_selling_product_id)->where('status',1)->with('productImage')->get();
+        $best_selling_produtcs =Product::WhereIn('id',$best_selling_product_id)->where('status',1)->get();
         $banner=Banner::latest()->first();
         return response()->json([
             'status' => 'SUCCESS',
@@ -201,7 +196,7 @@ class HomeController extends Controller
 
     public function subCategoryWiseProduct(Request $request){
          $sub_category=SubCategory::where('slug',$request->slug)->first();
-        $products=Product::where('sub_category_id',$sub_category->id)->with('productImage')->paginate(8);
+        $products=Product::where('sub_category_id',$sub_category->id)->paginate(8);
         return response()->json($products);
     }
 
@@ -210,7 +205,7 @@ class HomeController extends Controller
                           ->orWhere('product_code','like', '%' . $search . '%')
                           ->orWhere('details','like', '%' . $search . '%')
                           ->where('status',1)
-                          ->with('productImage')
+
                          ->get();
         return \response()->json($products);
 
@@ -228,7 +223,7 @@ class HomeController extends Controller
     public function subSubCategoryWiseProduct(Request $request){
 
         $sub_sub_category=SubSubCategory::where('slug',$request->slug)->first();
-        $products=Product::where('sub_sub_category_id',$sub_sub_category->id)->where('status',1)->with('productImage')->paginate(8);
+        $products=Product::where('sub_sub_category_id',$sub_sub_category->id)->where('status',1)->paginate(8);
         return response()->json($products);
     }
 
@@ -240,7 +235,7 @@ class HomeController extends Controller
                 $orderBy='DESC';
             }
             $category=Category::where('slug',$request->slug)->first();
-            $products=Product::where('category_id',$category->id)->orderBy('price',$orderBy)->where('status',1)->with('productImage')->get();
+            $products=Product::where('category_id',$category->id)->orderBy('price',$orderBy)->where('status',1)->get();
             return response()->json([
                     "products" => $products ,
             ]);
@@ -255,7 +250,7 @@ class HomeController extends Controller
             $orderBy='DESC';
         }
         $sub_category=SubCategory::where('slug',$request->slug)->first();
-        $products=Product::where('sub_category_id',$sub_category->id)->orderBy('price',$orderBy)->where('status',1)->with('productImage')->get();
+        $products=Product::where('sub_category_id',$sub_category->id)->orderBy('price',$orderBy)->where('status',1)->get();
         return response()->json([
                 "products" => $products ,
         ]);
@@ -270,7 +265,7 @@ class HomeController extends Controller
             $orderBy='DESC';
         }
         $sub_sub_category=SubSubCategory::where('slug',$request->slug)->first();
-        $products=Product::where('sub_sub_category_id',$sub_sub_category->id)->orderBy('price',$orderBy)->where('status',1)->with('productImage')->get();
+        $products=Product::where('sub_sub_category_id',$sub_sub_category->id)->orderBy('price',$orderBy)->where('status',1)->get();
         return response()->json([
             "products" => $products
         ]);
@@ -457,44 +452,10 @@ class HomeController extends Controller
     }
 
 
-
-
-  public function publish_occation_campaign(){
-
-        $occasion=OccasionProduct::latest()->first();
-        $occasion_p_top=Product::where('product_code',$occasion->product_code_one)->with('productImage')->first();
-        $occasion_p_bottom=Product::where('product_code',$occasion->product_code_two)->with('productImage')->first();
-
-            return response()->json([
-                  'status' => "OK",
-                  'occasion' => $occasion,
-                  'occasion_p_top' => $occasion_p_top,
-                  'occasion_p_bottom' => $occasion_p_bottom,
-            ]);
-
-   }
-
-
-    public function publish_seasional_campaign(){
-
-            $seasion=SeasonalProduct::latest()->first();
-            $seasion_p_top=Product::where('product_code',$seasion->product_code_one)->with('productImage')->first();
-            $seasion_p_bottom=Product::where('product_code',$seasion->product_code_two)->with('productImage')->first();
-
-                return response()->json([
-                    'status' => "OK",
-                    'seasion' => $seasion,
-                    'seasion_p_top' => $seasion_p_top,
-                    'seasion_p_bottom' => $seasion_p_bottom,
-                ]);
-
-    }
-
-
     public function publish_buy_one_get_one_campaign(){
 
                 $buy_get=BuyOneGetOneOffer::latest()->first();
-                $buy_get_p=Product::where('product_code',$buy_get->product_code)->with('productImage')->first();
+                $buy_get_p=Product::where('product_code',$buy_get->product_code)->first();
 
                     return response()->json([
                         'status' => "OK",

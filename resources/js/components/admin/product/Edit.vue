@@ -84,7 +84,7 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label>
-                          sale price
+                          price
                           <b class="text-danger">*</b>
                         </label>
                         <input
@@ -100,20 +100,7 @@
                         <has-error :form="form" field="sale_price"></has-error>
                       </div>
                     </div>
-                    <div class="col-lg-6">
-                     <div class="form-group">
-                    <label> wallet point </label>
-                    <input
-                      v-model="form.wallet_point"
-                      type="number"
-                      name="wallet_point"
-                      class="form-control"
-                      :class="{ 'is-invalid': form.errors.has('wallet_point') }"
-                      placeholder="wallet_point"
-                    />
-                    <has-error :form="form" field="wallet_point"></has-error>
-                  </div>
-                    </div>
+
                   </div>
                   <div class="row">
                     <div class="col-lg-6">
@@ -157,7 +144,7 @@
                     </div>
                     <div class="col-lg-3">
                       <div class="form-group">
-                        <label>price</label>
+                        <label>sale price</label>
                         <input
                           v-model="form.price"
                           type="text"
@@ -436,7 +423,6 @@ export default {
         sale_price: "",
         discount: "",
         price: "",
-        wallet_point: "",
         details: "",
         attribute:"",
         variant: [],
@@ -480,11 +466,11 @@ export default {
             this.loading=false;
             this.form.name = resp.data.product.name;
             this.form.category = resp.data.product.category_id;
-            this.form.sub_category = resp.data.product.sub_category_id;
+            this.form.sub_category = resp.data.product.sub_category_id ? resp.data.product.sub_category_id : ''  ;
+            this.form.sub_sub_category = resp.data.product.sub_sub_category_id ? resp.data.product.sub_sub_category_id : ''  ;
             this.form.sale_price = resp.data.product.sale_price;
             this.form.discount = resp.data.product.discount?resp.data.product.discount:'';
             this.form.price = resp.data.product.price;
-            this.form.wallet_point = resp.data.product.wallet_point;
             this.form.product_placement=resp.data.product.product_placement;
             this.form.campaign_id=resp.data.product.campaign_id?resp.data.product.campaign_id:"";
             this.form.expired_date=resp.data.product.expired_date?resp.data.product.expired_date:"";
@@ -532,12 +518,12 @@ export default {
 
             }
           } else {
-            this.error = "some thing went to wrong";
+            this.error = "something went to wrong";
           }
         })
         .catch((error) => {
           console.log(error);
-         // this.error = "some thing went to wrong";
+         // this.error = "something went to wrong";
         });
     },
     getSaleCampaign(){
@@ -577,7 +563,7 @@ export default {
             })
             .catch((error) => {
               console.log(error);
-              this.error = "some thing went to wrong";
+              this.error = "something went to wrong";
             });
         } else {
           this.$toasted.show("OK ! no action here", {
@@ -615,7 +601,7 @@ export default {
               duration: 4000,
             });
           } else {
-            this.error = "some thing went to wrong";
+            this.error = "something went to wrong";
           }
         })
         .catch((error) => {
@@ -623,7 +609,7 @@ export default {
           console.log(error);
           this.$Progress.finish();
 
-          this.error = "some thing went to wrong";
+          this.error = "something went to wrong";
         });
     },
     UpdateProductProperties() {
@@ -653,7 +639,7 @@ export default {
               duration: 4000,
             });
           } else {
-            this.error = "some thing went to wrong";
+            this.error = "something went to wrong";
           }
         })
         .catch((error) => {
@@ -661,7 +647,7 @@ export default {
           console.log(error);
           this.$Progress.finish();
 
-          this.error = "some thing went to wrong";
+          this.error = "something went to wrong";
         });
     },
     UpdateProductImage() {
@@ -691,13 +677,13 @@ export default {
               duration: 4000,
             });
           } else {
-            this.error = "some thing went to wrong";
+            this.error = "something went to wrong";
           }
         })
         .catch((error) => {
           console.log(error);
           this.$Progress.finish();
-          this.error = "some thing went to wrong" ;
+          this.error = "something went to wrong" ;
         });
     },
 
@@ -711,12 +697,12 @@ export default {
             this.merchants = resp.data.merchants;
             this.attributes = resp.data.attributes;
           } else {
-            this.error = "some thing went to wrong";
+            this.error = "something went to wrong";
           }
         })
         .catch((error) => {
           //  console.log(error)
-          this.error = "some thing went to wrong";
+          this.error = "something went to wrong";
         });
     },
     categoryWiseSubCategory() {
@@ -737,7 +723,7 @@ export default {
           }
         })
         .catch((error) => {
-          this.error = "some thing went wrong";
+          this.error = "something went wrong";
         });
     },
     subCategoryWiseSubSUbCategory() {
@@ -758,7 +744,7 @@ export default {
           }
         })
         .catch((error) => {
-          this.error = "some thing went wrong";
+          this.error = "something went wrong";
         });
     },
     attributeWiseVariants() {
@@ -774,7 +760,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.error = "some thing went wrong";
+          this.error = "something went wrong";
         });
     },
     salePrice() {

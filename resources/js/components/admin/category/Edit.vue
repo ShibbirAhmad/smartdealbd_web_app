@@ -24,6 +24,7 @@
                                      <div class="alert-danger alert" v-if="error">
                                          {{error}}
                                      </div>
+
                                     <div class="form-group">
                                         <label>Category Name</label>
                                         <input v-model="form.name" type="text" name="name"
@@ -32,6 +33,15 @@
                                         <has-error :form="form" field="name"></has-error>
 
                                     </div>
+
+                                    <div class="form-group">
+                                        <label>Display Position</label>
+                                        <input v-model="form.position" type="number" name="position"
+                                               class="form-control"
+                                            >
+                                    </div>
+
+
                                     <div class="form-group">
                                         <label>Category Image</label>
                                         <input class="form-control" :class="{ 'is-invalid': form.errors.has('image') }"
@@ -74,7 +84,7 @@
                 form: new Form({
                     name: "",
                     image: "",
-
+                    position: 0,
                 }),
                 error:'',
                 loading:true
@@ -89,9 +99,10 @@
                       //  console.log(resp)
                         if (resp.data.status == 'SUCCESS') {
                             this.form.name = resp.data.category.name;
+                            this.form.position = resp.data.category.position;
                             this.loading = false
                         } else {
-                            this.$toasted.show('some thing want to wrong', {
+                            this.$toasted.show('something went to wrong', {
                                 type: "error",
                                 position: 'top-center',
                                 duration: 5000
@@ -99,7 +110,7 @@
                         }
                     })
                     .catch((error) => {
-                        this.$toasted.show('some thing want to wrong', {
+                        this.$toasted.show('something went to wrong', {
                             type: "error",
                             position: 'top-center',
                             duration: 4000
@@ -123,13 +134,13 @@
                                 duration: 4000
                             });
                         } else {
-                            this.error = 'some thing want to wrong';
+                            this.error = 'something went to wrong';
                         }
 
                     })
                     .catch((error) => {
                         console.log(error)
-                        this.error = 'some thing want to wrong';
+                        this.error = 'something went to wrong';
                     })
             },
             uploadImage(e) {

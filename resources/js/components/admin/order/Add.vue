@@ -524,10 +524,11 @@ export default {
           .get("/search/customer/with/phone/number/" + this.form.customer_mobile)
           .then((resp) => {
             //when com data from t resp
+             console.log(resp);
             if (resp.data) {
               if (resp.data.customer) {
-                (this.form.customer_name = resp.data.customer.name),
-                  (this.form.customer_address = resp.data.customer.address);
+                (this.form.customer_name = resp.data.customer.customer_name),
+                  (this.form.customer_address = resp.data.customer.customer_address);
                 this.form.city = resp.data.customer.city_id;
               }
               this.$toasted.show(resp.data.message, {

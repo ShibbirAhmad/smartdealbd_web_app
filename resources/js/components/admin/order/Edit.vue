@@ -407,12 +407,12 @@ export default {
     edit() {
       axios.get("/order/view/" + this.$route.params.id).then((resp) => {
         console.log(resp);
-        console.log(resp.data.order.cutomer_phone);
+        console.log(resp.data.order.customer_phone);
         if (resp.data.status == "SUCCESS") {
           let order = resp.data.order;
-          this.form.customer_mobile = order.cutomer_phone;
-          this.form.customer_name = order.customer.name;
-          this.form.customer_address = order.customer.address;
+          this.form.customer_mobile = order.customer_phone;
+          this.form.customer_name = order.customer_name;
+          this.form.customer_address = order.customer_address;
           this.form.city = order.city_id;
           this.form.shipping_cost = order.shipping_cost;
           this.form.courier = order.courier_id;
@@ -456,7 +456,7 @@ export default {
     },
     //method initial for submit data
     add() {
-    if (typeof(this.form.paid_by)=='string') {
+    if ( this.form.paid_by =='select one' ) {
           alert('selecet any balance');
           return ;
       }

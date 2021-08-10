@@ -445,6 +445,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1322,7 +1326,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { placeholder: "Enter Invoice,Cutomer_phone" },
+                          attrs: {
+                            placeholder: "Enter Invoice,customer_phone"
+                          },
                           domProps: { value: _vm.search },
                           on: {
                             keyup: _vm.orderSearch,
@@ -1529,7 +1535,11 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("th", { attrs: { scope: "col" } }, [
-                            _vm._v("customer_name")
+                            _vm._v("Host Name")
+                          ]),
+                          _vm._v(" "),
+                          _c("th", { attrs: { scope: "col" } }, [
+                            _vm._v("C_name")
                           ]),
                           _vm._v(" "),
                           _c("th", { attrs: { scope: "col" } }, [
@@ -1632,7 +1642,15 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("td", { staticClass: "three-percent" }, [
                                     _vm._v(
-                                      "\n                        " +
+                                      "\n                         " +
+                                        _vm._s(order.host_name) +
+                                        "\n                      "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "three-percent" }, [
+                                    _vm._v(
+                                      "\n                         " +
                                         _vm._s(order.customer_name) +
                                         "\n                      "
                                     )
@@ -1641,7 +1659,7 @@ var render = function() {
                                   _c("td", { staticClass: "three-percent" }, [
                                     _vm._v(
                                       "\n                        " +
-                                        _vm._s(order.cutomer_phone) +
+                                        _vm._s(order.customer_phone) +
                                         "\n                      "
                                     )
                                   ]),

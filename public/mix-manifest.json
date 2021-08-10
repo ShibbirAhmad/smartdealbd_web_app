@@ -227,5 +227,6 @@
     "/chunks/vendors~single_product.bundle.js": "/chunks/vendors~single_product.bundle.js",
     "/chunks/viewOrder.bundle.js": "/chunks/viewOrder.bundle.js",
     "/chunks/viewSale.bundle.js": "/chunks/viewSale.bundle.js",
-    "/chunks/wholesaleOrder.bundle.js": "/chunks/wholesaleOrder.bundle.js"
+    "/chunks/wholesaleOrder.bundle.js": "/chunks/wholesaleOrder.bundle.js",
+    "/chunks/vendors~AccountReport~DeliveredOrder~OrderProfite~ReturnOrder~SaleProfite~admin_dashboard~approvedOr~90dabd7b.bundle.js": "/chunks/vendors~AccountReport~DeliveredOrder~OrderProfite~ReturnOrder~SaleProfite~admin_dashboard~approvedOr~90dabd7b.bundle.js"
 }

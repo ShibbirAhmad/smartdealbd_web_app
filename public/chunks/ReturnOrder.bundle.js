@@ -1313,7 +1313,9 @@ var render = function() {
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { placeholder: "Enter Invoice,Cutomer_phone" },
+                          attrs: {
+                            placeholder: "Enter Invoice,customer_phone"
+                          },
                           domProps: { value: _vm.search },
                           on: {
                             keyup: _vm.orderSearch,
@@ -1693,7 +1695,7 @@ var render = function() {
                                   _c("td", { staticClass: "three-percent" }, [
                                     _vm._v(
                                       "\n                        " +
-                                        _vm._s(order.cutomer_phone) +
+                                        _vm._s(order.customer_phone) +
                                         "\n                      "
                                     )
                                   ]),

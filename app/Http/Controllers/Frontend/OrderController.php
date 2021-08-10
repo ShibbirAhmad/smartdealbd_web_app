@@ -52,8 +52,9 @@ class OrderController extends Controller
                 $id = Order::max('id') ?? 0;
                 $invoice = 100 + $id;
                 $order=new Order();
+                $order->host_name=$request->getHttpHost();
                 $order->customer_name=$request->name;
-                $order->cutomer_phone=$request->mobile_no;
+                $order->customer_phone=$request->mobile_no;
                 $order->cutomer_address=$request->address;
                 $order->invoice_no=$invoice;
                 $order->order_type=1;
@@ -68,9 +69,9 @@ class OrderController extends Controller
 
                 foreach(Cart::content() as $product){
                 //update product stock
-                $product_stock=Product::where('id',$product->id)->first();
-                $product_stock->stock=$product_stock->stock-$product->qty;
-                $product_stock->save();
+                // $product_stock=Product::where('id',$product->id)->first();
+                // $product_stock->stock=$product_stock->stock - $product->qty;
+                // $product_stock->save();
                 //inserting order items
                 $details=new OrderItem();
                 $details->order_id=$order->id;

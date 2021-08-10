@@ -259,85 +259,20 @@ $admin = session()->get('admin');
                     @endif
 
 
-                    @if($admin->can('manage users'))
-                    <li>
-                        <router-link  :to="{ name: 'user'}"  > <i class="fa fa-user-circle"></i>Users</router-link>
-                    </li>
-                    @endif
-                    @if($admin->can('manage customers'))
-                    <li>
-                        <router-link :to="{ name: 'customer'}"  > <i class="fa fa-user-circle"></i> Customers</router-link>
-                    </li>
-                    @endif
-
                     @if($admin->can('create and manage merchant'))
                       <li>
                         <router-link :to="{ name: 'merchant'}"><i class="fa fa-user"></i>Merchant</router-link>
                     </li>
                       @endif
 
-
-                   @if($admin->can('manage reseller'))
                     <li>
                         <router-link :to="{ name: 'resellerHome'}"><i class="fa fa-user"></i>Reseller</router-link>
                     </li>
-                   @endif
+
 
 
                 </ul>
             </li>
-
-
-
-
-            @if($admin->can('manage reseller'))
-
-              <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-hand-o-right"></i> <span>Showroom Management</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                         <li>
-                            <router-link :to="{ name: 'showroom'}"><i class="fa fa-list-alt"></i>Showroom List</router-link>
-                        </li>
-                           <li>
-                            <router-link :to="{ name: 'showroom_manager'}"><i class="fa fa-user-secret"></i>Showroom Managers</router-link>
-                        </li>
-                         <li>
-                            <router-link :to="{ name: 'product_transfer'}"><i class="fa fa-exchange"></i>Transfer Product</router-link>
-                        </li>
-                    </ul>
-                </li>
-
-
-
-            @endif
-             @if($admin->can('manage reseller'))
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-user"></i> <span>Reseller Payment</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                     <li>
-                        <router-link :to="{ name: 'UnpaidPayment'}"><i class="fa fa-plus"></i>Unpaid</router-link>
-                    </li>
-                    <li>
-                        <router-link :to="{ name: 'paidPayment'}"><i class="fa fa-eye"></i>Paid</router-link>
-                    </li>
-                    <li>
-                        <router-link :to="{ name: 'PaymentInvoice'}"><i class="fa fa-eye"></i>Invoice</router-link>
-                    </li>
-
-
-                </ul>
-            </li>
-            @endif
 
 
             @if($admin->can('manage reports'))
@@ -405,11 +340,6 @@ $admin = session()->get('admin');
                     <li>
                         <router-link :to="{ name: 'sale_campaign'}"><i class="fa fa-eye"></i> General Campaign </router-link>
                     </li>
-
-                    <li>
-                        <router-link :to="{ name: 'buy_one_get_one'}"><i class="fa fa-fire"></i>buy-one get-one offer </router-link>
-                    </li>
-
 
                      <li>
                         <router-link :to="{ name: 'coupon'}"><i class="fa fa-gift"></i> Cupon Code </router-link>

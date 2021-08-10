@@ -234,7 +234,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -254,7 +253,7 @@ __webpack_require__.r(__webpack_exports__);
       search: "",
       item: "30",
       status: "all",
-      base_url: this.$store.state.image_base_link
+      base_url: this.$store.state.image_thumbnail_link
     };
   },
   methods: {
@@ -836,18 +835,15 @@ var render = function() {
                                     ),
                                     _vm._v(" "),
                                     _c("td", [
-                                      product.product_image.length
-                                        ? _c("img", {
-                                            staticClass: "table-image",
-                                            attrs: {
-                                              src:
-                                                _vm.base_url +
-                                                product.product_image[0]
-                                                  .product_image,
-                                              alt: "product image"
-                                            }
-                                          })
-                                        : _vm._e()
+                                      _c("img", {
+                                        staticClass: "table-image",
+                                        attrs: {
+                                          src:
+                                            _vm.base_url +
+                                            product.thumbnail_img,
+                                          alt: "product image"
+                                        }
+                                      })
                                     ]),
                                     _vm._v(" "),
                                     _c("td", [

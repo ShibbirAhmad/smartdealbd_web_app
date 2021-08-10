@@ -74,7 +74,7 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-       // return $request->all();
+    //    return $request ;
         $validatedData = $request->validate([
             'customer_mobile' => 'required|digits:11 ',
             'customer_name' => 'required ',
@@ -102,38 +102,16 @@ class OrderController extends Controller
             }
         }
         DB::transaction(function() use($request){
-        //first find find the customer
-        $customer=Customer::where('phone',$request->customer_mobile)->first();
-        $customertype=1;
-        if($request->order_type==3){
-            $customertype=2;
-        }
-        //if not customer then save, as a new customer
-        if(!$customer){
-            $customer=new Customer();
-            $customer->name=$request->customer_name;
-            $customer->phone=$request->customer_mobile;
-            $customer->address=$request->customer_address;
-            $customer->city_id=$request->city;
-            $customer->customer_type=$customertype;
-            $customer->save();
-        }else{
-            $customer->user_id=0;
-            $customer->name=$request->customer_name;
-            $customer->address=$request->customer_address;
-            $customer->city_id=$request->city;
-            $customer->customer_type=$customertype;
-            $customer->save();
-        }
-
         //save the order
-        $id = Order::max('id') ?? 0;
-        $invoice = 41151 + $id;
+        $max_id = Order::max('id') ?? 0;
+        $invoice = 1 + $max_id;
         $order=new Order();
-        $order->customer_id=$customer->id;
-        $order->cutomer_phone=$request->customer_mobile;
+        $order->host_name=$request->getHttpHost();
         $order->invoice_no=$invoice;
         $order->order_type=$request->order_type;
+        $order->customer_name=$request->customer_name;
+        $order->customer_phone=$request->customer_mobile;
+        $order->customer_address=$request->customer_address;
         $order->city_id=$request->city;
         $order->courier_id=$request->courier;
         $order->shipping_cost=$request->shipping_cost ?? 0;
@@ -173,10 +151,10 @@ class OrderController extends Controller
                 $details->variant_id=$product['variant_id'] ?? null;
                 $details->save();
                 }
-                $phone=$order->cutomer_phone;
-                $name=$customer->name;
+                $phone=$order->customer_phone;
+                $name=$request->name;
                 $invoice=$order->invoice_no;
-                Order::SendMessageCustomer($phone,$name,$invoice);
+              //  Order::SendMessageCustomer($phone,$name,$invoice);
               //create a credit
               if($order->paid>0){
                 $credit = new Credit();
@@ -193,40 +171,14 @@ class OrderController extends Controller
         });
         return response()->json([
                 'status'=>'SUCCESS',
-                'message'=>'Order was created successfully'
+                'message'=>'Order created successfully'
             ]);
     }
 
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
    public function update(Request $request, $id)
     {
          //return $request->all();
@@ -237,39 +189,19 @@ class OrderController extends Controller
             'city' => 'required',
             'courier' => 'required',
             'shipping_cost' => 'required',
-            //'commission' => 'required',
             'sub_city' => 'required',
-
         ]);
 
-        //first find find the customer
-        $customer=Customer::where('phone',$request->customer_mobile)->first();
         $order=Order::findOrFail($id);
-
         if($order->status!=1 && $order->status!=2){
-
             return \response()->json('Order New Or Pending not now');
         }
-        //if not customer then save, as a new customer
-        if(!$customer){
-            $customer=new Customer();
-            $customer->name=$request->customer_name;
-            $customer->phone=$request->customer_mobile;
-            $customer->address=$request->customer_address;
-            $customer->city_id=$request->city;
-            $customer->save();
-        }else{
-           $customer->name=$request->customer_name;
-            $customer->address=$request->customer_address;
-            $customer->city_id=$request->city;
-            $customer->save();
-        }
-
-
+        DB::transaction(function() use($request,$order){
       // return $customer->name;
         $paid= $request->paid - $order->paid;
-        $order->customer_id=$customer->id;
-        $order->cutomer_phone=$request->customer_mobile;
+        $order->customer_name=$request->customer_name;
+        $order->customer_address=$request->customer_address;
+        $order->customer_phone=$request->customer_mobile;
         $order->city_id=$request->city;
         $order->courier_id=$request->courier;
         $order->shipping_cost=$request->shipping_cost ?? 0;
@@ -277,13 +209,9 @@ class OrderController extends Controller
         $order->paid=$request->paid??0;
         $order->total=$request->total;
         $order->sub_city_id=$request->sub_city;
-
-        //if order save then save the order details
-        if($order->save()){
-
+        $order->save() ;
             //update credit
             if( $paid > 0){
-
                 $credit = new Credit();
                 $credit->purpose = "Order Paid Amount(From Order Update)";
                 $credit->amount = $paid;
@@ -294,7 +222,7 @@ class OrderController extends Controller
                 $credit->save();
               }
 
-            $order_items=OrderItem::where('order_id',$id)->get();
+            $order_items=OrderItem::where('order_id',$order->id)->get();
             //many of times when update order item, some item remove or some item add, so here we are delete previous item and insert new $rquest item
             foreach($order_items as $order_item){
             //update product stock befere delete items
@@ -305,13 +233,11 @@ class OrderController extends Controller
             }
 
             foreach($request->products as $product){
-
-
                // return $product['product_id'];
                 //update product stock before insert item
                 $product_item=Product::where('id',$product['product_id'])->first();
                 $product_item->stock;
-                $product_item->stock=$product_item->stock-$product['quantity'];
+                $product_item->stock=$product_item->stock - $product['quantity'];
                 $product_item->save();
 
                 $details=new OrderItem();
@@ -319,17 +245,19 @@ class OrderController extends Controller
                 $details->product_id=$product['product_id'];
                 $details->price=$product['price'];
                 $details->quantity=$product['quantity'];
-                $details->total=$product['quantity']*$product['price'];
+                $details->total=$product['quantity'] * $product['price'];
                 $details->attribute_id=$product['attribute_id'] ?? null;
                 $details->variant_id=$product['variant_id'] ?? null;
                 $details->save();
                 }
-                 return \response()->json([
+
+            });
+
+                 return response()->json([
                     'status'=>'SUCCESS',
                     'message'=>'Order was updated successfully'
                 ]);
 
-        }
 
     }
 
@@ -345,13 +273,13 @@ class OrderController extends Controller
             foreach($order_items as $order_item){
               $product=Product::where('id', $order_item->product_id)->first();
                 if($product->stock<=0){
-                    return \response()->json($product->code.'- Stock out');
+                    return \response()->json($product->product_code.'- Stock out');
                 }
                 else if($product->stock < $order_item->quantity){
                     return \response()->json("this product ".$product->product_code.' Stock Available-'.$product->stock.'. But created quantity ' .$order_item->quantity);
                 }
                 else{
-                    $product->stock=$product->stock-$order_item->quantity;
+                    $product->stock=$product->stock - $order_item->quantity;
                     $product->save();
                 }
 
@@ -412,24 +340,6 @@ class OrderController extends Controller
                 $credit->save();
             }
 
-            $order_items=OrderItem::where('order_id',$order->id)->get();
-            $my_wallet=0 ;
-            foreach ($order_items as $item) {
-                $product=Product::where('id',$item->product_id)->first();
-                $my_wallet += $product->wallet_point * $item->quantity ;
-            }
-           //inserting to customer wallet
-             $w_customer=CustomerWallet::where('user_id',$order->customer_id)->first();
-             if (empty($w_customer)) {
-                $wallet= new CustomerWallet();
-                $wallet->user_id=$order->customer_id ;
-                $wallet->point=$my_wallet ;
-                $wallet->save();
-             } else {
-               $w_customer->point= $w_customer->point + $my_wallet ;
-               $w_customer->save();
-             }
-
         });
 
          return response()->json([
@@ -446,7 +356,7 @@ class OrderController extends Controller
             $order->shipment_admin_id=session()->get('admin')['id'];
             $order->shippment_date=Carbon::now();
             $order->save();
-            Order::sendShipmentMenssage($order);
+          //  Order::sendShipmentMenssage($order);
              return \response()->json([
                     'status'=>'SUCCESS',
                     'message'=>'Order was shiped successfully'
@@ -599,7 +509,7 @@ class OrderController extends Controller
 
    if(strlen($search)==11){
 
-    $orders = Order::where('cutomer_phone','like', '%' . $search . '%')
+    $orders = Order::where('customer_phone','like', '%' . $search . '%')
                     ->where('status',$request->status)
                     ->orderBy('id', 'DESC')
                     ->with(['customer','createAdmin','courier','reseller'])
@@ -624,7 +534,7 @@ class OrderController extends Controller
     public function orderSearch($search){
 
         $orders = Order::where('invoice_no', 'like', '%' . $search . '%')
-                            ->orWhere('cutomer_phone','like', '%' . $search . '%')
+                            ->orWhere('customer_phone','like', '%' . $search . '%')
                             ->orderBy('id', 'DESC')
                          ->with(['customer','createAdmin','courier','reseller'])
                             ->paginate(10);
@@ -745,7 +655,7 @@ class OrderController extends Controller
 
                 //add customer due if paid amountt smaller then  total amount......
             //     if($order->paid < $order->total+$order->shipping_cost){
-            //        $customer=Customer::where('phone',$order->cutomer_phone)->first();
+            //        $customer=Customer::where('phone',$order->customer_phone)->first();
             //         DB::table('customer_dues')->insert([
             //             'order_invoice_no'=>$order->invoice_no,
             //             'customer_mobile_no'=>$customer->phone,
@@ -922,4 +832,39 @@ class OrderController extends Controller
         return response()->json('Item Not Found');
     }
   }
+
+
+    public function searchCustomer($number){
+
+     $customer=Order::where('customer_phone',$number)->select('city_id','customer_name','customer_phone','customer_address')->first();
+      if(!empty($customer)){
+       return \response()->json([
+             'message'=>"customer already register.",
+             'customer'=>$customer
+       ]);
+      }else{
+        return \response()->json([
+            'message'=>"new customer for us",
+          ]);
+      }
+
+    }
+
+
+    public function searchOfficeSaleCustomer($number){
+
+     $customer=Sale::where('mobile_no',$number)->select('name','mobile_no','address')->first();
+      if(!empty($customer)){
+       return \response()->json([
+             'message'=>"customer already register.",
+             'customer'=>$customer
+       ]);
+      }else{
+        return \response()->json([
+            'message'=>"new customer for us",
+          ]);
+      }
+
+    }
+
 }

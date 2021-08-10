@@ -319,7 +319,7 @@ export default {
         })
     },
     add() {
-     if (typeof(this.form.paid_by)=='string') {
+     if (typeof(this.paid_by)=='string') {
           alert('selecet any balance');
           return ;
       }

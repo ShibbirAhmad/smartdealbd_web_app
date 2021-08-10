@@ -414,19 +414,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -455,7 +442,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
         sale_price: "",
         discount: "",
         price: "",
-        wallet_point: "",
         details: "",
         attribute: "",
         variant: [],
@@ -498,11 +484,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
           _this.loading = false;
           _this.form.name = resp.data.product.name;
           _this.form.category = resp.data.product.category_id;
-          _this.form.sub_category = resp.data.product.sub_category_id;
+          _this.form.sub_category = resp.data.product.sub_category_id ? resp.data.product.sub_category_id : '';
+          _this.form.sub_sub_category = resp.data.product.sub_sub_category_id ? resp.data.product.sub_sub_category_id : '';
           _this.form.sale_price = resp.data.product.sale_price;
           _this.form.discount = resp.data.product.discount ? resp.data.product.discount : '';
           _this.form.price = resp.data.product.price;
-          _this.form.wallet_point = resp.data.product.wallet_point;
           _this.form.product_placement = resp.data.product.product_placement;
           _this.form.campaign_id = resp.data.product.campaign_id ? resp.data.product.campaign_id : "";
           _this.form.expired_date = resp.data.product.expired_date ? resp.data.product.expired_date : "";
@@ -556,10 +542,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
 
           }
         } else {
-          _this.error = "some thing went to wrong";
+          _this.error = "something went to wrong";
         }
       })["catch"](function (error) {
-        console.log(error); // this.error = "some thing went to wrong";
+        console.log(error); // this.error = "something went to wrong";
       });
     },
     getSaleCampaign: function getSaleCampaign() {
@@ -601,7 +587,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
             }
           })["catch"](function (error) {
             console.log(error);
-            _this3.error = "some thing went to wrong";
+            _this3.error = "something went to wrong";
           });
         } else {
           _this3.$toasted.show("OK ! no action here", {
@@ -641,7 +627,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
             duration: 4000
           });
         } else {
-          _this4.error = "some thing went to wrong";
+          _this4.error = "something went to wrong";
         }
       })["catch"](function (error) {
         console.log(error);
@@ -649,7 +635,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
 
         _this4.$Progress.finish();
 
-        _this4.error = "some thing went to wrong";
+        _this4.error = "something went to wrong";
       });
     },
     UpdateProductProperties: function UpdateProductProperties() {
@@ -681,7 +667,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
             duration: 4000
           });
         } else {
-          _this5.error = "some thing went to wrong";
+          _this5.error = "something went to wrong";
         }
       })["catch"](function (error) {
         console.log(error);
@@ -689,7 +675,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
 
         _this5.$Progress.finish();
 
-        _this5.error = "some thing went to wrong";
+        _this5.error = "something went to wrong";
       });
     },
     UpdateProductImage: function UpdateProductImage() {
@@ -721,14 +707,14 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
             duration: 4000
           });
         } else {
-          _this6.error = "some thing went to wrong";
+          _this6.error = "something went to wrong";
         }
       })["catch"](function (error) {
         console.log(error);
 
         _this6.$Progress.finish();
 
-        _this6.error = "some thing went to wrong";
+        _this6.error = "something went to wrong";
       });
     },
     others: function others() {
@@ -741,11 +727,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
           _this7.merchants = resp.data.merchants;
           _this7.attributes = resp.data.attributes;
         } else {
-          _this7.error = "some thing went to wrong";
+          _this7.error = "something went to wrong";
         }
       })["catch"](function (error) {
         //  console.log(error)
-        _this7.error = "some thing went to wrong";
+        _this7.error = "something went to wrong";
       });
     },
     categoryWiseSubCategory: function categoryWiseSubCategory() {
@@ -765,7 +751,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
           _this8.subcategories = "";
         }
       })["catch"](function (error) {
-        _this8.error = "some thing went wrong";
+        _this8.error = "something went wrong";
       });
     },
     subCategoryWiseSubSUbCategory: function subCategoryWiseSubSUbCategory() {
@@ -785,7 +771,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
           _this9.subSubCategories = "";
         }
       })["catch"](function (error) {
-        _this9.error = "some thing went wrong";
+        _this9.error = "something went wrong";
       });
     },
     attributeWiseVariants: function attributeWiseVariants() {
@@ -801,7 +787,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
         }
       })["catch"](function (error) {
         console.log(error);
-        _this10.error = "some thing went wrong";
+        _this10.error = "something went wrong";
       });
     },
     salePrice: function salePrice() {
@@ -1206,59 +1192,6 @@ var render = function() {
                               ],
                               1
                             )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-lg-6" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-group" },
-                              [
-                                _c("label", [_vm._v(" wallet point ")]),
-                                _vm._v(" "),
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.wallet_point,
-                                      expression: "form.wallet_point"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has(
-                                      "wallet_point"
-                                    )
-                                  },
-                                  attrs: {
-                                    type: "number",
-                                    name: "wallet_point",
-                                    placeholder: "wallet_point"
-                                  },
-                                  domProps: { value: _vm.form.wallet_point },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.form,
-                                        "wallet_point",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: {
-                                    form: _vm.form,
-                                    field: "wallet_point"
-                                  }
-                                })
-                              ],
-                              1
-                            )
                           ])
                         ]),
                         _vm._v(" "),
@@ -1402,7 +1335,7 @@ var render = function() {
                               "div",
                               { staticClass: "form-group" },
                               [
-                                _c("label", [_vm._v("price")]),
+                                _c("label", [_vm._v("sale price")]),
                                 _vm._v(" "),
                                 _c("input", {
                                   directives: [
@@ -2380,7 +2313,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", [
-      _vm._v("\n                        sale price\n                        "),
+      _vm._v("\n                        price\n                        "),
       _c("b", { staticClass: "text-danger" }, [_vm._v("*")])
     ])
   },

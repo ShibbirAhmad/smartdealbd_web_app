@@ -3,27 +3,6 @@
     <frontend-header></frontend-header>
     <div id="container">
       <div class="container">
-        <div class="slider slider-animation bv xz">
-          <div class="row">
-            <div class="col-lg-12">
-              <carousel
-                v-if="sub_sub_category_sliders"
-                :items="1"
-                :nav="false"
-                :autoplay="true"
-                :autoplayTimeout="2000"
-              >
-                <a
-                  v-for="slider in sub_sub_category_sliders"
-                  :href="slider.url"
-                  :key="slider.id"
-                >
-                  <img :src="base_url + slider.image" />
-                </a>
-              </carousel>
-            </div>
-          </div>
-        </div>
 
         <!-- Breadcrumb Start-->
         <ul class="breadcrumb">
@@ -117,10 +96,7 @@
                 <div class="product-card ">
                   <div class="product-card-body">
                     <router-link :to="{ name: 'single', params: { slug: product.slug } }">
-                      <img
-                        v-if="product.product_image.length"
-                        :src="base_url + product.product_image[0].product_image"
-                      />
+                      <img :src="  product_thumbnail_link + product.thumbnail_img "  :alt="product.name" />
                     </router-link>
                     <div class="product-detail">
                       <h4>
@@ -195,6 +171,7 @@ export default {
         max_price: "",
       },
       base_url: this.$store.state.image_base_link,
+      product_thumbnail_link: this.$store.state.image_thumbnail_link,
       sort_by_price: "select_by",
       quick_v_product_id: "",
       o_modal: false,

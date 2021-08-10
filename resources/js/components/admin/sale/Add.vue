@@ -602,7 +602,7 @@ export default {
     searchCustomer() {
      // console.log('serach')
       if (this.form.mobile_no.length == 11) {
-        axios .get( "/search/customer/with/phone/number/" + this.form.mobile_no)
+        axios .get( "/search/office/sale/customer/" + this.form.mobile_no)
           .then((resp) => {
             console.log(resp)
             //when com data from t resp

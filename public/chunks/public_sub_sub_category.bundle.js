@@ -171,30 +171,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -219,6 +195,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         max_price: ""
       },
       base_url: this.$store.state.image_base_link,
+      product_thumbnail_link: this.$store.state.image_thumbnail_link,
       sort_by_price: "select_by",
       quick_v_product_id: "",
       o_modal: false
@@ -384,43 +361,6 @@ var render = function() {
       _vm._v(" "),
       _c("div", { attrs: { id: "container" } }, [
         _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "slider slider-animation bv xz" }, [
-            _c("div", { staticClass: "row" }, [
-              _c(
-                "div",
-                { staticClass: "col-lg-12" },
-                [
-                  _vm.sub_sub_category_sliders
-                    ? _c(
-                        "carousel",
-                        {
-                          attrs: {
-                            items: 1,
-                            nav: false,
-                            autoplay: true,
-                            autoplayTimeout: 2000
-                          }
-                        },
-                        _vm._l(_vm.sub_sub_category_sliders, function(slider) {
-                          return _c(
-                            "a",
-                            { key: slider.id, attrs: { href: slider.url } },
-                            [
-                              _c("img", {
-                                attrs: { src: _vm.base_url + slider.image }
-                              })
-                            ]
-                          )
-                        }),
-                        0
-                      )
-                    : _vm._e()
-                ],
-                1
-              )
-            ])
-          ]),
-          _vm._v(" "),
           _c(
             "ul",
             { staticClass: "breadcrumb" },
@@ -691,16 +631,14 @@ var render = function() {
                                   }
                                 },
                                 [
-                                  product.product_image.length
-                                    ? _c("img", {
-                                        attrs: {
-                                          src:
-                                            _vm.base_url +
-                                            product.product_image[0]
-                                              .product_image
-                                        }
-                                      })
-                                    : _vm._e()
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        _vm.product_thumbnail_link +
+                                        product.thumbnail_img,
+                                      alt: product.name
+                                    }
+                                  })
                                 ]
                               ),
                               _vm._v(" "),

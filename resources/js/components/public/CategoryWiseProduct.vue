@@ -119,11 +119,8 @@
               <div class="product-card-body">
                 <router-link :to="{name: 'single', params: { slug: product.slug } }">
 
-                 <v-lazy-image
-                      v-if="product.product_image.length"
-                     :src="base_url+product.product_image[0].product_image"
-                     :src-placeholder="base_url+'images/preview.png'"
-                     />
+                 <img :src="  product_thumbnail_link + product.thumbnail_img "  :alt="product.name" />
+
                 </router-link>
                 <div class="product-detail ">
                   <h4>   <router-link class="product-link" :to="{name: 'single', params: { slug: product.slug } }">{{ product.name }}</router-link ></h4>
@@ -180,7 +177,8 @@ export default {
         min_price: "",
         max_price: "",
       },
-       base_url: this.$store.state.image_base_link,
+      //  base_url: this.$store.state.image_base_link,
+       product_thumbnail_link: this.$store.state.image_thumbnail_link,
        sort_by_price: "select_by",
        quick_v_product_id:"",
        o_modal:false

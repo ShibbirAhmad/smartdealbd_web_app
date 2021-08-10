@@ -47,8 +47,8 @@
                             <div class="s_price_container">
                               <h4> Price </h4>
                               <p >
-                                    <span class="price-old price_in_small" v-if="product.discount">&#2547; {{product.sale_price}}</span>
-                                    <span class="price-new price_in_small">&#2547; {{product.price}}</span>
+                                    <span class="price-old price_in_small" v-if="product.discount">&#2547;{{product.sale_price}}</span>
+                                    <span class="price-new price_in_small">&#2547;{{product.price}}</span>
                                </p>
                           </div>
                       </div>
@@ -195,10 +195,9 @@
             <div class="product-card ">
               <div class="product-card-body">
                 <router-link :to="{name: 'single', params: { slug: product.slug } }">
-                 <v-lazy-image
-                     :src="base_url+product.product_image[0].product_image"
-                     :src-placeholder="base_url+'images/preview.png'"
-                 />
+
+                 <img :src="  product_thumbnail_link + product.thumbnail_img "  :alt="product.name" />
+
                 </router-link>
                 <div class="product-detail small-detail">
                   <h4>   <router-link class="product-link" :to="{name: 'single', params: { slug: product.slug } }">{{ product.name }}</router-link ></h4>
@@ -259,6 +258,7 @@ export default {
       disabled: true,
       variant_index: "",
       base_url: this.$store.state.image_base_link,
+      product_thumbnail_link: this.$store.state.image_thumbnail_link,
        cart: {
         product_id: "",
         variant_id: "",

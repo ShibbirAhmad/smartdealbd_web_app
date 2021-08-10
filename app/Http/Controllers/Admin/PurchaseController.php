@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\SupplierPayment;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Balance;
 use Intervention\Image\Facades\Image;
 
 class PurchaseController extends Controller
@@ -90,12 +91,13 @@ class PurchaseController extends Controller
         }
 
        //save a supplier paid amount
+        $balance = Balance::findOrFail($request->paid_by);
        if($purchase->paid>0){
          $supplier_payment=new SupplierPayment();
          $supplier_payment->supplier_id=$request->supplier_id;
          $supplier_payment->amount=$request->paid;
          $supplier_payment->date=$request->purchase_date;
-         $supplier_payment->balance_id=$request->paid_by;
+         $supplier_payment->paid_by=$balance->name;
          $supplier_payment->save();
        }
 

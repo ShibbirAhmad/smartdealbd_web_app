@@ -60,8 +60,7 @@
                         }"
                       >
                         <img
-                          v-if="item.product_image.length"
-                          :src="base_url + item.product_image[0].product_image"
+                          :src="product_thumbnail_link + item.thumbnail_img"
                         />
                       </router-link>
                       <p class="arrival_link">
@@ -142,13 +141,7 @@
                   }"
                 >
                   <img
-                    v-if="campaign_product.product_image"
-                    :src="
-                      base_url + campaign_product.product_image[0].product_image
-                    "
-                    :alt="campaign_product.name"
-                    :title="campaign_product.name"
-                    class="img-responsive"
+                    :src="  product_thumbnail_link + campaign_product.thumbnail_img "  :alt="campaign_product.name"
                   />
                 </router-link>
               </div>
@@ -226,11 +219,9 @@
                     <router-link
                       :to="{ name: 'single', params: { slug: product.slug } }"
                     >
-                      <v-lazy-image
-                        v-if="product.product_image.length"
-                        :src="base_url + product.product_image[0].product_image"
-                        :src-placeholder="base_url + 'images/preview.png'"
-                      />
+                     <img :src="product_thumbnail_link+product.thumbnail_img"
+                          :alt="product.name"
+                           :title="product.name" />
                     </router-link>
                     <div class="product-detail">
                       <h4>
@@ -351,6 +342,7 @@ export default {
       offers: [],
       product_id: null,
       base_url: this.$store.state.image_base_link,
+      product_thumbnail_link: this.$store.state.image_thumbnail_link,
       isScroll: 0,
       quick_v_product_id: "",
       o_modal: false,

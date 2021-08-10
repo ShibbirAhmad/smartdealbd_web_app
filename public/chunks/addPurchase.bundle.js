@@ -334,7 +334,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
     add: function add() {
       var _this2 = this;
 
-      if (typeof this.form.paid_by == 'string') {
+      if (typeof this.paid_by == 'string') {
         alert('selecet any balance');
         return;
       }

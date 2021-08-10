@@ -104,7 +104,7 @@
                         class="form-control"
                         @keyup="orderSearch"
                         v-model="search"
-                        placeholder="Enter Invoice,Cutomer_phone"
+                        placeholder="Enter Invoice,customer_phone"
                       />
                     </div>
                     <div class="col-lg-4">
@@ -176,7 +176,8 @@
                         <th scope="col">
                           <input type="checkbox" @click="selectAll" />
                         </th>
-                        <th scope="col">customer_name</th>
+                        <th scope="col">Host Name</th>
+                        <th scope="col">C_name</th>
                         <th scope="col">C_phone</th>
                         <th scope="col">C_address</th>
 
@@ -208,11 +209,14 @@
                             :value="order.id"
                           />
                         </td>
-                   <td class="three-percent">
-                          {{ order.customer_name }}
+                      <td class="three-percent">
+                           {{ order.host_name }}
+                        </td>
+                       <td class="three-percent">
+                           {{ order.customer_name }}
                         </td>
                         <td class="three-percent">
-                          {{ order.cutomer_phone }}
+                          {{ order.customer_phone }}
                         </td>
                         <td class="three-percent">
                           {{ order.customer_address ? order.customer_address : 'null' }}

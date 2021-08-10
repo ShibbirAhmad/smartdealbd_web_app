@@ -30,8 +30,8 @@
       </section>
       <section class="content">
         <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-11">
+          <div class="row ">
+            <div class="col-lg-11 ">
               <div class="box box-primary">
                 <div class="box-header with-border">
                   <div class="row" style="margin-bottom:3px;">
@@ -150,13 +150,14 @@
                   </div>
                 </div>
                 <div class="box-body">
-                  <table class="table">
+                  <table class="table table-hover table-striped table-bordered ">
                     <thead>
                       <tr>
                         <th scope="col">
                           <input type="checkbox" @click="selectAll" />
                         </th>
-                        <th scope="col">customer_name</th>
+                        <th scope="col">Host Name</th>
+                        <th scope="col">C_name</th>
                         <th scope="col">C_phone</th>
                         <th scope="col">C_address</th>
 
@@ -189,11 +190,12 @@
                             :value="order.id"
                           />
                         </td>
+                        <td>    {{ order.host_name }}  </td>
                        <td class="three-percent">
                           {{ order.customer_name }}
                         </td>
                         <td class="three-percent">
-                          {{ order.cutomer_phone }}
+                          {{ order.customer_phone }}
                         </td>
                         <td class="three-percent">
                           {{ order.customer_address ? order.customer_address : 'null' }}
@@ -380,11 +382,10 @@
 </template>
 
 <script>
-import Index from "../Index";
+
 import { Form } from "vform";
 
 export default {
-  components: { Index },
 
   created() {
    this.ordersList();
@@ -464,7 +465,7 @@ export default {
 
           //else show a error
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 5000,
@@ -474,7 +475,7 @@ export default {
         .catch((error) => {
           //finish progress bar after resp
           this.$Progress.finish();
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -517,7 +518,7 @@ export default {
           }
           //not resp success.....
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -526,7 +527,7 @@ export default {
         })
         .catch((error) => {
           //end progress bar after resp
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -558,7 +559,7 @@ export default {
           }
           //for any kind of error resp .......
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -567,7 +568,7 @@ export default {
         })
         .catch((error) => {
           //end progress bar after resp
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -600,7 +601,7 @@ export default {
           }
           //for any kind off error resp
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -609,7 +610,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -640,7 +641,7 @@ export default {
           }
           //any kind of error resp
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -649,7 +650,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -682,7 +683,7 @@ export default {
           else {
             this.$Progress.finish();
 
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -691,7 +692,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -724,7 +725,7 @@ export default {
           else {
             this.$Progress.finish();
 
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -733,7 +734,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -762,7 +763,7 @@ export default {
           //for any kind of error
           .catch((error) => {
             console.log(error);
-            alert("some thing want wrong");
+            alert("something went wrong");
           });
       }
       //if search lenght smaller then 2, then excute orderist method .......
@@ -1041,9 +1042,6 @@ export default {
   margin-bottom: 10px;
 }
 
-.box{
-  width:90%;
-  overflow-x: scroll;
-}
+
 
 </style>

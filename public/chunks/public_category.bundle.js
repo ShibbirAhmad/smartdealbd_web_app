@@ -179,9 +179,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -203,7 +200,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         min_price: "",
         max_price: ""
       },
-      base_url: this.$store.state.image_base_link,
+      //  base_url: this.$store.state.image_base_link,
+      product_thumbnail_link: this.$store.state.image_thumbnail_link,
       sort_by_price: "select_by",
       quick_v_product_id: "",
       o_modal: false
@@ -692,21 +690,15 @@ var render = function() {
                                     }
                                   },
                                   [
-                                    product.product_image.length
-                                      ? _c("v-lazy-image", {
-                                          attrs: {
-                                            src:
-                                              _vm.base_url +
-                                              product.product_image[0]
-                                                .product_image,
-                                            "src-placeholder":
-                                              _vm.base_url +
-                                              "images/preview.png"
-                                          }
-                                        })
-                                      : _vm._e()
-                                  ],
-                                  1
+                                    _c("img", {
+                                      attrs: {
+                                        src:
+                                          _vm.product_thumbnail_link +
+                                          product.thumbnail_img,
+                                        alt: product.name
+                                      }
+                                    })
+                                  ]
                                 ),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "product-detail " }, [

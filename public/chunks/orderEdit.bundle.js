@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["orderEdit"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[7],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/order/Edit.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************!*\
@@ -417,15 +417,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
 
       axios.get("/order/view/" + this.$route.params.id).then(function (resp) {
         console.log(resp);
-        console.log(resp.data.order.cutomer_phone);
+        console.log(resp.data.order.customer_phone);
 
         if (resp.data.status == "SUCCESS") {
           var _console;
 
           var order = resp.data.order;
-          _this2.form.customer_mobile = order.cutomer_phone;
-          _this2.form.customer_name = order.customer.name;
-          _this2.form.customer_address = order.customer.address;
+          _this2.form.customer_mobile = order.customer_phone;
+          _this2.form.customer_name = order.customer_name;
+          _this2.form.customer_address = order.customer_address;
           _this2.form.city = order.city_id;
           _this2.form.shipping_cost = order.shipping_cost;
           _this2.form.courier = order.courier_id;
@@ -477,7 +477,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
     add: function add() {
       var _this3 = this;
 
-      if (typeof this.form.paid_by == 'string') {
+      if (this.form.paid_by == 'select one') {
         alert('selecet any balance');
         return;
       }

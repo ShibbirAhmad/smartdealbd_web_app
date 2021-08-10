@@ -87,10 +87,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.searchProducts();
@@ -100,7 +96,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       products: "",
       search: this.$route.params.search,
-      base_url: this.$store.state.image_base_link,
+      product_thumbnail_link: this.$store.state.image_thumbnail_link,
       quick_v_product_id: "",
       o_modal: false
     };
@@ -284,20 +280,15 @@ var render = function() {
                                   }
                                 },
                                 [
-                                  product.product_image.length
-                                    ? _c("v-lazy-image", {
-                                        attrs: {
-                                          src:
-                                            _vm.base_url +
-                                            product.product_image[0]
-                                              .product_image,
-                                          "src-placeholder":
-                                            _vm.base_url + "images/preview.png"
-                                        }
-                                      })
-                                    : _vm._e()
-                                ],
-                                1
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        _vm.product_thumbnail_link +
+                                        product.thumbnail_img,
+                                      alt: product.name
+                                    }
+                                  })
+                                ]
                               ),
                               _vm._v(" "),
                               _c("div", { staticClass: "product-detail" }, [

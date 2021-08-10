@@ -509,7 +509,7 @@ var render = function() {
                             _c("div", [
                               _c("p", [
                                 _vm._v(
-                                  "Name: " + _vm._s(_vm.order.customer.name)
+                                  "Name: " + _vm._s(_vm.order.customer_name)
                                 )
                               ]),
                               _vm._v(" "),
@@ -519,7 +519,7 @@ var render = function() {
                                 ),
                                 _c("strong", [
                                   _vm._v(
-                                    " " + _vm._s(_vm.order.cutomer_phone) + " "
+                                    " " + _vm._s(_vm.order.customer_phone) + " "
                                   )
                                 ])
                               ]),
@@ -531,7 +531,7 @@ var render = function() {
                                 _c("span", [
                                   _vm._v(
                                     "\n                          " +
-                                      _vm._s(_vm.order.customer.address) +
+                                      _vm._s(_vm.order.customer_address) +
                                       "\n                        "
                                   )
                                 ]),

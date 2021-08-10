@@ -541,9 +541,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
       if (this.form.customer_mobile.length == 11) {
         axios.get("/search/customer/with/phone/number/" + this.form.customer_mobile).then(function (resp) {
           //when com data from t resp
+          console.log(resp);
+
           if (resp.data) {
             if (resp.data.customer) {
-              _this5.form.customer_name = resp.data.customer.name, _this5.form.customer_address = resp.data.customer.address;
+              _this5.form.customer_name = resp.data.customer.customer_name, _this5.form.customer_address = resp.data.customer.customer_address;
               _this5.form.city = resp.data.customer.city_id;
             }
 

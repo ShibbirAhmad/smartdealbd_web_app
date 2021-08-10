@@ -58,6 +58,7 @@ const state = {
     view_permission:false,
 
     image_base_link: '/../storage/',
+    image_thumbnail_link: '/../storage/images/product_thumbnail_img/',
 
     //for home page products
     home_page_products: "",
@@ -130,9 +131,15 @@ const getters = {
     product_images(state) {
         return state.product_images;
     },
+
     image_base_link(state) {
         return state.image_base_link;
     },
+
+    image_thumbnail_link(state) {
+        return state.image_thumbnail_link;
+    },
+
     home_page_products(state) {
 
         return state.home_page_products;
@@ -313,7 +320,7 @@ const actions = {
     home_page_products(context) {
         axios.get('/_public/products')
             .then(resp => {
-                //  console.log(resp)
+                 console.log(resp)
                 context.commit('home_page_products', resp.data)
             })
             .catch(e => {

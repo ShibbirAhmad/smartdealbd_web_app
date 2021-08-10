@@ -38,7 +38,7 @@
                                             <th scope="col">#</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Image</th>
-                                            <th scope="col">isSelected</th>
+                                            <th scope="col">Display Position</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Action</th>
 
@@ -56,9 +56,7 @@
                                                      class="img-circle small-image" alt="Category Image">
                                             </td>
                                             <td>
-                                                <span v-if="category.is_selected==1" class="badge"><i
-                                                    class="fa fa-check"></i></span>
-                                                <span v-else class="badge"><i class="fa fa-close"></i>
+                                                <span class="badge badge-success"> {{ category.position }}
                                                 </span>
                                             </td>
                                             <td>
@@ -71,16 +69,10 @@
                                                     :to="{ name: 'CategoryEdit', params: { categoryId: category.id }}"
                                                     class="btn btn-success btn-sm"><i
                                                     class="fa fa-edit"></i></router-link>
-                                                <a class="btn btn-danger" title="un-selected"
-                                                   @click="unselected(category)"
-                                                   v-if="category.is_selected==1"><i class="fa fa-close"></i></a>
-                                                <a class="btn btn-primary" title="selected" @click="selected(category)"
-                                                   v-else><i
-                                                    class="fa fa-chain"></i></a>
 
-                                                <a class="btn btn-warning" title="De-active" @click="deActive(category)"
+                                                <a class="btn btn-sm  btn-warning" title="De-active" @click="deActive(category)"
                                                    v-if="category.status==1"><i class="fa fa-ban"></i></a>
-                                                <a class="btn btn-primary" title="active" @click="active(category)"
+                                                <a class="btn  btn-sm btn-primary" title="active" @click="active(category)"
                                                    v-else><i
                                                     class="fa fa-check"></i></a>
 

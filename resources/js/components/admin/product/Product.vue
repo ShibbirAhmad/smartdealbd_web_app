@@ -96,8 +96,7 @@
                         </td>
                         <td>
                           <img
-                            v-if="product.product_image.length"
-                            :src=" base_url+product.product_image[0].product_image "
+                            :src=" base_url+product.thumbnail_img "
                             class="table-image"
                             alt="product image"
                           />
@@ -242,8 +241,7 @@ export default {
       search: "",
       item: "30",
       status: "all",
-      base_url:this.$store.state.image_base_link,
-
+      base_url:this.$store.state.image_thumbnail_link,
 
     };
   },

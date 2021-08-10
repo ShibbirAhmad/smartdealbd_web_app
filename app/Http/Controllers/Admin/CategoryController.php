@@ -12,7 +12,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::orderby('id', 'desc')->paginate(10);
+        $categories = Category::orderby('id', 'asc')->paginate(30);
         return response()->json([
             'categories' => $categories,
             'status' => 'SUCCESS'
@@ -27,23 +27,20 @@ class CategoryController extends Controller
         ]);
 
 
-        //for category slug 
+        //for category slug
          $id = Category::max('id') ?? 0;
         $categpory_code = 1000 + $id;
- 
+
         //save product data
 
         $slug=explode(" ", $request->name);
         $category = new Category();
         $category->name = $request->name;
-        $category->is_selected = 1;
+        $category->position = 0;
         $category->status = 1;
         $category->slug = $categpory_code. '-' .$slug[count($slug)-1];   //make category slug.
 
         if ($request->hasFile('image')) {
-            $validatedData = $request->validate([
-                //'image' => 'required|file|image|dimensions:max_width=1000,max_height=1000',
-            ]);
             $path = $request->file('image')->store('images/category', 'public');
             $category->icon_image = $path;
         }
@@ -55,33 +52,6 @@ class CategoryController extends Controller
         }
     }
 
-    public function unselected($id)
-    {
-        $category = Category::find($id);
-        if ($category) {
-            $category->is_selected = 0;
-            if ($category->save()) {
-                return response()->json([
-                    'status' => 'SUCCESS',
-                    'message' => 'category unselected successfully'
-                ]);
-            }
-        }
-    }
-
-    public function selected($id)
-    {
-        $category = Category::find($id);
-        if ($category) {
-            $category->is_selected = 1;
-            if ($category->save()) {
-                return response()->json([
-                    'status' => 'SUCCESS',
-                    'message' => 'category selected successfully'
-                ]);
-            }
-        }
-    }
 
     public function active($id)
     {
@@ -144,11 +114,9 @@ class CategoryController extends Controller
         ]);
         $category = Category::find($id);
         $category->name = $request->name;
+        $category->position = $request->position;
 
         if ($request->hasFile('image')) {
-            $validatedData = $request->validate([
-                //'image' => 'required|file|image|dimensions:max_width=1000,max_height=1000',
-            ]);
             $path = $request->file('image')->store('images/category', 'public');
             $category->icon_image = $path;
         }

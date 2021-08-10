@@ -83,7 +83,6 @@
                   <div class="form-group">
                     <label>
                       sub category
-                      <b class="text-danger">*</b>
                     </label>
                     <select
                       class="form-control"
@@ -129,7 +128,7 @@
                 <div class="box-body">
                   <div class="form-group">
                     <label>
-                      sale_price
+                       price
                       <b class="text-danger">*</b>
                     </label>
                     <input
@@ -159,7 +158,7 @@
                     <has-error :form="form" field="discount"></has-error>
                   </div>
                   <div class="form-group">
-                    <label>price</label>
+                    <label>sale price</label>
                     <input
                       v-model="form.price"
                       type="text"
@@ -172,18 +171,7 @@
                     />
                     <has-error :form="form" field="price"></has-error>
                   </div>
-                    <div class="form-group">
-                    <label> wallet point </label>
-                    <input
-                      v-model="form.wallet_point"
-                      type="number"
-                      name="wallet_point"
-                      class="form-control"
-                      :class="{ 'is-invalid': form.errors.has('wallet_point') }"
-                      placeholder="wallet_point"
-                    />
-                    <has-error :form="form" field="wallet_point"></has-error>
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -342,7 +330,6 @@ export default {
         purchase_price: "",
         sale_price: "",
         discount: "",
-        wallet_point: "",
         price: "",
         details: "",
         attribute: "",
@@ -380,7 +367,7 @@ export default {
             },
           ],
           onUploadProgress: (e) => {
-            // Do whatever you want with the progress event
+            // Do whatever you went with the progress event
             console.log(e);
           },
         })
@@ -396,7 +383,7 @@ export default {
               duration: 4000,
             });
           } else {
-            this.error = "some thing want to wrong";
+            this.error = "something went to wrong";
           }
         })
         .catch((error) => {
@@ -404,7 +391,7 @@ export default {
           console.log(error);
           this.$Progress.finish();
 
-          this.error = "some thing want to wrong";
+          this.error = "some thing went to wrong";
         });
     },
     others() {
@@ -417,12 +404,12 @@ export default {
             this.merchants = resp.data.merchants;
             this.attributes = resp.data.attributes;
           } else {
-            this.error = "some thing want to wrong";
+            this.error = "some thing went to wrong";
           }
         })
         .catch((error) => {
           //  console.log(error)
-          this.error = "some thing want to wrong";
+          this.error = "some thing went to wrong";
         });
     },
     categoryWiseSubCategory() {
@@ -443,7 +430,7 @@ export default {
           }
         })
         .catch((error) => {
-          this.error = "some thing want wrong";
+          this.error = "some thing went wrong";
         });
     },
     subCategoryWiseSubSUbCategory() {
@@ -464,7 +451,7 @@ export default {
           }
         })
         .catch((error) => {
-          this.error = "some thing want wrong";
+          this.error = "some thing went wrong";
         });
     },
     attributeWiseVariants() {
@@ -485,7 +472,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.error = "some thing want wrong";
+          this.error = "some thing went wrong";
         });
     },
     salePrice() {

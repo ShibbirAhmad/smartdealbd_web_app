@@ -321,18 +321,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -360,7 +348,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
         purchase_price: "",
         sale_price: "",
         discount: "",
-        wallet_point: "",
         price: "",
         details: "",
         attribute: "",
@@ -395,7 +382,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
           return objectToFormData(data);
         }],
         onUploadProgress: function onUploadProgress(e) {
-          // Do whatever you want with the progress event
+          // Do whatever you went with the progress event
           console.log(e);
         }
       }).then(function (resp) {
@@ -414,7 +401,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
             duration: 4000
           });
         } else {
-          _this2.error = "some thing want to wrong";
+          _this2.error = "something went to wrong";
         }
       })["catch"](function (error) {
         console.log(error);
@@ -422,7 +409,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
 
         _this2.$Progress.finish();
 
-        _this2.error = "some thing want to wrong";
+        _this2.error = "some thing went to wrong";
       });
     },
     others: function others() {
@@ -435,11 +422,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
           _this3.merchants = resp.data.merchants;
           _this3.attributes = resp.data.attributes;
         } else {
-          _this3.error = "some thing want to wrong";
+          _this3.error = "some thing went to wrong";
         }
       })["catch"](function (error) {
         //  console.log(error)
-        _this3.error = "some thing want to wrong";
+        _this3.error = "some thing went to wrong";
       });
     },
     categoryWiseSubCategory: function categoryWiseSubCategory() {
@@ -459,7 +446,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
           _this4.subcategories = "";
         }
       })["catch"](function (error) {
-        _this4.error = "some thing want wrong";
+        _this4.error = "some thing went wrong";
       });
     },
     subCategoryWiseSubSUbCategory: function subCategoryWiseSubSUbCategory() {
@@ -479,7 +466,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
           _this5.subSubCategories = "";
         }
       })["catch"](function (error) {
-        _this5.error = "some thing want wrong";
+        _this5.error = "some thing went wrong";
       });
     },
     attributeWiseVariants: function attributeWiseVariants() {
@@ -499,7 +486,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
         }
       })["catch"](function (error) {
         console.log(error);
-        _this6.error = "some thing want wrong";
+        _this6.error = "some thing went wrong";
       });
     },
     salePrice: function salePrice() {
@@ -876,7 +863,11 @@ var render = function() {
                             "div",
                             { staticClass: "form-group" },
                             [
-                              _vm._m(4),
+                              _c("label", [
+                                _vm._v(
+                                  "\n                    sub category\n                  "
+                                )
+                              ]),
                               _vm._v(" "),
                               _c(
                                 "select",
@@ -1039,14 +1030,14 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-lg-4" }, [
                       _c("div", { staticClass: "box box-success height" }, [
-                        _vm._m(5),
+                        _vm._m(4),
                         _vm._v(" "),
                         _c("div", { staticClass: "box-body" }, [
                           _c(
                             "div",
                             { staticClass: "form-group" },
                             [
-                              _vm._m(6),
+                              _vm._m(5),
                               _vm._v(" "),
                               _c("input", {
                                 directives: [
@@ -1148,7 +1139,7 @@ var render = function() {
                             "div",
                             { staticClass: "form-group" },
                             [
-                              _c("label", [_vm._v("price")]),
+                              _c("label", [_vm._v("sale price")]),
                               _vm._v(" "),
                               _c("input", {
                                 directives: [
@@ -1190,54 +1181,6 @@ var render = function() {
                               })
                             ],
                             1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", [_vm._v(" wallet point ")]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.wallet_point,
-                                    expression: "form.wallet_point"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                class: {
-                                  "is-invalid": _vm.form.errors.has(
-                                    "wallet_point"
-                                  )
-                                },
-                                attrs: {
-                                  type: "number",
-                                  name: "wallet_point",
-                                  placeholder: "wallet_point"
-                                },
-                                domProps: { value: _vm.form.wallet_point },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.form,
-                                      "wallet_point",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: { form: _vm.form, field: "wallet_point" }
-                              })
-                            ],
-                            1
                           )
                         ])
                       ])
@@ -1245,11 +1188,11 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-lg-4" }, [
                       _c("div", { staticClass: "box box-primary height" }, [
-                        _vm._m(7),
+                        _vm._m(6),
                         _vm._v(" "),
                         _c("div", { staticClass: "box-body" }, [
                           _c("div", { staticClass: "form-group" }, [
-                            _vm._m(8),
+                            _vm._m(7),
                             _vm._v(" "),
                             _c(
                               "select",
@@ -1310,7 +1253,7 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-group" }, [
-                            _vm._m(9),
+                            _vm._m(8),
                             _vm._v(" "),
                             _c(
                               "select",
@@ -1376,7 +1319,7 @@ var render = function() {
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col-lg-6" }, [
                       _c("div", { staticClass: "box box-primary" }, [
-                        _vm._m(10),
+                        _vm._m(9),
                         _vm._v(" "),
                         _c("div", { staticClass: "box-body" }, [
                           _c(
@@ -1518,7 +1461,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-lg-6" }, [
                       _c("div", { staticClass: "box box-primary" }, [
-                        _vm._m(11),
+                        _vm._m(10),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -1616,15 +1559,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", [
-      _vm._v("\n                    sub category\n                    "),
-      _c("b", { staticClass: "text-danger" }, [_vm._v("*")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "box-header with-border" }, [
       _c("h3", { staticClass: "box-title" }, [_vm._v("Price & Quantity")])
     ])
@@ -1634,7 +1568,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", [
-      _vm._v("\n                    sale_price\n                    "),
+      _vm._v("\n                     price\n                    "),
       _c("b", { staticClass: "text-danger" }, [_vm._v("*")])
     ])
   },

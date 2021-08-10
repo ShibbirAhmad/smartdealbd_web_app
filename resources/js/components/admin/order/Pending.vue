@@ -127,7 +127,7 @@
                         class="form-control"
                         @keyup="orderSearch"
                         v-model="search"
-                        placeholder="Enter Invoice,Cutomer_phone"
+                        placeholder="Enter Invoice,customer_phone"
                       />
                     </div>
                     <div class="col-lg-4">
@@ -249,7 +249,7 @@
                           {{ order.customer_name }}
                         </td>
                         <td class="three-percent">
-                          {{ order.cutomer_phone }}
+                          {{ order.customer_phone }}
                         </td>
                         <td class="three-percent">
                           {{ order.customer_address ? order.customer_address : 'null' }}

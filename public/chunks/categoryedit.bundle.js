@@ -73,6 +73,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MODULE_1__["HasError"].name, vform__WEBPACK_IMPORTED_MODULE_1__["HasError"]);
@@ -89,7 +99,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
     return {
       form: new vform__WEBPACK_IMPORTED_MODULE_1__["Form"]({
         name: "",
-        image: ""
+        image: "",
+        position: 0
       }),
       error: '',
       loading: true
@@ -103,16 +114,17 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
         //  console.log(resp)
         if (resp.data.status == 'SUCCESS') {
           _this2.form.name = resp.data.category.name;
+          _this2.form.position = resp.data.category.position;
           _this2.loading = false;
         } else {
-          _this2.$toasted.show('some thing want to wrong', {
+          _this2.$toasted.show('something went to wrong', {
             type: "error",
             position: 'top-center',
             duration: 5000
           });
         }
       })["catch"](function (error) {
-        _this2.$toasted.show('some thing want to wrong', {
+        _this2.$toasted.show('something went to wrong', {
           type: "error",
           position: 'top-center',
           duration: 4000
@@ -140,11 +152,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
             duration: 4000
           });
         } else {
-          _this3.error = 'some thing want to wrong';
+          _this3.error = 'something went to wrong';
         }
       })["catch"](function (error) {
         console.log(error);
-        _this3.error = 'some thing want to wrong';
+        _this3.error = 'something went to wrong';
       });
     },
     uploadImage: function uploadImage(e) {
@@ -349,6 +361,36 @@ var render = function() {
                             ],
                             1
                           ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", [_vm._v("Display Position")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.position,
+                                  expression: "form.position"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "number", name: "position" },
+                              domProps: { value: _vm.form.position },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "position",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
                           _vm._v(" "),
                           _c(
                             "div",

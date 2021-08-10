@@ -268,7 +268,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
 
 
 
@@ -292,6 +291,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       disabled: true,
       variant_index: "",
       base_url: this.$store.state.image_base_link,
+      product_thumbnail_link: this.$store.state.image_thumbnail_link,
       cart: {
         product_id: "",
         variant_id: "",
@@ -694,7 +694,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "৳ " + _vm._s(_vm.product.sale_price)
+                                          "৳" + _vm._s(_vm.product.sale_price)
                                         )
                                       ]
                                     )
@@ -703,7 +703,7 @@ var render = function() {
                                 _c(
                                   "span",
                                   { staticClass: "price-new price_in_small" },
-                                  [_vm._v("৳ " + _vm._s(_vm.product.price))]
+                                  [_vm._v("৳" + _vm._s(_vm.product.price))]
                                 )
                               ])
                             ])
@@ -1123,17 +1123,15 @@ var render = function() {
                                   }
                                 },
                                 [
-                                  _c("v-lazy-image", {
+                                  _c("img", {
                                     attrs: {
                                       src:
-                                        _vm.base_url +
-                                        product.product_image[0].product_image,
-                                      "src-placeholder":
-                                        _vm.base_url + "images/preview.png"
+                                        _vm.product_thumbnail_link +
+                                        product.thumbnail_img,
+                                      alt: product.name
                                     }
                                   })
-                                ],
-                                1
+                                ]
                               ),
                               _vm._v(" "),
                               _c(

@@ -478,14 +478,14 @@ export default {
                 stock:''
               };
               for (let i = 0; i < resp.data.product.length; i++) {
-                //check the product stcok availity
-                // if (resp.data.product[i].stock <= 0) {
-                //   return Swal.fire({
-                //     type: "warning",
-                //     title: "Wopps....",
-                //     html: `${resp.data.product[i].name} - <strong> ${resp.data.product[i].product_code} </strong> in <b>stcok not available</b>.`,
-                //   });
-                // }
+                // check the product stcok availity
+                if (resp.data.product[i].stock <= 0) {
+                  return Swal.fire({
+                    type: "warning",
+                    title: "Wopps....",
+                    html: `${resp.data.product[i].name} - <strong> ${resp.data.product[i].product_code} </strong> in <b>stcok not available</b>.`,
+                  });
+                }
 
                 this.products.push(resp.data.product[i]);
                 product.id = resp.data.product[i].id;
@@ -531,9 +531,9 @@ export default {
           .then((resp) => {
             //when com data from t resp
             if (resp.data) {
-              if (resp.data.customer) {
-                (this.form.customer_name = resp.data.customer.name),
-                  (this.form.customer_address = resp.data.customer.address);
+            if (resp.data.customer) {
+                (this.form.customer_name = resp.data.customer.customer_name),
+                  (this.form.customer_address = resp.data.customer.customer_address);
                 this.form.city = resp.data.customer.city_id;
               }
               this.$toasted.show(resp.data.message, {

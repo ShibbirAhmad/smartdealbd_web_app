@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["newOrder"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/order/New.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************!*\
@@ -9,9 +9,8 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Index */ "./resources/js/components/admin/Index.vue");
-/* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vform */ "./node_modules/vform/dist/vform.common.js");
-/* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vform__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vform */ "./node_modules/vform/dist/vform.common.js");
+/* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vform__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -393,12 +392,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    Index: _Index__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
   created: function created() {
     this.ordersList();
     this.others();
@@ -470,7 +467,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.loading = false;
         } //else show a error
         else {
-            _this.$toasted.show("some thing want to wrong", {
+            _this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 5000
@@ -480,7 +477,7 @@ __webpack_require__.r(__webpack_exports__);
         //finish progress bar after resp
         _this.$Progress.finish();
 
-        _this.$toasted.show("some thing want to wrong", {
+        _this.$toasted.show("something went to wrong", {
           type: "error",
           position: "top-center",
           duration: 4000
@@ -524,7 +521,7 @@ __webpack_require__.r(__webpack_exports__);
           _this3.orders.data[index].status = 3;
         } //not resp success.....
         else {
-            _this3.$toasted.show("some thing want to wrong", {
+            _this3.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000
@@ -532,7 +529,7 @@ __webpack_require__.r(__webpack_exports__);
           }
       })["catch"](function (error) {
         //end progress bar after resp
-        _this3.$toasted.show("some thing want to wrong", {
+        _this3.$toasted.show("something went to wrong", {
           type: "error",
           position: "top-center",
           duration: 4000
@@ -561,7 +558,7 @@ __webpack_require__.r(__webpack_exports__);
           _this4.orders.data[index].status = 6;
         } //for any kind of error resp .......
         else {
-            _this4.$toasted.show("some thing want to wrong", {
+            _this4.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000
@@ -569,7 +566,7 @@ __webpack_require__.r(__webpack_exports__);
           }
       })["catch"](function (error) {
         //end progress bar after resp
-        _this4.$toasted.show("some thing want to wrong", {
+        _this4.$toasted.show("something went to wrong", {
           type: "error",
           position: "top-center",
           duration: 4000
@@ -599,7 +596,7 @@ __webpack_require__.r(__webpack_exports__);
           _this5.orders.data[index].status = 7;
         } //for any kind off error resp
         else {
-            _this5.$toasted.show("some thing want to wrong", {
+            _this5.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000
@@ -608,7 +605,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
 
-        _this5.$toasted.show("some thing want to wrong", {
+        _this5.$toasted.show("something went to wrong", {
           type: "error",
           position: "top-center",
           duration: 4000
@@ -637,7 +634,7 @@ __webpack_require__.r(__webpack_exports__);
           _this6.orders.data[index].status = 5;
         } //any kind of error resp
         else {
-            _this6.$toasted.show("some thing want to wrong", {
+            _this6.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000
@@ -646,7 +643,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
 
-        _this6.$toasted.show("some thing want to wrong", {
+        _this6.$toasted.show("something went to wrong", {
           type: "error",
           position: "top-center",
           duration: 4000
@@ -677,7 +674,7 @@ __webpack_require__.r(__webpack_exports__);
         else {
             _this7.$Progress.finish();
 
-            _this7.$toasted.show("some thing want to wrong", {
+            _this7.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000
@@ -686,7 +683,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
 
-        _this7.$toasted.show("some thing want to wrong", {
+        _this7.$toasted.show("something went to wrong", {
           type: "error",
           position: "top-center",
           duration: 4000
@@ -717,7 +714,7 @@ __webpack_require__.r(__webpack_exports__);
         else {
             _this8.$Progress.finish();
 
-            _this8.$toasted.show("some thing want to wrong", {
+            _this8.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000
@@ -726,7 +723,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
 
-        _this8.$toasted.show("some thing want to wrong", {
+        _this8.$toasted.show("something went to wrong", {
           type: "error",
           position: "top-center",
           duration: 4000
@@ -753,7 +750,7 @@ __webpack_require__.r(__webpack_exports__);
         }) //for any kind of error
         ["catch"](function (error) {
           console.log(error);
-          alert("some thing want wrong");
+          alert("something went wrong");
         });
       } //if search lenght smaller then 2, then excute orderist method .......
       else {
@@ -1019,7 +1016,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.orders-heading {\r\n  text-align: center;\r\n  text-transform: uppercase;\r\n  border-bottom: 2px solid #000;\r\n  margin-bottom: 10px;\n}\n.box{\r\n  width:90%;\r\n  overflow-x: scroll;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.orders-heading {\r\n  text-align: center;\r\n  text-transform: uppercase;\r\n  border-bottom: 2px solid #000;\r\n  margin-bottom: 10px;\n}\r\n\r\n\r\n\r\n", ""]);
 
 // exports
 
@@ -1179,8 +1176,8 @@ var render = function() {
         _vm._v(" "),
         _c("section", { staticClass: "content" }, [
           _c("div", { staticClass: "container" }, [
-            _c("div", { staticClass: "row justify-content-center" }, [
-              _c("div", { staticClass: "col-lg-11" }, [
+            _c("div", { staticClass: "row " }, [
+              _c("div", { staticClass: "col-lg-11 " }, [
                 _c("div", { staticClass: "box box-primary" }, [
                   _c("div", { staticClass: "box-header with-border" }, [
                     _c(
@@ -1673,502 +1670,524 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "box-body" }, [
-                    _c("table", { staticClass: "table" }, [
-                      _c("thead", [
-                        _c("tr", [
-                          _c("th", { attrs: { scope: "col" } }, [
-                            _c("input", {
-                              attrs: { type: "checkbox" },
-                              on: { click: _vm.selectAll }
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c("th", { attrs: { scope: "col" } }, [
-                            _vm._v("customer_name")
-                          ]),
-                          _vm._v(" "),
-                          _c("th", { attrs: { scope: "col" } }, [
-                            _vm._v("C_phone")
-                          ]),
-                          _vm._v(" "),
-                          _c("th", { attrs: { scope: "col" } }, [
-                            _vm._v("C_address")
-                          ]),
-                          _vm._v(" "),
-                          _c("th", { attrs: { scope: "col" } }, [
-                            _vm._v("Invoice")
-                          ]),
-                          _vm._v(" "),
-                          _c("th", { attrs: { scope: "col" } }, [
-                            _vm._v("Total")
-                          ]),
-                          _vm._v(" "),
-                          _c("th", { attrs: { scope: "col" } }, [
-                            _vm._v("Create_by")
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "th",
-                            {
-                              staticStyle: { width: "2%" },
-                              attrs: { scope: "col" }
-                            },
-                            [_vm._v("Order_place")]
-                          ),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Order_date")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Action")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("CMNT")])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "tbody",
-                        [
-                          _vm.loading
-                            ? _c("h1", [
-                                _c("i", {
-                                  staticClass: "fa fa-spin fa-spinner"
-                                })
-                              ])
-                            : _vm._l(_vm.orders.data, function(order, index) {
-                                return _c("tr", { key: index }, [
-                                  _c("td", { staticStyle: { width: "1%" } }, [
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.select_order_id,
-                                          expression: "select_order_id"
-                                        }
-                                      ],
-                                      staticClass: "select-all",
-                                      attrs: { type: "checkbox" },
-                                      domProps: {
-                                        value: order.id,
-                                        checked: Array.isArray(
-                                          _vm.select_order_id
-                                        )
-                                          ? _vm._i(
-                                              _vm.select_order_id,
-                                              order.id
-                                            ) > -1
-                                          : _vm.select_order_id
-                                      },
-                                      on: {
-                                        change: function($event) {
-                                          var $$a = _vm.select_order_id,
-                                            $$el = $event.target,
-                                            $$c = $$el.checked ? true : false
-                                          if (Array.isArray($$a)) {
-                                            var $$v = order.id,
-                                              $$i = _vm._i($$a, $$v)
-                                            if ($$el.checked) {
-                                              $$i < 0 &&
-                                                (_vm.select_order_id = $$a.concat(
-                                                  [$$v]
-                                                ))
+                    _c(
+                      "table",
+                      {
+                        staticClass:
+                          "table table-hover table-striped table-bordered "
+                      },
+                      [
+                        _c("thead", [
+                          _c("tr", [
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _c("input", {
+                                attrs: { type: "checkbox" },
+                                on: { click: _vm.selectAll }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Host Name")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("C_name")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("C_phone")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("C_address")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Invoice")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Total")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Create_by")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "th",
+                              {
+                                staticStyle: { width: "2%" },
+                                attrs: { scope: "col" }
+                              },
+                              [_vm._v("Order_place")]
+                            ),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Order_date")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Action")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("CMNT")])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          [
+                            _vm.loading
+                              ? _c("h1", [
+                                  _c("i", {
+                                    staticClass: "fa fa-spin fa-spinner"
+                                  })
+                                ])
+                              : _vm._l(_vm.orders.data, function(order, index) {
+                                  return _c("tr", { key: index }, [
+                                    _c("td", { staticStyle: { width: "1%" } }, [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.select_order_id,
+                                            expression: "select_order_id"
+                                          }
+                                        ],
+                                        staticClass: "select-all",
+                                        attrs: { type: "checkbox" },
+                                        domProps: {
+                                          value: order.id,
+                                          checked: Array.isArray(
+                                            _vm.select_order_id
+                                          )
+                                            ? _vm._i(
+                                                _vm.select_order_id,
+                                                order.id
+                                              ) > -1
+                                            : _vm.select_order_id
+                                        },
+                                        on: {
+                                          change: function($event) {
+                                            var $$a = _vm.select_order_id,
+                                              $$el = $event.target,
+                                              $$c = $$el.checked ? true : false
+                                            if (Array.isArray($$a)) {
+                                              var $$v = order.id,
+                                                $$i = _vm._i($$a, $$v)
+                                              if ($$el.checked) {
+                                                $$i < 0 &&
+                                                  (_vm.select_order_id = $$a.concat(
+                                                    [$$v]
+                                                  ))
+                                              } else {
+                                                $$i > -1 &&
+                                                  (_vm.select_order_id = $$a
+                                                    .slice(0, $$i)
+                                                    .concat($$a.slice($$i + 1)))
+                                              }
                                             } else {
-                                              $$i > -1 &&
-                                                (_vm.select_order_id = $$a
-                                                  .slice(0, $$i)
-                                                  .concat($$a.slice($$i + 1)))
+                                              _vm.select_order_id = $$c
                                             }
-                                          } else {
-                                            _vm.select_order_id = $$c
                                           }
                                         }
-                                      }
-                                    })
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "three-percent" }, [
-                                    _vm._v(
-                                      "\n                        " +
-                                        _vm._s(order.customer_name) +
-                                        "\n                      "
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "three-percent" }, [
-                                    _vm._v(
-                                      "\n                        " +
-                                        _vm._s(order.cutomer_phone) +
-                                        "\n                      "
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "three-percent" }, [
-                                    _vm._v(
-                                      "\n                        " +
-                                        _vm._s(
-                                          order.customer_address
-                                            ? order.customer_address
-                                            : "null"
-                                        ) +
-                                        "\n                      "
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "two-percent" }, [
-                                    _vm._v(_vm._s(order.invoice_no))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "two-percent" }, [
-                                    _c("strong", [
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
                                       _vm._v(
-                                        "\n                          Total: " +
-                                          _vm._s(
-                                            parseInt(order.total) -
-                                              parseInt(order.discount) +
-                                              parseInt(order.shipping_cost)
-                                          ) +
-                                          "\n\n                        "
+                                        "    " + _vm._s(order.host_name) + "  "
                                       )
                                     ]),
                                     _vm._v(" "),
-                                    _c("strong", [
+                                    _c("td", { staticClass: "three-percent" }, [
                                       _vm._v(
-                                        "\n                          P: " +
-                                          _vm._s(parseInt(order.paid)) +
-                                          "\n\n                        "
+                                        "\n                        " +
+                                          _vm._s(order.customer_name) +
+                                          "\n                      "
                                       )
                                     ]),
                                     _vm._v(" "),
-                                    _c("strong", [
+                                    _c("td", { staticClass: "three-percent" }, [
                                       _vm._v(
-                                        "\n                          D: " +
-                                          _vm._s(
-                                            parseInt(order.total) -
-                                              (parseInt(order.discount) +
-                                                parseInt(order.paid)) +
-                                              parseInt(order.shipping_cost)
-                                          ) +
-                                          "\n\n                        "
+                                        "\n                        " +
+                                          _vm._s(order.customer_phone) +
+                                          "\n                      "
                                       )
-                                    ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "two-percent" }, [
-                                    order.order_type == 1
-                                      ? _c("p", [_vm._v("customer")])
-                                      : _vm._e(),
+                                    ]),
                                     _vm._v(" "),
-                                    order.order_type == 2
-                                      ? _c("p", [
-                                          _vm._v(
-                                            "\n                          Admin ||\n                          "
-                                          ),
-                                          _c("strong", [
+                                    _c("td", { staticClass: "three-percent" }, [
+                                      _vm._v(
+                                        "\n                        " +
+                                          _vm._s(
+                                            order.customer_address
+                                              ? order.customer_address
+                                              : "null"
+                                          ) +
+                                          "\n                      "
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "two-percent" }, [
+                                      _vm._v(_vm._s(order.invoice_no))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "two-percent" }, [
+                                      _c("strong", [
+                                        _vm._v(
+                                          "\n                          Total: " +
+                                            _vm._s(
+                                              parseInt(order.total) -
+                                                parseInt(order.discount) +
+                                                parseInt(order.shipping_cost)
+                                            ) +
+                                            "\n\n                        "
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("strong", [
+                                        _vm._v(
+                                          "\n                          P: " +
+                                            _vm._s(parseInt(order.paid)) +
+                                            "\n\n                        "
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("strong", [
+                                        _vm._v(
+                                          "\n                          D: " +
+                                            _vm._s(
+                                              parseInt(order.total) -
+                                                (parseInt(order.discount) +
+                                                  parseInt(order.paid)) +
+                                                parseInt(order.shipping_cost)
+                                            ) +
+                                            "\n\n                        "
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "two-percent" }, [
+                                      order.order_type == 1
+                                        ? _c("p", [_vm._v("customer")])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      order.order_type == 2
+                                        ? _c("p", [
                                             _vm._v(
-                                              _vm._s(order.create_admin.name)
-                                            )
+                                              "\n                          Admin ||\n                          "
+                                            ),
+                                            _c("strong", [
+                                              _vm._v(
+                                                _vm._s(order.create_admin.name)
+                                              )
+                                            ])
                                           ])
-                                        ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    order.order_type == 3
-                                      ? _c("p", [
-                                          _vm._v(
-                                            "\n                          Whole sale ||\n                          "
-                                          ),
-                                          _c("strong", [
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      order.order_type == 3
+                                        ? _c("p", [
                                             _vm._v(
-                                              _vm._s(order.create_admin.name)
-                                            )
+                                              "\n                          Whole sale ||\n                          "
+                                            ),
+                                            _c("strong", [
+                                              _vm._v(
+                                                _vm._s(order.create_admin.name)
+                                              )
+                                            ])
                                           ])
-                                        ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    order.order_type == 4
-                                      ? _c("p", [
-                                          _vm._v(
-                                            "\n                          Reseller "
-                                          ),
-                                          order.reseller.username
-                                            ? _c("strong", [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    order.reseller.username
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      order.order_type == 4
+                                        ? _c("p", [
+                                            _vm._v(
+                                              "\n                          Reseller "
+                                            ),
+                                            order.reseller.username
+                                              ? _c("strong", [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      order.reseller.username
+                                                    )
                                                   )
-                                                )
-                                              ])
-                                            : _vm._e()
-                                        ])
-                                      : _vm._e()
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "two-percent" }, [
-                                    order.status == 1
-                                      ? _c("span", { staticClass: "badge" }, [
-                                          _vm._v("New")
-                                        ])
-                                      : _vm._e(),
+                                                ])
+                                              : _vm._e()
+                                          ])
+                                        : _vm._e()
+                                    ]),
                                     _vm._v(" "),
-                                    order.status == 2
-                                      ? _c("span", { staticClass: "badge" }, [
-                                          _vm._v("Pending")
-                                        ])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    order.status == 3
-                                      ? _c(
-                                          "span",
-                                          {
-                                            staticClass: "badge badge-success"
-                                          },
-                                          [_vm._v("Approved")]
-                                        )
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    order.status == 4
-                                      ? _c(
-                                          "span",
-                                          {
-                                            staticClass: "badge badge-success"
-                                          },
-                                          [_vm._v("Shipment")]
-                                        )
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    order.status == 5
-                                      ? _c(
-                                          "span",
-                                          {
-                                            staticClass: "badge badge-warning"
-                                          },
-                                          [_vm._v("Delivered")]
-                                        )
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    order.status == 6
-                                      ? _c(
-                                          "span",
-                                          { staticClass: "badge badge-danger" },
-                                          [_vm._v("Cancel")]
-                                        )
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    order.status == 7
-                                      ? _c(
-                                          "span",
-                                          { staticClass: "badge badge-danger" },
-                                          [_vm._v("Return")]
-                                        )
-                                      : _vm._e()
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "two-percent" }, [
-                                    _vm._v(_vm._s(order.created_at))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "td",
-                                    [
-                                      order.status == 2 ||
-                                      order.status == 1 ||
+                                    _c("td", { staticClass: "two-percent" }, [
+                                      order.status == 1
+                                        ? _c("span", { staticClass: "badge" }, [
+                                            _vm._v("New")
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      order.status == 2
+                                        ? _c("span", { staticClass: "badge" }, [
+                                            _vm._v("Pending")
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      order.status == 3
+                                        ? _c(
+                                            "span",
+                                            {
+                                              staticClass: "badge badge-success"
+                                            },
+                                            [_vm._v("Approved")]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      order.status == 4
+                                        ? _c(
+                                            "span",
+                                            {
+                                              staticClass: "badge badge-success"
+                                            },
+                                            [_vm._v("Shipment")]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      order.status == 5
+                                        ? _c(
+                                            "span",
+                                            {
+                                              staticClass: "badge badge-warning"
+                                            },
+                                            [_vm._v("Delivered")]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
                                       order.status == 6
                                         ? _c(
-                                            "button",
+                                            "span",
                                             {
-                                              staticClass:
-                                                "btn btn-sm btn-success action-btn",
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.approved(
-                                                    order,
-                                                    index
-                                                  )
-                                                }
-                                              }
+                                              staticClass: "badge badge-danger"
                                             },
-                                            [
-                                              _vm._v(
-                                                "\n                          Approved\n                        "
-                                              )
-                                            ]
+                                            [_vm._v("Cancel")]
                                           )
                                         : _vm._e(),
                                       _vm._v(" "),
-                                      order.status == 1 ||
-                                      order.status == 7 ||
-                                      order.status == 2
+                                      order.status == 7
                                         ? _c(
-                                            "button",
+                                            "span",
                                             {
-                                              staticClass:
-                                                "btn btn-sm btn-info action-btn",
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.pending(
-                                                    order,
-                                                    index
-                                                  )
-                                                }
-                                              }
+                                              staticClass: "badge badge-danger"
                                             },
-                                            [
-                                              _vm._v(
-                                                "\n                          Pending\n                        "
-                                              )
-                                            ]
+                                            [_vm._v("Return")]
                                           )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      order.status == 4
-                                        ? _c(
-                                            "button",
-                                            {
-                                              staticClass:
-                                                "btn btn-sm btn-success action-btn",
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.delivered(
-                                                    order,
-                                                    index
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                          Deliverd\n                        "
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      order.status == 3
-                                        ? _c(
-                                            "button",
-                                            {
-                                              staticClass:
-                                                "btn btn-sm btn-primary action-btn",
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.shipment(
-                                                    order,
-                                                    index
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                          Shipment\n                        "
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      order.status == 1 ||
-                                      order.status == 2 ||
-                                      order.status == 3
-                                        ? _c(
-                                            "button",
-                                            {
-                                              staticClass:
-                                                "btn btn-sm btn-danger action-btn",
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.cancel(
-                                                    order,
-                                                    index
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                          Cancel\n                        "
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      order.status == 4
-                                        ? _c(
-                                            "button",
-                                            {
-                                              staticClass:
-                                                "btn btn-sm btn-warning action-btn",
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.returnOrder(
-                                                    order,
-                                                    index
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                          Return\n                        "
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _c(
-                                        "router-link",
-                                        {
-                                          staticClass: "btn btn-sm btn-warning",
-                                          attrs: {
-                                            to: {
-                                              name: "orderEdit",
-                                              params: { id: order.id }
-                                            }
-                                          }
-                                        },
-                                        [_vm._v("Edit")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "router-link",
-                                        {
-                                          staticClass:
-                                            "btn btn-sm btn-primary action-btn",
-                                          staticStyle: { color: "#fff" },
-                                          attrs: {
-                                            to: {
-                                              name: "viewOrder",
-                                              params: { id: order.id }
-                                            }
-                                          }
-                                        },
-                                        [_vm._v("View")]
-                                      )
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c("td", [
+                                        : _vm._e()
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "two-percent" }, [
+                                      _vm._v(_vm._s(order.created_at))
+                                    ]),
+                                    _vm._v(" "),
                                     _c(
-                                      "a",
-                                      {
-                                        attrs: { href: "#" },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.comment(
-                                              order.id,
-                                              index,
-                                              order.comment
+                                      "td",
+                                      [
+                                        order.status == 2 ||
+                                        order.status == 1 ||
+                                        order.status == 6
+                                          ? _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "btn btn-sm btn-success action-btn",
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.approved(
+                                                      order,
+                                                      index
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                          Approved\n                        "
+                                                )
+                                              ]
                                             )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        order.status == 1 ||
+                                        order.status == 7 ||
+                                        order.status == 2
+                                          ? _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "btn btn-sm btn-info action-btn",
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.pending(
+                                                      order,
+                                                      index
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                          Pending\n                        "
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        order.status == 4
+                                          ? _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "btn btn-sm btn-success action-btn",
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.delivered(
+                                                      order,
+                                                      index
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                          Deliverd\n                        "
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        order.status == 3
+                                          ? _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "btn btn-sm btn-primary action-btn",
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.shipment(
+                                                      order,
+                                                      index
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                          Shipment\n                        "
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        order.status == 1 ||
+                                        order.status == 2 ||
+                                        order.status == 3
+                                          ? _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "btn btn-sm btn-danger action-btn",
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.cancel(
+                                                      order,
+                                                      index
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                          Cancel\n                        "
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        order.status == 4
+                                          ? _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "btn btn-sm btn-warning action-btn",
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.returnOrder(
+                                                      order,
+                                                      index
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                          Return\n                        "
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _c(
+                                          "router-link",
+                                          {
+                                            staticClass:
+                                              "btn btn-sm btn-warning",
+                                            attrs: {
+                                              to: {
+                                                name: "orderEdit",
+                                                params: { id: order.id }
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Edit")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "router-link",
+                                          {
+                                            staticClass:
+                                              "btn btn-sm btn-primary action-btn",
+                                            staticStyle: { color: "#fff" },
+                                            attrs: {
+                                              to: {
+                                                name: "viewOrder",
+                                                params: { id: order.id }
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("View")]
+                                        )
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _c(
+                                        "a",
+                                        {
+                                          attrs: { href: "#" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.comment(
+                                                order.id,
+                                                index,
+                                                order.comment
+                                              )
+                                            }
                                           }
-                                        }
-                                      },
-                                      [_vm._v("CO")]
-                                    )
+                                        },
+                                        [_vm._v("CO")]
+                                      )
+                                    ])
                                   ])
-                                ])
-                              })
-                        ],
-                        2
-                      )
-                    ])
+                                })
+                          ],
+                          2
+                        )
+                      ]
+                    )
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "box-footer" }, [

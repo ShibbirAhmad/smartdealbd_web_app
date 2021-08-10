@@ -45,22 +45,6 @@ class SaleController extends Controller
 
 
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
    public function store(Request $request)
     {
         //  return $request->all();
@@ -148,28 +132,11 @@ class SaleController extends Controller
                         $sale_item->total=$item['price'] * $item['quantity'];
                         $sale_item->save();
                     }
-                        //first search customer new or exists
-                        $customer=Customer::where('phone',$request->mobile_no)->first();
-                        //if not customer then save, as a new customer
-                        if(!$customer){
-                            $customer=new Customer();
-                            $customer->name=$request->name;
-                            $customer->phone=$request->mobile_no;
-                            $customer->address=$request->address;
-                            $customer->city_id=2;
-                            $customer->custome_type=3;        //ofice sale customer
-                            $customer->save();
-                        }
-                        else{
-                            $customer->name=$request->name;
-                            $customer->address=$request->address;
-                            $customer->save();
-                        }
+
                         //send message to customer
                         $amount= $sale->total - $sale->discount;
-                        Sale::SendMessageToCustomer($customer,$amount,$sale->id);
-                        //create a credit.......
-                            // $comment='office sale. Amount BDT '.$sale->total.' and paid by '.$sale->paid_by .' Sale created by_'. session()->get('admin')['name'];
+                    //    Sale::SendMessageToCustomer($customer,$amount,$sale->id);
+
                         if( $sale->paid > 0){
                                 $credit = new Credit();
                                 $credit->purpose = "Office sale";
@@ -196,7 +163,7 @@ class SaleController extends Controller
 
             return response()->json([
                 'status' => 'SUCCESS',
-                'message' => 'new sale was added'
+                'message' => 'new sale  added'
             ]);
 
        }
@@ -223,7 +190,7 @@ class SaleController extends Controller
 
 
 
-    
+
 
     public function paid($id){
 

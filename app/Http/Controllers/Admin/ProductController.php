@@ -32,10 +32,10 @@ class ProductController extends Controller
         $paginate = $request->item ?? 30;
 
         if($request->status=="all"){
-            $products = Product::orderBy('id', 'DESC')->with(['productImage', 'productBarcode'])->paginate($paginate);
+            $products = Product::orderBy('id', 'DESC')->with(['productBarcode'])->paginate($paginate);
 
         }else{
-            $products = Product::orderBy('id', 'DESC')->with(['productImage', 'productBarcode'])->where('status',$request->status)->paginate($paginate);
+            $products = Product::orderBy('id', 'DESC')->with(['productBarcode'])->where('status',$request->status)->paginate($paginate);
 
         }
         return response()->json([
@@ -88,7 +88,6 @@ class ProductController extends Controller
                 $product->sale_price = $request->sale_price;
                 $product->price = $request->price;
                 $product->discount = $request->discount ?? null;
-                $product->wallet_point = $request->wallet_point ?? 0;
                 $product->status = 1;
                 $product->details = $request->details;
                 $product->product_placement = $request->product_placement ?? 0;
@@ -117,9 +116,7 @@ class ProductController extends Controller
                 $image_resize->save(public_path('storage/images/product_thumbnail_img/'.$filename));
                 $product->thumbnail_img = $filename;
                 $product->save();
-
-
-                    foreach ($files as $file) {
+                 foreach ($files as $file) {
                         $product_image = new ProductImage();
                         $product_image->product_id = $product->id;
                         $path = $file->store('images/products', 'public');
@@ -265,12 +262,12 @@ class ProductController extends Controller
             //update product basic information
             $product->update([
                 'name' => $request->name,
+                'slug' => $this->slugCreator(strtolower($request->name)).'-'. $product->product_code,
                 'category_id' => $request->category,
                 'sub_category_id' => $request->sub_category ?? null,
                 'sub_sub_category_id' => $request->sub_sub_category ?? null,
                 'sale_price' => $request->sale_price,
                 'price' => $request->price,
-                'wallet_point' => $request->wallet_point,
                 'discount' => $request->discount ?? null,
                 'details' => $request->details,
                 'campaign_id'=>$request->campaign_id ,
@@ -417,7 +414,7 @@ class ProductController extends Controller
                     $product->sub_category_id = $c_product->sub_category_id ?? null;
                     $product->sub_sub_category_id = $c_product->sub_sub_category_id ?? null;
                     $product->product_code = $product_code;
-                    $product->slug =  $c_product->name.'_'. rand(111,777) .'-' . $product_code;
+                    $product->slug =  $c_product->slug.'_'. rand(11,77) .'-' . $product_code;
                     $product->sale_price = $c_product->sale_price;
                     $product->price = $c_product->price;
                     $product->discount = $c_product->discount ?? null;
@@ -501,30 +498,7 @@ class ProductController extends Controller
         return view('admin.pdf.barcode',\compact('product_barcode','howmany'));
     }
 
-    public function searchCustomer(Request $request,$number){
 
-        if(!$request->ajax()){
-            return \abort(404);
-        }
-
-       $customer=Customer::where('phone',$number)->first();
-
-      if(!empty($customer)){
-        $customer_order=Order::where('customer_id',$customer->id)->orderBy('id','DESC')->first();
-
-       return \response()->json([
-             'message'=>"customer al ready register.",
-            'customer'=>$customer
-       ]);
-
-      }else{
-        return \response()->json([
-            'message'=>"new customer for us",
-
-          ]);
-      }
-
-    }
     public function get_suggested_product(Request $request){
 
         $paginate_item= $request->item ?? 10 ;

@@ -121,14 +121,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -482,17 +474,17 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("td", [
-                                      category.is_selected == 1
-                                        ? _c("span", { staticClass: "badge" }, [
-                                            _c("i", {
-                                              staticClass: "fa fa-check"
-                                            })
-                                          ])
-                                        : _c("span", { staticClass: "badge" }, [
-                                            _c("i", {
-                                              staticClass: "fa fa-close"
-                                            })
-                                          ])
+                                      _c(
+                                        "span",
+                                        { staticClass: "badge badge-success" },
+                                        [
+                                          _vm._v(
+                                            " " +
+                                              _vm._s(category.position) +
+                                              "\n                                            "
+                                          )
+                                        ]
+                                      )
                                     ]),
                                     _vm._v(" "),
                                     _c("td", [
@@ -529,51 +521,12 @@ var render = function() {
                                           ]
                                         ),
                                         _vm._v(" "),
-                                        category.is_selected == 1
-                                          ? _c(
-                                              "a",
-                                              {
-                                                staticClass: "btn btn-danger",
-                                                attrs: { title: "un-selected" },
-                                                on: {
-                                                  click: function($event) {
-                                                    return _vm.unselected(
-                                                      category
-                                                    )
-                                                  }
-                                                }
-                                              },
-                                              [
-                                                _c("i", {
-                                                  staticClass: "fa fa-close"
-                                                })
-                                              ]
-                                            )
-                                          : _c(
-                                              "a",
-                                              {
-                                                staticClass: "btn btn-primary",
-                                                attrs: { title: "selected" },
-                                                on: {
-                                                  click: function($event) {
-                                                    return _vm.selected(
-                                                      category
-                                                    )
-                                                  }
-                                                }
-                                              },
-                                              [
-                                                _c("i", {
-                                                  staticClass: "fa fa-chain"
-                                                })
-                                              ]
-                                            ),
-                                        _vm._v(" "),
                                         category.status == 1
                                           ? _c(
                                               "a",
                                               {
-                                                staticClass: "btn btn-warning",
+                                                staticClass:
+                                                  "btn btn-sm  btn-warning",
                                                 attrs: { title: "De-active" },
                                                 on: {
                                                   click: function($event) {
@@ -592,7 +545,8 @@ var render = function() {
                                           : _c(
                                               "a",
                                               {
-                                                staticClass: "btn btn-primary",
+                                                staticClass:
+                                                  "btn  btn-sm btn-primary",
                                                 attrs: { title: "active" },
                                                 on: {
                                                   click: function($event) {
@@ -709,7 +663,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Image")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("isSelected")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Display Position")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")]),
         _vm._v(" "),

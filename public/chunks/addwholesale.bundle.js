@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["addwholesale"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/order/AddWholeSale.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************!*\
@@ -490,14 +490,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
             };
 
             for (var _i = 0; _i < resp.data.product.length; _i++) {
-              //check the product stcok availity
-              // if (resp.data.product[i].stock <= 0) {
-              //   return Swal.fire({
-              //     type: "warning",
-              //     title: "Wopps....",
-              //     html: `${resp.data.product[i].name} - <strong> ${resp.data.product[i].product_code} </strong> in <b>stcok not available</b>.`,
-              //   });
-              // }
+              // check the product stcok availity
+              if (resp.data.product[_i].stock <= 0) {
+                return Swal.fire({
+                  type: "warning",
+                  title: "Wopps....",
+                  html: "".concat(resp.data.product[_i].name, " - <strong> ").concat(resp.data.product[_i].product_code, " </strong> in <b>stcok not available</b>.")
+                });
+              }
+
               _this4.products.push(resp.data.product[_i]);
 
               product.id = resp.data.product[_i].id;
@@ -536,7 +537,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(vform__WEBPACK_IMPORTED_MOD
           //when com data from t resp
           if (resp.data) {
             if (resp.data.customer) {
-              _this5.form.customer_name = resp.data.customer.name, _this5.form.customer_address = resp.data.customer.address;
+              _this5.form.customer_name = resp.data.customer.customer_name, _this5.form.customer_address = resp.data.customer.customer_address;
               _this5.form.city = resp.data.customer.city_id;
             }
 

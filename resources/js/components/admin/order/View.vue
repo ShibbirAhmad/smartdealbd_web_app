@@ -20,16 +20,16 @@
                     <div class="col-md-1 col-sm-1"></div>
                     <div class="col-md-3 col-sm-3 description">
                       <div>
-                        <p>Name: {{ order.customer.name }}</p>
+                        <p>Name: {{ order.customer_name }}</p>
                         <p>
                           Mobile No:
-                          <strong> {{ order.cutomer_phone }} </strong>
+                          <strong> {{ order.customer_phone }} </strong>
                         </p>
                         <p class="address_line">
                           Address:
 
                           <span>
-                            {{ order.customer.address }}
+                            {{ order.customer_address }}
                           </span>
                           <span v-if="order.sub_city">{{
                             "," + order.sub_city.name

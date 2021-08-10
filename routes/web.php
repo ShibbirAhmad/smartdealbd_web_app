@@ -422,7 +422,6 @@ Route::group([
     Route::get('search/product/{search}', 'ProductController@search');
     Route::get('search/single/product/{search}', 'ProductController@searchSingleProduct');
     Route::get('/search/product/with/code/{search}', 'ProductController@searchWithCode')->name('search.product.with.code');
-    Route::get('search/customer/with/phone/number/{number}', 'ProductController@searchCustomer');
 
     Route::get('api/get/seggested/product/for/order','ProductController@get_suggested_product');
     Route::get('api/search/seggested/product/for/order/{product_code}','ProductController@search_suggested_product');
@@ -483,6 +482,8 @@ Route::group([
 
    //start the order  route
      Route::post('create/order', 'OrderController@store');
+      Route::get('search/customer/with/phone/number/{number}', 'OrderController@searchCustomer');
+      Route::get('search/office/sale/customer/{number}', 'OrderController@searchOfficeSaleCustomer');
      Route::post('update/order/{id}', 'OrderController@update');
 
     Route::get('orders', 'OrderController@index');
