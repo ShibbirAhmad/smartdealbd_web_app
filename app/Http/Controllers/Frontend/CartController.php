@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Models\ProductAttribute;
 use App\Models\ProductImage;
-use Cart;
+use Illuminate\Http\Request;
+use App\Models\ProductAttribute;
+use App\Http\Controllers\Controller;
+use Gloudemans\Shoppingcart\Facades\Cart;
+
 
 class CartController extends Controller
 {
@@ -51,14 +52,14 @@ class CartController extends Controller
 
         return response()->json([
             'status'=>'SUCCESS',
-            'message'=>$product->name.' add your cart'
+            'message'=>$product->name.' added your cart'
         ]);
         }
 
  }
  public function carToContent(){
 
-  
+
     $cart_content=Cart::content();
     $cart_total=Cart::total();
 
@@ -70,7 +71,7 @@ class CartController extends Controller
 
     }
 
-    
+
 
     public  function carToUpdate(Request $request){
 
@@ -78,12 +79,12 @@ class CartController extends Controller
         if(Cart::update($rowId, $request->qty)){
             return response()->json([
                 'status'=>'SUCCESS',
-               
-            ]); 
+
+            ]);
         }
-        
+
     }
-    
+
     public  function carToDestroy(Request $request){
 
        // return $request->all();
@@ -92,9 +93,9 @@ class CartController extends Controller
         Cart::remove($rowId);
         return response()->json([
             'status'=>'SUCCESS',
-           
+
         ]);
-           
-        
+
+
     }
 }

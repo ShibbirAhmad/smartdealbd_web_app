@@ -13,7 +13,7 @@
             <div class="row">
               <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                 <div class="custom-box">
-                  <h2 class="title">Checkout</h2>
+                  <h3 style="text-align:center" >Please Order Now</h3>
                   <form @submit.prevent="chekout">
                     <div class="form-grop">
                       <label class="control-label" for="input-email">Name</label>

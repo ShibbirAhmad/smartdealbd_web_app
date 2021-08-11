@@ -1875,7 +1875,7 @@ span.price-new {
     .left_menu_container {
         display: block;
         position: absolute;
-        z-index: 99999000;
+        z-index: 99999999;
         margin-left: 8%;
         cursor: pointer;
     }
@@ -1973,6 +1973,7 @@ span.price-new {
     }
 
     .order_now_container {
+            display: block;
             padding: 10px;
             border: 2px dotted var(--primary-color);
             margin: 10% 0%;
@@ -2083,17 +2084,6 @@ span.price-new {
         box-sizing: border-box;
         }
 
-        .form-control {
-        background-color: transparent;
-        border: 1px solid #ddd;
-        border-radius: 0;
-        box-shadow: 0 0 transparent;
-        box-shadow: 0 0 0 #000;
-        font-size: 14px;
-        outline: 0;
-        padding: 0 20px;
-        transition: all .4s ease;
-        }
 
         .text-swatch li span {
         background-color: #fff;
@@ -2395,6 +2385,15 @@ span.price-new {
         border: 1px dashed;
         padding: 7px 10px;
         border-radius: 50%;
+    }
+
+    .order_now_container {
+        display: none ;
+    }
+
+   .call_now_container {
+        margin-top: 20px;
+        padding: 5px;
     }
 
     .__preview_image_box {

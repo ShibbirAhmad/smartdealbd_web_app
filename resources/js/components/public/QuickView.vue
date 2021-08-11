@@ -25,7 +25,7 @@
 
                     <div class="row">
                       <div class="col-md-4 col-sm-12">
-                          <img class="quick_view_image" v-if="quick_view_product.product_image" :src="base_url+quick_view_product.product_image[0].product_image" alt="">
+                          <img class="quick_view_image" :src="product_thumbnail_link+quick_view_product.thumbnail_img" alt="">
                       </div>
 
                        <div class="col-md-4 col-sm-12">
@@ -45,9 +45,8 @@
                           <ul class="price-box">
                           <li class="price">
                           <h3>
-                            <span class="price-old" v-if="quick_view_product.discount">&#2547; {{quick_view_product.sale_price}}</span>
-                            <span class="price-new">&#2547; {{quick_view_product.price}}</span>
-                              <span v-if="quick_view_product.discount > 0" class="discount"> <i class="fa fa-star discount_star"> </i> {{ ((quick_view_product.discount/quick_view_product.sale_price)*100).toFixed(0) }}%  <span class="d_off">off</span> </span>
+                            <span class="price-old" v-if="quick_view_product.discount">&#2547;{{quick_view_product.sale_price}}</span>
+                            <span class="price-new">&#2547;{{quick_view_product.price}}</span>
 
                           </h3>
                           </li>
@@ -125,7 +124,7 @@
                          <div class="r_quick_body">
 
                             <div v-for="(r_product,index) in recommended_products " :key="index" class="col-md-2 ">
-                                  <img :src="base_url+r_product.product_image[0].product_image" class="img-responsive r_p_image" >
+                                  <img :src="product_thumbnail_link+r_product.thumbnail_img" class="img-responsive r_p_image" >
                                   <a class="r_p_title" @mouseover.prevent="recommended_replace(index)" >{{ r_product.name }} </a>
 
                             </div>
@@ -149,6 +148,7 @@
 import Loading from 'vue-loading-overlay';
     // Import stylesheet
 import 'vue-loading-overlay/dist/vue-loading.css';
+import Swal from 'sweetalert2' ;
 export default {
   name:"quick_view_modal",
   created() {
@@ -163,7 +163,7 @@ export default {
       quick_loading: false,
       disabled: true,
       variant_index: "",
-      base_url: this.$store.state.image_base_link,
+      product_thumbnail_link: this.$store.state.image_thumbnail_link ,
       cart: {
         product_id: "",
         variant_id: "",
@@ -243,21 +243,14 @@ export default {
           // console.log(error);
         });
     },
+
     validation() {
       if (this.cart.quantity < 1) {
         this.cart.quantity = 1;
         alert("Quantity at least 1");
         return;
       }
-      if (this.quick_view_product.product_attribute) {
-        if (this.cart.attrribute_id < 1) {
-          this.disabled = true;
-        } else {
-          this.disabled = false;
-        }
-      } else {
-        this.disabled = false;
-      }
+
     },
     SelectVaraint() {
       // this.product.product_variant.length=0;

@@ -107,7 +107,7 @@ class HomeController extends Controller
 
     public function category()
     {
-       $categories = Category::orderBy('id', 'ASC')->where(['status' => 1, 'is_selected' => 1])->with(['subCategory.SubSubCategory'])->take(11)->get();
+       $categories = Category::orderBy('id', 'ASC')->where(['status' => 1])->with(['subCategory.SubSubCategory'])->take(11)->get();
         return response()->json([
             'status' => 'SUCCESS',
             'categories' => $categories
@@ -205,7 +205,6 @@ class HomeController extends Controller
                           ->orWhere('product_code','like', '%' . $search . '%')
                           ->orWhere('details','like', '%' . $search . '%')
                           ->where('status',1)
-
                          ->get();
         return \response()->json($products);
 
@@ -274,9 +273,9 @@ class HomeController extends Controller
 
       public function get_quick_view_product($id){
 
-        $product= Product::where('id',$id)->with(['productAttribute.attribute','productVariant.variant','productImage'])->first();
+        $product= Product::where('id',$id)->with(['productAttribute.attribute','productVariant.variant'])->first();
         $recommended_products=Product::where('sub_category_id',$product->sub_category_id)->where('id','!=',$product->id)->where('status',1)
-        ->with(['productAttribute.attribute','productVariant.variant','productImage'])
+        ->with(['productAttribute.attribute','productVariant.variant'])
         ->inRandomOrder()->take(24)->get();
               return  response()->json([
                   "status" => "OK",

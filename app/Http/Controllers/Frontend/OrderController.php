@@ -55,7 +55,7 @@ class OrderController extends Controller
                 $order->host_name=$request->getHttpHost();
                 $order->customer_name=$request->name;
                 $order->customer_phone=$request->mobile_no;
-                $order->cutomer_address=$request->address;
+                $order->customer_address=$request->address;
                 $order->invoice_no=$invoice;
                 $order->order_type=1;
                 $order->city_id=$request->city;
@@ -86,7 +86,7 @@ class OrderController extends Controller
             //sending message
              $invoice=$order->invoice_no;
              $name=$request->name;
-             $number=$order->cutomer_phone;
+             $number=$order->customer_phone;
             //  Order::SendMessageCustomer($number,$name,$invoice);
              Cart::destroy() ;
         });
@@ -113,7 +113,7 @@ class OrderController extends Controller
         $customer=Customer::where('id',$order->customer_id)->first();
 
         $name = $customer->name;
-        $phone =$order->cutomer_phone;
+        $phone =$order->customer_phone;
         $amount = ( ( $order->total + $order->shipping_cost ) - $order->discount  ) ;
         $trnxId = 'trnx_' . Str::uuid(); // must be unique
 

@@ -37,7 +37,7 @@
                       class="search-router-link"
                       >
                         <div class="__search_porducts_details">
-                        <img :src="base_url+product.product_image[0].product_image" class="search_result_img">
+                        <img :src="product_thumbnail_link+product.thumbnail_img" class="search_result_img">
                           <div class="search_name_price">
                             <p> {{ product.name }} </p>
                           <p>
@@ -245,6 +245,7 @@ export default {
       cartTotal: "",
       display: "none",
       base_url: this.$store.state.image_base_link,
+      product_thumbnail_link: this.$store.state.image_thumbnail_link ,
       search_products: [],
       search: "",
     };

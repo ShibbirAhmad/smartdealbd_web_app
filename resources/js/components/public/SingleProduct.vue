@@ -137,6 +137,7 @@
                           class="btn btn-primary btn-lg btn-block"
                           style="margin-top:38px;background:#000;"
                           >Buy Now</button>
+
                       </div>
                     </div>
 
@@ -210,7 +211,6 @@
                       v-if="product.discount"
                       >&#2547; {{ product.sale_price }}</span
                     >
-
                   </p>
                 </div>
               </div>
@@ -313,7 +313,7 @@ export default {
     },
 
     CartToAdd() {
-         if (this.product.product_variant ) {
+         if (this.product.product_variant.length > 0 ) {
          this.cart.attrribute_id = this.product.product_attribute.attribute.id ;
         if (this.cart.variant_id < 1) {
              Swal.fire({
@@ -336,7 +336,7 @@ export default {
           },
         })
         .then((resp) => {
-         // console.log(resp);
+        //  console.log(resp);
           if (resp.data.status == "SUCCESS") {
             this.$toasted.show(resp.data.message, {
               position: "top-center",
@@ -357,7 +357,7 @@ export default {
         });
     },
      buyNow() {
-       if (this.product.product_variant ) {
+       if (this.product.product_variant.length > 0 ) {
          this.cart.attrribute_id = this.product.product_attribute.attribute.id ;
         if (this.cart.variant_id < 1) {
              Swal.fire({
