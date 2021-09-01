@@ -136,10 +136,10 @@ class HomeController extends Controller
          $slider = Slider::where('status',1)->where('position',1)->get();
          $best_selling_product_id=OrderItem::select('product_id',DB::raw('count(*) as total'))
                                                 ->groupBy('product_id')
-                                                ->orderBy('total','DESC')
+                                                ->orderBy('total','desc')
                                                 ->take(12)
                                                 ->pluck('product_id');
-        $best_selling_produtcs =Product::WhereIn('id',$best_selling_product_id)->where('status',1)->get();
+        $best_selling_produtcs =Product::where('status',1)->WhereIn('id',$best_selling_product_id)->get();
         $banner=Banner::latest()->first();
         return response()->json([
             'status' => 'SUCCESS',

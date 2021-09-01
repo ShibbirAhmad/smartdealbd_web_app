@@ -69,7 +69,7 @@
 
      <!-- left menus start  -->
         <div class="left_menu_container">
-          <h4 class="left_menu_headidng" > <i class="fa fa-bars" id="left_menu_icon"></i>  Categories </h4>
+          <h4 class="left_menu_headidng" > <i class="fa fa-bars" id="left_menu_icon"></i> ALL CATEGORIES </h4>
           <ul class="left_category_menu">
                 <li v-for="(left_category,l_c_index) in categories" :key="l_c_index" >
                       <img :src="base_url+left_category.icon_image" class="c_icon_image">

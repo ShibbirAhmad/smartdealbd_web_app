@@ -201,7 +201,8 @@
 
                 </router-link>
                 <div class="product-detail small-detail">
-                  <h4>   <router-link class="product-link" :to="{name: 'single', params: { slug: product.slug } }">{{ product.name }}</router-link ></h4>
+                  <h4>   <router-link class="product-link" :to="{name: 'single', params: { slug: product.slug } }">{{ product.name.substring(0,20) }}
+                         <span v-if="product.name.length > 20">...</span></router-link ></h4>
                   <p class="price">
                     <span class="price-new">{{
                       product.price
@@ -313,7 +314,7 @@ export default {
     },
 
     CartToAdd() {
-         if (this.product.product_variant.length > 0 ) {
+      if (this.product.product_variant.length > 0 ) {
          this.cart.attrribute_id = this.product.product_attribute.attribute.id ;
         if (this.cart.variant_id < 1) {
              Swal.fire({

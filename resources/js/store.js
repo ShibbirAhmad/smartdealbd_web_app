@@ -66,15 +66,11 @@ const state = {
     //general setting
     general_setting:"",
 
-
     //footer setting
     footer_setting:"",
 
-
     //theme setting
      theme_setting:"",
-
-
 
 }
 const getters = {
@@ -253,7 +249,7 @@ const actions = {
         axios
             .get("/_public/slider")
             .then((resp) => {
-                // console.log(resp)
+                console.log(resp)
                 context.commit('sliders', resp.data.sliders);
                 context.commit('banner', resp.data.banner);
                 context.commit('best_selling_produtcs', resp.data.best_selling_produtcs);

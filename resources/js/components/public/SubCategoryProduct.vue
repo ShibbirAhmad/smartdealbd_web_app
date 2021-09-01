@@ -75,7 +75,8 @@
                    <img :src="  product_thumbnail_link + product.thumbnail_img "  :alt="product.name" />
                 </router-link>
                 <div class="product-detail  ">
-                  <h4>   <router-link class="product-link" :to="{name: 'single', params: { slug: product.slug } }">{{ product.name }}</router-link ></h4>
+                  <h4>   <router-link class="product-link" :to="{name: 'single', params: { slug: product.slug } }">{{ product.name.substring(0,20) }}
+                         <span v-if="product.name.length > 20">...</span></router-link ></h4>
                   <p class="price">
                     <span class="price-new"> &#2547; {{
                       product.price

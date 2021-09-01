@@ -18,9 +18,8 @@ const routes = [
     },
 
 
-
     {
-        path: '/public/product/view/:slug',
+        path: '/product/view/:slug',
         component: () => import(/* webpackChunkName: "single_product" */'./components/public/SingleProduct'),
         name: 'single',
         props: true,
@@ -30,7 +29,7 @@ const routes = [
     },
 
     {
-        path: '/public/category/products/:slug',
+        path: '/category/products/:slug',
         component: () => import(/* webpackChunkName: "public_category" */'./components/public/CategoryWiseProduct'),
         name: 'PublcaCategory',
 
@@ -40,7 +39,7 @@ const routes = [
     },
 
     {
-        path: '/public/sub/caetgory/products/:slug',
+        path: '/sub/caetgory/products/:slug',
         component: () => import(/* webpackChunkName: "public_sub_category" */'./components/public/SubCategoryProduct'),
         name: 'PublicSubCategory',
 
@@ -50,7 +49,7 @@ const routes = [
     },
 
     {
-        path: '/public/sub/sub/caetgory/products/:slug',
+        path: '/sub/sub/caetgory/products/:slug',
         component: () => import(/* webpackChunkName: "public_sub_sub_category" */'./components/public/SubSubCategoryProduct'),
         name: 'PublicSubSUbCategory',
 
@@ -60,7 +59,7 @@ const routes = [
     },
 
     {
-        path: '/public/products/search/:search',
+        path: '/products/search/:search',
         component: () => import(/* webpackChunkName: "public_product_search" */'./components/public/SearchProduct'),
         name: 'PublicProductSearch',
 
@@ -70,7 +69,16 @@ const routes = [
     },
 
     {
-        path: '/public/how/to/buy',
+        path: '/public/order/success',
+        component: () => import(/* webpackChunkName: "order_welcome" */'./components/public/OrderWelcome.vue'),
+        name: 'order_welcome',
+        meta: {
+            title: 'order confirmation '
+        }
+    },
+
+    {
+        path: '/how/to/buy',
         component: () => import(/* webpackChunkName: "how_to_buy" */'./components/public/policy_and_info/how_to_buy'),
         name: 'how_to_buy',
 
@@ -80,7 +88,7 @@ const routes = [
     },
 
     {
-        path: '/public/return/policy',
+        path: '/return/policy',
         component: () => import(/* webpackChunkName: "return_policy" */'./components/public/policy_and_info/return_policy'),
         name: 'return_policy',
 
@@ -100,7 +108,7 @@ const routes = [
     },
 
     {
-        path: '/public/shipment',
+        path: '/shipment',
         component: () => import(/* webpackChunkName: "shipment" */'./components/public/policy_and_info/Shipment'),
         name: 'shipment',
 
@@ -111,7 +119,7 @@ const routes = [
 
 
     {
-        path: '/public/about/seller',
+        path: '/about/seller',
         component: () => import(/* webpackChunkName: "about_seller" */'./components/public/policy_and_info/About_seller'),
         name: 'about_seller',
 
@@ -122,7 +130,7 @@ const routes = [
 
 
     {
-        path: '/public/about/us',
+        path: '/about/us',
         component: () => import(/* webpackChunkName: "about_us" */'./components/public/Aboutus'),
         name: 'AboutUs',
 
@@ -131,7 +139,7 @@ const routes = [
         }
     },
     {
-        path: '/public/contact/us',
+        path: '/contact/us',
         component: () => import(/* webpackChunkName: "contact_us" */'./components/public/Contactus'),
         name: 'ContactUs',
 
@@ -141,7 +149,7 @@ const routes = [
     },
 
     {
-        path: '/public/user/dashboard',
+        path: '/user/dashboard',
         component: () => import(/* webpackChunkName: "user_dashboard" */'./components/public/user/Dashboard'),
         name: 'UserDashboard',
         meta: {
@@ -153,7 +161,7 @@ const routes = [
 
 
     {
-        path: '/public/user/login',
+        path: '/user/login',
         component: () => import(/* webpackChunkName: "userLogin" */'./components/public/Login'),
         name: 'UserLogin',
         meta: {
@@ -163,7 +171,7 @@ const routes = [
     },
 
     {
-        path: '/public/otp/login',
+        path: '/otp/login',
         component: () => import(/* webpackChunkName: "otp_login" */'./components/public/otp'),
         name: 'otpLogin',
         meta: {
@@ -171,7 +179,7 @@ const routes = [
         }
     },
     {
-        path: '/public/user/new/set/password',
+        path: '/user/new/set/password',
         component: () => import(/* webpackChunkName: "user_password_reset" */'./components/public/user/SetNewPassword'),
         name: 'user_new_password_set',
         meta: {
@@ -184,7 +192,7 @@ const routes = [
 
 
     {
-        path: '/public/user/code/verify/:mobile_no',
+        path: '/user/code/verify/:mobile_no',
         component: () => import(/* webpackChunkName: "code_verified" */'./components/public/CodeVerified'),
         name: 'CodeVerified',
         meta: {
@@ -195,7 +203,7 @@ const routes = [
 
 
     {
-        path: '/public/user/register',
+        path: '/user/register',
         component: () => import(/* webpackChunkName: "user_register" */'./components/public/user/Register'),
         name: 'UserRegister',
         meta: {
@@ -204,7 +212,7 @@ const routes = [
 
     },
     {
-        path: '/public/user/Checkout',
+        path: '/user/Checkout',
         component: () => import(/* webpackChunkName: "checkout" */'./components/public/Checkout.vue'),
         name: 'Chekout',
         meta: {
@@ -213,7 +221,7 @@ const routes = [
 
     },
     {
-        path: '/public/user/order/history',
+        path: '/user/order/history',
         component: () => import(/* webpackChunkName: "order_history" */'./components/public/user/OrderHistory'),
         name: 'OrderHistory',
         meta: {
@@ -225,7 +233,7 @@ const routes = [
     },
 
     {
-        path: '/public/user/order/details/:id',
+        path: '/user/order/details/:id',
         component: () => import(/* webpackChunkName: "order_details" */'./components/public/user/OrderDetails'),
         name: 'order_details',
         meta: {
@@ -237,7 +245,7 @@ const routes = [
     },
 
     {
-        path: '/public/user/password',
+        path: '/user/password',
         component: () => import(/* webpackChunkName: "user_password" */'./components/public/user/Password'),
         name: 'PasswordEdit',
         meta: {
@@ -249,7 +257,7 @@ const routes = [
     },
 
     {
-        path: '/public/user/profile',
+        path: '/user/profile',
         component: () => import(/* webpackChunkName: "user_profile" */'./components/public/user/Profile'),
         name: 'UserProfile',
         meta: {
@@ -261,7 +269,7 @@ const routes = [
     },
 
     {
-        path: '/public/user/profile/edit',
+        path: '/user/profile/edit',
         component: () => import(/* webpackChunkName: "user_profile_edit" */'./components/public/user/Edit'),
         name: 'UserProfileEdit',
         meta: {
@@ -2274,6 +2282,19 @@ const routes = [
     },
 
 
+     {
+        path: '/user/Checkout/success',
+        component: () =>
+            import( /* webpackChunkName: "successCheckout" */ './components/public/Success'),
+        name: 'checkoutSuccess',
+        meta: {
+            title: 'Checkout || Success',
+          //  requiresAuthUser: true,
+
+        }
+    },
+
+
 
 ]
 
@@ -2284,6 +2305,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+    window.scrollTo(0, 0);
     if (to.matched.some(record => record.meta.requiresAuthAdmin)) {
         if (localStorage.getItem('admin_token')) {
             next()
@@ -2300,7 +2322,7 @@ router.beforeEach((to, from, next) => {
             next()
             return
         }
-        next('/public/user/login')
+        next('/user/login')
     } else {
         next()
     }

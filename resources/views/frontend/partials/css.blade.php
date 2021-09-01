@@ -2724,8 +2724,6 @@ span.price-new {
 
 
             .c-v-all {
-                background: #000;
-                color: #fff;
                 padding: 5px 13px;
                 width: 22px;
                 height: 38px;
@@ -2897,13 +2895,6 @@ span.price-new {
             border-radius: 5px;
             }
 
-
-            .c-product-header{
-
-                display:none ;
-            }
-
-
            .product-card {
             width:100%;
             height: auto;
@@ -2914,21 +2905,19 @@ span.price-new {
             margin-bottom: 15px;
             }
 
-
             .product-card:hover>.product-card-footer{
                 display: none;
             }
 
             .product-card p {
-            font-size: 13px;
-            margin-top: -15px;
-
+                    font-size: 13px;
+                    margin-top: -15px;
             }
 
             .product-detail h4 {
-            font-size: 16px;
-            padding-bottom: 10px;
-            margin-top: -5px;
+                font-size: 16px;
+                padding-bottom: 10px;
+                margin-top: -5px;
             }
 
             .product-card-body img {

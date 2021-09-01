@@ -18,7 +18,7 @@
     </div>
 
 
-      <div v-if="banner" class="row advertise_banner_row">
+      <div v-if="banner && banner.status==1" class="row advertise_banner_row">
         <div class="col-lg-6 col-md-6 col-xs-6">
           <a :href="banner.url_1" target="_blank">
             <img
@@ -40,8 +40,8 @@
 
 
 
-    <div class="container">
-      <div class="new_arrival_section">
+    <div  class="container">
+      <div v-if="best_selling_produtcs.length"  class="new_arrival_section">
         <h4 class="arrival_heading">Top Selling Products</h4>
         <div class="row">
           <vue-horizontal-list
@@ -69,7 +69,9 @@
                             name: 'single',
                             params: { slug: item.slug },
                           }"
-                          >{{ item.name }}</router-link
+                          >{{ item.name.substring(0,20) }}
+                            <span v-if="item.name.length > 20"> ... </span>
+                          </router-link
                         >
                       </p>
                       <p class="price">
@@ -141,7 +143,7 @@
                   }"
                 >
                   <img
-                    :src="  product_thumbnail_link + campaign_product.thumbnail_img "  :alt="campaign_product.name"
+                    :src="  product_thumbnail_link + campaign_product.thumbnail_img "
                   />
                 </router-link>
               </div>
@@ -152,7 +154,8 @@
                       name: 'single',
                       params: { slug: campaign_product.slug },
                     }"
-                    >{{ campaign_product.name }}</router-link
+                    >{{ campaign_product.name.substring(0,20) }}
+                         <span v-if="product.name.length > 20">...</span></router-link
                   >
                 </h4>
                 <p class="price">
@@ -183,7 +186,7 @@
         </div>
 
 
-        <div v-if="isScroll > 0">
+        <div>
           <div
             class="c-product"
             v-for="(category, idx) in home_page_products"
@@ -212,7 +215,6 @@
                 class="col-lg-3 col-sm-4 col-md-3 col-xs-6 width_20 small_width"
                 v-for="(product, index) in category.products"
                 :key="index"
-                v-if="index < 10"
               >
                 <div class="product-card">
                   <div class="product-card-body">
@@ -220,8 +222,7 @@
                       :to="{ name: 'single', params: { slug: product.slug } }"
                     >
                      <img :src="product_thumbnail_link+product.thumbnail_img"
-                          :alt="product.name"
-                           :title="product.name" />
+                     />
                     </router-link>
                     <div class="product-detail">
                       <h4>
@@ -231,7 +232,8 @@
                             name: 'single',
                             params: { slug: product.slug },
                           }"
-                          >{{ product.name }}</router-link
+                          >{{ product.name.substring(0,20) }}
+                         <span v-if="product.name.length > 20">...</span></router-link
                         >
                       </h4>
                       <p class="price">
@@ -248,8 +250,7 @@
                     <button
                       class="btn btn-primary btnQuick"
                       style="cursor: pointer"
-                      @click="quick_v_product_id = product.id"
-                    >
+                      @click="quick_v_product_id = product.id">
                       view
                     </button>
                   </div>
@@ -257,7 +258,7 @@
               </div>
             </div>
           </div>
-          <infinite-loading @distange="0.5" @infinite="home_page_product">
+          <infinite-loading @distange="1" @infinite="homeProduct">
             <div slot="no-more"></div>
           </infinite-loading>
         </div>
@@ -314,7 +315,7 @@
       </div>
     </div>
 
-    <frontend-footer v-if="isScroll > 0"></frontend-footer>
+    <frontend-footer ></frontend-footer>
     <quick-view
       v-if="quick_v_product_id"
       v-on:clicked="closedModal($event)"
@@ -332,12 +333,13 @@ import "vue-loading-overlay/dist/vue-loading.css";
 import carousel from "vue-owl-carousel";
 import VueHorizontalList from "vue-horizontal-list";
 Vue.use(Loading);
-
 export default {
+  created(){
+    this.homeProduct();
+  },
   data() {
     return {
       loading: true,
-      // sub_categories: [],
       page: 1,
       offers: [],
       product_id: null,
@@ -361,14 +363,18 @@ export default {
         position: {
           start: 0,
         },
+         autoplay: {
+          play: true,
+          speed: 1800,
+          repeat: true,
+        },
       },
 
 
     };
   },
   methods: {
-
-    home_page_product($state) {
+    homeProduct($state) {
       axios
         .get("/_public/products?page=" + this.page)
         .then((resp) => {
@@ -380,7 +386,6 @@ export default {
             $state.complete();
           }
         })
-        .catch((e) => {});
     },
     handleScrol() {
       this.isScroll = 1;
@@ -404,7 +409,7 @@ export default {
     Loading,
     carousel,
     FlipCountdown,
-    VueHorizontalList,
+    VueHorizontalList
   },
   mounted() {
     window.addEventListener("scroll", this.handleScrol);
@@ -432,10 +437,6 @@ export default {
 
     sale_campaign() {
       return this.$store.getters.sale_campaign;
-    },
-
-    sub_categories() {
-      return this.$store.getters.home_page_products;
     },
   },
   watch: {

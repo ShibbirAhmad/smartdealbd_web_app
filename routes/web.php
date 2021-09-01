@@ -29,8 +29,6 @@ Route::group([
      //chekout route
      Route::get('apply/coupon/code', 'HomeController@ApplyCoupon');
 
-
-
     // public carrier route
     Route::get('carrier/list','CarrierController@index');
     Route::get('carrier/details/{id}','CarrierController@carrier_details');
@@ -809,7 +807,7 @@ Route::get('/backend/{any}', function () {
 // when any one type public / anything as url
 // then laravel router transfer  to vue-routing
 
-Route::get('/public/{any}', function () {
+Route::get('/{any}', function () {
 
     // $categories = Category::orderBy('id', 'DESC')->where(['status' => 1, 'is_selected' => 1])->with(['subCategory.SubSubCategory'])->get();
     // $sliders = Slider::orderBy('id', 'DESC')->where('status', 1)->get();

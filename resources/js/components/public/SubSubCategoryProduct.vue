@@ -103,7 +103,8 @@
                         <router-link
                           class="product-link"
                           :to="{ name: 'single', params: { slug: product.slug } }"
-                          >{{ product.name }}</router-link
+                          >{{ product.name.substring(0,20) }}
+                         <span v-if="product.name.length > 20">...</span></router-link
                         >
                       </h4>
                       <p class="price">

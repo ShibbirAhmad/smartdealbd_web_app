@@ -270,8 +270,8 @@ export default {
         .then((resp) => {
           console.log(resp);
           if (resp.data.status == "SUCCESS") {
-            this.$router.push({ name: "welcome" });
-            this.$toasted.show(resp.data.message, {
+             window.open('/user/Checkout/success','_self')
+             this.$toasted.show(resp.data.message, {
               type: "success",
               position: "top-center",
               duration: 5000,
