@@ -4,9 +4,7 @@
     <div class="content-wrapper">
       <section class="content-header">
         <h1 class="order_statistic">
-     <router-link :to="{ name: 'addOrder' }" class="btn btn-primary">
-            <i class="fa fa-plus"></i> Add
-          </router-link>
+
           <router-link :to="{ name: 'NewOrder' }" class="btn btn-sm "
             >New <sup> {{ order_count.new_order }} </sup>
             </router-link >
@@ -53,12 +51,7 @@
             >All</router-link
           >
         </h1>
-        <ol class="breadcrumb">
-          <li>
-            <a href="#"> <i class="fa fa-dashboard"></i>Dashboard </a>
-          </li>
-          <li class="active">All Order</li>
-        </ol>
+
       </section>
       <section class="content">
         <div class="container">
@@ -221,12 +214,12 @@
                         <th scope="col">Invoice</th>
                         <th scope="col">Total</th>
                         <th scope="col">Create_by</th>
-                        <th scope="col" style="width: 2%">Order_place</th>
-                        <th>Order_date</th>
+                        <th scope="col" width="2%">Order_place</th>
+                        <th scope="col" >Order_date</th>
 
-                        <th>Action</th>
-                        <th>Courier</th>
-                        <th>CMNT</th>
+                        <th scope="col" width="5%" >Action</th>
+                        <th scope="col" >Courier</th>
+                        <th scope="col" width="5%" >CMNT</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -355,22 +348,13 @@
                           </button>
 
                           <router-link
+                            style="width:70px"
                             class="btn btn-sm btn-warning"
                             :to="{
                               name: 'orderEdit',
                               params: { id: order.id },
                             }"
                             >Edit</router-link
-                          >
-
-                          <router-link
-                            class="btn btn-sm btn-primary action-btn"
-                            style="color: #fff"
-                            :to="{
-                              name: 'viewOrder',
-                              params: { id: order.id },
-                            }"
-                            >View</router-link
                           >
                         </td>
 
@@ -392,7 +376,7 @@
                           <a
                             href="#"
                             @click="comment(order.id, index, order.comment)"
-                            >CO</a
+                            >Comment</a
                           >
                         </td>
                       </tr>
@@ -433,7 +417,6 @@
 <script>
 
 export default {
-  components: { Index },
 
   created() {
     this.ordersList();
@@ -1162,6 +1145,7 @@ export default {
 
 .router-link-active {
    border: 1.5px dashed !important ;
+   color:#000 !important;
 }
 
 

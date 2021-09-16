@@ -58,7 +58,7 @@
       <section class="content">
         <div class="container">
           <div class="row ">
-            <div class="col-lg-11">
+            <div class="col-lg-11 col-md-11">
               <div class="box box-primary">
                 <div class="box-header with-border">
                   <div class="row" style="margin-bottom: 3px">
@@ -214,7 +214,7 @@
 
                         <th>Action</th>
                         <th>Courier</th>
-                        <th>CMNT</th>
+                        <th>Comment</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -373,6 +373,7 @@
                           </button>
 
                           <router-link
+                            style="width:70px"
                             class="btn btn-sm btn-warning"
                             :to="{
                               name: 'orderEdit',
@@ -531,16 +532,14 @@ export default {
           },
         })
         .then((resp) => {
-          console.log(resp);
-          //finish progress bar after resp
-          this.$Progress.finish();
-          //only success resp
+
           if (resp.data.status == "SUCCESS") {
             this.orders = resp.data.orders;
-            this.order_count = resp.data.order_count;
             this.loading = false;
             this.page = this.page + 1;
             this.loading = false;
+            this.order_count = resp.data.order_count;
+            this.$Progress.finish();
           }
           //else show a error
           else {
@@ -576,8 +575,6 @@ export default {
 
     //initial method for order approved
     approved(order, index) {
-      /////index initial for update order from orderLit or order arrow.
-
       //start progress bar
       this.$Progress.start();
       axios
@@ -585,7 +582,6 @@ export default {
         .then((resp) => {
           //end progress bar after resp
           this.$Progress.finish();
-
           //if resp success then....
           if (resp.data.status == "SUCCESS") {
             this.$toasted.show(resp.data.message, {
@@ -595,7 +591,6 @@ export default {
             });
             this.orders.data[index].status = 3;
           }
-
           //not resp success.....
           else {
             this.$toasted.show(resp.data, {
@@ -618,16 +613,12 @@ export default {
     //initial method for order cancel
 
     cancel(order, index) {
-      /////index initial for update order from orderLit or order arrow.
-
-      //start progress bar
       this.$Progress.start();
       axios
         .get("/cancel/order/" + order.id)
         .then((resp) => {
           //end progress bar after resp
           this.$Progress.finish();
-
           //only success resp .......
           if (resp.data.status == "SUCCESS") {
             this.$toasted.show(resp.data.message, {
@@ -657,11 +648,7 @@ export default {
     },
 
     //initial method for order return
-
     returnOrder(order, index) {
-      /////index initial for update order from orderLit or order arrow.
-
-      //start progress bar
       this.$Progress.start();
       axios
         .get("/return/order/" + order.id)

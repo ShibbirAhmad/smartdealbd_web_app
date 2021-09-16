@@ -3,48 +3,53 @@
     <admin-main></admin-main>
     <div class="content-wrapper">
       <section class="content-header">
-        <h1>
-          <router-link :to="{ name: 'addOrder' }" class="btn btn-primary">
-            <i class="fa fa-plus"></i>
-          </router-link>
-          <router-link :to="{ name: 'NewOrder' }" class="btn btn-sm btn-success"
-            >New</router-link
+      <h1 class="order_statistic">
+          <router-link :to="{ name: 'NewOrder' }" class="btn btn-sm "
+            >New <sup> {{ order_count.new_order }} </sup>
+            </router-link >
+          <router-link
+            :to="{ name: 'PendingOrder' }"
+            class="btn btn-sm "
+            >Pending <sup> {{ order_count.pending_order }} </sup> </router-link
           >
-          <router-link :to="{ name: 'PendingOrder' }" class="btn btn-sm btn-success"
-            >Pending</router-link
-          >
-          <router-link :to="{ name: 'ApprovedOrder' }" class="btn btn-sm btn-success"
-            >Approved</router-link
+          <router-link
+            :to="{ name: 'ApprovedOrder' }"
+            class="btn btn-sm "
+            >Ready To Ship  <sup> {{ order_count.approved_order }} </sup>  </router-link
           >
           <router-link
             :to="{ name: 'ShipmentOrder' }"
-            class="btn btn-sm btn-success active"
-            >Shipment</router-link
+            class="btn btn-sm "
+            >Shipment  <sup> {{ order_count.shipment_order }} </sup> </router-link
           >
-          <router-link :to="{ name: 'DeliveredOrder' }" class="btn btn-sm btn-success"
-            >Delivered</router-link
+          <router-link
+            :to="{ name: 'DeliveredOrder' }"
+            class="btn btn-sm "
+            >Delivered <sup> {{ order_count.delivered_order }} </sup> </router-link
+          >
+          <router-link
+            :to="{ name: 'ReturnOrder' }"
+            class="btn btn-sm "
+            >Return  <sup> {{ order_count.return_order }} </sup>  </router-link
+          >
+          <router-link
+            :to="{ name: 'CancelOrder' }"
+            class="btn btn-sm"
+            >Cancel  <sup> {{ order_count.cancel_order }} </sup>  </router-link
+          >
+          <router-link
+            :to="{ name: 'WholeSaleOrder' }"
+            class="btn btn-sm "
+            >wholesale</router-link
           >
 
-          <router-link :to="{ name: 'ReturnOrder' }" class="btn btn-sm btn-success"
-            >Return</router-link
-          >
-          <router-link :to="{ name: 'CancelOrder' }" class="btn btn-sm btn-success"
-            >Cancel</router-link
-          >
-          <router-link :to="{ name: 'WholeSaleOrder' }" class="btn btn-sm btn-success"
-            >whole sale</router-link
-          >
-
-          <router-link :to="{ name: 'order' }" class="btn btn-sm btn-success"
+          <router-link
+            :to="{ name: 'order' }"
+            class="btn btn-sm  "
+            style="background:#4aa316"
             >All</router-link
           >
         </h1>
-        <ol class="breadcrumb">
-          <li>
-            <a href="#"> <i class="fa fa-dashboard"></i>Dashboard </a>
-          </li>
-          <li class="active">All Order</li>
-        </ol>
       </section>
       <section class="content">
         <div class="container">
@@ -186,10 +191,9 @@
                         <th scope="col">Create_by</th>
                         <th scope="col" style="width: 2%">Order_place</th>
                         <th>Order_date</th>
-
-                        <th>Action</th>
+                        <th scope="col" width="5%" >Action</th>
                         <th>Courier</th>
-                        <th>CMNT</th>
+                        <th width="5%">Comment</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -294,13 +298,7 @@
                           >
                             Deliverd
                           </button>
-                          <button
-                            class="btn btn-sm btn-primary action-btn"
-                            v-if="order.status == 3"
-                            @click="shipment(order, index)"
-                          >
-                            Shipment
-                          </button>
+
                           <button
                             class="btn btn-sm btn-danger action-btn"
                             v-if="
@@ -311,7 +309,7 @@
                             Cancel
                           </button>
                           <button
-                            class="btn btn-sm btn-warning action-btn"
+                            class="btn btn-sm btn-danger action-btn"
                             v-if="order.status == 4"
                             @click="returnOrder(order, index)"
                           >
@@ -319,19 +317,10 @@
                           </button>
 
                           <router-link
+                          style="width:70px;"
                             class="btn btn-sm btn-warning"
                             :to="{ name: 'orderEdit', params: { id: order.id } }"
                             >Edit</router-link
-                          >
-
-                          <router-link
-                            class="btn btn-sm btn-primary action-btn"
-                            style="color: #fff"
-                            :to="{
-                              name: 'viewOrder',
-                              params: { id: order.id },
-                            }"
-                            >View</router-link
                           >
                         </td>
                         <td style="width: 1%">
@@ -346,7 +335,7 @@
                           <small v-if="order.comment">{{ order.comment }}</small>
 
                           <a href="#" @click="comment(order.id, index, order.comment)"
-                            >CO</a
+                            >Comment</a
                           >
                         </td>
                       </tr>
@@ -411,12 +400,7 @@
 </template>
 
 <script>
-import Index from "../Index";
-import { Form } from "vform";
-
 export default {
-  components: { Index },
-
   created() {
     this.ordersList();
     this.others();
@@ -437,7 +421,6 @@ export default {
       search: "",
       start_date: "",
       end_date: "",
-
       //date picker options ..........
       options: {
         format: "YYYY-MM-DD",
@@ -447,18 +430,15 @@ export default {
       type: "all",
       page: 1,
       selected: false,
-
       //for biblk action
       select_order_id: [],
       bulk_status: "all",
-
       //heading in table
       heading: "All Order",
-
       bulkActionType: "0",
-
       //for filtaring order
       courier_id: "",
+      order_count: "",
     };
   },
   methods: {
@@ -479,23 +459,19 @@ export default {
           },
         })
         .then((resp) => {
-          console.log(resp);
-          // console.log(resp);
-
-          //finish progress bar after resp
-          this.$Progress.finish();
-
           //only success resp
           if (resp.data.status == "SUCCESS") {
             this.orders = resp.data.orders;
             this.loading = false;
             this.page = this.page + 1;
             this.loading = false;
+            this.order_count = resp.data.order_count;
+            this.$Progress.finish();
           }
 
           //else show a error
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("someting went to wrong", {
               type: "error",
               position: "top-center",
               duration: 5000,
@@ -505,7 +481,7 @@ export default {
         .catch((error) => {
           //finish progress bar after resp
           this.$Progress.finish();
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("someting went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -548,7 +524,7 @@ export default {
           }
           //not resp success.....
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("someting went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -557,7 +533,7 @@ export default {
         })
         .catch((error) => {
           //end progress bar after resp
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("someting went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -589,7 +565,7 @@ export default {
           }
           //for any kind of error resp .......
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("someting went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -598,7 +574,7 @@ export default {
         })
         .catch((error) => {
           //end progress bar after resp
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("someting went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -631,7 +607,7 @@ export default {
           }
           //for any kind off error resp
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("someting went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -640,7 +616,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("someting went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -648,46 +624,48 @@ export default {
         });
     },
 
+
+
     delivered(order, index) {
-        console.log(order)
-      Swal.fire({
-        title:'CHECK IT',
-        html:`
 
-            <div class="form-group">
-              <label>Credit Amount</label>
-              <input class="form-control" readonly value="${parseInt(order.total)-parseInt(order.paid)-parseInt(order.discount)+parseInt(order.shipping_cost)}">
-            </div>
 
-              <div class="form-group">
-              <label>Credit In</label>
-              <select class="form-control" id="credit_id">
-               <option value="Cash">Cash</option>
-                      <option value="Bkash(personal)">Bkash(personal)</option>
-                      <option value="Bkash(merchant)">Bkash(merchant)</option>
-                      <option value="Bank">Bank(SIBL)</option>
-                       <option value="Bank(AIBL)">Bank(AIBL)</option>
-              </select>
-            </div>
-
-        `
-      }).then(result=>{
-        if(result.value){
-          let credit_in=document.getElementById('credit_id').value;
-
-          console.log(credit_in)
-
+      axios.get("/api/balance/list")
+        .then((resp) => {
+          console.log(resp)
+          let options = {};
+          resp.data.balance.forEach((element) => {
+            options[element.id] = element.name ;
+          });
+          Swal.fire({
+            title: "Select a balance",
+            input: "select",
+            inputOptions: options,
+            inputPlaceholder: "Select One Balance",
+            showCancelButton: true,
+          }).then((result) => {
+            if (result.value) {
+               this.credit_in = result.value;
+              Swal.fire({
+              title:'CHECK IT',
+              html:`
+                  <div class="form-group">
+                    <label>Credit Amount</label>
+                    <input class="form-control" readonly value="${parseInt(order.total)-parseInt(order.paid)-parseInt(order.discount)+parseInt(order.shipping_cost)}">
+                  </div>
+              `
+            })
+            .then(result=> {
+              if (result.value) {
                this.$Progress.start();
-      axios.get("/delivered/order/" + order.id,{
-        params:{
-          credit_in
-        }
-      })
+              axios.get("/delivered/order/" + order.id,{
+                params:{
+                   credit_in :this.credit_in
+                }
+              })
         .then((resp) => {
           console.log(resp);
           //end progress bar after resp
           this.$Progress.finish();
-
           //only success resp .......
           if (resp.data.status == "SUCCESS") {
             this.$toasted.show(resp.data.message, {
@@ -706,69 +684,21 @@ export default {
             });
           }
         })
-        .catch((error) => {
-          console.log(error);
-          this.$toasted.show("some thing want to wrong", {
-            type: "error",
-            position: "top-center",
-            duration: 4000,
-          });
-        });
 
-          console.log(credit_in);
-        }else{
-          console.log('jhgj')
+              }
+            })
+
+
         }
-      })
 
-      console.log(order);
-      ///index initial for update order from orderLit or order arrow.
 
-      //start progress bar
-
-    },
-
-    shipment(order, index) {
-      /////index initial for update order from orderLit or order arrow.
-
-      //start progress bar
-      this.$Progress.start();
-      axios
-        .get("/shipment/order/" + order.id)
-        .then((resp) => {
-          console.log(resp);
-          //end progress bar after resp
-          this.$Progress.finish();
-
-          //only success resp .......
-          if (resp.data.status == "SUCCESS") {
-            this.$toasted.show(resp.data.message, {
-              type: "success",
-              position: "top-center",
-              duration: 2000,
-            });
-            this.orders.data[index].status = 4;
-          }
-          //any kind of error resp
-          else {
-            this.$Progress.finish();
-
-            this.$toasted.show("some thing want to wrong", {
-              type: "error",
-              position: "top-center",
-              duration: 2000,
-            });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          this.$toasted.show("some thing want to wrong", {
-            type: "error",
-            position: "top-center",
-            duration: 4000,
           });
-        });
+        })
+
+
+
     },
+
 
     pending(order, index) {
       /////index initial for update order from orderLit or order arrow.
@@ -795,7 +725,7 @@ export default {
           else {
             this.$Progress.finish();
 
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("someting went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -804,7 +734,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("someting went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -866,7 +796,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          alert("some thing want wrong");
+          alert("someting went wrong");
         });
     },
 
@@ -891,7 +821,7 @@ export default {
           //for any kind of error
           .catch((error) => {
             console.log(error);
-            alert("some thing want wrong");
+            alert("someting went wrong");
           });
       }
       //if search lenght smaller then 2, then excute orderist method .......
@@ -1194,7 +1124,9 @@ export default {
 };
 </script>
 
+
 <style>
+
 .orders-heading {
   text-align: center;
   text-transform: uppercase;
@@ -1202,9 +1134,23 @@ export default {
   margin-bottom: 10px;
 }
 
-.box{
-  width:100%;
-  overflow-x: scroll;
+
+.order_statistic a {
+    background:#fff;
+    color:#000 ;
+    box-shadow: 0 1pt 6pt rgb(150 165 237);
+    border: none ;
+    padding: 11px 46px;
+    margin: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: serif;
 }
+
+.router-link-active {
+   border: 1.5px dashed !important ;
+   color: #000 !important;
+}
+
 
 </style>

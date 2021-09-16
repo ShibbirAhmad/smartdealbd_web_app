@@ -3,30 +3,53 @@
     <admin-main></admin-main>
     <div class="content-wrapper">
       <section class="content-header">
-        <h1>
-          <router-link :to="{ name: 'addOrder' }" class="btn btn-primary">
-            <i class="fa fa-plus"></i>
-          </router-link>
-          <router-link :to="{name:'NewOrder'}" class="btn btn-sm btn-success">New</router-link>
-          <router-link :to="{name:'PendingOrder'}" class="btn btn-sm btn-success">Pending</router-link>
-          <router-link :to="{name:'ApprovedOrder'}" class="btn btn-sm btn-success">Approved</router-link>
-          <router-link :to="{name:'ShipmentOrder'}" class="btn btn-sm btn-success">Shipment</router-link>
-          <router-link :to="{name:'DeliveredOrder'}" class="btn btn-sm btn-success">Delivered</router-link>
+   <h1 class="order_statistic">
+          <router-link :to="{ name: 'NewOrder' }" class="btn btn-sm "
+            >New <sup> {{ order_count.new_order }} </sup>
+            </router-link >
+          <router-link
+            :to="{ name: 'PendingOrder' }"
+            class="btn btn-sm "
+            >Pending <sup> {{ order_count.pending_order }} </sup> </router-link
+          >
+          <router-link
+            :to="{ name: 'ApprovedOrder' }"
+            class="btn btn-sm "
+            >Ready To Ship  <sup> {{ order_count.approved_order }} </sup>  </router-link
+          >
+          <router-link
+            :to="{ name: 'ShipmentOrder' }"
+            class="btn btn-sm "
+            >Shipment  <sup> {{ order_count.shipment_order }} </sup> </router-link
+          >
+          <router-link
+            :to="{ name: 'DeliveredOrder' }"
+            class="btn btn-sm "
+            >Delivered <sup> {{ order_count.delivered_order }} </sup> </router-link
+          >
+          <router-link
+            :to="{ name: 'ReturnOrder' }"
+            class="btn btn-sm "
+            >Return  <sup> {{ order_count.return_order }} </sup>  </router-link
+          >
+          <router-link
+            :to="{ name: 'CancelOrder' }"
+            class="btn btn-sm"
+            >Cancel  <sup> {{ order_count.cancel_order }} </sup>  </router-link
+          >
+          <router-link
+            :to="{ name: 'WholeSaleOrder' }"
+            class="btn btn-sm "
+            >wholesale</router-link
+          >
 
-          <router-link :to="{name:'ReturnOrder'}" class="btn btn-sm btn-success">Return</router-link>
-          <router-link :to="{name:'CancelOrder'}" class="btn btn-sm btn-success active">Cancel</router-link>
-          <router-link :to="{name:'WholeSaleOrder'}" class="btn btn-sm btn-success ">whole sale</router-link>
-
-          <router-link :to="{name:'order'}" class="btn btn-sm btn-success">All</router-link>
-
-
+          <router-link
+            :to="{ name: 'order' }"
+            class="btn btn-sm  "
+            style="background:#4aa316"
+            >All</router-link
+          >
         </h1>
-        <ol class="breadcrumb">
-          <li>
-            <a href="#"> <i class="fa fa-dashboard"></i>Dashboard </a>
-          </li>
-          <li class="active">All Order</li>
-        </ol>
       </section>
       <section class="content">
         <div class="container">
@@ -163,11 +186,8 @@
                         <th scope="col">Total</th>
                         <th scope="col">Create_by</th>
                         <th scope="col" style="width: 2%">Order_place</th>
-                        <th>Order_date</th>
-
-                        <th>Action</th>
-                        <th>Courier</th>
-                        <th>CMNT</th>
+                         <th>Order_date</th>
+                         <th width="3%" >Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -192,7 +212,7 @@
                           {{ order.customer_name }}
                         </td>
                         <td class="three-percent">
-                          {{ order.cutomer_phone }}
+                          {{ order.customer_phone }}
                         </td>
                         <td class="three-percent">
                           {{ order.customer_address ? order.customer_address : 'null' }}
@@ -313,7 +333,9 @@
                             Return
                           </button>
 
-                          <router-link class="btn btn-sm btn-warning" :to="{name:'orderEdit',params:{id:order.id}}">Edit</router-link>
+                          <router-link class="btn btn-sm btn-warning"
+                          style="width:70px;"
+                          :to="{name:'orderEdit',params:{id:order.id}}">Edit</router-link>
 
                           <router-link
                             class="btn btn-sm btn-primary action-btn"
@@ -325,22 +347,7 @@
                             >View</router-link
                           >
                         </td>
-                        <td style="width:1%;">
-                          <small v-if="order.courier_id">{{
-                            order.courier.name
-                          }}</small>
-                          <span class="badge" if="order.memo_no">{{
-                            order.memo_no
-                          }}</span>
 
-
-                            <i class="fa fa-edit"  @click="courierModal(order, index)"></i>
-
-                        </td>
-                        <td>
-                           <small v-if="order.comment">{{order.comment}}</small>
-                          <a href="#" @click="comment(order.id, index,order.comment)">CO</a>
-                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -375,44 +382,13 @@
         </div>
       </section>
     </div>
-    <modal name="example" :width="400" :height="300">
-      <div class="card">
-        <div class="card-body">
-          <form @submit.prevent="OrderCourier">
-            <div class="form-group">
-              <label>Courier</label>
-              <select name class="form-control" v-model="courier.courier_id">
-                <option value>Select Courier</option>
-                <option v-for="courier in couriers" :value="courier.id">
-                  {{ courier.name }}
-                </option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Memo_number</label>
-              <input
-                class="form-control"
-                v-model="courier.memo_no"
-                placeholder="Enter memo number"
-              />
-            </div>
-            <button type="submit" class="btn btn-success btn-block">
-              submit
-            </button>
-          </form>
-        </div>
-      </div>
-    </modal>
+
   </div>
 </template>
 
 <script>
-import Index from "../Index";
-import { Form } from "vform";
 
 export default {
-  components: { Index },
-
   created() {
    this.ordersList();
    this.others();
@@ -433,7 +409,6 @@ export default {
       search: "",
       start_date: "",
       end_date: "",
-
       //date picker options ..........
       options: {
         format: "YYYY-MM-DD",
@@ -443,16 +418,13 @@ export default {
       type: "all",
       page: 1,
       selected: false,
-
       //for biblk action
       select_order_id: [],
       bulk_status: "all",
-
       //heading in table
       heading: "All Order",
-
       bulkActionType:"0",
-
+      order_count:"",
       //for filtaring order
       courier_id:'',
     };
@@ -475,23 +447,18 @@ export default {
           },
         })
         .then((resp) => {
-          console.log(resp);
-          // console.log(resp);
-
-          //finish progress bar after resp
-          this.$Progress.finish();
-
-          //only success resp
           if (resp.data.status == "SUCCESS") {
             this.orders = resp.data.orders;
             this.loading = false;
             this.page = this.page + 1;
             this.loading=false;
+            this.order_count = resp.data.order_count;
+            this.$Progress.finish();
           }
 
           //else show a error
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 5000,
@@ -501,7 +468,7 @@ export default {
         .catch((error) => {
           //finish progress bar after resp
           this.$Progress.finish();
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -544,7 +511,7 @@ export default {
           }
           //not resp success.....
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -553,7 +520,7 @@ export default {
         })
         .catch((error) => {
           //end progress bar after resp
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -585,7 +552,7 @@ export default {
           }
           //for any kind of error resp .......
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -594,7 +561,7 @@ export default {
         })
         .catch((error) => {
           //end progress bar after resp
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -627,7 +594,7 @@ export default {
           }
           //for any kind off error resp
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -636,7 +603,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -667,7 +634,7 @@ export default {
           }
           //any kind of error resp
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -676,7 +643,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -709,7 +676,7 @@ export default {
           else {
             this.$Progress.finish();
 
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -718,7 +685,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -751,7 +718,7 @@ export default {
           else {
             this.$Progress.finish();
 
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -760,7 +727,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -818,7 +785,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          alert("some thing want wrong");
+          alert("something went wrong");
         });
     },
 
@@ -843,7 +810,7 @@ export default {
           //for any kind of error
           .catch((error) => {
             console.log(error);
-            alert("some thing want wrong");
+            alert("something went wrong");
           });
       }
       //if search lenght smaller then 2, then excute orderist method .......
@@ -1090,7 +1057,10 @@ export default {
 };
 </script>
 
+
+
 <style>
+
 .orders-heading {
   text-align: center;
   text-transform: uppercase;
@@ -1098,9 +1068,23 @@ export default {
   margin-bottom: 10px;
 }
 
-.box{
-  width:100%;
-  overflow-x: scroll;
+
+.order_statistic a {
+    background:#fff;
+    color:#000 ;
+    box-shadow: 0 1pt 6pt rgb(150 165 237);
+    border: none ;
+    padding: 11px 46px;
+    margin: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: serif;
 }
+
+.router-link-active {
+   border: 1.5px dashed !important ;
+   color:#000 !important ;
+}
+
 
 </style>

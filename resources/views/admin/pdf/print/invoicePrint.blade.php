@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,7 +12,9 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <title>Print || Invoice</title>
 
-
+    <?php
+        $setting = App\Models\GeneralSetting::latest()->first();
+    ?>
     <style>
 
         .pull-right.moha_add_inv p {
@@ -19,12 +23,19 @@
         }
         .pull-right.moha_add_inv {
             text-align: left;
-            margin-right: 50px !important;
-            margin-top: 20px;
+            margin-right: 20px ;
+            margin-left: 20px ;
+            margin-top: 10px;
         }
 
         body {
             background: #ddd;
+        }
+
+
+        th {
+        background-color: #04AA6D !important;
+        color: #000 !important;
         }
 
         .print {
@@ -40,26 +51,21 @@
             margin-bottom: 10px;
             width: 70%;
         }
-        .col-lg-4{
+        .invoice_header_left_section{
+            text-align: left;
+            width: 55% !important;
+        }
+        .invoice_header_right_section{
             text-align: center;
             width: 35% !important;
-            margin: 0;
-            padding:0;
-            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
         }
-        .col-lg-6{
-            text-align: center;
-            width: 60% !important;
-            margin: 0;
-            padding:0;
-        }
-
-
-
         @media print {
             #print {
                 display: none;
             }
+
         }
         .btn-pr{
             text-align: right;
@@ -71,28 +77,55 @@
         .btn-pr button{
             height: 50px;
         }
- .rotate-logo {
-    position: fixed;
-    left: 30%;
-    top:20%;
-    right: 0;
-    bottom: 50%;
-    width: 502px;
-    font-size: 24px;
-    opacity: 0.2;
 
-}
 
-.rotate-logo img{
-width: 450px;
-height:200px;
-}
+        .rotate-logo {
+            position: fixed;
+            left: 30%;
+            top:30%;
+            right: 0;
+            bottom: 50%;
+            width: 502px;
+            font-size: 24px;
+            opacity: 0.2;
 
-</style>
+        }
 
-        <?php
-          $setting = App\Models\GeneralSetting::latest()->first();
-        ?>
+        .rotate-logo img{ width: 350px; }
+
+
+        .customer_info_list {
+          border:3px dashed #000 ;
+          margin-top: 30px;
+          margin-right: 100px;
+          margin-left: 10px;
+        }
+
+        .customer_info_list li {
+           list-style-type: square;
+           padding: 5px 0px;
+           text-align: left;
+        }
+
+        .current_date {
+            margin-right: 110px;
+        }
+
+        .company_logo {
+            width: 200px;
+            margin-left: 20px;
+        }
+
+    </style>
+
+ @php
+         $total_qty = 0 ;
+         foreach ($orders as $order) {
+            foreach ($order->orderItem as  $item) {
+                $total_qty += $item->quantity ;
+            }
+         }
+ @endphp
 
 </head>
 <body>
@@ -103,18 +136,27 @@ height:200px;
 
  <div class="container page-break">
         <div class="row justify-content-center break">
-            <div class="col-lg-4  ml-5">
-                <div class="header-left ml-4 text-left">
-                    <img class="inv_logo" src="{{ asset('storage/'.$setting->logo) }}" alt="logo" height="90px" width="300px">
-                </div>
-            </div>
-            <div class="col-lg-6">
+            <div class="invoice_header_left_section">
+                    <ul class="customer_info_list">
+                        <li> <strong> Name:  {{ $order->customer_name ?? "" }} </strong>  </li>
+                        <li> <strong> Mobile: {{ $order->customer_phone ?? "" }} </strong>  </li>
+                        <li> <strong> Address: </strong>        @if(!empty($order->customer->address))
+                                                                    {{ $order->customer->address. ',' }}
+                                                                @endif
+                                                                @if(!empty($order->sub_city->name))
+                                                                {{','.$order->sub_city->name.','}}
+                                                                @endif
+                                                                {{ $order->city->name ?? ''}}
+                        </li>
+                        <li> <strong> Invoice No: {{ $order->invoice_no }} </strong> </li>
+                    </ul>
+                        </div>
+            <div class="invoice_header_right_section">
+              <img class="company_logo" src="{{ asset('storage/'.$setting->logo) }}" alt="logo">
                 <div class="pull-right moha_add_inv" >
-                    <p style="text-align:left" class="invoice_address"> {!! $setting->invoice_address_details !!} </p>
-
-                    <p class=" current_date" style="margin-top: 5px;" ><span style="border: .5px solid #ddd;padding:2px 4px 2px 4px; border-right: none;">Date: </span><span style="border: .5px solid #ddd ;padding:2px 4px 2px 4px;"><?php echo date("d/m/Y"); ?></span></p>
-
-
+                    <p> {!! $setting->invoice_address_details !!} </p>
+                    <p class="current_date" style="margin-top: 5px;" >
+                     <strong>  Date: <span style="border:1px solid #ddd">  <?php echo date("d/m/Y"); ?></span>   </strong> </p>
                 </div>
             </div>
         </div>
@@ -124,64 +166,20 @@ height:200px;
                 <table class="table table-bordered moha_tbl_inv" style="margin-top: 5px;">
 
                     <tbody>
-                    <tr>
-                              <th colspan="2" class="text-left"> Name &nbsp;:
-                        <span style="font-size:15px;">
-                           {{ $order->customer->name ?? "" }}
-                            </span>
-
-                        </th>
-                         <th colspan="3" class="text-left"> Phone &nbsp;:
-                        <span style="font-size:15px;">
-                           {{ $order->cutomer_phone ?? "" }}
-                            </span>
-
-                        </th>
-
-
-                        <th  colspan="2" class="text-left">Invoice No : {{$order->invoice_no}}</th>
-                    </tr>
-
-                    <tr>
-                        <td colspan="4" class="text-left" style="text-transform: capitalize;"><b>Address  : </b><b>
-
-                                @if(!empty($order->customer->address))
-                                    {{ $order->customer->address. ',' }}
-                                @endif
-
-                                    @if(!empty($order->sub_city->name))
-                                    {{','.$order->sub_city->name.','}}
-                                @endif
-
-                                    {{ $order->city->name ?? ''}}
-
-                            </b>
-                        </td>
-                        <td colspan="3">
-                           <b> Courier :
-
-                                {{ $order->courier->name ?? "" }}
-                </b>
+                   @if ($order->courier)
+                     <tr>
+                        <td colspan="7" class="text-left" style="text-transform: capitalize;"><b> Courier  :  {{ $order->courier->name ?? "" }} </b>
                         </td>
                     </tr>
-                    {{-- <tr>
-                        <th colspan="4" class="text-left"> Phone &nbsp;: <b>
-
-                          {{ $order->cutomer_phone }}
-                            </b></th>
-                        <th class="text-left" colspan="2">Courier : <b>
-
-                                {{ $order->courier->name ?? "" }}
-                </b></th>
-                    </tr> --}}
+                   @endif
                     <tr>
-                        <th class="text-left">No</th>
-                        <th class="text-left">Product Details</th>
-                         <th class="text-left">Size</th>
-                        <th class="text-left">Order No</th>
-                        <th class="text-right">Price</th>
-                        <th class="text-right">Qty</th>
-                        <th class="text-right">Total</th>
+                        <th  style="background-color: #04AA6D !important;" class="text-left ">No</th>
+                        <th  style="background-color: #04AA6D !important;" class="text-left ">Product Details</th>
+                        <th  style="background-color: #04AA6D !important;" class="text-left ">Size</th>
+                        <th  style="background-color: #04AA6D !important;" class="text-left ">Order No</th>
+                        <th  style="background-color: #04AA6D !important;" class="text-right ">Price</th>
+                        <th  style="background-color: #04AA6D !important;" class="text-right ">Qty</th>
+                        <th  style="background-color: #04AA6D !important;" class="text-right ">Total</th>
                     </tr>
                     @foreach($order->orderItem as $k=> $item)
 
@@ -189,15 +187,7 @@ height:200px;
 
                             <td class="text-center">{{$k+1}}</td>
                             <td class="text-center" style="text-transform: capitalize;">
-
-
                                 {{$item->product->name}} {{$item->product->product_code}}
-                                {{-- <strong>
-                                [ {{ $item->variant->attribute->name ?? "" }}]
-                                @if(!empty($item->variant))
-                                {{ '-'. $item->variant->name ?? ''}}
-                                @endif
-                                </strong> --}}
                             </td>
                             <td>
                                  {{$item->variant->name ?? '-'}}
@@ -208,7 +198,7 @@ height:200px;
                             <td class="text-center">
                                 {{$item->price}}
                             </td>
-                            <td class="text-center"><span style="border: .5px solid #ddd;"><b style="font-size: 16px;padding:5px 5px 5px 5px;"> {{$item->quantity}}</b></span></td>
+                            <td class="text-center"><span style="border: 1px solid #ddd;"><b style="font-size: 16px;padding:5px 5px 5px 5px;"> {{$item->quantity}}</b></span></td>
                             <td class="text-right">{{$item->quantity*$item->price}} Tk</td>
                         </tr>
                     @endforeach
@@ -216,13 +206,15 @@ height:200px;
 
 
                     <tr>
-                        <td colspan="6" class="text-right"><span style="font-weight: 900; font-size: 13px;">Sub-Total:</span></td>
-                        <td class="text-right"><span style="font-weight: 900; font-size: 13px;">{{$order->total}} Tk</span></td>
+                        <td colspan="5" class="text-right"> Total Quantity and Shipping Charge </td>
+                        <td> <strong> = {{ $total_qty }} </strong> </td>
+                        <td class="text-right"><span style="font-size: 13px;">{{$order->shipping_cost}} Tk</span></td>
                     </tr>
                     <tr>
-                        <td colspan="6" class="text-right">Courier Charge:</td>
+                        <td colspan="6" class="text-right">Total:</td>
                         <td class="text-right">
-                          {{$order->shipping_cost}}
+                         <span style="font-weight:bold;font-size:13px;">
+                            {{ $order->shipping_cost + $order->total }} TK</span>
                         </td>
                     </tr>
                         <tr>
@@ -284,14 +276,9 @@ height:200px;
       window.print();
     });
 
-    window.addEventListener('click',function(){
-         //let a=console.log('c');
-
-         console.log(a);
-
-    });
-
 </script>
 
 </body>
 </html>
+
+

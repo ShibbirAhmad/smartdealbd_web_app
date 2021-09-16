@@ -3,30 +3,56 @@
     <admin-main></admin-main>
     <div class="content-wrapper">
       <section class="content-header">
-        <h1>
+        <h1 class="order_statistic">
           <router-link :to="{ name: 'addOrder' }" class="btn btn-primary">
-            <i class="fa fa-plus"></i>
+            <i class="fa fa-plus"></i> Add
           </router-link>
-          <router-link :to="{name:'NewOrder'}" class="btn btn-sm btn-success active">New</router-link>
-          <router-link :to="{name:'PendingOrder'}" class="btn btn-sm btn-success">Pending</router-link>
-          <router-link :to="{name:'ApprovedOrder'}" class="btn btn-sm btn-success">Approved</router-link>
-          <router-link :to="{name:'ShipmentOrder'}" class="btn btn-sm btn-success">Shipment</router-link>
-          <router-link :to="{name:'DeliveredOrder'}" class="btn btn-sm btn-success">Delivered</router-link>
+          <router-link :to="{ name: 'NewOrder' }" class="btn btn-sm "
+            >New <sup> {{ order_count.new_order }} </sup>
+            </router-link >
+          <router-link
+            :to="{ name: 'PendingOrder' }"
+            class="btn btn-sm "
+            >Pending <sup> {{ order_count.pending_order }} </sup> </router-link
+          >
+          <router-link
+            :to="{ name: 'ApprovedOrder' }"
+            class="btn btn-sm "
+            >Ready To Ship  <sup> {{ order_count.approved_order }} </sup>  </router-link
+          >
+          <router-link
+            :to="{ name: 'ShipmentOrder' }"
+            class="btn btn-sm "
+            >Shipment  <sup> {{ order_count.shipment_order }} </sup> </router-link
+          >
+          <router-link
+            :to="{ name: 'DeliveredOrder' }"
+            class="btn btn-sm "
+            >Delivered <sup> {{ order_count.delivered_order }} </sup> </router-link
+          >
+          <router-link
+            :to="{ name: 'ReturnOrder' }"
+            class="btn btn-sm "
+            >Return  <sup> {{ order_count.return_order }} </sup>  </router-link
+          >
+          <router-link
+            :to="{ name: 'CancelOrder' }"
+            class="btn btn-sm"
+            >Cancel  <sup> {{ order_count.cancel_order }} </sup>  </router-link
+          >
+          <router-link
+            :to="{ name: 'WholeSaleOrder' }"
+            class="btn btn-sm "
+            >wholesale</router-link
+          >
 
-          <router-link :to="{name:'ReturnOrder'}" class="btn btn-sm btn-success">Return</router-link>
-          <router-link :to="{name:'CancelOrder'}" class="btn btn-sm btn-success">Cancel</router-link>
-          <router-link :to="{name:'WholeSaleOrder'}" class="btn btn-sm btn-success ">whole sale</router-link>
-
-          <router-link :to="{name:'order'}" class="btn btn-sm btn-success ">All</router-link>
-
-
+          <router-link
+            :to="{ name: 'order' }"
+            class="btn btn-sm  active"
+            style="background:#4aa316"
+            >All</router-link
+          >
         </h1>
-        <ol class="breadcrumb">
-          <li>
-            <a href="#"> <i class="fa fa-dashboard"></i>Dashboard </a>
-          </li>
-          <li class="active">All Order</li>
-        </ol>
       </section>
       <section class="content">
         <div class="container">
@@ -166,10 +192,8 @@
                         <th scope="col">Create_by</th>
                         <th scope="col" style="width: 2%">Order_place</th>
                         <th>Order_date</th>
-
-                        <th>Action</th>
-                        <!-- <th>Courier</th> -->
-                        <th>CMNT</th>
+                         <th scope="col" width="5%" >Action</th>
+                        <th width="5%">Comment</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -316,32 +340,11 @@
                             Return
                           </button>
 
-                          <router-link class="btn btn-sm btn-warning" :to="{name:'orderEdit',params:{id:order.id}}">Edit</router-link>
-
-                          <router-link
-                            class="btn btn-sm btn-primary action-btn"
-                            style="color: #fff"
-                            :to="{
-                              name: 'viewOrder',
-                              params: { id: order.id },
-                            }"
-                            >View</router-link
-                          >
+                          <router-link style="width:70px" class="btn btn-sm btn-warning" :to="{name:'orderEdit',params:{id:order.id}}">Edit</router-link>
                         </td>
-                        <!-- <td style="width:1%;">
-                          <small v-if="order.courier_id">{{
-                            order.courier.name
-                          }}</small>
-                          <span class="badge" if="order.memo_no">{{
-                            order.memo_no
-                          }}</span>
 
-
-                            <i class="fa fa-edit"  @click="courierModal(order, index)"></i>
-
-                        </td> -->
                         <td>
-                          <a href="#" @click="comment(order.id, index,order.comment)">CO</a>
+                          <a href="#" @click="comment(order.id, index,order.comment)">Comment</a>
                         </td>
                       </tr>
                     </tbody>
@@ -382,11 +385,7 @@
 </template>
 
 <script>
-
-import { Form } from "vform";
-
 export default {
-
   created() {
    this.ordersList();
    this.others();
@@ -429,6 +428,7 @@ export default {
 
       //for filtaring order
       courier_id:'',
+      order_count:"",
     };
   },
   methods: {
@@ -449,18 +449,14 @@ export default {
           },
         })
         .then((resp) => {
-          console.log(resp);
-          // console.log(resp);
-
-          //finish progress bar after resp
           this.$Progress.finish();
-
           //only success resp
           if (resp.data.status == "SUCCESS") {
             this.orders = resp.data.orders;
             this.loading = false;
             this.page = this.page + 1;
             this.loading=false;
+            this.order_count = resp.data.order_count;
           }
 
           //else show a error
@@ -1034,7 +1030,9 @@ export default {
 };
 </script>
 
+
 <style>
+
 .orders-heading {
   text-align: center;
   text-transform: uppercase;
@@ -1042,6 +1040,23 @@ export default {
   margin-bottom: 10px;
 }
 
+
+.order_statistic a {
+    background:#fff;
+    color:#000 ;
+    box-shadow: 0 1pt 6pt rgb(150 165 237);
+    border: none ;
+    padding: 11px 46px;
+    margin: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: serif;
+}
+
+.router-link-active {
+   border: 1.5px dashed !important ;
+   color: #000 !important;
+}
 
 
 </style>

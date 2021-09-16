@@ -44,11 +44,10 @@ const state = {
     sub_sub_category_sliders: '',
 
 
-     //for campaign sale products
-     sale_campaign: {},
+    //for campaign sale products
+    sale_campaign: {},
 
     //for specific product
-
     single_product: {},
 
     //for product image
@@ -57,8 +56,8 @@ const state = {
     //for check admin page view permisson
     view_permission:false,
 
-    image_base_link: '/../storage/',
-    image_thumbnail_link: '/../storage/images/product_thumbnail_img/',
+    image_base_link: '/../public/storage/',
+    image_thumbnail_link: '/../public/storage/images/product_thumbnail_img/',
 
     //general setting
     general_setting:"",
@@ -67,7 +66,7 @@ const state = {
     footer_setting:"",
 
     //theme setting
-     theme_setting:"",
+    theme_setting:"",
 
 }
 const getters = {

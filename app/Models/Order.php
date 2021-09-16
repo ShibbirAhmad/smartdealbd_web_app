@@ -232,12 +232,14 @@ class Order extends Model
             ]);
     }
 
-       public static function SendMessageCustomer($number,$name,$invoice){
 
-        $api_key = "C20080926059d38fab0643.83594698";
+
+    public static function SendMessageCustomer($number,$name,$invoice){
+
+        $api_key = "C20085946114fda41c2886.82283615";
         $contacts = $number;
-        $senderid = '8809612446756';
-        $sms = 'Dear '.$name.','. 'Your order has been received. Invoice number is '.$invoice. '.' .'If you have any query please contact with us .'. '01715-900066. Thanks by  madinafashion.com.bd';   // put here your dynamic message text here
+        $senderid = '8809612436808';
+        $sms = 'Assalamualikum Dear '.$name.','. 'Your order has been received. Invoice number is '.$invoice. '.' .'If you have any query please contact with us .'. ' 01946224444. Thanks by  smartdealbd.com';   // put here your dynamic message text here
         $URL = "http://bulk.fmsms.biz/smsapi?api_key=" . urlencode($api_key) . "&type=text&contacts=" . urlencode($contacts) . "&senderid=" . urlencode($senderid) . "&msg=" . urlencode($sms);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $URL);
@@ -266,9 +268,9 @@ class Order extends Model
         $customer_name=$order->customer->name;
         $contacts=$order->cutomer_phone;
 
-        $api_key = "C20080926059d38fab0643.83594698";
-        $senderid = '8809612446756';
-        $sms = 'Dear ' . $customer_name .'.'. ' Your order has been shiped to '.$courier_name.' courier.'.' Your memo number is ' .$memo_no.' and payable amount '.$total.' Tk.'.' Thanks by madinafashion.com.bd';
+        $api_key = "C20085946114fda41c2886.82283615";
+        $senderid = '8809612436808';
+        $sms = 'Assalamualikum Dear ' . $customer_name .'.'. ' Your order has been shiped to '.$courier_name.' courier.'.' Your memo number is ' .$memo_no.' and payable amount '.$total.' Tk.'.' Thanks by smartdealbd.com';
        // put here your dynamic message text here
         $URL = "http://bulk.fmsms.biz/smsapi?api_key=" . urlencode($api_key) . "&type=text&contacts=" . urlencode($contacts) . "&senderid=" . urlencode($senderid) . "&msg=" . urlencode($sms);
         $ch = curl_init();
@@ -285,6 +287,8 @@ class Order extends Model
         }
         return $output;
     }
+
+    
 
     public static function adminOrderAnalysis(){
        $admin_id=session()->get('admin')['id'];
@@ -368,6 +372,8 @@ public static function orderCount(){
                                    ->count();
         $order['cancel_order']=Order::where('status',6)
                                 ->count();
+        $order['wholesale']=Order::where('status',6)
+        ->count();
        return $order;
 }
 

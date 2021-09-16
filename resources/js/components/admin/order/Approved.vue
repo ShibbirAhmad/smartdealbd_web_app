@@ -3,48 +3,64 @@
     <admin-main></admin-main>
     <div class="content-wrapper">
       <section class="content-header">
-        <h1>
-          <router-link :to="{ name: 'addOrder' }" class="btn btn-primary">
-            <i class="fa fa-plus"></i>
+        <h1 class="order_statistic">
+          <router-link :to="{ name: 'NewOrder' }" class="btn btn-sm"
+            >New <sup> {{ order_count.new_order }} </sup>
           </router-link>
-          <router-link :to="{name:'NewOrder'}" class="btn btn-sm btn-success">New</router-link>
-          <router-link :to="{name:'PendingOrder'}" class="btn btn-sm btn-success">Pending</router-link>
-          <router-link :to="{name:'ApprovedOrder'}" class="btn btn-sm btn-success active">Approved</router-link>
-          <router-link :to="{name:'ShipmentOrder'}" class="btn btn-sm btn-success">Shipment</router-link>
-          <router-link :to="{name:'DeliveredOrder'}" class="btn btn-sm btn-success">Delivered</router-link>
+          <router-link :to="{ name: 'PendingOrder' }" class="btn btn-sm"
+            >Pending <sup> {{ order_count.pending_order }} </sup>
+          </router-link>
+          <router-link :to="{ name: 'ApprovedOrder' }" class="btn btn-sm"
+            >Ready To Ship <sup> {{ order_count.approved_order }} </sup>
+          </router-link>
+          <router-link :to="{ name: 'ShipmentOrder' }" class="btn btn-sm"
+            >Shipment <sup> {{ order_count.shipment_order }} </sup>
+          </router-link>
+          <router-link :to="{ name: 'DeliveredOrder' }" class="btn btn-sm"
+            >Delivered <sup> {{ order_count.delivered_order }} </sup>
+          </router-link>
+          <router-link :to="{ name: 'ReturnOrder' }" class="btn btn-sm"
+            >Return <sup> {{ order_count.return_order }} </sup>
+          </router-link>
+          <router-link :to="{ name: 'CancelOrder' }" class="btn btn-sm"
+            >Cancel <sup> {{ order_count.cancel_order }} </sup>
+          </router-link>
+          <router-link :to="{ name: 'WholeSaleOrder' }" class="btn btn-sm"
+            >wholesale</router-link
+          >
 
-          <router-link :to="{name:'ReturnOrder'}" class="btn btn-sm btn-success">Return</router-link>
-          <router-link :to="{name:'CancelOrder'}" class="btn btn-sm btn-success">Cancel</router-link>
-          <router-link :to="{name:'WholeSaleOrder'}" class="btn btn-sm btn-success ">whole sale</router-link>
-
-          <router-link :to="{name:'order'}" class="btn btn-sm btn-success">All</router-link>
-
-
+          <router-link
+            :to="{ name: 'order' }"
+            class="btn btn-sm"
+            style="background: #4aa316"
+            >All</router-link
+          >
         </h1>
-        <ol class="breadcrumb">
-          <li>
-            <a href="#"> <i class="fa fa-dashboard"></i>Dashboard </a>
-          </li>
-          <li class="active">All Order</li>
-        </ol>
       </section>
       <section class="content">
         <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-11">
+          <div class="row">
+            <div class="col-lg-11 col-md-11">
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <div class="row" style="margin-bottom:3px;">
+                  <div class="row" style="margin-bottom: 3px">
                     <div class="col-lg-3">
-                      <select name="" id="" v-model="bulkActionType" class="form-control">
-                        <option  value="0" selected  disabled>Select Action</option>
+                      <select
+                        name=""
+                        id=""
+                        v-model="bulkActionType"
+                        class="form-control"
+                      >
+                        <option value="0" selected disabled>
+                          Select Action
+                        </option>
 
-                           <option value="LABEL PRINT">Label Print</option>
-                         <option value="INVOICE PRINT">Invoice Print</option>
+                        <option value="LABEL PRINT">Label Print</option>
+                        <option value="INVOICE PRINT">Invoice Print</option>
                         <option value="PENDING ALL">Pending All</option>
                         <option value="SHIPMENT ALL">Shipment All</option>
                         <option value="CANCEL ALL">Cencel ALl</option>
-                       </select>
+                      </select>
                     </div>
                     <div class="col-lg-4 col-lg-offset-1 orders-heading">
                       <h3 class="box-title">{{ heading }}</h3>
@@ -108,10 +124,22 @@
                             ></date-picker>
                           </div>
                           <div class="col-lg-4">
-                           <select class="form-control" v-model="courier_id" style="width:120px;">
-                             <option value="" selected disabled>Select Courier</option>
-                             <option v-for="courier in couriers" :value="courier.id" :key="courier.id">{{courier.name}}</option>
-                           </select>
+                            <select
+                              class="form-control"
+                              v-model="courier_id"
+                              style="width: 120px"
+                            >
+                              <option value="" selected disabled>
+                                Select Courier
+                              </option>
+                              <option
+                                v-for="courier in couriers"
+                                :value="courier.id"
+                                :key="courier.id"
+                              >
+                                {{ courier.name }}
+                              </option>
+                            </select>
                           </div>
                         </div>
                       </form>
@@ -133,13 +161,17 @@
                         v-model="item"
                         v-if="start_date.length > 0"
                         @change="filterOrder"
-                       >
+                      >
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
                       </select>
-                       <select  class="form-control" v-model="item" v-else @change="ordersList">
-
+                      <select
+                        class="form-control"
+                        v-model="item"
+                        v-else
+                        @change="ordersList"
+                      >
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
@@ -164,9 +196,9 @@
                         <th scope="col" style="width: 2%">Order_place</th>
                         <th>Order_date</th>
 
-                        <th>Action</th>
+                        <th scope="col" width="5%">Action</th>
                         <th>Courier</th>
-                        <th>CMNT</th>
+                         <th width="5%">Comment</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -187,28 +219,38 @@
                             :value="order.id"
                           />
                         </td>
-                     <td class="three-percent">
+                        <td class="three-percent">
                           {{ order.customer_name }}
                         </td>
                         <td class="three-percent">
-                          {{ order.cutomer_phone }}
+                          {{ order.customer_phone }}
                         </td>
                         <td class="three-percent">
-                          {{ order.customer_address ? order.customer_address : 'null' }}
+                          {{
+                            order.customer_address
+                              ? order.customer_address
+                              : "null"
+                          }}
                         </td>
                         <td class="two-percent">{{ order.invoice_no }}</td>
                         <td class="two-percent">
-                           <strong>
-                            Total: {{parseInt(order.total)-parseInt(order.discount)+parseInt(order.shipping_cost)}}
-
-                          </strong>
                           <strong>
-                            P: {{parseInt(order.paid)}}
-
+                            Total:
+                            {{
+                              parseInt(order.total) -
+                              parseInt(order.discount) +
+                              parseInt(order.shipping_cost)
+                            }}
                           </strong>
+                          <strong> P: {{ parseInt(order.paid) }} </strong>
                           <strong>
-                            D: {{parseInt(order.total)-(parseInt(order.discount)+parseInt(order.paid))+parseInt(order.shipping_cost)}}
-
+                            D:
+                            {{
+                              parseInt(order.total) -
+                              (parseInt(order.discount) +
+                                parseInt(order.paid)) +
+                              parseInt(order.shipping_cost)
+                            }}
                           </strong>
                         </td>
                         <td class="two-percent">
@@ -222,12 +264,19 @@
                             <strong>{{ order.create_admin.name }}</strong>
                           </p>
                           <p v-if="order.order_type == 4">
-                            Reseller <strong v-if="order.reseller.username">{{order.reseller.username}}</strong>
+                            Reseller
+                            <strong v-if="order.reseller.username">{{
+                              order.reseller.username
+                            }}</strong>
                           </p>
                         </td>
                         <td class="two-percent">
-                          <span class="badge" v-if="order.status == 1">New</span>
-                          <span class="badge" v-if="order.status == 2">Pending</span>
+                          <span class="badge" v-if="order.status == 1"
+                            >New</span
+                          >
+                          <span class="badge" v-if="order.status == 2"
+                            >Pending</span
+                          >
 
                           <span
                             class="badge badge-success"
@@ -280,13 +329,6 @@
                             Pending
                           </button>
                           <button
-                            class="btn btn-sm btn-success action-btn"
-                            v-if="order.status == 4"
-                            @click="delivered(order, index)"
-                          >
-                            Deliverd
-                          </button>
-                          <button
                             class="btn btn-sm btn-primary action-btn"
                             v-if="order.status == 3"
                             @click="shipment(order, index)"
@@ -312,7 +354,15 @@
                             Return
                           </button>
 
-                          <router-link class="btn btn-sm btn-warning" :to="{name:'orderEdit',params:{id:order.id}}">Edit</router-link>
+                          <router-link
+                            style="width: 70px"
+                            class="btn btn-sm btn-warning"
+                            :to="{
+                              name: 'orderEdit',
+                              params: { id: order.id },
+                            }"
+                            >Edit</router-link
+                          >
 
                           <router-link
                             class="btn btn-sm btn-primary action-btn"
@@ -324,7 +374,7 @@
                             >View</router-link
                           >
                         </td>
-                        <td style="width:1%;">
+                        <td style="width: 1%">
                           <small v-if="order.courier_id">{{
                             order.courier.name
                           }}</small>
@@ -332,13 +382,20 @@
                             order.memo_no
                           }}</span>
 
-
-                            <i class="fa fa-edit"  @click="courierModal(order, index)"></i>
-
+                          <i
+                            class="fa fa-edit"
+                            @click="courierModal(order, index)"
+                          ></i>
                         </td>
                         <td>
-                           <small v-if="order.comment">{{order.comment}}</small>
-                          <a href="#" @click="comment(order.id, index,order.comment)">CO</a>
+                          <small v-if="order.comment">{{
+                            order.comment
+                          }}</small>
+                          <a
+                            href="#"
+                            @click="comment(order.id, index, order.comment)"
+                            >Comment</a
+                          >
                         </td>
                       </tr>
                     </tbody>
@@ -347,8 +404,6 @@
                 <div class="box-footer">
                   <div class="row">
                     <div class="col-lg-6">
-
-
                       <pagination
                         :data="orders"
                         @pagination-change-page="ordersList"
@@ -374,9 +429,9 @@
         </div>
       </section>
     </div>
-    <modal name="example" :width="400" :height="300">
+    <modal name="example" :width="300" :height="250">
       <div class="card">
-        <div class="card-body">
+        <div style="padding:10px;" class="card-body">
           <form @submit.prevent="OrderCourier">
             <div class="form-group">
               <label>Courier</label>
@@ -406,15 +461,11 @@
 </template>
 
 <script>
-import Index from "../Index";
-import { Form } from "vform";
 
 export default {
-  components: { Index },
-
   created() {
-   this.ordersList();
-   this.others();
+    this.ordersList();
+    this.others();
   },
   data() {
     return {
@@ -428,7 +479,7 @@ export default {
         order_index: "",
       },
       couriers: "",
-      comments:'',
+      comments: "",
       search: "",
       start_date: "",
       end_date: "",
@@ -450,10 +501,10 @@ export default {
       //heading in table
       heading: "All Order",
 
-      bulkActionType:"0",
-
+      bulkActionType: "0",
+      order_count: "",
       //for filtaring order
-      courier_id:'',
+      courier_id: "",
     };
   },
   methods: {
@@ -468,29 +519,24 @@ export default {
             status: this.status,
             item: this.item,
             type: this.type,
-            start_date:this.start_date,
-            end_date:this.end_date,
-            courier_id:this.courier_id,
+            start_date: this.start_date,
+            end_date: this.end_date,
+            courier_id: this.courier_id,
           },
         })
         .then((resp) => {
-          console.log(resp);
-          // console.log(resp);
-
-          //finish progress bar after resp
-          this.$Progress.finish();
-
           //only success resp
           if (resp.data.status == "SUCCESS") {
             this.orders = resp.data.orders;
+            this.order_count = resp.data.order_count;
             this.loading = false;
             this.page = this.page + 1;
-            this.loading=false;
+            this.loading = false;
+            this.$Progress.finish();
           }
-
           //else show a error
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 5000,
@@ -500,7 +546,7 @@ export default {
         .catch((error) => {
           //finish progress bar after resp
           this.$Progress.finish();
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -512,10 +558,10 @@ export default {
     others() {
       axios.get("/others").then((resp) => {
         //only success resp
-        console.log(resp)
+        console.log(resp);
         if (resp.data.status == "SUCCESS") {
           this.couriers = resp.data.couriers;
-          this.comments=resp.data.comments;;
+          this.comments = resp.data.comments;
         }
       });
     },
@@ -543,7 +589,7 @@ export default {
           }
           //not resp success.....
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -552,7 +598,7 @@ export default {
         })
         .catch((error) => {
           //end progress bar after resp
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -584,7 +630,7 @@ export default {
           }
           //for any kind of error resp .......
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -593,7 +639,7 @@ export default {
         })
         .catch((error) => {
           //end progress bar after resp
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -626,7 +672,7 @@ export default {
           }
           //for any kind off error resp
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -635,7 +681,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -643,57 +689,18 @@ export default {
         });
     },
 
-    delivered(order, index) {
-      /////index initial for update order from orderLit or order arrow.
-
-      //start progress bar
-      this.$Progress.start();
-      axios
-        .get("/delivered/order/" + order.id)
-        .then((resp) => {
-          console.log(resp);
-          //end progress bar after resp
-          this.$Progress.finish();
-
-          //only success resp .......
-          if (resp.data.status == "SUCCESS") {
-            this.$toasted.show(resp.data.message, {
-              type: "success",
-              position: "top-center",
-              duration: 2000,
-            });
-            this.orders.data[index].status = 5;
-          }
-          //any kind of error resp
-          else {
-            this.$toasted.show("some thing want to wrong", {
-              type: "error",
-              position: "top-center",
-              duration: 2000,
-            });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          this.$toasted.show("some thing want to wrong", {
-            type: "error",
-            position: "top-center",
-            duration: 4000,
-          });
-        });
-    },
 
     shipment(order, index) {
       /////index initial for update order from orderLit or order arrow.
-      if(!this.orders.data[index].courier_id){
-      alert('please select a courier')
-      return;
-    }
+      if (!this.orders.data[index].courier_id) {
+        alert("please select a courier");
+        return;
+      }
 
-    if(!this.orders.data[index].memo_no){
-      alert('Must Be Need Memo Number')
-      return;
-    }
+      if (!this.orders.data[index].memo_no) {
+        alert("Must Be Need Memo Number");
+        return;
+      }
 
       //start progress bar
       this.$Progress.start();
@@ -717,7 +724,7 @@ export default {
           else {
             this.$Progress.finish();
 
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -726,7 +733,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -759,7 +766,7 @@ export default {
           else {
             this.$Progress.finish();
 
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -768,7 +775,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -787,8 +794,8 @@ export default {
 
       // get courier from couerir order list by the index number
       this.courier.order_index = index;
-       if(order.courier_id){
-        this.courier.courier_id=order.courier_id;
+      if (order.courier_id) {
+        this.courier.courier_id = order.courier_id;
       }
       //after set all data, open courier modal .........
       this.$modal.show("example");
@@ -819,8 +826,8 @@ export default {
             if (resp.data.courier) {
               this.orders.data[order_index].courier = resp.data.courier;
             }
-            this.courier.courier_id="";
-            this.courier.memo_no="";
+            this.courier.courier_id = "";
+            this.courier.memo_no = "";
             this.$toasted.show(resp.data.message, {
               type: "success",
               position: "top-center",
@@ -830,7 +837,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          alert("some thing want wrong");
+          alert("something went wrong");
         });
     },
 
@@ -855,7 +862,7 @@ export default {
           //for any kind of error
           .catch((error) => {
             console.log(error);
-            alert("some thing want wrong");
+            alert("something went wrong");
           });
       }
       //if search lenght smaller then 2, then excute orderist method .......
@@ -880,8 +887,8 @@ export default {
           params: {
             start_date: this.start_date,
             end_date: this.end_date,
-            item:this.item,
-            status:this.status
+            item: this.item,
+            status: this.status,
           },
         })
         .then((resp) => {
@@ -900,7 +907,7 @@ export default {
 
     //method initial for rest all data, or order arrow
     resetAll() {
-     location.reload();
+      location.reload();
     },
 
     //method inital for select all
@@ -941,200 +948,193 @@ export default {
 
     //method inital for a bulk action
     selectBulkAction() {
-     if(this.select_order_id.length<=0){
-       Swal.fire({
-         type:'warning',
-         text:'Please select at least one row'
-       })
-       return ;
-
-     }
-     let action_type=this.bulkActionType;
-      if(action_type=='LABEL PRINT'){
-          window.open('/order/label/print/'+this.select_order_id,'_blank')
-      }
-       if(action_type=='INVOICE PRINT'){
-          window.open('/order/invoice/print/'+this.select_order_id,'_blank')
-      }
-
-     if(action_type=='PENDING ALL'){
-        if(confirm("are you sure")){
-           this.pendingAll(this.select_order_id);
-        }
+      if (this.select_order_id.length <= 0) {
+        Swal.fire({
+          type: "warning",
+          text: "Please select at least one row",
+        });
         return;
-     }
+      }
+      let action_type = this.bulkActionType;
+      if (action_type == "LABEL PRINT") {
+        window.open("/order/label/print/" + this.select_order_id, "_blank");
+      }
+      if (action_type == "INVOICE PRINT") {
+        window.open("/order/invoice/print/" + this.select_order_id, "_blank");
+      }
 
-      if(action_type=="APPROVED ALL"){
-         if(confirm("are you sure")){
-         this.apprvedAll(this.select_order_id);
+      if (action_type == "PENDING ALL") {
+        if (confirm("are you sure")) {
+          this.pendingAll(this.select_order_id);
         }
         return;
       }
-     if(action_type=='SHIPMENT ALL'){
-        if(confirm("are you sure")){
-           this.shipmentAll(this.select_order_id);
-        }
-        return;
-     }
-     if(action_type=='DELIVERED ALL'){
-        if(confirm("are you sure")){
-           this.deliveredAll(this.select_order_id);
-        }
-        return;
-     }
 
-     if(action_type=='CANCEL ALL'){
-        if(confirm("are you sure")){
-           this.cancelAll(this.select_order_id);
+      if (action_type == "APPROVED ALL") {
+        if (confirm("are you sure")) {
+          this.apprvedAll(this.select_order_id);
         }
         return;
-     }
-     if(action_type=='RETURN ALLL'){
-        if(confirm("are you sure")){
-           this.returnAll(this.select_order_id);
+      }
+      if (action_type == "SHIPMENT ALL") {
+        if (confirm("are you sure")) {
+          this.shipmentAll(this.select_order_id);
         }
         return;
-     }
-   },
+      }
+      if (action_type == "DELIVERED ALL") {
+        if (confirm("are you sure")) {
+          this.deliveredAll(this.select_order_id);
+        }
+        return;
+      }
 
-    labelPrint(){
-      window.open('','_self',"width=600,height=600");
+      if (action_type == "CANCEL ALL") {
+        if (confirm("are you sure")) {
+          this.cancelAll(this.select_order_id);
+        }
+        return;
+      }
+      if (action_type == "RETURN ALLL") {
+        if (confirm("are you sure")) {
+          this.returnAll(this.select_order_id);
+        }
+        return;
+      }
     },
 
-   pendingAll(order_id){
-    axios.get('/pending/all/order/'+order_id)
-         .then(resp=>{
-            if(resp.data){
-               this.$toasted.show(resp.data, {
+    labelPrint() {
+      window.open("", "_self", "width=600,height=600");
+    },
+
+    pendingAll(order_id) {
+      axios
+        .get("/pending/all/order/" + order_id)
+        .then((resp) => {
+          if (resp.data) {
+            this.$toasted.show(resp.data, {
               type: "success",
               position: "top-center",
               duration: 2000,
-              });
-            this.$router.push({name:"PendingOrder"})
-
-            }
-         })
-         .catch(error=>{
-           console.log(error);
-         })
-  },
-
-   shipmentAll(order_id){
-    axios.get('/shipment/all/order/'+order_id)
-         .then(resp=>{
-            if(resp.data.status=="OK"){
-               this.$toasted.show(resp.data.message, {
-              type: "success",
-              position: "top-center",
-              duration: 2000,
-              });
-              this.$router.push({name:"ShipmentOrder"})
-
-            }else{
-               this.$toasted.show(resp.data, {
-                type: "error",
-                position: "top-center",
-                duration: 4000,
             });
-            }
-         })
-         .catch(error=>{
-           console.log(error);
-         })
-  },
-
-
-   deliveredAll(order_id){
-    axios.get('/delivered/all/order/'+order_id)
-         .then(resp=>{
-            if(resp.data){
-               this.$toasted.show(resp.data, {
-              type: "success",
-              position: "top-center",
-              duration: 2000,
-              });
-            this.$router.push({name:"DeliveredOrder"})
-
-            }
-         })
-         .catch(error=>{
-           console.log(error);
-         })
-  },
-
-   returnAll(order_id){
-    axios.get('/return/all/order/'+order_id)
-         .then(resp=>{
-            if(resp.data){
-               this.$toasted.show(resp.data, {
-              type: "success",
-              position: "top-center",
-              duration: 2000,
-              });
-            this.$router.push({name:"ReturnOrder"})
-
-            }
-         })
-         .catch(error=>{
-           console.log(error);
-         })
-  },
-   cancelAll(order_id){
-    axios.get('/cancel/all/order/'+order_id)
-         .then(resp=>{
-            if(resp.data){
-               this.$toasted.show(resp.data, {
-              type: "success",
-              position: "top-center",
-              duration: 2000,
-              });
-            this.$router.push({name:"CancelOrder"})
-
-            }
-         })
-         .catch(error=>{
-           console.log(error);
-         })
-  },
-  comment(order_id,order_index,comment){
-
-
-    console.log(comment);
-     let options ={};
-     this.comments.forEach(element => {
-            options[element.name] = element.name;
-     });
-
-       let sSelect=document.getElementsByClassName('swal2-select');
-       Swal.fire({
-            title:comment ? comment:'Select a comment',
-            input: 'select',
-            inputOptions: options,
-            inputPlaceholder: 'Select or change a comment',
-            showCancelButton: true,
-        }).then((result)=>{
-          if(result.value){
-            axios.get('/api/order/comment',{
-              params:{
-                order_id,
-                comment:result.value,
-              }
-            })
-            .then(resp=>{
-              console.log(resp);
-            })
-            .catch(e=>{
-              console.log(e);
-            })
-
-          }else{
-            console.log("Ok")
+            this.$router.push({ name: "PendingOrder" });
           }
         })
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
+    shipmentAll(order_id) {
+      axios
+        .get("/shipment/all/order/" + order_id)
+        .then((resp) => {
+          if (resp.data.status == "OK") {
+            this.$toasted.show(resp.data.message, {
+              type: "success",
+              position: "top-center",
+              duration: 2000,
+            });
+            this.$router.push({ name: "ShipmentOrder" });
+          } else {
+            this.$toasted.show(resp.data, {
+              type: "error",
+              position: "top-center",
+              duration: 4000,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
 
+    deliveredAll(order_id) {
+      axios
+        .get("/delivered/all/order/" + order_id)
+        .then((resp) => {
+          if (resp.data) {
+            this.$toasted.show(resp.data, {
+              type: "success",
+              position: "top-center",
+              duration: 2000,
+            });
+            this.$router.push({ name: "DeliveredOrder" });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
 
+    returnAll(order_id) {
+      axios
+        .get("/return/all/order/" + order_id)
+        .then((resp) => {
+          if (resp.data) {
+            this.$toasted.show(resp.data, {
+              type: "success",
+              position: "top-center",
+              duration: 2000,
+            });
+            this.$router.push({ name: "ReturnOrder" });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    cancelAll(order_id) {
+      axios
+        .get("/cancel/all/order/" + order_id)
+        .then((resp) => {
+          if (resp.data) {
+            this.$toasted.show(resp.data, {
+              type: "success",
+              position: "top-center",
+              duration: 2000,
+            });
+            this.$router.push({ name: "CancelOrder" });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    comment(order_id, order_index, comment) {
+      console.log(comment);
+      let options = {};
+      this.comments.forEach((element) => {
+        options[element.name] = element.name;
+      });
+
+      let sSelect = document.getElementsByClassName("swal2-select");
+      Swal.fire({
+        title: comment ? comment : "Select a comment",
+        input: "select",
+        inputOptions: options,
+        inputPlaceholder: "Select or change a comment",
+        showCancelButton: true,
+      }).then((result) => {
+        if (result.value) {
+          axios
+            .get("/api/order/comment", {
+              params: {
+                order_id,
+                comment: result.value,
+              },
+            })
+            .then((resp) => {
+              console.log(resp);
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+        } else {
+          console.log("Ok");
+        }
+      });
+    },
   },
 
   watch: {
@@ -1158,28 +1158,27 @@ export default {
       }
     },
 
-    start_date:function(value){
-        if(value.length>1){
-          this.ordersList();
-        }
+    start_date: function (value) {
+      if (value.length > 1) {
+        this.ordersList();
+      }
     },
-    end_date:function(value){
-      if(value.length>1){
-          this.ordersList();
-        }
+    end_date: function (value) {
+      if (value.length > 1) {
+        this.ordersList();
+      }
     },
-     bulkActionType:function(value){
+    bulkActionType: function (value) {
       this.selectBulkAction();
     },
-    courier_id:function(value){
+    courier_id: function (value) {
       this.ordersList();
-    }
-
+    },
   },
-
-
 };
 </script>
+
+
 
 <style>
 .orders-heading {
@@ -1189,8 +1188,20 @@ export default {
   margin-bottom: 10px;
 }
 
-.box{
-  width:100%;
-  overflow-x: scroll;
+.order_statistic a {
+  background: #fff;
+  color: #000;
+  box-shadow: 0 1pt 6pt rgb(150 165 237);
+  border: none;
+  padding: 11px 46px;
+  margin: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: serif;
+}
+
+.router-link-active {
+  border: 1.5px dashed !important ;
+  color: #000 !important;
 }
 </style>
