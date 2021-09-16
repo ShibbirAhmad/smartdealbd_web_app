@@ -164,7 +164,7 @@
                   alt=""
                 />
               </li>
-              <li>{{ cart_content.name }}</li>
+              <li>{{ cart_content.name.substring(0,20).concat('...') }}</li>
             </ul>
           </div>
           <div class="col-lg-2 col-sm-2 cart_responsive_item flex">
@@ -464,9 +464,6 @@ ul.p-image-name li {
   padding: 0px 2px;
   font-size: 12px;
 }
-
-
-
 
 
 

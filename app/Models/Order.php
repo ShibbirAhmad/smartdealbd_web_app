@@ -88,7 +88,8 @@ class Order extends Model
             }
             return \response()->json([
                 'status'=>'SUCCESS',
-                'orders'=>$orders
+                'orders'=>$orders,
+                'order_count'=> self::orderCount(),
             ]);
     }
 
@@ -126,7 +127,8 @@ class Order extends Model
             }
              return \response()->json([
                 'status'=>'SUCCESS',
-                'orders'=>$orders
+                'orders'=>$orders,
+                'order_count'=> self::orderCount(),
             ]);
     }
 
@@ -168,12 +170,12 @@ class Order extends Model
             }
              return \response()->json([
                 'status'=>'SUCCESS',
-                'orders'=>$orders
+                'orders'=>$orders,
+                'order_count'=> self::orderCount(),
             ]);
     }
+
      public static function orderFilterWithCourier($request){
-
-
          $paginate=$request->item??10;
         if(!empty($request->start_date) && empty($request->end_date)){
 
@@ -225,7 +227,8 @@ class Order extends Model
         return \response()->json([
 
                 'status'=>'SUCCESS',
-                'orders'=>$orders
+                'orders'=>$orders,
+                'order_count'=> self::orderCount(),
             ]);
     }
 
@@ -291,14 +294,46 @@ class Order extends Model
                         ->groupBy(DB::raw('DATE(created_at)'))
                         ->orderBy('created_at','DESC')
                         ->get();
-       $admin_order['all']=Order::whereNotNull('create_admin_id')
+
+
+       $admin_order['today']=Order::whereNotNull('create_admin_id')
                          ->where('created_at', '>=', Carbon::today()->startOfDay())
                          ->where('created_at', '<=', Carbon::today()->endOfDay())
-                         ->select('create_admin_id',DB::raw('count(*) as total'))
+                         ->select('create_admin_id',DB::raw('count(*) as total'),DB::raw('SUM(total) as total_amount') )
                          ->groupBy('create_admin_id')
                          ->orderBy('total','DESC')
                          ->with('createAdmin')
                          ->get();
+
+      $admin_order['yesterday']=Order::whereNotNull('create_admin_id')
+                  ->where('created_at', '>=', Carbon::yesterday()->startOfDay())
+                  ->where('created_at', '<=', Carbon::yesterday()->endOfDay())
+                  ->select('create_admin_id',DB::raw('count(*) as total'),DB::raw('SUM(total) as total_amount'))
+                  ->groupBy('create_admin_id')
+                  ->orderBy('total','DESC')
+                  ->with('createAdmin')
+                  ->get();
+
+      $admin_order['this_week']=Order::whereNotNull('create_admin_id')
+                  ->where('created_at', '>=', Carbon::today()->subDays('7')->startOfDay())
+                  ->where('created_at', '<=', Carbon::today()->endOfDay())
+                  ->select('create_admin_id',DB::raw('count(*) as total'),DB::raw('SUM(total) as total_amount'))
+                  ->groupBy('create_admin_id')
+                  ->orderBy('total','DESC')
+                  ->with('createAdmin')
+                  ->get();
+
+      $admin_order['this_month']=Order::whereNotNull('create_admin_id')
+                  ->where('created_at', '>=', Carbon::today()->subDays('30')->startOfDay())
+                  ->where('created_at', '<=', Carbon::today()->endOfDay())
+                  ->select('create_admin_id',DB::raw('count(*) as total'),DB::raw('SUM(total) as total_amount'))
+                  ->groupBy('create_admin_id')
+                  ->orderBy('total','DESC')
+                  ->with('createAdmin')
+                  ->get();
+
+
+
 
        return $admin_order;
     }

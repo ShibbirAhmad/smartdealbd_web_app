@@ -17,31 +17,22 @@
       </div>
     </div>
 
-
-      <div v-if="banner && banner.status==1" class="row advertise_banner_row">
-        <div class="col-lg-6 col-md-6 col-xs-6">
-          <a :href="banner.url_1" target="_blank">
-            <img
-              class="advertise_banner_1"
-              :src="base_url + banner.banner_1"
-            />
-          </a>
-        </div>
-
-        <div class="col-lg-6 col-md-6 col-xs-6">
-          <a :href="banner.url_2" target="_blank">
-            <img
-              class="advertise_banner_2"
-              :src="base_url + banner.banner_2"
-            />
-          </a>
-        </div>
+    <div v-if="banner && banner.status == 1" class="row advertise_banner_row">
+      <div class="col-lg-6 col-md-6 col-xs-6">
+        <a :href="banner.url_1" target="_blank">
+          <img class="advertise_banner_1" :src="base_url + banner.banner_1" />
+        </a>
       </div>
 
+      <div class="col-lg-6 col-md-6 col-xs-6">
+        <a :href="banner.url_2" target="_blank">
+          <img class="advertise_banner_2" :src="base_url + banner.banner_2" />
+        </a>
+      </div>
+    </div>
 
-
-    <div  class="container">
-      <div v-if="best_selling_produtcs.length"  class="new_arrival_section">
+    <div class="container">
+      <div v-if="best_selling_produtcs.length" class="new_arrival_section">
         <h4 class="arrival_heading">Top Selling Products</h4>
         <div class="row">
           <vue-horizontal-list
@@ -69,10 +60,9 @@
                             name: 'single',
                             params: { slug: item.slug },
                           }"
-                          >{{ item.name.substring(0,20) }}
-                            <span v-if="item.name.length > 20"> ... </span>
-                          </router-link
-                        >
+                          >{{ item.name.substring(0, 20) }}
+                          <span v-if="item.name.length > 20"> ... </span>
+                        </router-link>
                       </p>
                       <p class="price">
                         <span class="price-new"> &#2547; {{ item.price }}</span>
@@ -80,20 +70,15 @@
                           &#2547; {{ item.sale_price }}</span
                         >
 
-                        <span
-                          v-if=" item.discount > 0"
-                          class="top_s_discount"
-                        >
+                        <span v-if="item.discount > 0" class="top_s_discount">
                           <i class="fa fa-star discount_star1"> </i>
                           <i class="fa fa-star discount_star2"> </i>
                           {{
-                            (
-                              ( item.discount /  item.sale_price) *
-                              100
-                            ).toFixed(0)
+                            ((item.discount / item.sale_price) * 100).toFixed(
+                              0
+                            )
                           }}% <span class="d_off">off</span>
                         </span>
-
                       </p>
                     </div>
                   </div>
@@ -143,7 +128,9 @@
                   }"
                 >
                   <img
-                    :src="  product_thumbnail_link + campaign_product.thumbnail_img "
+                    :src="
+                      product_thumbnail_link + campaign_product.thumbnail_img
+                    "
                   />
                 </router-link>
               </div>
@@ -154,8 +141,10 @@
                       name: 'single',
                       params: { slug: campaign_product.slug },
                     }"
-                    >{{ campaign_product.name.substring(0,20) }}
-                         <span v-if="product.name.length > 20">...</span></router-link
+                    >{{ campaign_product.name.substring(0, 20) }}
+                    <span v-if="product.name.length > 20"
+                      >...</span
+                    ></router-link
                   >
                 </h4>
                 <p class="price">
@@ -166,25 +155,25 @@
                     &#2547; {{ campaign_product.sale_price }}</span
                   >
 
-                      <span
-                      v-if="campaign_product.discount > 0"
-                      class="flas_p_discount"
-                    >
-                      <i class="fa fa-star discount_star1"> </i>
-                      <i class="fa fa-star discount_star2"> </i>
-                      {{
-                        (
-                          (campaign_product.discount / campaign_product.sale_price) *
-                          100
-                        ).toFixed(0)
-                      }}% <span class="d_off">off</span>
-                    </span>
+                  <span
+                    v-if="campaign_product.discount > 0"
+                    class="flas_p_discount"
+                  >
+                    <i class="fa fa-star discount_star1"> </i>
+                    <i class="fa fa-star discount_star2"> </i>
+                    {{
+                      (
+                        (campaign_product.discount /
+                          campaign_product.sale_price) *
+                        100
+                      ).toFixed(0)
+                    }}% <span class="d_off">off</span>
+                  </span>
                 </p>
               </div>
             </div>
           </carousel>
         </div>
-
 
         <div>
           <div
@@ -195,24 +184,21 @@
           >
             <div class="c-product-header">
               <h4 class="category-heading">{{ category.name }}</h4>
-                <div
-                  class="category_view_all"
-                >
-                  <router-link
-                    :to="{
-                      name: 'PublcaCategory',
-                      params: { slug: category.slug },
-                    }"
-                    class="c-v-all"
-                    >View All
-                  </router-link>
-                </div>
-
+              <div class="category_view_all">
+                <router-link
+                  :to="{
+                    name: 'PublcaCategory',
+                    params: { slug: category.slug },
+                  }"
+                  class="c-v-all"
+                  >View All
+                </router-link>
+              </div>
             </div>
 
             <div class="row landing_page_all_p_row">
               <div
-                class="col-lg-3 col-sm-4 col-md-3 col-xs-6 width_20 small_width"
+                class="col-lg-2 col-md-2 col-xs-6 custom_width small_width"
                 v-for="(product, index) in category.products"
                 :key="index"
               >
@@ -221,8 +207,9 @@
                     <router-link
                       :to="{ name: 'single', params: { slug: product.slug } }"
                     >
-                     <img :src="product_thumbnail_link+product.thumbnail_img"
-                     />
+                      <img
+                        :src="product_thumbnail_link + product.thumbnail_img"
+                      />
                     </router-link>
                     <div class="product-detail">
                       <h4>
@@ -232,27 +219,33 @@
                             name: 'single',
                             params: { slug: product.slug },
                           }"
-                          >{{ product.name.substring(0,20) }}
-                         <span v-if="product.name.length > 20">...</span></router-link
+                          >{{ product.name.substring(0, 20) }}
+                          <span v-if="product.name.length > 20"
+                            >...</span
+                          ></router-link
                         >
                       </h4>
                       <p class="price">
                         <span class="price-new"
-                          >&#2547; {{ product.price }}</span
+                          >&#2547;{{ product.price }}</span
                         >
                         <span class="price-old" v-if="product.discount">
-                          &#2547;{{ product.sale_price }}</span>
+                          &#2547;{{ product.sale_price }}</span
+                        >
                       </p>
                     </div>
                   </div>
 
                   <div class="product-card-footer">
-                    <button
-                      class="btn btn-primary btnQuick"
-                      style="cursor: pointer"
-                      @click="quick_v_product_id = product.id">
-                      view
+
+                    <router-link  v-if="product.product_attribute" :to="{ name:'single',params:{ slug: product.slug }}"  class="btn btn-primary btnQuick" style="cursor: pointer" >
+                      অর্ডার করুন
+                    </router-link>
+
+                    <button v-else @click="buyNow(product.slug)"  class="btn btn-primary btnQuick" style="cursor: pointer" >
+                      অর্ডার করুন
                     </button>
+
                   </div>
                 </div>
               </div>
@@ -315,7 +308,7 @@
       </div>
     </div>
 
-    <frontend-footer ></frontend-footer>
+    <frontend-footer></frontend-footer>
     <quick-view
       v-if="quick_v_product_id"
       v-on:clicked="closedModal($event)"
@@ -334,9 +327,7 @@ import carousel from "vue-owl-carousel";
 import VueHorizontalList from "vue-horizontal-list";
 Vue.use(Loading);
 export default {
-  created(){
-    this.homeProduct();
-  },
+
   data() {
     return {
       loading: true,
@@ -363,29 +354,54 @@ export default {
         position: {
           start: 0,
         },
-         autoplay: {
+        autoplay: {
           play: true,
           speed: 1800,
           repeat: true,
         },
       },
-
-
     };
   },
   methods: {
-    homeProduct($state) {
+     buyNow(slug) {
       axios
-        .get("/_public/products?page=" + this.page)
+        .get("/_public/addToCart", {
+          params: {
+            slug:slug,
+            quantity: 1,
+          },
+        })
         .then((resp) => {
-          if (resp.data.data.length) {
-            this.page += 1;
-            this.home_page_products.push(...resp.data.data);
-            $state.loaded();
-          } else {
-            $state.complete();
+         // console.log(resp);
+          if (resp.data.status == "SUCCESS") {
+              this.$store.dispatch("getCartContent");
+              this.$toasted.show(resp.data.message, {
+              position: "bottom-left",
+              type: "success",
+              duration: 2000,
+            });
+           this.$router.push({ name: "Chekout" });
+          } else if (resp.data.status == "error") {
+            this.$toasted.show(resp.data.message, {
+              position: "top-center",
+              type: "error",
+              duration: 4000,
+            });
           }
         })
+    },
+    homeProduct($state) {
+      axios.get("/_public/products?page=" + this.page)
+      .then((resp) => {
+        console.log(resp);
+        if (resp.data.data.length) {
+          this.page += 1;
+          this.home_page_products.push(...resp.data.data);
+          $state.loaded();
+        } else {
+          $state.complete();
+        }
+      });
     },
     handleScrol() {
       this.isScroll = 1;
@@ -409,7 +425,7 @@ export default {
     Loading,
     carousel,
     FlipCountdown,
-    VueHorizontalList
+    VueHorizontalList,
   },
   mounted() {
     window.addEventListener("scroll", this.handleScrol);
@@ -439,13 +455,7 @@ export default {
       return this.$store.getters.sale_campaign;
     },
   },
-  watch: {
-    isScroll: function (value) {
-      if (value == 1) {
-        this.$store.dispatch("home_page_products");
-      }
-    },
-  },
+
 };
 
 //show sub  menu in mobile menu
@@ -458,9 +468,8 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < sub_menu.length; i++) {
       //set a click event
       sub_menu[i].addEventListener("click", function () {
-        let show_sub_menu = sub_menu[i].parentElement.querySelector(
-          ".left-sub-menu"
-        );
+        let show_sub_menu =
+          sub_menu[i].parentElement.querySelector(".left-sub-menu");
         //set active class
         show_sub_menu.classList.toggle("nav-active");
         sub_menu[i].classList.toggle("fa-minus");

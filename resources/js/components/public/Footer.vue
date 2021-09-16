@@ -14,12 +14,12 @@
               </ul>
             </div>
 
-            <div class="column col-lg-2 col-md-2 col-sm-6 col-xs-6">
+            <div class="quick_link_column col-lg-2 col-md-2 col-sm-6 col-xs-6">
               <div class="quick_link">
                 <h5>Quick Links</h5>
                 <div class="line"></div>
                 <ul class="link_line">
-      
+
                   <li>
                     <router-link :to="{ name: 'welcome' }">Home</router-link>
                   </li>
@@ -38,7 +38,7 @@
               </div>
             </div>
 
-            <div class="column col-lg-2 col-md-2 col-sm-6 col-xs-6">
+            <div class="quick_link_column col-lg-2 col-md-2 col-sm-6 col-xs-6">
               <h5>Information</h5>
               <div class="line"></div>
               <ul class="link_line">
@@ -64,7 +64,7 @@
               </ul>
             </div>
 
-            <div class="column col-lg-5 col-md-5 col-sm-5 col-xs-12">
+            <div class=" col-lg-5 col-md-5 col-sm-5 col-xs-12">
               <div class="row news_letter">
               <h5>Newsletter</h5>
               <div class="line"></div>
@@ -194,4 +194,7 @@ export default {
 
 
 <style scoped>
+
+ 
+
 </style>

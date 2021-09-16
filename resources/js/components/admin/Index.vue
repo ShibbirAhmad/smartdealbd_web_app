@@ -50,7 +50,7 @@
             <div class="small-box bg-green">
               <div class="inner">
                 <h3>{{ orders.approved_order }}</h3>
-                <h4>Approved Order</h4>
+                <h4>Ready To Ship</h4>
               </div>
               <div class="icon"></div>
               <router-link :to="{ name: 'ApprovedOrder' }" class="small-box-footer"
@@ -514,7 +514,7 @@
         </div>
         <div class="row">
           <h3 class="text-center text-uppercase">Create Analysis</h3>
-          <div class="col-lg-6">
+          <div class="col-lg-4 col-md-4">
             <div class="box box-primary">
               <div class="box-header with-border text-center">
                 <img
@@ -556,42 +556,115 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-6">
-            <div class="box box-success">
-              <div class="box-header with-border text-center">
-                <h4 class="text-center">{{ "Today order create count  " }}</h4>
-              </div>
-              <div class="box-body">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Admin</th>
-                      <th>Total Create</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr
-                      v-for="(order_create_count, index) in admin_orders.all"
-                      :key="index"
-                    >
-                      <td>{{ index + 1 }}</td>
-                      <td>
-                        <img
-                          :src="base_url + order_create_count.create_admin.image"
-                          class="img-circle small-image"
-                          style="width: 30px"
-                          v-if="order_create_count.create_admin.image"
-                        />
-                        {{ order_create_count.create_admin.name }}
-                      </td>
-                      <td>{{ order_create_count.total }}</td>
-                    </tr>
-                  </tbody>
-                </table>
+            <div class="col-lg-8 col-md-8">
+              <div class="box box-success">
+                <div class="box-header with-border text-center">
+                   <ul class="admin_order_menu" >
+                    <li @click="adminOrderToday"     :class="{ active_border : admin_order_today == true }">  Today </li>
+                    <li @click="adminOrderYesterday" :class="{ active_border : admin_order_yesterday == true }"> Yesterday </li>
+                    <li @click="adminOrderThisWeek"  :class="{ active_border : admin_order_this_week == true }"> This Week </li>
+                    <li @click="adminOrderThisMonth" :class="{ active_border : admin_order_this_month == true }">  This Month  </li>
+                  </ul>
+                </div>
+                <div class="box-body">
+                  <table class="table table-bordered table-striped table-hover ">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Admin</th>
+                        <th>Total Create</th>
+                        <th>Total Amount</th>
+                      </tr>
+                    </thead>
+
+                    <tbody v-if="admin_order_today" >
+                      <tr
+                        v-for="(order_create_count, index) in admin_orders.today"
+                        :key="index" >
+                        <td>{{ index + 1 }}</td>
+                        <td>
+                          <img
+                            :src="base_url + order_create_count.create_admin.image "
+                            class="img-circle small-image"
+                            style="width:60px;height:60px"
+                            v-if="order_create_count.create_admin.image"
+                          />
+                          {{ order_create_count.create_admin.name }}
+                        </td>
+                        <td>{{ order_create_count.total }}</td>
+                        <td> &#2547;{{ order_create_count.total_amount }}</td>
+                      </tr>
+                    </tbody>
+
+                    <tbody v-if="admin_order_yesterday" >
+                      <tr
+                        v-for="(order_create_count, index) in admin_orders.yesterday"
+                        :key="index" >
+                        <td>{{ index + 1 }}</td>
+                        <td>
+                          <img
+                            :src="
+                              base_url + order_create_count.create_admin.image
+                            "
+                            class="img-circle small-image"
+                            style="width:60px;height:60px"
+                            v-if="order_create_count.create_admin.image"
+                          />
+                          {{ order_create_count.create_admin.name }}
+                        </td>
+                        <td>{{ order_create_count.total }}</td>
+                         <td>&#2547;{{ order_create_count.total_amount }}</td>
+                      </tr>
+                    </tbody>
+
+
+                    <tbody v-if="admin_order_this_week" >
+                      <tr
+                        v-for="(order_create_count, index) in admin_orders.this_week"
+                        :key="index" >
+                        <td>{{ index + 1 }}</td>
+                        <td>
+                          <img
+                            :src="
+                              base_url + order_create_count.create_admin.image
+                            "
+                            class="img-circle small-image"
+                            style="width:60px;height:60px"
+                            v-if="order_create_count.create_admin.image"
+                          />
+                          {{ order_create_count.create_admin.name }}
+                        </td>
+                        <td>{{ order_create_count.total }}</td>
+                        <td>&#2547;{{ order_create_count.total_amount }}</td>
+                      </tr>
+                    </tbody>
+
+                     <tbody v-if="admin_order_this_month" >
+                      <tr
+                        v-for="(order_create_count, index) in admin_orders.this_month"
+                        :key="index" >
+                        <td>{{ index + 1 }}</td>
+                        <td>
+                          <img
+                            :src="
+                              base_url + order_create_count.create_admin.image
+                            "
+                            class="img-circle small-image"
+                            style="width:60px;height:60px"
+                            v-if="order_create_count.create_admin.image"
+                          />
+                          {{ order_create_count.create_admin.name }}
+                        </td>
+                        <td>{{ order_create_count.total }}</td>
+                        <td>&#2547;{{ order_create_count.total_amount }}</td>
+                      </tr>
+                    </tbody>
+
+                  </table>
+
+                </div>
               </div>
             </div>
-          </div>
         </div>
         <div class="row" v-if="$can('view dashboard')">
           <h3 class="text-center text-uppercase">Top Sell Product Today</h3>
@@ -628,9 +701,9 @@
                           top_s_product.product.product_code
                         }}</a>
                       </h6>
-                      <!-- <h6>
-                  order count:{{ top_s_product.total }}
-                </h6> -->
+                      <h6>
+                        order today: <b>{{ top_s_product.total }} </b>
+                      </h6>
                     </div>
                   </div>
                 </carousel>
@@ -664,6 +737,10 @@ export default {
       base_url: this.$store.state.image_base_link,
       analysis: "",
       analysisshow: 1,
+      admin_order_today:true,
+      admin_order_yesterday:false,
+      admin_order_this_week:false,
+      admin_order_this_month:false,
     };
   },
   created() {},
@@ -672,6 +749,38 @@ export default {
     this.dashboard();
   },
   methods: {
+
+  adminOrderToday(){
+       this.admin_order_today=true ;
+       this.admin_order_yesterday=false ;
+       this.admin_order_this_week=false ;
+       this.admin_order_this_month=false ;
+    },
+
+      adminOrderYesterday(){
+       this.admin_order_today=false ;
+       this.admin_order_yesterday=true ;
+       this.admin_order_this_week=false ;
+       this.admin_order_this_month=false ;
+    },
+
+     adminOrderThisWeek(){
+       this.admin_order_today=false ;
+       this.admin_order_yesterday=false ;
+       this.admin_order_this_week=true ;
+       this.admin_order_this_month=false ;
+    },
+
+
+     adminOrderThisMonth(){
+       this.admin_order_today=false ;
+       this.admin_order_yesterday=false ;
+       this.admin_order_this_week=false ;
+       this.admin_order_this_month=true ;
+    },
+
+
+
      loadMoreData(e) {
       e.target.innerText="Loading......";
       this.$Progress.start();
@@ -786,51 +895,74 @@ export default {
 </script>
 
 <style>
-.box-gradiant {
-  background: -webkit-linear-gradient(to right, #c33764, #1d2671);
-  background: linear-gradient(to right, #c33764, #1d2671);
-}
-.small-box .icon {
-  color: #fff !important;
-  opacity: 0.6;
-}
-.product-thumb.clearfix {
-  padding: 12px 13px;
-  margin-right: 10px;
-  margin-right: 10px;
-  border: 1px solid #eee;
-  box-shadow: 2px 2px 2px #eee;
-}
-.custom-box {
-  background: #fff;
-  padding: 13px;
-  min-height: 220px;
-  box-shadow: 3px 3px 3px #ddd;
-  border-radius: 6px;
-  margin-bottom: 10px;
 
-}
-.custom-box-body strong {
-  position: absolute;
-  right: 10%;
-  color: blue;
-}
-.custom-box-footer {
-  background: #00a65a;
-  color: #fff;
-}
-.analysis-item {
-  display: flex;
-  list-style-type: none;
-  float: right;
-}
-.analysis-item li {
-  padding: 10px 10px;
-  text-transform: uppercase;
-  font-weight: bold;
-  cursor: pointer;
-}
-.analysis-item .active {
-  border-bottom: 2px solid #000;
-}
+
+    .box-gradiant {
+      background: -webkit-linear-gradient(to right, #c33764, #1d2671);
+      background: linear-gradient(to right, #c33764, #1d2671);
+    }
+    .small-box .icon {
+      color: #fff !important;
+      opacity: 0.6;
+    }
+    .product-thumb.clearfix {
+      padding: 12px 13px;
+      margin-right: 10px;
+      margin-right: 10px;
+      border: 1px solid #eee;
+      box-shadow: 2px 2px 2px #eee;
+    }
+    .custom-box {
+      background: #fff;
+      padding: 13px;
+      min-height: 220px;
+      box-shadow: 3px 3px 3px #ddd;
+      border-radius: 6px;
+      margin-bottom: 10px;
+
+    }
+    .custom-box-body strong {
+      position: absolute;
+      right: 10%;
+      color: blue;
+    }
+    .custom-box-footer {
+      background: #00a65a;
+      color: #fff;
+    }
+    .analysis-item {
+      display: flex;
+      list-style-type: none;
+      float: right;
+    }
+    .analysis-item li {
+      padding: 10px 10px;
+      text-transform: uppercase;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .analysis-item .active {
+      border-bottom: 2px solid #000;
+    }
+
+
+    .admin_order_menu {
+      display: flex;
+    }
+
+    .admin_order_menu li {
+        list-style-type: none;
+        margin: 5px 14px;
+        cursor: pointer;
+        padding: 5px 10px;
+        box-shadow: 0 1pt 12pt rgb(150 165 237);
+    }
+
+    .active_border {
+      border: 2px dashed #000;
+    }
+
+
+
+
 </style>

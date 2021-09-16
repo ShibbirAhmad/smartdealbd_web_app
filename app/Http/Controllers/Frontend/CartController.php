@@ -22,18 +22,19 @@ class CartController extends Controller
                 'status'=>'error',
                 'message'=>'missing product information'
              ]);
-        }else if($product->stock<=0){
-            return response()->json([
-            'status'=>'error',
-            'message'=>"Product Stock Out"
-            ]);
         }
-         else if($request->quantity > $product->stock){
-            return response()->json([
-                    'status'=>'error',
-                    'message'=>"Product Hisgest Quanity '$product->stock'"
-            ]);
-        }
+        //else if($product->stock<=0){
+        //     return response()->json([
+        //     'status'=>'error',
+        //     'message'=>"Product Stock Out"
+        //     ]);
+        // }
+        //  else if($request->quantity > $product->stock){
+        //     return response()->json([
+        //             'status'=>'error',
+        //             'message'=>"Product Hisgest Quanity '$product->stock'"
+        //     ]);
+        // }
         else{
             Cart::add([
                 'id' => $product->id,

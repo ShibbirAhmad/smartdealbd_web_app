@@ -41,8 +41,7 @@ body{
     overflow-x: hidden;
 }
 
-.width_20 {
-    width: 20% !important ;
+.custom_width {
     padding-left: 5px !important;
     padding-right: 5px !important;
 }
@@ -252,11 +251,6 @@ span.badge-primary {
 }
 
 
-.btnQuick:hover {
-  background: #ff4d03;
-}
-
-
 .displayeBlok{
   display: none;
 }
@@ -441,7 +435,7 @@ ul.side-nav li:hover>.left-sub-menu {
 }
 .product-card {
     width: 100%;
-    height: 310px;
+    height: 315px;
     background: #F4F1F0;
     text-align: center;
     margin-bottom: 20px;
@@ -451,30 +445,10 @@ ul.side-nav li:hover>.left-sub-menu {
     border-radius: 40px;;
 }
 
-.product-card:hover>.product-card-footer{
-    display: block;
-    margin-top: -45px;
-    animation: fly 1s ease 1;
-}
-
-@keyframes fly {
-    0% {
-      transform: translateY(0%);
-    }
-
-    50% {
-      transform: translateY(100%);
-    }
-
-    100% {
-      transform: translateY(0);
-    }
-  }
-
 .product-card-body img {
     padding: 10px;
     width: 100%;
-    height: 230px;
+    height: 200px;
     transition: .3s;
 }
 
@@ -484,9 +458,7 @@ ul.side-nav li:hover>.left-sub-menu {
     padding: 5px;
 }
 .product-card-footer {
-    display: none;
     background: var(--primary-color);
-    padding: 5px;
     transition: .5s;
 }
 .detls_prodcut{
@@ -550,9 +522,8 @@ ul.side-nav li:hover>.left-sub-menu {
 .single-product-box {
     background: #fff;
     padding: 15px 25px;
-
-   border-radius: 5px;
-   height: auto;
+    border-radius: 5px;
+    height: auto;
 }
 .product-description{
       background: #fff;
@@ -768,19 +739,13 @@ img.zoomer-control.responsive-image {
     display: block !important;
 }
 
-.product-card-footer {
-    padding: 0px;
-}
 
 .btnQuick:hover {
     background: var(--primary-color);
 }
 
 
-
-
 .parallax_inside {
-
     position: absolute;
     width: 40%;
     height: 200px;
@@ -790,7 +755,6 @@ img.zoomer-control.responsive-image {
 
     margin: 10px;
     position: absolute;
-
     width: 96%;
     height: 175px;
     text-align: center;
@@ -1879,8 +1843,11 @@ span.price-new {
         margin-left: 8%;
         cursor: pointer;
     }
+
     .left_menu_headidng {
         color: #fff;
+        font-size: 15px;
+        padding-top: 2px;
     }
 
     .left_category_menu {
@@ -2223,6 +2190,19 @@ span.price-new {
         display: none;
     }
 
+    .btn_buy_cart {
+        margin-top:38px;
+    }
+
+    .p_code {
+        padding: 6px 5px;
+        background: var(--primary-color);
+        width: 43%;
+        border: 1px dashed  #fff;
+        color: #fff;
+        font-size: 14px;
+    }
+
 @media only screen and (max-width: 900px) {
 
 
@@ -2306,10 +2286,7 @@ span.price-new {
 
     }
 
-    .menu-item {
-        padding: 10px 10px;
-        display: flex;
-    }
+
 
     .sub-item {
         width: auto;
@@ -2376,6 +2353,23 @@ span.price-new {
 
 @media screen and (max-width: 768px) {
 
+  .btn_buy_cart {
+        margin-top:10px;
+    }
+
+    .service_row {
+       display: none;
+     }
+
+    .slider_row {
+        margin-top: 115px;
+    }
+
+    .quick_link_column{
+        display: none;
+    }
+
+
     .header_facebook {
         position: absolute;
         display: block;
@@ -2394,6 +2388,12 @@ span.price-new {
    .call_now_container {
         margin-top: 20px;
         padding: 5px;
+    }
+
+
+   .call_now_container h2 {
+        line-height: 20px;
+        font-size: 28px;
     }
 
     .__preview_image_box {
@@ -2428,9 +2428,10 @@ span.price-new {
     }
 
     .menu-item {
-            padding: 10px 15px;
-            display: flex;
-        }
+        padding: 10px 0px;
+        display: flex;
+        margin-left: -40px;
+    }
 
 
    .sub-menu-icon {
@@ -2860,15 +2861,6 @@ span.price-new {
             }
 
 
-
-       /* in small view device quick view button won't display */
-
-            .btnQuick{
-
-                display: none ;
-            }
-
-
             /* frontend common responsive issue is start from here  */
 
             img.responsive-image.preview-box
@@ -2897,17 +2889,15 @@ span.price-new {
 
            .product-card {
             width:100%;
-            height: auto;
+            height: 240px;
             background: #F4F1F0;
             border: 1px solid #ddd;
             text-align: center;
-            padding-top: 5px;
+            padding-top: 3px;
             margin-bottom: 15px;
             }
 
-            .product-card:hover>.product-card-footer{
-                display: none;
-            }
+
 
             .product-card p {
                     font-size: 13px;
@@ -2920,13 +2910,15 @@ span.price-new {
                 margin-top: -5px;
             }
 
-            .product-card-body img {
-                width: 95% !important;
-                height: 100% !important;
-                padding: 5px 0px !important;
-            }
+         .product-card-body img {
+            width: 95% !important;
+            height: 100% !important;
+            padding: 2px 0px !important;
+        }
 
-
+         .custom-box {
+            margin-top: 65px ;
+        }
 
 
         /* contact us responsive code is here  */
@@ -3088,8 +3080,12 @@ span.price-new {
         }
 
 
-        .main-header {
-            height:130px;
+      .main-header {
+            height: 115px;
+            position: fixed;
+            z-index: 99999999;
+            width: 100%;
+            top: 0;
         }
 
 
@@ -3120,6 +3116,14 @@ span.price-new {
 
 @media screen and (max-width:600px) {
 
+ .single-product-box {
+    background: #fff;
+    padding: 0px 5px;
+    border-radius: 5px;
+    height: auto;
+    margin-top: 100px;
+}
+
     .landing_page_all_p_row {
         margin-left: -5px !important;
     }
@@ -3133,9 +3137,9 @@ span.price-new {
        padding-right: 10px  ;
     }
 
-     .p_code {
-         font-size: 16px;
-     }
+    .p_code {
+        width: 48%;
+    }
 
     .s_price_container h4 {
         font-size: 16px;
@@ -3150,11 +3154,11 @@ span.price-new {
     }
 
     .incrementor_plus {
-        margin-left: 25%;
+        margin-left: 22%;
     }
 
     .incrementor_minus {
-        margin-left: 82%;
+        margin-left: 76%;
     }
 
 
@@ -3194,6 +3198,12 @@ span.price-new {
 
 
 @media screen and (max-width: 450px) {
+
+    .small_width {
+        width: 48% !important;
+        padding-left: 15px;
+        padding-right: 0px;
+    }
 
     .auto_writer {
         position: absolute;
@@ -3407,8 +3417,8 @@ span.price-new {
 
 
     .single_product_image {
-        width: 250px;
-        height: 250px;
+        width: 345px;
+        height: 350px;
     }
 
 
@@ -3431,11 +3441,6 @@ span.price-new {
         }
 
 
-        .small_width {
-            width: 48% !important;
-            padding-left: 15px;
-            padding-right: 0px;
-        }
 
         .cart_responsive_item {
             margin-left: 200px;

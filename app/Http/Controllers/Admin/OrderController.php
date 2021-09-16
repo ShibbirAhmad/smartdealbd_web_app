@@ -14,7 +14,6 @@ use App\Models\OrderItem;
 use App\Models\CustomerDue;
 use App\Models\OrderBarcode;
 use Illuminate\Http\Request;
-use App\Models\CustomerWallet;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -42,7 +41,6 @@ class OrderController extends Controller
         //2 is when only $request start date
         //3 is when filtaring with start and end date
         //4 is when order filtaring with courier
-
 
         // when no $request data
         if(empty($request->start_date) && empty($request->end_date) && empty($request->courier_id)){

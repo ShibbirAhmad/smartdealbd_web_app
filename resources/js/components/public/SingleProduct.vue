@@ -32,10 +32,20 @@
                  <h2 class="title" itemprop="name">{{ product.name }}</h2>
 
                   </li>
+
+                   <li>
+                      <div class="s_price_container">
+                            <h4> মূল্যঃ  </h4>
+                            <p >
+                                  <span style="font-size:18px" class="price-old price_in_small" v-if="product.discount">&#2547;{{product.sale_price}}</span>
+                                  <span class="price-new price_in_small">&#2547;{{product.price}}</span>
+                              </p>
+                        </div>
+                    </li>
+
                     <li>
                       <h4 class="p_code">
-                        <b>Product Code:</b>
-                        <span itemprop="mpn">{{ product.product_code }}</span>
+                        <b> প্রোডাক্ট কোডঃ {{ product.product_code }} </b>
                       </h4>
                     </li>
 
@@ -43,15 +53,7 @@
 
                   <div id="product">
                     <div class="row">
-                      <div class="col-lg-12 col-md-12 col-xs-12">
-                            <div class="s_price_container">
-                              <h4> Price </h4>
-                              <p >
-                                    <span class="price-old price_in_small" v-if="product.discount">&#2547;{{product.sale_price}}</span>
-                                    <span class="price-new price_in_small">&#2547;{{product.price}}</span>
-                               </p>
-                          </div>
-                      </div>
+
                       <div class="col-lg-12 col-md-12 col-xs-12" v-if="product.product_variant.length>0 && product.product_attribute">
 
                         <div class="ps-product__variations">
@@ -118,25 +120,24 @@
                     <div class="row">
 
 
-                      <div class="col-lg-6">
-                        <button
-                          @click.prevent="CartToAdd"
-                          type="button"
-                          id="button-cart"
-                          class="btn btn-primary btn-lg btn-block"
-                          style="margin-top:38px;"
-                          >
-                         <span>Add To Cart</span>
-                        </button>
-                      </div>
-
-                         <div class="col-lg-6">
+                      <div class="col-lg-5 col-md-5">
                         <button
                           @click.prevent="buyNow"
                           type="button"
-                          class="btn btn-primary btn-lg btn-block"
-                          style="margin-top:38px;background:#000;"
-                          >Buy Now</button>
+                          style="background:green;color:#fff"
+                          class="btn  btn-lg btn-block btn_buy_cart"
+                          >অর্ডার করুন</button>
+                      </div>
+
+                       <div class="col-lg-5 col-md-5">
+
+                         <button
+                          @click.prevent="CartToAdd"
+                          type="button"
+                          class="btn btn-primary btn-lg btn-block btn_buy_cart"
+                          >
+                         <span>Add To Cart</span>
+                        </button>
 
                       </div>
                     </div>
@@ -152,10 +153,11 @@
 
                  <div class="call_now_container">
                        <p>  Have question about this product ? please call</p>
-                      <h1> <a  :href="'tel:'+general_setting.header_contact_number"><i class="fa fa-phone "></i> {{ general_setting.header_contact_number }}</a> </h1>
+                      <h2> <a  :href="'tel:'+general_setting.header_contact_number"><i class="fa fa-phone "></i> {{ general_setting.header_contact_number }}</a> </h2>
+                      <h2> <a  href="tel:01945004004"><i class="fa fa-phone "></i> 01945004004 </a> </h2>
+                      <h2> <a  href="tel:01818357735"><i class="fa fa-phone "></i> 01818357735 </a> </h2>
+
                  </div>
-
-
             </div>
 
          </div>
@@ -192,7 +194,7 @@
 
         <div class="row realted-producs">
             <h3 class="title" >Related Products</h3>
-             <div class="col-lg-3 col-sm-4 col-md-3 col-xs-6 width_20 small_width" v-for="(product,index) in related_products" :key="index">
+             <div class="col-lg-2 col-md-2 col-xs-6 custom_width small_width" v-for="(product,index) in related_products" :key="index">
             <div class="product-card ">
               <div class="product-card-body">
                 <router-link :to="{name: 'single', params: { slug: product.slug } }">
@@ -204,19 +206,21 @@
                   <h4>   <router-link class="product-link" :to="{name: 'single', params: { slug: product.slug } }">{{ product.name.substring(0,20) }}
                          <span v-if="product.name.length > 20">...</span></router-link ></h4>
                   <p class="price">
-                    <span class="price-new">{{
+                    <span class="price-new">&#2547;{{
                       product.price
                     }}</span>
                     <span
                       class="price-old"
                       v-if="product.discount"
-                      >&#2547; {{ product.sale_price }}</span
+                      >&#2547;{{ product.sale_price }}</span
                     >
                   </p>
                 </div>
               </div>
                <div class="product-card-footer">
-                    <button class="btn btn-primary btnQuick" style="cursor:pointer" @click="quick_v_product_id=product.id"  >view</button>
+                    <router-link  :to="{ name:'single',params:{ slug: product.slug }}"  class="btn btn-primary btnQuick" style="cursor: pointer" >
+                      অর্ডার করুন
+                    </router-link>
               </div>
             </div>
           </div>
@@ -401,7 +405,7 @@ export default {
         .then((error) => {
           // console.log(error);
         });
-    },
+     },
     validation() {
       if (this.cart.quantity < 1) {
         this.cart.quantity = 1;

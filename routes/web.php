@@ -68,7 +68,7 @@ Route::group([
     Route::get('sub/sub/category/{slug}', 'HomeController@subSubCategory');
     Route::get('sub/sub/category/wise/product', 'HomeController@subSubCategoryWiseProduct');
 
-   // slider display route started here
+   //slider display route started here
     Route::get('slider', 'HomeController@slider');
     Route::get('api/display/category/slider', 'HomeController@display_category_slider');
     Route::get('api/display/sub/category/slider', 'HomeController@display_sub_category_slider');

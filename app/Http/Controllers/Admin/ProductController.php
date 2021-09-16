@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Picqer;
 use Carbon\Carbon;
-use App\Models\Order;
 use App\Models\Product;
 use App\Models\Variant;
-use App\Models\Customer;
 use Illuminate\Support\Str;
 use App\Models\ProductImage;
 use App\Models\Purchaseitem;
@@ -15,7 +13,6 @@ use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use App\Models\ProductBarcode;
 use App\Models\ProductVariant;
-use Illuminate\Validation\Rule;
 use App\Models\ProductAttribute;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\DB;
@@ -414,7 +411,7 @@ class ProductController extends Controller
                     $product->sub_category_id = $c_product->sub_category_id ?? null;
                     $product->sub_sub_category_id = $c_product->sub_sub_category_id ?? null;
                     $product->product_code = $product_code;
-                    $product->slug =  $c_product->slug.'_'. rand(11,77) .'-' . $product_code;
+                    $product->slug =  $c_product->slug.'-' . $product_code;
                     $product->sale_price = $c_product->sale_price;
                     $product->price = $c_product->price;
                     $product->discount = $c_product->discount ?? null;

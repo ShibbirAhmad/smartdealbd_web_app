@@ -58,8 +58,14 @@
                 </div>
               </div>
                 <div class="product-card-footer">
-                    <button class="btn btn-primary btnQuick" style="cursor:pointer" @click="quick_v_product_id=product.id"  >quick view</button>
-              </div>
+                  <router-link  v-if="product.product_attribute" :to="{ name:'single',params:{ slug: product.slug }}"  class="btn btn-primary btnQuick" style="cursor: pointer" >
+                  অর্ডার করুন
+                </router-link>
+
+                <button v-else @click="buyNow(product.slug)"  class="btn btn-primary btnQuick" style="cursor: pointer" >
+                  অর্ডার করুন
+                </button>
+                </div>
             </div>
           </div>
 
@@ -94,6 +100,33 @@ export default {
   },
 
   methods: {
+   buyNow(slug) {
+      axios
+        .get("/_public/addToCart", {
+          params: {
+            slug:slug,
+            quantity: 1,
+          },
+        })
+        .then((resp) => {
+         // console.log(resp);
+          if (resp.data.status == "SUCCESS") {
+              this.$store.dispatch("getCartContent");
+              this.$toasted.show(resp.data.message, {
+              position: "bottom-left",
+              type: "success",
+              duration: 2000,
+            });
+           this.$router.push({ name: "Chekout" });
+          } else if (resp.data.status == "error") {
+            this.$toasted.show(resp.data.message, {
+              position: "top-center",
+              type: "error",
+              duration: 4000,
+            });
+          }
+        })
+    },
     searchProducts() {
       this.$Progress.start();
       axios

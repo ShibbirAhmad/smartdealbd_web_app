@@ -57,11 +57,8 @@ const state = {
     //for check admin page view permisson
     view_permission:false,
 
-    image_base_link: '/../public/storage/',
-    image_thumbnail_link: '/../public/storage/images/product_thumbnail_img/',
-
-    //for home page products
-    home_page_products: "",
+    image_base_link: '/../storage/',
+    image_thumbnail_link: '/../storage/images/product_thumbnail_img/',
 
     //general setting
     general_setting:"",
@@ -136,10 +133,6 @@ const getters = {
         return state.image_thumbnail_link;
     },
 
-    home_page_products(state) {
-
-        return state.home_page_products;
-    },
 
     sale_campaign(state) {
         return state.sale_campaign;
@@ -313,16 +306,6 @@ const actions = {
                 context.commit('product_images', resp.data.product_images)
             })
     },
-    home_page_products(context) {
-        axios.get('/_public/products')
-            .then(resp => {
-                 console.log(resp)
-                context.commit('home_page_products', resp.data)
-            })
-            .catch(e => {
-                // console.log(e);
-            })
-    },
 
     general_setting(context){
         axios.get("/_public/api/get/general/setting")
@@ -407,9 +390,7 @@ const mutations = {
     product_images(state, payload) {
         return state.product_images = payload;
     },
-    home_page_products(state, payload) {
-        return state.home_page_products = payload;
-    },
+
 
     general_setting(state,payload){
         return state.general_setting=payload ;

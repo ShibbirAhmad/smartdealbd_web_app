@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Cart;
+
 use Picqer;
 use App\User;
 use App\Models\Order;
+use GuzzleHttp\Client;
 use App\Models\Product;
 use App\Models\Customer;
 use App\Models\OrderItem;
-use Illuminate\Support\Str;
-use App\Models\OrderBarcode;
 use Illuminate\Http\Request;
-use App\Models\CustomerWallet;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use GuzzleHttp\Client;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 
 class OrderController extends Controller
@@ -36,15 +34,14 @@ class OrderController extends Controller
             'name' => 'required ',
             'address' => 'required',
             'city' => 'required',
-            'sub_city' => 'required',
         ]);
 
         DB::transaction(function() use($request){
 
                $total=Cart::total();
                $discount=0 ;
-                if( $request->coupon_discount > 0 || $request->premium_member_discount > 0 ){
-                    $total_dicount= intval($request->premium_member_discount) + intval($request->coupon_discount) ;
+                if( $request->coupon_discount > 0  ){
+                    $total_dicount= intval($request->coupon_discount) ;
                     $total=$total - $total_dicount;
                     $discount += $total_dicount ;
                 }
@@ -58,30 +55,25 @@ class OrderController extends Controller
                 $order->customer_address=$request->address;
                 $order->invoice_no=$invoice;
                 $order->order_type=1;
-                $order->city_id=$request->city;
+                $order->city_id=$request->city ;
                 $order->shipping_cost=$request->shipping_cost ?? 0;
                 $order->discount=$discount ;
                 $order->paid=$request->paid ?? 0;
                 $order->total=$total;
                 $order->status=1;
-                $order->sub_city_id=$request->sub_city;
+                $order->sub_city_id=$request->sub_city ?? 0;
                 $order->save();
 
                 foreach(Cart::content() as $product){
-                //update product stock
-                // $product_stock=Product::where('id',$product->id)->first();
-                // $product_stock->stock=$product_stock->stock - $product->qty;
-                // $product_stock->save();
-                //inserting order items
-                $details=new OrderItem();
-                $details->order_id=$order->id;
-                $details->product_id=$product->id;
-                $details->price=$product->price;
-                $details->quantity=$product->qty;
-                $details->attribute_id=$product->options->attribute_id??null;
-                $details->variant_id=$product->options->variant_id??null;
-                $details->total=$product->qty*$product->price;
-                $details->save();
+                    $details=new OrderItem();
+                    $details->order_id=$order->id;
+                    $details->product_id=$product->id;
+                    $details->price=$product->price;
+                    $details->quantity=$product->qty;
+                    $details->attribute_id=$product->options->attribute_id??null;
+                    $details->variant_id=$product->options->variant_id??null;
+                    $details->total=$product->qty*$product->price;
+                    $details->save();
                 }
             //sending message
              $invoice=$order->invoice_no;
@@ -108,36 +100,6 @@ class OrderController extends Controller
 // end online payment transaction
 
     public function onlinePayment($order_id) {
-
-        $order=Order::findOrFail($order_id);
-        $customer=Customer::where('id',$order->customer_id)->first();
-
-        $name = $customer->name;
-        $phone =$order->customer_phone;
-        $amount = ( ( $order->total + $order->shipping_cost ) - $order->discount  ) ;
-        $trnxId = 'trnx_' . Str::uuid(); // must be unique
-
-        $client = new \GuzzleHttp\Client();
-        $response = $client->request('POST', 'https://api.sheba.xyz/v1/ecom-payment/initiate', [
-            'headers' => [
-                'client-id' => "281465963",
-                'client-secret' => "CkXsLasMTxanu4dm6WOTdmgzqHxvtFGpi3D5kosqsyxun90rbNzXT1hKi9ZKlA8n6twGIoQSz343CR4EIzCSG8vCFETgnA6jbVNvg9JeHQiansaFB6RtptAQ",
-            ],
-            'form_params' => [
-                'customer_name' => $name,
-                'customer_mobile' => $phone,
-                'amount' => $amount,
-                'transaction_id' => $trnxId,
-                'success_url' => 'https://madinafashion.com.bd/online/payment/success', // success url
-                'fail_url' => 'https://madinafashion.com.bd/online/payment/failed', // failed url
-            ],
-        ]);
-
-      //  echo $response->getStatusCode(); // 200
-     //   echo $response->getHeaderLine('content-type'); // 'application/json; charset=utf8'
-        return $response->getBody(); // '{"id": 1420053, "name": "guzzle", ...}'
-
-         session()->put('order_id', $order_id);
 
     }
 

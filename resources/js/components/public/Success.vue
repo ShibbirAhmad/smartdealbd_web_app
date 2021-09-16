@@ -1,28 +1,12 @@
 <template>
   <div class="wrapper-wide">
 
-    <frontend-header :categories="categories"></frontend-header>
+    <frontend-header></frontend-header>
 
     <div id="container">
       <div class="container">
-        <!-- Breadcrumb End-->
 
-        <div class="row">
-          <div class="empty-cart">
-            <h4 class="text-uppercase">Thank you for your order</h4>
-            <img style="    margin-bottom: 50px;
-    margin-top: 50px;max-width:80%;" src="https://static-cms.hotjar.com/images/blog-17-Featured-1.width-750.png">
-            <br/>
-            <a href="/" style="    background: rgb(11 19 244);
-    color: #fff;
-    padding: 12px 15px;
-    border-radius:5px;">Home</a>
-            <a href="/user/dashboard" style="    background: rgb(11 19 244);
-    color: #fff;
-    padding: 12px 15px;
-    border-radius: 5px;">Dashboard</a>
-          </div>
-        </div>
+
       </div>
     </div>
     <frontend-footer></frontend-footer>
@@ -30,32 +14,50 @@
 </template>
 
 
-
+<script>
+export default {
+  created(){
+    setTimeout(()=>{
+      this.showAlert();
+    },1000);
+  },
+  methods: {
+    showAlert(){
+              Swal.fire({
+              position: 'top-center',
+              type: "success",
+              title: '<strong><h2>আপনার অর্ডারটি কনফার্ম হয়েছে, ধন্যবাদ</h2></strong>',
+              html:'<h4>বিস্তারিত জানাতে আমরা আপনাকে ফোন করবো (সকাল ৯ টা থেকে রাত ৯ টার মধ্যে )</h4>',
+              confirmButtonText: `<h6><a style="color:#fff" href="/">View More</a></h6>`,
+              showCancelButton: true,
+              cancelButtonText: `<h6><a style="color:#fff" href="/">Close</a></h6>`,
+              cancelButtonColor: 'red',
+              duration: 5000,
+            });
+    }
+  },
+}
+</script>
 
 <style>
-.empty-cart {
-  width: 50%;
-  background: #fff;
-  text-align: center;
-  margin-left: 25%;
-  padding: 50px 50px;
-  box-shadow: 3px 3px 3px #ddd;
+
+
+
+.swal2-popup {
+    display: none;
+    position: relative;
+    box-sizing: border-box;
+    grid-template-columns: minmax(0,100%);
+    width: 50em !important;
+    max-width: 100%;
+    padding: 0 0 1.25em;
+    border: none;
+    border-radius: 5px;
+    color: #545454;
+    font-family: inherit;
+    font-size: 1rem;
 }
-.payment_option {
-  background: #e6eaf2;
-  padding: 15px 15px;
-  text-align: center;
-  font-size: 13px;
-  border-radius: 5px;
-  cursor: pointer;
-  height: 70px;
-  margin-top: 8px;
-}
-.payment_option h4 {
-  font-size: 16px;
-  font-weight: 600;
-}
-.payment_option_active {
-  border: 1px solid #ff4d03;
-}
+
+
+
 </style>

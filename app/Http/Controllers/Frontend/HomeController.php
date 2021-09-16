@@ -66,8 +66,8 @@ class HomeController extends Controller
              $category->{'products'}=Product::where('category_id',$category->id)
                                            ->where('status',1)
                                            ->select('id','name','thumbnail_img','price','sale_price','slug','discount')
-                                          ->get()
-                                          ->take(10);
+                                          ->with('productAttribute')->get()
+                                          ->take(24);
         }
          return response()->json($categories);
     }
@@ -117,14 +117,14 @@ class HomeController extends Controller
     public function categoryWiseProduct(Request $request)
     {
       $category=Category::where('slug',$request->slug)->first();
-      $products=Product::where('category_id',$category->id)->paginate(12);
+      $products=Product::where('category_id',$category->id)->with('productAttribute')->paginate(12);
       return response()->json($products);
     }
 
     public function categoryWiseProductPriceFilter(Request $request){
 
         $category=Category::where('slug',$request->slug)->first();
-        $products=Product::where('category_id',$category->id)->where('price','>=',$request->min_price)->where('price','<=',$request->max_price)->paginate(20);
+        $products=Product::where('category_id',$category->id)->where('price','>=',$request->min_price)->where('price','<=',$request->max_price)->with('productAttribute')->paginate(20);
         return response()->json([
             "status" => "OK",
             "products" => $products ,
@@ -196,7 +196,7 @@ class HomeController extends Controller
 
     public function subCategoryWiseProduct(Request $request){
          $sub_category=SubCategory::where('slug',$request->slug)->first();
-        $products=Product::where('sub_category_id',$sub_category->id)->paginate(8);
+        $products=Product::where('sub_category_id',$sub_category->id)->with('productAttribute')->paginate(8);
         return response()->json($products);
     }
 
@@ -204,7 +204,7 @@ class HomeController extends Controller
         $products=Product::where('name','like', '%' . $search . '%')
                           ->orWhere('product_code','like', '%' . $search . '%')
                           ->orWhere('details','like', '%' . $search . '%')
-                          ->where('status',1)
+                          ->where('status',1)->with('productAttribute')
                          ->get();
         return \response()->json($products);
 
@@ -222,7 +222,7 @@ class HomeController extends Controller
     public function subSubCategoryWiseProduct(Request $request){
 
         $sub_sub_category=SubSubCategory::where('slug',$request->slug)->first();
-        $products=Product::where('sub_sub_category_id',$sub_sub_category->id)->where('status',1)->paginate(8);
+        $products=Product::where('sub_sub_category_id',$sub_sub_category->id)->where('status',1)->with('productAttribute')->paginate(8);
         return response()->json($products);
     }
 
@@ -234,7 +234,7 @@ class HomeController extends Controller
                 $orderBy='DESC';
             }
             $category=Category::where('slug',$request->slug)->first();
-            $products=Product::where('category_id',$category->id)->orderBy('price',$orderBy)->where('status',1)->get();
+            $products=Product::where('category_id',$category->id)->orderBy('price',$orderBy)->where('status',1)->with('productAttribute')->get();
             return response()->json([
                     "products" => $products ,
             ]);
@@ -249,7 +249,7 @@ class HomeController extends Controller
             $orderBy='DESC';
         }
         $sub_category=SubCategory::where('slug',$request->slug)->first();
-        $products=Product::where('sub_category_id',$sub_category->id)->orderBy('price',$orderBy)->where('status',1)->get();
+        $products=Product::where('sub_category_id',$sub_category->id)->orderBy('price',$orderBy)->where('status',1)->with('productAttribute')->get();
         return response()->json([
                 "products" => $products ,
         ]);
@@ -264,7 +264,7 @@ class HomeController extends Controller
             $orderBy='DESC';
         }
         $sub_sub_category=SubSubCategory::where('slug',$request->slug)->first();
-        $products=Product::where('sub_sub_category_id',$sub_sub_category->id)->orderBy('price',$orderBy)->where('status',1)->get();
+        $products=Product::where('sub_sub_category_id',$sub_sub_category->id)->orderBy('price',$orderBy)->where('status',1)->with('productAttribute')->get();
         return response()->json([
             "products" => $products
         ]);

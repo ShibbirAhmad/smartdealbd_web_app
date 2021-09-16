@@ -21,7 +21,7 @@
                         type="text"
                         name="name"
                         class="form-control"
-                        autocomplete="off"
+                         placeholder="Ex:mohammad"
                         :class="{ 'is-invalid': form.errors.has('name') }"
                         v-model="form.name"
                         autofocus
@@ -36,7 +36,6 @@
                         name="mobile_no"
                         placeholder="01xxx-xxxxx"
                         class="form-control"
-                        autocomplete="off"
                         maxlength="11"
                         :class="{ 'is-invalid': form.errors.has('mobile_no') }"
                         v-model="form.mobile_no"
@@ -59,7 +58,7 @@
 
                       <br />
                       <div class="form-group">
-                        <label class="control-label" for="input-email">City</label>
+                        <label class="control-label" for="city">Select Your Area</label>
                         <select
                           name="city"
                          :class="{ 'is-invalid': form.errors.has('city') }"
@@ -67,36 +66,22 @@
                           v-model="form.city"
                           @change="selectCity"
                         >
-                          <option value="" selected disabled>Select City</option>
-                          <option
-                            value
-                            v-for="(city,index) in cities"
-                            :key="index"
-                            :value="city.id"
-                          >{{city.name}}</option>
+
+                           <option value="Inside-Dhaka">Inside Dhaka</option>
+                           <option value="Outside-Dhaka">Outside Dhaka</option>
                         </select>
                         <has-error :form="form" field="city"></has-error>
                       </div>
 
-                       <div class="form-group">
-                    <label>Sub City</label>
-                    <select @change="validation" class="form-control" name="sub_city"  :class="{ 'is-invalid': form.errors.has('sub_city') }" v-model="form.sub_city">
-                      <option disabled value="">select sub city</option>
-                      <option v-if="sub_cities.length > 0 " v-for="sub_city in sub_cities" :key="sub_city.id" :value="sub_city.id">{{sub_city.name}}</option>
-                    </select>
-                                        <has-error :form="form" field="sub_city"></has-error>
-
-                  </div>
-                      <br />
                     </div>
-                    <button
-
-                      class="btn btn-block btn-primary"
+                    <div class="form-group">
+                       <button   class="btn btn-block btn-primary"
                       type="submit"
-                      :disabled="form.busy || disabled"
-                    >
+                      :disabled="form.busy || disabled" >
+
                       <i class="fa fa-spinner fa-spin" v-if="form.busy"></i>PLACE ORDER
                     </button>
+                    </div>
                   </form>
                 </div>
               </div>
@@ -111,7 +96,7 @@
                           <td colspan="4"></td>
                           <td>
                             :
-                            <span v-if="form.shipping_cost">&#2547; {{form.total}}</span>
+                            <span v-if="form.shipping_cost">&#2547;{{form.total}}</span>
                             <span v-else>.....</span>
                           </td>
                         </tr>
@@ -122,31 +107,18 @@
                           <td colspan="4"></td>
                           <td>
                             :
-                            <span v-if="form.coupon_discount">&#2547; {{form.coupon_discount}}</span>
+                            <span v-if="form.coupon_discount">&#2547;{{form.coupon_discount}}</span>
                           </td>
                         </tr>
 
                         <br />
-
-                         <tr v-if="form.premium_member_discount > 0">
-                          <td>Membership Discount</td>
-                          <td colspan="4"></td>
-                          <td>
-                            :
-                            <span v-if="form.premium_member_discount">&#2547; {{form.premium_member_discount}}</span>
-                          </td>
-                        </tr>
-
-
-                        <br />
-
 
                         <tr>
                           <td>Shipping cost</td>
                           <td colspan="4"></td>
                           <td>
                             :
-                            <span v-if="form.shipping_cost">&#2547; {{ form.shipping_cost }}</span>
+                            <span v-if="form.shipping_cost">&#2547;{{ form.shipping_cost }}</span>
                             <span v-else>.....</span>
                           </td>
                         </tr>
@@ -158,7 +130,7 @@
                                  :
                             <span
                               v-if="form.shipping_cost"
-                            >&#2547; {{(parseInt(form.total.replace(',','') - parseInt(form.coupon_discount ) - parseInt(form.premium_member_discount)   )) + parseInt(form.shipping_cost)}}</span>
+                            >&#2547;{{(parseInt(form.total.replace(',','') - parseInt(form.coupon_discount )  )) + parseInt(form.shipping_cost)}}</span>
                             <span v-else>.....</span>
                           </td>
                         </tr>
@@ -172,18 +144,7 @@
                 <br/>
                 <div class="custom-box" >
                    <ul class="list-group">
-                     <!-- <li class="list-group-item">
-                        <h5  class="extra_d " > your available wallet point is
-                       {{ customer_wallet_point}} = &#2547;
-                        {{ (  parseInt(customer_wallet_point) / parseInt(general_setting.wallet_point_value) )  }}
-                         <a class="btn btn-primary p_a_btn">apply</a>
-                       </h5>
-                        </li> -->
-                      <li v-show="member_type.length" class="list-group-item">
-                        <h5  class="extra_d " > you are now {{ member_type }} member
-                         <a @click="applyMemberDiscount" class="btn btn-primary p_a_btn">apply {{ member_discount }} % discount </a>
-                       </h5>
-                      </li>
+
                      <li class="list-group-item">  <h5  class=" extra_d coupon-apply" @click.prevent="coupon = !coupon">Have you any cupon? <i class="fa fa-angle-down"></i> </h5>  </li>
                    </ul>
 
@@ -210,6 +171,7 @@
           </div>
         </div>
       </div>
+
     </div>
     <frontend-footer></frontend-footer>
   </div>
@@ -220,9 +182,7 @@ import "vue-loading-overlay/dist/vue-loading.css";
 import { Form, HasError } from "vform";
 
 export default {
-  props: ["categories"],
   created() {
-    this.getCity();
     this.getCartContent();
     this.$store.dispatch('general_setting');
     setTimeout(() => {
@@ -236,13 +196,11 @@ export default {
         mobile_no: "",
         name: "",
         address: "",
-        city: "",
+        city: "Inside-Dhaka",
         total: "",
         cart: "",
         shipping_cost: "",
-        sub_city:"",
         coupon_discount: 0,
-        premium_member_discount: 0,
         coupon_type: "",
         coupon_id: "",
       }),
@@ -250,32 +208,26 @@ export default {
       fullPage: true,
       cities: "",
       cart_content: {},
-      customer_wallet_point:0,
-      member_type:0,
-      member_discount:0,
       product_discount:0,
       cart: {
         total: 0,
       },
       disabled: true,
-      sub_cities:"",
        coupon_code: "",
        coupon:false
     };
   },
   methods: {
+
     chekout() {
       this.form
         .post("/_public/checkout")
         .then((resp) => {
           console.log(resp);
           if (resp.data.status == "SUCCESS") {
-             window.open('/user/Checkout/success','_self')
-             this.$toasted.show(resp.data.message, {
-              type: "success",
-              position: "top-center",
-              duration: 5000,
-            });
+
+            window.open('/user/Checkout/success','_self')
+
           } else {
             this.$toasted.show("something went to wrong", {
                 type: "error",
@@ -294,24 +246,14 @@ export default {
         });
     },
 
-    getCity() {
-      axios
-        .get("/_public/others")
-        .then((resp) => {
-          this.cities = resp.data.cities;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-
     selectCity() {
-      for (let i = 0; i < this.cities.length; i++) {
-        if (this.cities[i].id == this.form.city) {
-          this.form.shipping_cost = this.cities[i].delivery_charge;
+
+      if (this.form.city == "Inside-Dhaka") {
+           this.form.shipping_cost = 70 ;
+        }else if(this.form.city == "Outside-Dhaka"){
+           this.form.shipping_cost = 120 ;
         }
-      }
-     this.subCity();
+
       this.validation();
     },
 
@@ -340,44 +282,9 @@ export default {
         return;
       }
 
-      if(!this.form.sub_city){
-        this.disabled=true;
-        return;
-      }
-
       this.disabled = false;
     },
-    subCity(){
-    if(this.form.city){
-       this.isLoading=true;
-         axios.get('/api/city/wise/sub/city/'+this.form.city)
-        .then(resp=>{
 
-         if(resp.data.length){
-                if( this.sub_cities.length > 0){
-                  this.sub_cities="";
-                }
-                if(this.form.sub_city){
-                  this.form.sub_city="";
-                }
-                this.sub_cities=resp.data;
-
-              }else{
-                this.form.sub_city="";
-                this.sub_cities="";
-                alert('No Sub City Under Selected Under City');
-              }
-            this.isLoading=false
-            this.validation()
-
-          console.log(resp)
-        })
-        .catch(e=>{
-          console.log(e);
-          this.isLoading=false;
-        })
-     }
-    },
      applyCoupon() {
       if (this.coupon_code.length <= 0) {
         alert("Coupon Code Is Empty");
@@ -472,7 +379,23 @@ export default {
 };
 </script>
 
-<style>
+<style >
+
+.swal2-popup {
+    display: none;
+    position: relative;
+    box-sizing: border-box;
+    grid-template-columns: minmax(0,100%);
+    width: 50em !important;
+    max-width: 100%;
+    padding: 0 0 1.25em;
+    border: none;
+    border-radius: 5px;
+    color: #545454;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
 
 .extra_d {
   cursor: pointer;

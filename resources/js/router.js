@@ -17,37 +17,6 @@ const routes = [
 
     },
 
-
-    {
-        path: '/product/view/:slug',
-        component: () => import(/* webpackChunkName: "single_product" */'./components/public/SingleProduct'),
-        name: 'single',
-        props: true,
-        meta: {
-            title: 'Singe product'
-        }
-    },
-
-    {
-        path: '/category/products/:slug',
-        component: () => import(/* webpackChunkName: "public_category" */'./components/public/CategoryWiseProduct'),
-        name: 'PublcaCategory',
-
-        meta: {
-            title: 'Category wise product'
-        }
-    },
-
-    {
-        path: '/sub/caetgory/products/:slug',
-        component: () => import(/* webpackChunkName: "public_sub_category" */'./components/public/SubCategoryProduct'),
-        name: 'PublicSubCategory',
-
-        meta: {
-            title: 'sub-category wise product'
-        }
-    },
-
     {
         path: '/sub/sub/caetgory/products/:slug',
         component: () => import(/* webpackChunkName: "public_sub_sub_category" */'./components/public/SubSubCategoryProduct'),
@@ -68,14 +37,39 @@ const routes = [
         }
     },
 
+
     {
-        path: '/public/order/success',
-        component: () => import(/* webpackChunkName: "order_welcome" */'./components/public/OrderWelcome.vue'),
-        name: 'order_welcome',
+        path: '/sub/caetgory/products/:slug',
+        component: () => import(/* webpackChunkName: "public_sub_category" */'./components/public/SubCategoryProduct'),
+        name: 'PublicSubCategory',
+
         meta: {
-            title: 'order confirmation '
+            title: 'sub-category wise product'
         }
     },
+
+
+    {
+        path: '/category/products/:slug',
+        component: () => import(/* webpackChunkName: "public_category" */'./components/public/CategoryWiseProduct'),
+        name: 'PublcaCategory',
+
+        meta: {
+            title: 'Category wise product'
+        }
+    },
+
+
+    {
+        path: '/product/:slug',
+        component: () => import(/* webpackChunkName: "single_product" */'./components/public/SingleProduct.vue'),
+        name: 'single',
+        props: true,
+        meta: {
+            title: 'product details'
+        }
+    },
+
 
     {
         path: '/how/to/buy',

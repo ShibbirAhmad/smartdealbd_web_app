@@ -371,11 +371,10 @@
 </template>
 
 <script>
-import Index from "../Index";
-import { Form } from "vform";
+
 
 export default {
-  components: { Index },
+
 
   created() {
    this.ordersList();
@@ -441,10 +440,8 @@ export default {
         .then((resp) => {
           console.log(resp);
           // console.log(resp);
-
-          //finish progress bar after resp
+          //finish proress bar after resp
           this.$Progress.finish();
-
           //only success resp
           if (resp.data.status == "SUCCESS") {
             this.orders = resp.data.orders;
@@ -455,7 +452,7 @@ export default {
 
           //else show a error
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 5000,
@@ -465,7 +462,7 @@ export default {
         .catch((error) => {
           //finish progress bar after resp
           this.$Progress.finish();
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -508,7 +505,7 @@ export default {
           }
           //not resp success.....
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -517,7 +514,7 @@ export default {
         })
         .catch((error) => {
           //end progress bar after resp
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -549,7 +546,7 @@ export default {
           }
           //for any kind of error resp .......
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -558,7 +555,7 @@ export default {
         })
         .catch((error) => {
           //end progress bar after resp
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -591,7 +588,7 @@ export default {
           }
           //for any kind off error resp
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -600,7 +597,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -631,7 +628,7 @@ export default {
           }
           //any kind of error resp
           else {
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -640,7 +637,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -673,7 +670,7 @@ export default {
           else {
             this.$Progress.finish();
 
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -682,7 +679,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -715,7 +712,7 @@ export default {
           else {
             this.$Progress.finish();
 
-            this.$toasted.show("some thing want to wrong", {
+            this.$toasted.show("something went to wrong", {
               type: "error",
               position: "top-center",
               duration: 2000,
@@ -724,7 +721,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.$toasted.show("some thing want to wrong", {
+          this.$toasted.show("something went to wrong", {
             type: "error",
             position: "top-center",
             duration: 4000,
@@ -755,7 +752,7 @@ export default {
           //for any kind of error
           .catch((error) => {
             console.log(error);
-            alert("some thing want wrong");
+            alert("something went wrong");
           });
       }
       //if search lenght smaller then 2, then excute orderist method .......
