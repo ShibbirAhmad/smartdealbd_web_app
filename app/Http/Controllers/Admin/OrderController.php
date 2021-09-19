@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\BalanceInsertAdmin;
 use App\Models\ResellerOrderDetails;
 
 
@@ -163,6 +164,14 @@ class OrderController extends Controller
                 $credit->date = date('Y-m-d');
                 $credit->insert_admin_id=session()->get('admin')['id'];
                 $credit->save();
+                //inserting balance add history
+                $balance_insert = new BalanceInsertAdmin();
+                $balance_insert->admin_id= session()->get('admin')['id'];
+                $balance_insert->balance_id= $order->paid_by;
+                $balance_insert->order_id= $order->id;
+                $balance_insert->amount= $order->paid;
+                $balance_insert->save();
+
               }
 
 
@@ -218,6 +227,21 @@ class OrderController extends Controller
                 $credit->date = date('Y-m-d');
                 $credit->insert_admin_id=session()->get('admin')['id'];
                 $credit->save();
+
+                //inserting balance add history
+                $exit_balance = BalanceInsertAdmin::where('order_id',$order->id)->where('balance_id',$credit->balance_id)->first();
+                if(!empty($exit_balance)){
+                    $exit_balance->amount=$order->paid;
+                    $exit_balance->save();
+                }else {
+                    $exit_balance->delete();
+                    $balance_insert = new BalanceInsertAdmin();
+                    $balance_insert->admin_id= session()->get('admin')['id'];
+                    $balance_insert->balance_id= $request->paid_by;
+                    $balance_insert->order_id= $order->id;
+                    $balance_insert->amount= $order->paid;
+                    $balance_insert->save();
+                 }
               }
 
             $order_items=OrderItem::where('order_id',$order->id)->get();
@@ -233,10 +257,10 @@ class OrderController extends Controller
             foreach($request->products as $product){
                // return $product['product_id'];
                 //update product stock before insert item
-                $product_item=Product::where('id',$product['product_id'])->first();
-                $product_item->stock;
-                $product_item->stock=$product_item->stock - $product['quantity'];
-                $product_item->save();
+                // $product_item=Product::where('id',$product['product_id'])->first();
+                // $product_item->stock;
+                // $product_item->stock=$product_item->stock - $product['quantity'];
+                // $product_item->save();
 
                 $details=new OrderItem();
                 $details->order_id=$order->id;
@@ -336,6 +360,20 @@ class OrderController extends Controller
                 $credit->insert_admin_id=session()->get('admin')['id'];
                 $credit->balance_id=$request->credit_in;
                 $credit->save();
+
+                //inserting balance add history
+                $balance_is_exist = BalanceInsertAdmin::where('order_id',$order->id)->where('balance_id',$request->credit_in)->first();
+                if(!empty($balance_is_exist)){
+                    $balance_is_exist->amount= $balance_is_exist->amount +  $credit->amount;
+                    $balance_is_exist->save();
+                }else {
+                    $balance_insert = new BalanceInsertAdmin();
+                    $balance_insert->admin_id= session()->get('admin')['id'];
+                    $balance_insert->balance_id= $request->credit_in;
+                    $balance_insert->order_id= $order->id;
+                    $balance_insert->amount= $credit->amount;
+                    $balance_insert->save();
+                 }
             }
 
         });

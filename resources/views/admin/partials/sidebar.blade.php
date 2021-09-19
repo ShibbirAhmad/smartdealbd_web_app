@@ -144,10 +144,12 @@ $admin = session()->get('admin');
                     <li>
                         <router-link :to="{ name: 'fondtransfer'}"><i class="fa fa-eye"></i>Fund Transfer</router-link>
                     </li>
-                      <li>
-                        <router-link :to="{ name: 'balance'}"><i class="fa fa-eye"></i>Mange Balance</router-link>
+                     <li>
+                        <router-link :to="{ name: 'balance'}"><i class="fa fa-eye"></i> Balance List</router-link>
                     </li>
-
+                     <li>
+                        <router-link :to="{ name: 'balance_insert_admin'}"><i class="fa fa-eye"></i> Balance Insert History</router-link>
+                    </li>
                 </ul>
             </li>
             @endif

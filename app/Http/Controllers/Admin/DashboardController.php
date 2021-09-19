@@ -3,18 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
-use App\Models\Debit;
+use App\Models\Admin;
 use App\Models\Order;
-use App\Models\Credit;
 use App\Models\Balance;
 use App\Models\Product;
-use App\Models\Purchase;
-use App\Models\SubCategory;
 use App\Models\Purchaseitem;
 use Illuminate\Http\Request;
-use App\Models\SubSubCategory;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\BalanceInsertAdmin;
 
 class DashboardController extends Controller
 {
@@ -77,6 +74,22 @@ class DashboardController extends Controller
 
 
 
+    public function BalanceInsertHistory(){
+
+         $admins = Admin::where('status',1)->select('id','name','image')->get();
+         foreach ($admins as $admin) {
+              $admin->{'insert_amount_today'} = BalanceInsertAdmin::where('admin_id',$admin->id)->where('created_at','>=',Carbon::today()->startOfDay())->where('created_at','<=',Carbon::today()->endOfDay())->sum('amount');
+              $admin->{'insert_amount_yesterday'} = BalanceInsertAdmin::where('admin_id',$admin->id)->where('created_at','>=',Carbon::yesterday()->startOfDay())->where('created_at','<=',Carbon::yesterday()->endOfDay())->sum('amount');
+              $admin->{'insert_amount_this_week'} = BalanceInsertAdmin::where('admin_id',$admin->id)->where('created_at','>=',Carbon::today()->subDays('7')->startOfDay())->where('created_at','<=',Carbon::today()->endOfDay())->sum('amount');
+              $admin->{'insert_amount_this_month'} = BalanceInsertAdmin::where('admin_id',$admin->id)->where('created_at','>=',Carbon::today()->subDays('30')->startOfDay())->where('created_at','<=',Carbon::today()->endOfDay())->sum('amount');
+         }
+
+         return response()->json([
+                'status' => 'OK',
+                'admins' => $admins ,
+         ]);
+
+     }
 
 
 }

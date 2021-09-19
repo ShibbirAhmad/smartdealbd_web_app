@@ -689,7 +689,6 @@ export default {
 
     delivered(order, index) {
 
-
       axios.get("/api/balance/list")
         .then((resp) => {
           console.log(resp)

@@ -771,6 +771,9 @@ Route::group([
     Route::get('api/remove/membership/{id}','CustomerController@removeMemberShip');
 
 
+    //balane history
+    Route::get('api/balance/insert/admin/records','DashboardController@BalanceInsertHistory');
+
 
 });
 
