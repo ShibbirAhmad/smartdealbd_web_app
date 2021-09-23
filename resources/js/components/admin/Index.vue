@@ -701,9 +701,9 @@
                           top_s_product.product.product_code
                         }}</a>
                       </h6>
-                      <h6>
+                      <h4>
                         order today: <b>{{ top_s_product.total }} </b>
-                      </h6>
+                      </h4>
                     </div>
                   </div>
                 </carousel>
@@ -859,8 +859,8 @@ export default {
         let amount = (parseInt(credit_amount) - parseInt(debit_amount)) ;
         return amount ;
     },
-      //total balance
-      totalBalance(){
+    //total balance
+    totalBalance(){
         let debit_amount = 0 ;
         let credit_amount = 0 ;
 

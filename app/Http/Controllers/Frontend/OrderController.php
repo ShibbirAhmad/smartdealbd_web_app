@@ -171,4 +171,9 @@ class OrderController extends Controller
            return view('frontend.pdf.invoicePrint', \compact('orders'));
     }
 
+
+
+
+
+
 }

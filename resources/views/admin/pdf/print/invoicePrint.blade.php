@@ -140,15 +140,19 @@
                     <ul class="customer_info_list">
                         <li> <strong> Name:  {{ $order->customer_name ?? "" }} </strong>  </li>
                         <li> <strong> Mobile: {{ $order->customer_phone ?? "" }} </strong>  </li>
-                        <li> <strong> Address: </strong>        @if(!empty($order->customer->address))
-                                                                    {{ $order->customer->address. ',' }}
+                        <li> <strong> Address: </strong>     @if(!empty($order->customer_address))
+                                                                    {{ $order->customer_address. ',' }}
                                                                 @endif
                                                                 @if(!empty($order->sub_city->name))
                                                                 {{','.$order->sub_city->name.','}}
                                                                 @endif
                                                                 {{ $order->city->name ?? ''}}
+
                         </li>
                         <li> <strong> Invoice No: {{ $order->invoice_no }} </strong> </li>
+                        @if ($order->courier)
+                        <li> <strong> Courier:  {{ $order->courier->name ?? "" }} </strong> </li>
+                        @endif
                     </ul>
                         </div>
             <div class="invoice_header_right_section">
@@ -166,20 +170,20 @@
                 <table class="table table-bordered moha_tbl_inv" style="margin-top: 5px;">
 
                     <tbody>
-                   @if ($order->courier)
-                     <tr>
-                        <td colspan="7" class="text-left" style="text-transform: capitalize;"><b> Courier  :  {{ $order->courier->name ?? "" }} </b>
+
+                     {{-- <tr>
+                        <td colspan="7" class="text-left" style="text-transform: capitalize;"><b> Courier  :  </b>
                         </td>
-                    </tr>
-                   @endif
+                    </tr> --}}
+
                     <tr>
-                        <th  style="background-color: #04AA6D !important;" class="text-left ">No</th>
-                        <th  style="background-color: #04AA6D !important;" class="text-left ">Product Details</th>
-                        <th  style="background-color: #04AA6D !important;" class="text-left ">Size</th>
-                        <th  style="background-color: #04AA6D !important;" class="text-left ">Order No</th>
-                        <th  style="background-color: #04AA6D !important;" class="text-right ">Price</th>
-                        <th  style="background-color: #04AA6D !important;" class="text-right ">Qty</th>
-                        <th  style="background-color: #04AA6D !important;" class="text-right ">Total</th>
+                        <th  style="background-color: #ddd !important;" class="text-left ">No</th>
+                        <th  style="background-color: #ddd !important;" class="text-left ">Product Details</th>
+                        <th  style="background-color: #ddd !important;" class="text-left ">Size</th>
+                        <th  style="background-color: #ddd !important;" class="text-left ">Order No</th>
+                        <th  style="background-color: #ddd !important;" class="text-right ">Price</th>
+                        <th  style="background-color: #ddd !important;" class="text-right ">Qty</th>
+                        <th  style="background-color: #ddd !important;" class="text-right ">Total</th>
                     </tr>
                     @foreach($order->orderItem as $k=> $item)
 

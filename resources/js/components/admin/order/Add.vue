@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <admin-main></admin-main>
     <div class="content-wrapper">
       <section class="content-header">
@@ -87,34 +86,68 @@
                         'is-invalid': form.errors.has('customer_address'),
                       }"
                     />
-                    <has-error :form="form" field="customer_address"></has-error>
+                    <has-error
+                      :form="form"
+                      field="customer_address"
+                    ></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="note">Order Note</label>
+                    <input
+                      type="text"
+                      name="note"
+                      class="form-control"
+                      v-model="form.note"
+                    />
                   </div>
 
                   <div class="form-group">
                     <label>City</label>
-                    <select
-                      name="city"
+                    <input
+                      type="text"
                       class="form-control"
-                      v-model="form.city"
-                      @change="selectCity"
-                      :class="{ 'is-invalid': form.errors.has('city') }"
+                      v-model="city_name"
+                      @keyup="citySearch"
+                      @mouseenter="showCityBox"
+                      autocomplete="off"
+                    />
+                    <ul
+                        id="city_name_container"
+                       class="list-group" >
+                      <li
+                      style="cursor: pointer"
+                      v-for="(city, index) in cities"
+                      @click="selectCity(city)"
+                      :key="index"
+                      class="list-group-item city_name"
                     >
-                      <option>select city</option>
-                      <option v-for="city in cities" :value="city.id">
-                        {{ city.name }}
-                      </option>
-                    </select>
-                    <has-error :form="form" field="city"></has-error>
+                      {{ city.name }}
+                    </li>
+                    </ul>
+
+
                   </div>
 
                   <div class="form-group">
                     <label>Sub City</label>
-                    <select class="form-control" name="sub_city"  :class="{ 'is-invalid': form.errors.has('sub_city') }" v-model="form.sub_city">
+                    <select
+                      class="form-control"
+                      name="sub_city"
+                      :class="{ 'is-invalid': form.errors.has('sub_city') }"
+                      v-model="form.sub_city"
+                    >
                       <option disabled value="">select sub city</option>
-                      <option v-if="sub_cities.length > 0 " v-for="sub_city in sub_cities" :key="sub_city.id" :value="sub_city.id">{{sub_city.name}}</option>
+                      <option
+                        v-if="sub_cities.length > 0"
+                        v-for="sub_city in sub_cities"
+                        :key="sub_city.id"
+                        :value="sub_city.id"
+                      >
+                        {{ sub_city.name }}
+                      </option>
                     </select>
-                                        <has-error :form="form" field="sub_city"></has-error>
-
+                    <has-error :form="form" field="sub_city"></has-error>
                   </div>
 
                   <div class="form-group">
@@ -149,23 +182,15 @@
 
                   <div class="form-group">
                     <label>Status</label>
-                    <select name="status" v-model="form.status" class="form-control">
-                      <option value="3">Approved</option>
+                    <select
+                      name="status"
+                      v-model="form.status"
+                      class="form-control"
+                    >
+                      <option value="3">Confirmed</option>
                       <option value="2">Pending</option>
                     </select>
                   </div>
-
-                  <!-- <div class="form-group">
-                    <label>Order_type</label>
-                    <select
-                      name="status"
-                      v-model="form.order_type"
-                      class="form-control"
-                    >
-                      <option value="2">Admin Order</option>
-                      <option value="3">Whole sale</option>
-                    </select>
-                  </div> -->
                 </div>
               </div>
             </div>
@@ -192,7 +217,9 @@
 
                   <div class="row">
                     <div class="col-lg-12">
-                      <table class="table table-hover table-bordered table-striped ">
+                      <table
+                        class="table table-hover table-bordered table-striped"
+                      >
                         <thead>
                           <tr>
                             <th>#</th>
@@ -207,7 +234,7 @@
                         </thead>
                         <tbody v-if="products.length > 0">
                           <tr v-for="(product, index) in products" :key="index">
-                            <td  style="width:10px" >{{ index }}</td>
+                            <td style="width: 10px">{{ index }}</td>
                             <td>
                               {{ product.name + "-" + product.product_code }}
                               <input type="hidden" :value="product.id" />
@@ -222,7 +249,9 @@
                                 <option value>select variant</option>
                                 <option
                                   v-if="product.variants"
-                                  v-for="(product_variant, index) in product.variants"
+                                  v-for="(
+                                    product_variant, index
+                                  ) in product.variants"
                                   :key="index"
                                   :value="product_variant.variant.id"
                                 >
@@ -238,11 +267,13 @@
                                 @change="quantity(index)"
                                 style="width: 70px"
                               />
-                              <span class="badge badge-danger">{{ product.stock }}</span>
+                              <span class="badge badge-danger">{{
+                                product.stock
+                              }}</span>
                             </td>
                             <td>
                               <input
-                               style="width: 80px"
+                                style="width: 80px"
                                 v-model="form.products[index].price"
                                 @keyup="totalCalculation && quantity(index)"
                                 v-if="form.order_type == 3"
@@ -251,7 +282,9 @@
                             </td>
                             <td>{{ form.products[index].total }}</td>
                             <td>
-                              <a class="btn btn-danger btn-sm" @click="remove(index)"
+                              <a
+                                class="btn btn-danger btn-sm"
+                                @click="remove(index)"
                                 ><i class="fa fa-trash"></i
                               ></a>
                             </td>
@@ -285,16 +318,30 @@
                               />
                             </td>
                           </tr>
-                           <tr>
+                          <tr>
                             <td colspan="4"></td>
                             <td>Paid By</td>
                             <td colspan="2">
                               <div class="form-group">
-                                  <select class="form-control" v-model="form.paid_by">
-                                    <option value="select one" disabled>select one</option>
-                                    <option v-for="(balance,index) in balance" :key="index" :value="balance.id" > {{ balance.name }} </option>
-                                  </select>
-                                <has-error :form="form" field="paid_by"></has-error>
+                                <select
+                                  class="form-control"
+                                  v-model="form.paid_by"
+                                >
+                                  <option value="select one" disabled>
+                                    select one
+                                  </option>
+                                  <option
+                                    v-for="(balance, index) in balance"
+                                    :key="index"
+                                    :value="balance.id"
+                                  >
+                                    {{ balance.name }}
+                                  </option>
+                                </select>
+                                <has-error
+                                  :form="form"
+                                  field="paid_by"
+                                ></has-error>
                               </div>
                             </td>
                           </tr>
@@ -307,7 +354,7 @@
                           <tr v-if="products.length > 0">
                             <td colspan="4"></td>
                             <td>Amoutn due</td>
-                           <td colspan="2">{{ form.due }}</td>
+                            <td colspan="2">{{ form.due }}</td>
                           </tr>
 
                           <button
@@ -327,8 +374,6 @@
             </div>
           </div>
         </form>
-
-
       </section>
     </div>
   </div>
@@ -338,9 +383,6 @@
 import Vue from "vue";
 import { Form, HasError, AlertError } from "vform";
 import datePicker from "vue-bootstrap-datetimepicker";
-import Loading from "vue-loading-overlay";
-import "vue-loading-overlay/dist/vue-loading.css";
-Vue.use(Loading);
 
 Vue.component(HasError.name, HasError);
 
@@ -356,10 +398,11 @@ export default {
         customer_name: "",
         customer_address: "",
         city: "",
+        note: "",
         courier: "",
         products: [],
         shipping_cost: 0,
-         paid_by: "select one",
+        paid_by: "select one",
         status: 2,
         courier: "",
         total: 0,
@@ -367,9 +410,10 @@ export default {
         paid: 0,
         due: 0,
         order_type: 2,
-        sub_city:""
+        sub_city: "",
       }),
-      balance:'',
+      city_name: "",
+      balance: "",
       search_product_code: "",
       attribute_id: "",
       variant_id: "",
@@ -380,30 +424,45 @@ export default {
       products: [],
       product_attributes: null,
       product_variants: null,
-      cities: null,
+      cities: "",
       couriers: null,
       product_quantity: 1,
       errors: [],
       suggested_products: {},
       product_per_page: 10,
       base_link: this.$store.state.image_base_link,
-      sub_cities:""
+      sub_cities: "",
     };
   },
 
   //method initial for submit data
   methods: {
-   balanceList() {
-      axios
-        .get("/api/balance/list")
-        .then((resp) => {
-            this.balance = resp.data.balance;
-        })
+
+    showCityBox(){
+      document.getElementById('city_name_container').style.display='block';
+    },
+
+     hideCityBox(){
+      document.getElementById('city_name_container').style.display='none';
+    },
+
+    citySearch() {
+      if (this.city_name.length > 0) {
+        axios.get("/api/search/city/" + this.city_name).then((resp) => {
+          console.log(resp);
+          this.cities = resp.data.cities.data;
+        });
+      }
+    },
+    balanceList() {
+      axios.get("/api/balance/list").then((resp) => {
+        this.balance = resp.data.balance;
+      });
     },
     add() {
-      if (typeof(this.form.paid_by)=='string') {
-          alert('selecet any balance');
-          return ;
+      if (typeof this.form.paid_by == "string") {
+        alert("selecet any balance");
+        return;
       }
       //start progress bar when submit fomr
       this.$Progress.start();
@@ -441,11 +500,9 @@ export default {
     others() {
       axios
         .get("/others")
-
         //success resp only
         .then((resp) => {
           if (resp.data.status == "SUCCESS") {
-            this.cities = resp.data.cities;
             this.couriers = resp.data.couriers;
             this.loading = false;
           }
@@ -461,13 +518,13 @@ export default {
       console.log(length);
       //  alert(length)
 
-      if (length >3) {
+      if (length > 3) {
         this.$Progress.start();
         axios
           .get("/search/product/with/code/" + this.product_code)
 
           .then((resp) => {
-            console.log(resp)
+            console.log(resp);
             if (resp.data.status == "SUCCESS") {
               this.product_code = "";
               let product = {
@@ -481,13 +538,13 @@ export default {
               };
               for (let i = 0; i < resp.data.product.length; i++) {
                 //check the product stcok availity
-                if (resp.data.product[i].stock <= 0) {
-                  return Swal.fire({
-                    type: "warning",
-                    title: "Wopps....",
-                    html: `${resp.data.product[i].name} - <strong> ${resp.data.product[i].product_code} </strong> in <b>stcok not available</b>.`,
-                  });
-                }
+                // if (resp.data.product[i].stock <= 0) {
+                //   return Swal.fire({
+                //     type: "warning",
+                //     title: "Wopps....",
+                //     html: `${resp.data.product[i].name} - <strong> ${resp.data.product[i].product_code} </strong> in <b>stcok not available</b>.`,
+                //   });
+                // }
 
                 this.products.push(resp.data.product[i]);
                 product.id = resp.data.product[i].id;
@@ -502,16 +559,19 @@ export default {
             }
             //when not resp success
             else {
-              this.$toasted.show("Product not found with " + this.product_code, {
-                position: "top-center",
-                type: "danger",
-                duration: 2000,
-              });
+              this.$toasted.show(
+                "Product not found with " + this.product_code,
+                {
+                  position: "top-center",
+                  type: "danger",
+                  duration: 2000,
+                }
+              );
             }
             this.$Progress.finish();
           })
           .catch((error) => {
-           console.log(error);
+            console.log(error);
             this.$Progress.finish();
           });
       }
@@ -521,14 +581,17 @@ export default {
     searchCustomer() {
       if (this.form.customer_mobile.length == 11) {
         axios
-          .get("/search/customer/with/phone/number/" + this.form.customer_mobile)
+          .get(
+            "/search/customer/with/phone/number/" + this.form.customer_mobile
+          )
           .then((resp) => {
             //when com data from t resp
-             console.log(resp);
+            console.log(resp);
             if (resp.data) {
               if (resp.data.customer) {
                 (this.form.customer_name = resp.data.customer.customer_name),
-                  (this.form.customer_address = resp.data.customer.customer_address);
+                  (this.form.customer_address =
+                    resp.data.customer.customer_address);
                 this.form.city = resp.data.customer.city_id;
               }
               this.$toasted.show(resp.data.message, {
@@ -537,9 +600,6 @@ export default {
                 duration: 4000,
               });
             }
-          })
-          .catch((error) => {
-            //console.log(error);
           });
       }
     },
@@ -554,11 +614,11 @@ export default {
     // },
     //when chage qauntity
     quantity(index) {
-      if(parseInt(this.products[index].stock ) < parseInt(this.form.products[index].quantity)){
-        alert(`max quantity ${this.form.products[index].stock}`)
-        this.form.products[index].quantity=this.form.products[index].stock;
-        return;
-      }
+      // if(parseInt(this.products[index].stock ) < parseInt(this.form.products[index].quantity)){
+      //   alert(`max quantity ${this.form.products[index].stock}`)
+      //   this.form.products[index].quantity=this.form.products[index].stock;
+      //   return;
+      // }
       this.form.products[index].total =
         parseInt(this.form.products[index].price) *
         parseInt(this.form.products[index].quantity);
@@ -584,7 +644,10 @@ export default {
         this.form.paid = total;
         return;
       }
-      if (parseInt(this.form.discount) > parseInt(total) + parseInt(this.form.discount)) {
+      if (
+        parseInt(this.form.discount) >
+        parseInt(total) + parseInt(this.form.discount)
+      ) {
         Swal.fire({
           type: "warning",
           text: `why discount amount ${this.form.discount} bigger this total amount ${total} ?????`,
@@ -604,25 +667,18 @@ export default {
     },
 
     //select city
-    selectCity() {
+    selectCity(city) {
+     document.getElementById('city_name_container').style.display='none';
+      this.city_name=city.name ;
+      this.form.city = city.id;
+      this.cityWiseSubCity(city.id);
+      this.form.shipping_cost = city.delivery_charge;
 
-
-      let id = this.form.city;
-      this.cityWiseSubCity(id)
-      let cities = this.cities;
-      for (let i = 0; i < cities.length; i++) {
-        if (cities[i].id == id) {
-          this.form.shipping_cost = cities[i].delivery_charge;
-        }
-      }
-      if (id == 1) {
-        this.form.courier = 5;
-      }
       this.totalCalculation();
 
     },
-    cityWiseSubCity(city_id){
-
+    
+    cityWiseSubCity(city_id) {
       let loader = this.$loading.show({
         // Optional parameters
         container: this.fullPage ? null : this.$refs.formContainer,
@@ -634,30 +690,27 @@ export default {
         width: 100,
         height: 100,
       });
-      console.log(city_id)
+      console.log(city_id);
 
-        axios.get('/api/city/wise/sub/city/'+city_id)
-        .then(resp=>{
+      axios
+        .get("/api/city/wise/sub/city/" + city_id)
+        .then((resp) => {
+          if (resp.data.length) {
+            this.sub_cities = resp.data;
+          } else {
+            this.form.sub_city = "";
+            this.sub_cities = "";
+            alert("No sub city under selected city");
+          }
+          loader.hide();
 
-
-              if(resp.data.length){
-                this.sub_cities=resp.data;
-
-              }else{
-                this.form.sub_city="";
-                this.sub_cities="";
-                alert('No sub city under selected city')
-              }
-            loader.hide();
-
-          console.log(resp)
+          console.log(resp);
         })
-        .catch(e=>{
+        .catch((e) => {
           console.log(e);
           loader.hide();
-        })
-
-     },
+        });
+    },
 
     remove(index) {
       // console.log(index);
@@ -669,7 +722,10 @@ export default {
     search_suggested_product() {
       if (this.search_product_code.length >= 2) {
         axios
-          .get("/api/search/seggested/product/for/order/" + this.search_product_code)
+          .get(
+            "/api/search/seggested/product/for/order/" +
+              this.search_product_code
+          )
           .then((resp) => {
             console.log(resp);
             if (resp.data.status == "OK") {
@@ -680,8 +736,6 @@ export default {
         this.getSuggestingProducts();
       }
     },
-
-
   },
 
   computed: {},
@@ -737,5 +791,9 @@ export default {
   width: 80%;
   left: 10%;
   position: relative;
+}
+
+.display_city {
+  display: none;
 }
 </style>

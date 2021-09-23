@@ -2227,7 +2227,7 @@ const routes = [
         }
      },
 
-        {
+    {
         path: '/backend/balance/insert/history',
         name: 'balance_insert_admin',
         component: () => import(/*webpackChunkName: "balance_insert_admin" */'./components/admin/balance/BalanceInsertAdmin.vue'),
@@ -2235,7 +2235,17 @@ const routes = [
             requiresAuthAdmin: true,
              title : 'balance insert by admin'
         }
-     },
+    },
+
+    {
+        path: '/backend/balance/insert/details/:id',
+        name: 'balance_insert_details',
+        component: () => import(/*webpackChunkName: "balance_insert_details" */'./components/admin/balance/BalanceInsertAdminDetails.vue'),
+        meta: {
+            requiresAuthAdmin: true,
+             title : 'balance insert details'
+        }
+    },
 
     {
         path: '/backend/bill/statement/add',

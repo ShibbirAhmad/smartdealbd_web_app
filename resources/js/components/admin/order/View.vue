@@ -26,18 +26,7 @@
                           <strong> {{ order.customer_phone }} </strong>
                         </p>
                         <p class="address_line">
-                          Address:
-
-                          <span>
-                            {{ order.customer_address }}
-                          </span>
-                          <span v-if="order.sub_city">{{
-                            "," + order.sub_city.name
-                          }}</span>
-
-                          <strong>
-                            {{ "," + order.city.name }}
-                          </strong>
+                          Address: {{ order.customer_address }}
                         </p>
                         <p>
                           Invoice No: <strong> {{ order.invoice_no }} </strong>
@@ -68,7 +57,7 @@
                           Object.keys(order.reseller_order_details).length
                         "
                       >
-                        <label for="">Reseller Commision</label>
+                        <!-- <label for="">Reseller Commision</label>
                         <div style="display: flex">
                           <input
                             type="text"
@@ -82,7 +71,7 @@
                           >
                             update
                           </button>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                     <div class="col-md-1 col-sm-1"></div>

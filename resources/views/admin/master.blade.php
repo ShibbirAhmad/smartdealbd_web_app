@@ -85,75 +85,127 @@
     .action-btn {
     width: 70px !important;
     margin-bottom: 2px !important;
-}
-li.dropdown a {
-    color: #fff !important;
-}
-li.dropdown a:hover {
-    color: #000 !important;
-}
-.invoice-header{
-    text-align: left;
-    display: none;
-}
-.invoice-header .address {
-    margin-top: 6px;
-    text-align: right;
-    position: absolute;
-    right: 50px;
+        }
+        li.dropdown a {
+            color: #fff !important;
+        }
+        li.dropdown a:hover {
+            color: #000 !important;
+        }
+        .invoice-header{
+            text-align: left;
+            display: none;
+        }
+        .invoice-header .address {
+            margin-top: 6px;
+            text-align: right;
+            position: absolute;
+            right: 50px;
 
-}
-.invoice-header .address p {
-    margin: 0 0px;
-    font-weight: bolder;
+        }
+        .invoice-header .address p {
+            margin: 0 0px;
+            font-weight: bolder;
 
-}
-.invoice-body{
-    margin-bottom: 30px;
-}
-.invoice-body p{
-    margin: 0 0px;
-}
-.toasted.toasted-primary.success {
-    width: 400px;
-    height: 55px;
-    font-size: 18px;
-}
-
-
-.toasted.toasted-primary.error {
-    width: 400px;
-    height: 55px;
-    font-size: 18px;
-    font-weight: bolder;
-}
-.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred{
-    height: 200px !important;
-}
-.permisson-denied {
-        text-align: center;
-
-}
-
-.permisson-denied img {
-    border: 5px solid red;
-    border-radius: 9px;
-}
-.content-wrapper{
-    min-height: 100vh !important;
-}
-html {
-  scroll-behavior: smooth;
-}
-.content{
-    background: none !important;
-}
+        }
+        .invoice-body{
+            margin-bottom: 30px;
+        }
+        .invoice-body p{
+            margin: 0 0px;
+        }
+        .toasted.toasted-primary.success {
+            width: 400px;
+            height: 55px;
+            font-size: 18px;
+        }
 
 
+        .toasted.toasted-primary.error {
+            width: 400px;
+            height: 55px;
+            font-size: 18px;
+            font-weight: bolder;
+        }
+        .ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred{
+            height: 200px !important;
+        }
+        .permisson-denied {
+                text-align: center;
 
-    /*.table tr:nth-child(even){background-color: #f2f2f2;}*/
+        }
 
-    /*.table tr:hover {background-color: #ddd;}*/
+        .permisson-denied img {
+            border: 5px solid red;
+            border-radius: 9px;
+        }
+        .content-wrapper{
+            min-height: 100vh !important;
+        }
+        html {
+        scroll-behavior: smooth;
+        }
+        .content{
+            background: none !important;
+        }
+
+
+        .order_statistic a {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 1pt 6pt rgb(150 165 237);
+            border: none;
+            padding: 42px 46px;
+            margin: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            font-family: serif;
+            width: 23%;
+            height: 100px;
+        }
+
+        sup{
+        font-weight: bold;
+        font-size: 28px;
+        }
+
+        .router-link-active {
+        border: 1.5px dashed !important ;
+        }
+
+        .action_container {
+            display: none;
+        }
+
+        .toggle_order_action{
+        display: block;
+        }
+
+
+    .vm--modal {
+        position: relative;
+        overflow: hidden;
+        box-sizing: border-box;
+        background-color: white;
+        border-radius: 3px;
+        box-shadow: 0 20px 60px -2px rgba(27, 33, 58, 0.4);
+        overflow-y: scroll !important;
+    }
+
+
+        @media only screen and (max-width:768px) {
+
+          .col-lg-11, .col-md-11, .col-lg-10,.col-md-10,.col-lg-6,.col-md-8,.col-lg-6,.col-md-6 {
+              overflow-x: auto ;
+          }
+
+          .order_statistic a {
+            width: 45%;
+            height: 100px;
+            padding: 42px 35px;
+           }
+
+        }
 
 </style>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -170,7 +222,7 @@ html {
 @endif
 @include('admin.partials.js')
 
-<script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/app.js') }}" ></script>
 
 <script>
 

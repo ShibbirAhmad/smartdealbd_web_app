@@ -770,10 +770,13 @@ Route::group([
     Route::get('api/get/membership/list','CustomerController@membersipList');
     Route::get('api/remove/membership/{id}','CustomerController@removeMemberShip');
 
-
     //balane history
     Route::get('api/balance/insert/admin/records','DashboardController@BalanceInsertHistory');
+    Route::get('api/balance/insert/admin/details/{id}','DashboardController@BalanceInsertHistoryDetails');
 
+    //order note routes
+    Route::get('api/add/order/note','OrderController@StoreOrderNote');
+    Route::get('api/get/order/note/list/{id}','OrderController@OrderNoteList');
 
 });
 

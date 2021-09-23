@@ -100,24 +100,44 @@
                   </div>
 
                   <div class="form-group">
-                    <label>City</label>
-                    <select
-                      name="city"
-                      id
+                    <label for="note">Order Note</label>
+                    <input
+                      type="text"
+                      name="note"
                       class="form-control"
-                      v-model="form.city"
-                      @change="selectCity"
-                      :class="{ 'is-invalid': form.errors.has('city') }"
-                    >
-                      <option value>select city</option>
-                      <option v-for="city in cities" :value="city.id">
-                        {{ city.name }}
-                      </option>
-                    </select>
-                    <has-error :form="form" field="city"></has-error>
+                      v-model="form.note"
+                    />
                   </div>
 
-                     <div class="form-group">
+
+                  <div class="form-group">
+                    <label>City</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      v-model="city_name"
+                      @keyup="citySearch"
+                      @mouseenter="showCityBox"
+                      autocomplete="off"
+                    />
+                    <ul
+                        id="city_name_container"
+                       class="list-group" >
+                      <li
+                      style="cursor: pointer"
+                      v-for="(city, index) in cities"
+                      @click="selectCity(city)"
+                      :key="index"
+                      class="list-group-item city_name"
+                    >
+                      {{ city.name }}
+                    </li>
+                    </ul>
+
+                  </div>
+
+
+                    <div class="form-group">
                     <label>Sub City</label>
                     <select class="form-control" name="sub_city"  :class="{ 'is-invalid': form.errors.has('sub_city') }" v-model="form.sub_city">
                       <option disabled value="">select sub city</option>
@@ -155,6 +175,18 @@
                       </option>
                     </select>
                     <has-error :form="form" field="courier"></has-error>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Status</label>
+                    <select
+                      name="status"
+                      v-model="form.status"
+                      class="form-control"
+                    >
+                      <option value="3">Confirmed</option>
+                      <option value="2">Pending</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -350,9 +382,11 @@ import datePicker from "vue-bootstrap-datetimepicker";
 Vue.component(HasError.name, HasError);
 
 export default {
-  name: "Add",
+  name: "edit_order",
   created() {
-    this.others();
+    setTimeout(() => {
+      this.others();
+    }, 2000);
     this.edit();
     this.balanceList();
   },
@@ -363,6 +397,7 @@ export default {
         customer_name: "",
         customer_address: "",
         city: "",
+        note: "",
         courier: "",
         products: [],
         shipping_cost: 0,
@@ -373,7 +408,8 @@ export default {
         paid_by: "select one",
         due: 0,
         order_type: "",
-        sub_city:""
+        sub_city:"",
+        status:"",
       }),
        balance:'',
       attribute_id: "",
@@ -386,11 +422,13 @@ export default {
       product_attributes: null,
       product_variants: null,
       cities: null,
+      our_cities: null,
       couriers: null,
       product_quantity: 1,
       error: "",
       loading: true,
-      sub_cities:""
+      sub_cities:"",
+      city_name:"",
     };
   },
 
@@ -403,11 +441,26 @@ export default {
             this.balance = resp.data.balance;
         })
     },
+
+    showCityBox(){
+      document.getElementById('city_name_container').style.display='block';
+    },
+
+      citySearch() {
+      if (this.city_name.length > 0) {
+        axios.get("/api/search/city/" + this.city_name).then((resp) => {
+          console.log(resp);
+          this.cities = resp.data.cities.data;
+        });
+      }
+    },
+
+
+
     //method initial for get data
     edit() {
       axios.get("/order/view/" + this.$route.params.id).then((resp) => {
         console.log(resp);
-        console.log(resp.data.order.customer_phone);
         if (resp.data.status == "SUCCESS") {
           let order = resp.data.order;
           this.form.customer_mobile = order.customer_phone;
@@ -418,6 +471,8 @@ export default {
           this.form.courier = order.courier_id;
           this.form.paid = order.paid;
           this.form.discount = order.discount;
+          this.form.status = order.status;
+          this.form.note = order.note;
           this.form.total = order.total;
           this.form.order_type = order.order_type;
           this.form.due =parseInt(order.total) - (parseInt(order.paid) + parseInt(order.discount)) + parseInt(order.shipping_cost);
@@ -444,9 +499,6 @@ export default {
             this.form.products[i].variant_id = resp.data.items[i].variant_id;
             this.form.products[i].attribute_id = resp.data.items[i].attribute_id;
           }
-
-          console.log(...products);
-          console.log(products);
 
           this.cityWiseSubCity();
           this.form.sub_city=order.sub_city_id;
@@ -490,11 +542,15 @@ export default {
     others() {
       axios
         .get("/others")
-
         //success resp only
         .then((resp) => {
           if (resp.data.status == "SUCCESS") {
-            this.cities = resp.data.cities;
+             resp.data.cities.forEach(element => {
+            if (this.form.city == element.id ) {
+                this.city_name = element.name ;
+              }
+            });
+
             this.couriers = resp.data.couriers;
           }
         })
@@ -608,17 +664,15 @@ export default {
       this.form.due =parseInt(this.form.total) -  parseInt(this.form.discount) -  parseInt(this.form.paid)+parseInt(this.form.shipping_cost);
     },
 
-    //select city
-    selectCity() {
-      let id = this.form.city;
-      let cities = this.cities;
-      for (let i = 0; i < cities.length; i++) {
-        if (cities[i].id == id) {
-          this.form.shipping_cost = parseInt(cities[i].delivery_charge);
-        }
-      }
+    selectCity(city) {
+     document.getElementById('city_name_container').style.display='none';
+      this.city_name=city.name ;
+      this.form.city = city.id;
+      this.cityWiseSubCity(city.id);
+      this.form.shipping_cost = city.delivery_charge;
+
       this.totalCalculation();
-      this.cityWiseSubCity();
+
     },
 
     remove(index) {
@@ -639,11 +693,7 @@ export default {
               }else{
                 this.form.sub_city="";
                 this.sub_cities="";
-                alert('No sub city under selected city')
               }
-
-
-          console.log(resp)
         })
         .catch(e=>{
           console.log(e);
@@ -676,5 +726,9 @@ export default {
 .autocomplete li:hover {
   background: #222d32;
   color: #ffffff;
+}
+
+.city_name_container {
+  display: none;
 }
 </style>

@@ -92,4 +92,36 @@ class DashboardController extends Controller
      }
 
 
+    public function BalanceInsertHistoryDetails($id){
+
+        $admin = Admin::findOrFail($id);
+        $balance=[];
+        $balance['today']=BalanceInsertAdmin::where('admin_id',$admin->id)
+                                             ->where('created_at','>=',Carbon::today()->startOfDay())
+                                             ->where('created_at','<=',Carbon::today()->endOfDay())
+                                             ->select('balance_id',DB::raw('SUM(amount) as amount'))
+                                             ->groupBy('balance_id')
+                                             ->with('balance')
+                                             ->get();
+
+        $balance['all']=BalanceInsertAdmin::where('admin_id',$admin->id)
+                                             ->select('balance_id',DB::raw('SUM(amount) as amount'))
+                                             ->groupBy('balance_id')
+                                             ->with('balance')
+                                             ->get();
+
+        return response()->json([
+            'admin'=>$admin,
+            'balance'=>$balance,
+        ]);
+
+     }
+
+
+
+
+
+
+
+
 }

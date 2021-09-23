@@ -43,6 +43,7 @@
         "vue-product-zoomer": "^3.0.1",
         "vue-progressbar": "^0.7.5",
         "vue-router": "^3.4.3",
+        "vue-select": "^3.13.0",
         "vue-signature": "^2.4.7",
         "vue-toasted": "^1.1.28",
         "vue-typer": "^1.2.0",

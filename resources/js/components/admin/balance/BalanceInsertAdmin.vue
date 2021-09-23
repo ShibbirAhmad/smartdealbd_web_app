@@ -48,13 +48,15 @@
                         :key="index" >
                         <td>{{ index + 1 }}</td>
                         <td>
+                          <router-link  style="color:blue" :to="{name:'balance_insert_details',params:{id:admin.id}}">
                           <img
                             :src="base_url + admin.image "
                             class="img-circle small-image"
-                            style="width:60px;height:60px;margin-right:20px"
+                            style="width:40px;height:40px;margin-right:20px"
                             v-if="admin.image"
                           />
                           <strong> {{ admin.name }}  </strong>
+                          </router-link>
                         </td>
                         <td> &#2547;{{ admin.insert_amount_today }}</td>
                       </tr>
@@ -66,6 +68,8 @@
                         :key="index" >
                         <td>{{ index + 1 }}</td>
                         <td>
+
+                         <router-link  style="color:blue" :to="{name:'balance_insert_details',params:{id:admin.id}}">
                           <img
                             :src="
                               base_url + admin.image
@@ -75,6 +79,7 @@
                             v-if="admin.image"
                           />
                           <strong> {{ admin.name }}  </strong>
+                         </router-link>
                         </td>
                          <td>&#2547;{{ admin.insert_amount_yesterday }}</td>
                       </tr>
@@ -87,6 +92,9 @@
                         :key="index" >
                         <td>{{ index + 1 }}</td>
                         <td>
+
+                       <router-link  style="color:blue" :to="{name:'balance_insert_details',params:{id:admin.id}}">
+
                           <img
                             :src="
                               base_url + admin.image
@@ -96,6 +104,7 @@
                             v-if="admin.image"
                           />
                           <strong> {{ admin.name }}  </strong>
+                          </router-link>
                         </td>
                         <td>&#2547;{{ admin.insert_amount_this_week }}</td>
                       </tr>
@@ -107,6 +116,7 @@
                         :key="index" >
                         <td>{{ index + 1 }}</td>
                         <td>
+                            <router-link  style="color:blue" :to="{name:'balance_insert_details',params:{id:admin.id}}">
                           <img
                             :src="
                               base_url + admin.image
@@ -116,6 +126,7 @@
                             v-if="admin.image"
                           />
                           <strong> {{ admin.name }}  </strong>
+                            </router-link>
                         </td>
                         <td>&#2547;{{ admin.insert_amount_this_month }}</td>
                       </tr>

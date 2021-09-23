@@ -1,4 +1,7 @@
 {
+    "/chunks/admin_dashboard.bundle.js": "/chunks/admin_dashboard.bundle.js",
+    "/chunks/vendors~about_and_contact~add_carrier~company_assets_add~company_assets_edit~edit_carrier~footer_set~ac1e2ab6.bundle.js": "/chunks/vendors~about_and_contact~add_carrier~company_assets_add~company_assets_edit~edit_carrier~footer_set~ac1e2ab6.bundle.js",
+    "/chunks/vendors~merchant_order~merchnat_product_manage~product.bundle.js": "/chunks/vendors~merchant_order~merchnat_product_manage~product.bundle.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/chunks/AccountReport.bundle.js": "/chunks/AccountReport.bundle.js",
@@ -34,7 +37,6 @@
     "/chunks/admin.bundle.js": "/chunks/admin.bundle.js",
     "/chunks/adminAdd.bundle.js": "/chunks/adminAdd.bundle.js",
     "/chunks/adminProfile.bundle.js": "/chunks/adminProfile.bundle.js",
-    "/chunks/admin_dashboard.bundle.js": "/chunks/admin_dashboard.bundle.js",
     "/chunks/admin_login.bundle.js": "/chunks/admin_login.bundle.js",
     "/chunks/applied_user.bundle.js": "/chunks/applied_user.bundle.js",
     "/chunks/approvedOrder.bundle.js": "/chunks/approvedOrder.bundle.js",
@@ -44,6 +46,8 @@
     "/chunks/attributeAdd.bundle.js": "/chunks/attributeAdd.bundle.js",
     "/chunks/balance.bundle.js": "/chunks/balance.bundle.js",
     "/chunks/balance_add.bundle.js": "/chunks/balance_add.bundle.js",
+    "/chunks/balance_insert_admin.bundle.js": "/chunks/balance_insert_admin.bundle.js",
+    "/chunks/balance_insert_details.bundle.js": "/chunks/balance_insert_details.bundle.js",
     "/chunks/banner.bundle.js": "/chunks/banner.bundle.js",
     "/chunks/bill_statement.bundle.js": "/chunks/bill_statement.bundle.js",
     "/chunks/bill_statement_add.bundle.js": "/chunks/bill_statement_add.bundle.js",
@@ -222,12 +226,8 @@
     "/chunks/user_register.bundle.js": "/chunks/user_register.bundle.js",
     "/chunks/variaantAdd.bundle.js": "/chunks/variaantAdd.bundle.js",
     "/chunks/variant.bundle.js": "/chunks/variant.bundle.js",
-    "/chunks/vendors~about_and_contact~add_carrier~company_assets_add~company_assets_edit~edit_carrier~footer_set~ac1e2ab6.bundle.js": "/chunks/vendors~about_and_contact~add_carrier~company_assets_add~company_assets_edit~edit_carrier~footer_set~ac1e2ab6.bundle.js",
-    "/chunks/vendors~debitAdd.bundle.js": "/chunks/vendors~debitAdd.bundle.js",
-    "/chunks/vendors~merchant_order~merchnat_product_manage~product.bundle.js": "/chunks/vendors~merchant_order~merchnat_product_manage~product.bundle.js",
     "/chunks/vendors~single_product.bundle.js": "/chunks/vendors~single_product.bundle.js",
     "/chunks/viewOrder.bundle.js": "/chunks/viewOrder.bundle.js",
     "/chunks/viewSale.bundle.js": "/chunks/viewSale.bundle.js",
-    "/chunks/wholesaleOrder.bundle.js": "/chunks/wholesaleOrder.bundle.js",
-    "/chunks/balance_insert_admin.bundle.js": "/chunks/balance_insert_admin.bundle.js"
+    "/chunks/wholesaleOrder.bundle.js": "/chunks/wholesaleOrder.bundle.js"
 }

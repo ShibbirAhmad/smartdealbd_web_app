@@ -449,9 +449,13 @@ ul.side-nav li:hover>.left-sub-menu {
     padding: 10px;
     width: 100%;
     height: 200px;
-    transition: .3s;
+    transition: 1s;
 }
 
+/* .product-card-body img:hover{
+     transform: scale(1.5);
+
+} */
 
 .product-detail h4 {
     font-size: 12px;

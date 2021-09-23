@@ -36,25 +36,10 @@ $admin = session()->get('admin');
              </li>
 
             @if($admin->can('manage Order'))
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-first-order"></i> <span>Order</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li>
-                        <router-link :to="{ name: 'addOrder'}"><i class="fa fa-plus"></i>Add</router-link>
-                    </li>
-                    <li>
-                        <router-link :to="{ name: 'order'}"><i class="fa fa-eye"></i>Manage</router-link>
-
-                    </li>
-
-
-                </ul>
+            <li>
+                <router-link :to="{ name: 'order'}"><i class="fa fa-first-order"></i>Order</router-link>
             </li>
+
             @endif
 
              @if($admin->can('manage Sale'))

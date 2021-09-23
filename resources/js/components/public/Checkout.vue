@@ -21,7 +21,7 @@
                         type="text"
                         name="name"
                         class="form-control"
-                         placeholder="Ex:mohammad"
+                         placeholder="আপনার নাম"
                         :class="{ 'is-invalid': form.errors.has('name') }"
                         v-model="form.name"
                         autofocus
@@ -34,7 +34,7 @@
                       <input
                         type="text"
                         name="mobile_no"
-                        placeholder="01xxx-xxxxx"
+                        placeholder=" মোবাইল নাম্বার "
                         class="form-control"
                         maxlength="11"
                         :class="{ 'is-invalid': form.errors.has('mobile_no') }"
@@ -48,7 +48,7 @@
                       <label class="control-label" for="input-password">Address</label>
                       <textarea
                         name="address"
-                        placeholder="Address"
+                        placeholder=" সম্পূর্ণ ঠিকানা "
                         class="form-control"
                         :class="{ 'is-invalid': form.errors.has('address') }"
                         v-model="form.address"

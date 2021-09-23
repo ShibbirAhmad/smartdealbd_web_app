@@ -11,13 +11,14 @@ use App\Models\Courier;
 use App\Models\Product;
 use App\Models\Customer;
 use App\Models\OrderItem;
+use App\Models\OrderNote;
 use App\Models\CustomerDue;
 use App\Models\OrderBarcode;
 use Illuminate\Http\Request;
+use App\Models\BalanceInsertAdmin;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\BalanceInsertAdmin;
 use App\Models\ResellerOrderDetails;
 
 
@@ -82,7 +83,6 @@ class OrderController extends Controller
             'courier' => 'required',
             'shipping_cost' => 'required',
             'paid_by'=>'required',
-            'sub_city' => 'required',
         ]);
 
         //check order status.product qauntity,and stock
@@ -111,6 +111,7 @@ class OrderController extends Controller
         $order->customer_name=$request->customer_name;
         $order->customer_phone=$request->customer_mobile;
         $order->customer_address=$request->customer_address;
+        $order->note=$request->note ;
         $order->city_id=$request->city;
         $order->courier_id=$request->courier;
         $order->shipping_cost=$request->shipping_cost ?? 0;
@@ -120,7 +121,6 @@ class OrderController extends Controller
         $order->status=$request->status;
         $order->create_admin_id=session()->get('admin')['id'];
         $order->paid_by=$request->paid_by;
-        $order->sub_city_id=$request->sub_city;
 
         //store who is approved
         if($request->status==3){
@@ -136,9 +136,9 @@ class OrderController extends Controller
         //if order save then save the order details
             foreach($request->products as $product){
                 //update product stock
-                $product_stock=Product::where('id',$product['id'])->first();
-                $product_stock->stock=$product_stock->stock-$product['quantity'];
-                $product_stock->save();
+                // $product_stock=Product::where('id',$product['id'])->first();
+                // $product_stock->stock=$product_stock->stock-$product['quantity'];
+                // $product_stock->save();
 
                 $details=new OrderItem();
                 $details->order_id=$order->id;
@@ -153,7 +153,7 @@ class OrderController extends Controller
                 $phone=$order->customer_phone;
                 $name=$request->name;
                 $invoice=$order->invoice_no;
-              //  Order::SendMessageCustomer($phone,$name,$invoice);
+                 Order::SendMessageCustomer($phone,$name,$invoice);
               //create a credit
               if($order->paid>0){
                 $credit = new Credit();
@@ -188,7 +188,7 @@ class OrderController extends Controller
 
    public function update(Request $request, $id)
     {
-         //return $request->all();
+        //  return $request->all();
         $validatedData = $request->validate([
             'customer_mobile' => 'required|digits:11 ',
             'customer_name' => 'required ',
@@ -196,7 +196,7 @@ class OrderController extends Controller
             'city' => 'required',
             'courier' => 'required',
             'shipping_cost' => 'required',
-            'sub_city' => 'required',
+            'status' => 'required',
         ]);
 
         $order=Order::findOrFail($id);
@@ -210,12 +210,13 @@ class OrderController extends Controller
         $order->customer_address=$request->customer_address;
         $order->customer_phone=$request->customer_mobile;
         $order->city_id=$request->city;
+        $order->note=$request->note ;
+        $order->status=$request->status;
         $order->courier_id=$request->courier;
         $order->shipping_cost=$request->shipping_cost ?? 0;
         $order->discount=$request->discount ?? 0;
         $order->paid=$request->paid??0;
         $order->total=$request->total;
-        $order->sub_city_id=$request->sub_city;
         $order->save() ;
             //update credit
             if( $paid > 0){
@@ -234,7 +235,6 @@ class OrderController extends Controller
                     $exit_balance->amount=$order->paid;
                     $exit_balance->save();
                 }else {
-                    $exit_balance->delete();
                     $balance_insert = new BalanceInsertAdmin();
                     $balance_insert->admin_id= session()->get('admin')['id'];
                     $balance_insert->balance_id= $request->paid_by;
@@ -248,9 +248,9 @@ class OrderController extends Controller
             //many of times when update order item, some item remove or some item add, so here we are delete previous item and insert new $rquest item
             foreach($order_items as $order_item){
             //update product stock befere delete items
-               $product_stock=Product::where('id',$order_item->product_id)->first();
-               $product_stock->stock=$product_stock->stock+$order_item->qty;
-               $product_stock->save();
+            //    $product_stock=Product::where('id',$order_item->product_id)->first();
+            //    $product_stock->stock=$product_stock->stock+$order_item->qty;
+            //    $product_stock->save();
                $order_item->delete();
             }
 
@@ -392,7 +392,7 @@ class OrderController extends Controller
             $order->shipment_admin_id=session()->get('admin')['id'];
             $order->shippment_date=Carbon::now();
             $order->save();
-          //  Order::sendShipmentMenssage($order);
+             Order::sendShipmentMenssage($order);
              return \response()->json([
                     'status'=>'SUCCESS',
                     'message'=>'Order was shiped successfully'
@@ -571,8 +571,9 @@ class OrderController extends Controller
 
         $orders = Order::where('invoice_no', 'like', '%' . $search . '%')
                             ->orWhere('customer_phone','like', '%' . $search . '%')
+                            ->orWhere('customer_name','like', '%' . $search . '%')
                             ->orderBy('id', 'DESC')
-                         ->with(['customer','createAdmin','courier','reseller'])
+                            ->with(['customer','createAdmin','courier'])
                             ->paginate(10);
 
               return response()->json([
@@ -606,7 +607,7 @@ class OrderController extends Controller
     }
 
     public function orderView($id){
-        $order=Order::where('id',$id)->with(['customer','courier','city','sub_city','approvedBy','orderBarcode','resellerOrderDetails'])->first();
+        $order=Order::where('id',$id)->with(['customer','courier','approvedBy','orderBarcode','resellerOrderDetails'])->first();
         $order_items=OrderItem::where('order_id',$order->id)->with(['product.productVariant.variant.attribute','attribute','variant','product.productImage'])->get();
 
         return response()->json([
@@ -804,6 +805,9 @@ class OrderController extends Controller
     public function invoicePrint($id){
         $order_id=explode(',',$id);
         $orders=Order::whereIn('id',$order_id)->get();
+        $order=Order::findOrFail($id);
+        $order->print_status = 1 ;
+        $order->save();
         return view('admin.pdf.print.invoicePrint', compact('orders'));
     }
 
@@ -902,5 +906,43 @@ class OrderController extends Controller
       }
 
     }
+
+
+
+
+
+
+
+    public function OrderNoteList($id){
+           $notes = OrderNote::where('order_id',$id)->orderBy('id','desc')->get();
+           return response()->json([
+              'status' => "OK",
+              'notes' => $notes
+          ]);
+    }
+
+    public function StoreOrderNote(Request $request){
+
+         $validatedData =$request->validate([
+             'order_id' => 'required',
+             'note' => 'required'
+         ]);
+
+          $note = new OrderNote();
+          $note->order_id= $request->order_id;
+          $note->note= $request->note;
+          $note->admin_name= session()->get('admin')['name'];
+          $note->save();
+          return response()->json([
+              'status' => "OK",
+              'message' => "added successfully"
+          ]);
+
+    }
+
+
+
+
+
 
 }

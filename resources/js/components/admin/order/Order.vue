@@ -4,9 +4,7 @@
     <div class="content-wrapper">
       <section class="content-header">
         <h1 class="order_statistic">
-          <router-link :to="{ name: 'addOrder' }" class="btn btn-primary">
-            <i class="fa fa-plus"></i> Add
-          </router-link>
+
           <router-link :to="{ name: 'NewOrder' }" class="btn btn-sm "
             >New <sup> {{ order_count.new_order }} </sup>
             </router-link >
@@ -41,17 +39,10 @@
             >Cancel  <sup> {{ order_count.cancel_order }} </sup>  </router-link
           >
           <router-link
-            :to="{ name: 'WholeSaleOrder' }"
-            class="btn btn-sm "
-            >wholesale</router-link
-          >
-
-          <router-link
             :to="{ name: 'order' }"
-            class="btn btn-sm  active"
-            style="background:#4aa316"
-            >All</router-link
-          >
+            class="btn btn-sm "
+            >All</router-link>
+
         </h1>
 
       </section>
@@ -60,27 +51,12 @@
           <div class="row ">
             <div class="col-lg-11 col-md-11">
               <div class="box box-primary">
-                <div class="box-header with-border">
-                  <div class="row" style="margin-bottom: 3px">
-                    <div class="col-lg-3">
-                      <select
-                        name=""
-                        id=""
-                        v-model="bulkActionType"
-                        class="form-control"
-                      >
-                        <option value="0" selected disabled>
-                          Select Action
-                        </option>
+                <div class="box-header with-border ">
+                     <router-link :to="{ name: 'addOrder' }" class="btn btn-primary">
+                        <i class="fa fa-plus"></i> Add New Order
+                      </router-link>
+                      <h3 class="box-title orders-heading">{{ heading }}</h3>
 
-                        <option value="LABEL PRINT">Label Print</option>
-                        <option value="INVOICE PRINT">Invoice Print</option>
-                      </select>
-                    </div>
-                    <div class="col-lg-4 orders-heading">
-                      <h3 class="box-title">{{ heading }}</h3>
-                    </div>
-                  </div>
                   <div class="row">
                     <div class="col-lg-2">
                       <select
@@ -91,8 +67,6 @@
                         <option value="all">All type</option>
                         <option value="2">Onely Admin</option>
                         <option value="1">Only Customer</option>
-                        <option value="3">Whole Sale</option>
-                        <option value="4">Only Reseller</option>
                       </select>
                     </div>
                     <div class="col-lg-2">
@@ -111,66 +85,30 @@
                         <option value="6">Cancel</option>
                       </select>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-4">
                       <input
                         class="form-control"
                         @keyup="orderSearch"
                         v-model="search"
-                        placeholder="Enter Invoice, customer phone"
+                        placeholder="Enter Invoice, customer name, phone"
                       />
                     </div>
-                    <div class="col-lg-4">
-                      <form @submit.prevent="filterOrder">
-                        <div class="row">
-                          <div class="col-lg-4">
-                            <date-picker
-                              autocomplete="off"
-                              v-model="start_date"
-                              placeholder="start-date"
-                              :config="options"
-                            ></date-picker>
-                          </div>
-                          <div class="col-lg-4" style="margin-left: -20px">
-                            <date-picker
-                              autocomplete="off"
-                              v-model="end_date"
-                              placeholder="end-date"
-                              :config="options"
-                            ></date-picker>
-                          </div>
-                          <div class="col-lg-4">
-                            <select
-                              class="form-control"
-                              v-model="courier_id"
-                              style="width: 120px"
-                            >
-                              <option value="" selected disabled>
-                                Select Courier
-                              </option>
-                              <option
-                                v-for="courier in couriers"
-                                :value="courier.id"
-                                :key="courier.id"
-                              >
-                                {{ courier.name }}
-                              </option>
-                            </select>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                    <div class="col-lg-1">
-                      <button
-                        @click="resetAll"
-                        style="margin-left: 45px"
-                        type="button"
-                        class="btn btn-primary btn-sm"
+
+                      <div class="col-lg-2">
+                      <select
+                        v-model="bulkActionType"
+                        class="form-control"
                       >
-                        <i class="fa fa-refresh"></i>
-                      </button>
+                        <option value="0" selected disabled>
+                          Select Action
+                        </option>
+
+                        <option value="LABEL PRINT">Label Print</option>
+                        <option value="INVOICE PRINT">Invoice Print</option>
+                      </select>
                     </div>
 
-                    <div class="col-lg-1">
+                    <div class="col-lg-2">
                       <select
                         class="form-control"
                         v-model="item"
@@ -180,6 +118,8 @@
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
+                        <option value="40">40</option>
+                        <option value="50">50</option>
                       </select>
                       <select
                         class="form-control"
@@ -198,23 +138,21 @@
                   <table class="table table-bordered table-striped table-hover ">
                     <thead>
                       <tr>
-                        <th scope="col">
+                        <th width="5%" >
                           <input type="checkbox" @click="selectAll" />
                         </th>
-                        <th scope="col">Host Name</th>
-                        <th scope="col">customer_name</th>
-                        <th scope="col">C_phone</th>
-                        <th scope="col">C_address</th>
-
-                        <th scope="col">Invoice</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Create_by</th>
-                        <th scope="col" style="width: 2%">Order_place</th>
-                        <th>Order_date</th>
-
-                        <th>Action</th>
-                        <th>Courier</th>
-                        <th>Comment</th>
+                        <!-- <th scope="col">Host Name</th> -->
+                        <th width="10%" >Customer</th>
+                        <th width="10%" >Address</th>
+                        <th width="15%" >Product</th>
+                        <th width="10%" >Invoice</th>
+                        <th width="10%" >Total</th>
+                        <th width="5%" >Created</th>
+                        <th width="5%" >Order_place</th>
+                        <th width="5%" >Order_date</th>
+                        <th width="5%" >Action</th>
+                        <th width="10%" >Courier</th>
+                        <th width="10%" >Comment</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -235,18 +173,22 @@
                             :value="order.id"
                           />
                         </td>
-                        <td> {{ order.host_name }} </td>
-                        <td class="three-percent">
-                          {{ order.customer_name }}
+                        <!-- <td> {{ order.host_name }} </td>  -->
+                        <td>
+                         <p>  <strong> {{ order.customer_name }} </strong> </p>
+                         <p>  <strong>{{ order.customer_phone }}  </strong> </p>
                         </td>
-                        <td class="three-percent">
-                          {{ order.customer_phone }}
-                        </td>
-                        <td class="three-percent">
+                        <td >
                           {{ order.customer_address ? order.customer_address : 'null' }}
                         </td>
-                        <td class="two-percent">{{ order.invoice_no }}</td>
-                        <td class="two-percent">
+                          <td>
+                           <div v-if="order.order_item.length > 0" >
+                                    <img width="50px" height="50px" :src="thumbnail_img_base_link+order.order_item[0].product.thumbnail_img" >
+                                    <p>  {{ order.order_item[0].product.name.substring(0,25).concat('...')+"-"+order.order_item[0].product.product_code }}  </p>
+                            </div>
+                       </td>
+                        <td >{{ order.invoice_no }}</td>
+                        <td >
                           <b>
                             <strong>
                               Total:
@@ -256,7 +198,7 @@
                                 parseInt(order.shipping_cost)
                               }}
                             </strong>
-                            <strong> P: {{ parseInt(order.paid) }} </strong>
+                            <strong> Paid: {{ parseInt(order.paid) }} </strong>
                             <strong>
                               D:
                               {{
@@ -268,7 +210,7 @@
                             </strong>
                           </b>
                         </td>
-                        <td class="two-percent">
+                        <td>
                           <p v-if="order.order_type == 1">customer</p>
                           <p v-if="order.order_type == 2">
                             Admin ||
@@ -278,14 +220,9 @@
                             Whole sale ||
                             <strong>{{ order.create_admin.name }}</strong>
                           </p>
-                          <p v-if="order.order_type == 4">
-                            Reseller
-                            <strong v-if="order.reseller.username">{{
-                              order.reseller.username
-                            }}</strong>
-                          </p>
+
                         </td>
-                        <td class="two-percent">
+                        <td >
                           <span class="badge" v-if="order.status == 1"
                             >New</span
                           >
@@ -319,58 +256,63 @@
                             >Return</span
                           >
                         </td>
-                        <td class="two-percent">{{ order.created_at }}</td>
+                        <td >{{ order.created_at }}</td>
                         <td>
-                          <button
-                            class="btn btn-sm btn-success action-btn"
-                            v-if="
-                              order.status == 2 ||
-                              order.status == 1 ||
-                              order.status == 6
-                            "
-                            @click="approved(order, index)"
-                          >
-                            Approved
-                          </button>
-                          <button
-                            class="btn btn-sm btn-info action-btn"
-                            v-if="order.status == 1 || order.status == 7"
-                            @click="pending(order, index)"
-                          >
-                            Pending
-                          </button>
-                          <button
-                            class="btn btn-sm btn-success action-btn"
-                            v-if="order.status == 4"
-                            @click="delivered(order, index)"
-                          >
-                            Deliverd
-                          </button>
-                          <button
-                            class="btn btn-sm btn-primary action-btn"
-                            v-if="order.status == 3"
-                            @click="shipment(order.id, index)"
-                          >
-                            Shipment
-                          </button>
-                          <button
-                            class="btn btn-sm btn-danger action-btn"
-                            v-if="
-                              order.status == 1 ||
-                              order.status == 2 ||
-                              order.status == 3
-                            "
-                            @click="cancel(order, index)"
-                          >
-                            Cancel
-                          </button>
-                          <button
-                            class="btn btn-sm btn-warning action-btn"
-                            v-if="order.status == 4"
-                            @click="returnOrder(order, index)"
-                          >
-                            Return
-                          </button>
+
+                          <button @click="orderAction(order.id)" class="btn btn-success"> -- <i class="fa fa-bars"></i> -- </button>
+
+                         <div :id="'order_action_'+order.id" class="action_container">
+
+                            <button
+                              class="btn btn-sm btn-success action-btn"
+                              v-if="
+                                order.status == 2 ||
+                                order.status == 1 ||
+                                order.status == 6
+                              "
+                              @click="approved(order, index)"
+                            >
+                              Approved
+                            </button>
+                            <button
+                              class="btn btn-sm btn-info action-btn"
+                              v-if="order.status == 1 || order.status == 7"
+                              @click="pending(order, index)"
+                            >
+                              Pending
+                            </button>
+                            <button
+                              class="btn btn-sm btn-success action-btn"
+                              v-if="order.status == 4"
+                              @click="delivered(order, index)"
+                            >
+                              Deliverd
+                            </button>
+                            <button
+                              class="btn btn-sm btn-primary action-btn"
+                              v-if="order.status == 3"
+                              @click="shipment(order.id, index)"
+                            >
+                              Shipment
+                            </button>
+                            <button
+                              class="btn btn-sm btn-danger action-btn"
+                              v-if="
+                                order.status == 1 ||
+                                order.status == 2 ||
+                                order.status == 3
+                              "
+                              @click="cancel(order, index)"
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              class="btn btn-sm btn-warning action-btn"
+                              v-if="order.status == 4"
+                              @click="returnOrder(order, index)"
+                            >
+                              Return
+                            </button>
 
                           <router-link
                             style="width:70px"
@@ -381,8 +323,11 @@
                             }"
                             v-if="order.status != 5 && order.status != 4"
                             >Edit</router-link>
+
+                         </div>
+
                         </td>
-                        <td style="width: 1%">
+                        <td >
                           <small v-if="order.courier_id">{{
                             order.courier.name
                           }}</small>
@@ -397,13 +342,9 @@
                           ></i>
                         </td>
                         <td>
-                          <small v-if="order.comment">{{
-                            order.comment
-                          }}</small>
-                          <a
-                            href="#"
-                            @click="comment(order.id, index, order.comment)"
-                            >CO</a
+                          <button class="btn "
+                            @click="comment(order.id)"
+                            >Comment</button
                           >
                         </td>
                       </tr>
@@ -438,6 +379,7 @@
         </div>
       </section>
     </div>
+
     <modal name="example" :width="300" :height="200">
       <div style="padding: 10px" class="card">
         <div class="card-body">
@@ -466,6 +408,43 @@
         </div>
       </div>
     </modal>
+
+
+    <modal name="orderNote" :width="600" :height="500">
+      <div style="padding:20px" class="card">
+        <div class="card-body">
+          <form @submit.prevent="addOrderComment">
+            <div style="display:flex;margin-top:20px;" class="form-group">
+              <label>Add Note</label>
+               <input type="text" style="height:50px" placeholder="write note" v-model="order_note" required class="form-control">
+                 <button type="submit" class="btn btn-success">Update Note</button>
+            </div>
+          </form>
+
+         <div class="box-body">
+                <table class="table table-bordered table-striped table-hover ">
+                    <thead>
+                      <tr>
+                        <th>Created At</th>
+                        <th>Note</th>
+                        <th>Created By</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr  v-for="(note,index) in order_note_list" :key="index">
+                       <td> {{ dateFormatter(note.created_at) }} </td>
+                       <td> {{ note.note }}</td>
+                       <td> {{ note.admin_name }} </td>
+                      </tr>
+                   </tbody>
+
+               </table>
+          </div>
+        </div>
+      </div>
+    </modal>
+
   </div>
 </template>
 
@@ -480,7 +459,7 @@ export default {
     return {
       orders: {},
       loading: true,
-      item: "10",
+      item: 30,
       courier: {
         order_id: "",
         courier_id: "",
@@ -492,7 +471,6 @@ export default {
       search: "",
       start_date: "",
       end_date: "",
-
       //date picker options ..........
       options: {
         format: "YYYY-MM-DD",
@@ -506,15 +484,67 @@ export default {
       select_order_id: [],
       bulk_status: "all",
       //heading in table
-      heading: "All Order",
+      heading: "All Orders",
       bulkActionType: "0",
       //for filtering order
       courier_id: "",
       credit_in: "",
       order_count:"",
+      thumbnail_img_base_link:this.$store.state.image_thumbnail_link,
+      order_note_list:"",
+      order_note:"",
+      order_id:"",
     };
   },
   methods: {
+
+  dateFormatter(created_time){
+    var date=new Date(created_time);
+    return date.toLocaleTimeString();
+  },
+
+  comment(order_id){
+      this.$modal.show("orderNote");
+      this.order_id = order_id ;
+      this.orderNoteList();
+  },
+
+  orderNoteList(){
+     axios.get('/api/get/order/note/list/'+this.order_id)
+     .then((resp)=>{
+       if (resp.data.status=='OK') {
+          this.order_note_list = resp.data.notes ;
+       }
+     })
+  },
+
+   addOrderComment(){
+     axios.get('/api/add/order/note',{
+       params : {
+         order_id: this.order_id ,
+         note: this.order_note ,
+       }
+     })
+     .then((resp)=>{
+      //  console.log(resp);
+       if (resp.data.status=='OK') {
+           this.$toasted.show(resp.data.message, {
+              type: "success",
+              position: "top-center",
+              duration: 2000,
+            });
+           this.orderNoteList();
+       }
+     })
+  },
+
+
+   orderAction(id){
+      console.log(id);
+      document.getElementById('order_action_'+id).classList.toggle('toggle_order_action');
+
+   },
+
     //get order list
     ordersList(page = 1) {
       //start progress bar
@@ -532,7 +562,7 @@ export default {
           },
         })
         .then((resp) => {
-
+           console.log(resp);
           if (resp.data.status == "SUCCESS") {
             this.orders = resp.data.orders;
             this.loading = false;
@@ -565,7 +595,7 @@ export default {
     others() {
       axios.get("/others").then((resp) => {
         //only success resp
-        console.log(resp);
+       // console.log(resp);
         if (resp.data.status == "SUCCESS") {
           this.couriers = resp.data.couriers;
           this.comments = resp.data.comments;
@@ -832,22 +862,18 @@ export default {
     courierModal(order, index) {
       //set courier list first
       this.others();
-
       //set courier -> order id
       this.courier.order_id = order.id;
-
       // get courier from couerir order list by the index number
-
       this.courier.order_index = index;
-
       if (order.courier_id) {
         //console.log(order.courier_id)
         this.courier.courier_id = order.courier_id;
       }
-
       //after set all data, open courier modal .........
       this.$modal.show("example");
     },
+
     OrderCourier() {
       //start the progress bar
       this.$Progress.start();
@@ -895,23 +921,18 @@ export default {
       if (this.search.length > 1) {
         //show loader
         this.loading = true;
-
         //fetch data
         axios
           .get("/order/search/" + this.search + "?page=" + page)
-
           .then((resp) => {
+            console.log(resp);
             //if success resp
             if (resp.data.status == "SUCCESS") {
               this.orders = resp.data.orders;
               this.loading = false;
             }
           })
-          //for any kind of error
-          .catch((error) => {
-            console.log(error);
-            alert("something went wrong");
-          });
+
       }
       //if search lenght smaller then 2, then excute orderist method .......
       else {
@@ -1016,7 +1037,8 @@ export default {
       window.open("", "_self", "width=600,height=600");
     },
 
-    comment(order_id, order_index, comment) {
+
+    commentBackup(order_id, order_index, comment) {
       console.log(comment);
       let options = {};
       this.comments.forEach((element) => {
@@ -1125,31 +1147,21 @@ export default {
 };
 </script>
 
-<style>
+
+<style scoped>
 
 .orders-heading {
-  text-align: center;
-  text-transform: uppercase;
-  border-bottom: 2px solid #000;
-  margin-bottom: 10px;
+    font-size: 24px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #000;
+    margin-bottom: 10px;
+    margin-left: 30%;
 }
 
 
-.order_statistic a {
-    background:#fff;
-    color:#000 ;
-    box-shadow: 0 1pt 6pt rgb(150 165 237);
-    border: none ;
-    padding: 11px 46px;
-    margin: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    font-family: serif;
-}
-
-.router-link-active {
-   border: 1.5px dashed !important ;
-}
-
+      .router-link-active {
+        border: 1.5px dashed !important ;
+        color:#000 !important
+     }
 
 </style>

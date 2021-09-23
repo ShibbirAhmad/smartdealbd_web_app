@@ -67,12 +67,12 @@ class Order extends Model
           if($request->status!="all"){
                 if($request->type=="all"){
                  $orders=Order::orderBy('id','DESC')
-                            ->with(['createAdmin','courier','reseller'])
+                            ->with(['createAdmin','courier','reseller','orderItem.product'])
                             ->where('status',$request->status)
                             ->paginate($paginate);
               }else{
                 $orders=Order::orderBy('id','DESC')
-                             ->with(['createAdmin','courier','reseller'])
+                             ->with(['createAdmin','courier','reseller','orderItem.product'])
                             ->where('status',$request->status)
                             ->where('order_type',$request->type)
                             ->paginate($paginate);
@@ -80,10 +80,10 @@ class Order extends Model
             }else{
                if($request->type=="all"){
                  $orders=Order::orderBy('id','DESC')
-                                 ->with(['createAdmin','courier','reseller'])
+                                 ->with(['createAdmin','courier','reseller','orderItem.product'])
                                 ->paginate($paginate);
               }else{
-                $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','reseller'])->where('order_type',$request->type)->paginate($paginate);
+                $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','reseller','orderItem.product'])->where('order_type',$request->type)->paginate($paginate);
               }
             }
             return \response()->json([
@@ -288,7 +288,7 @@ class Order extends Model
         return $output;
     }
 
-    
+
 
     public static function adminOrderAnalysis(){
        $admin_id=session()->get('admin')['id'];
@@ -337,9 +337,8 @@ class Order extends Model
                   ->get();
 
 
-
-
        return $admin_order;
+
     }
 
     public static function topSellingProductToday(){

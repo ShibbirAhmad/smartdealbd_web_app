@@ -385,7 +385,7 @@ export default {
 
             if(resp.data.product){
               let product=resp.data.product;
-              if(product.stock>0){
+              // if(product.stock>0){
                 this.preview_products.product_name = product.name;
                 this.preview_products.product_id = product.id;
                 this.preview_products.product_code = product.product_code;
@@ -396,13 +396,13 @@ export default {
                 document.getElementById('product_quanitty').focus();
                 this.search = product.product_code + "-" + product.name;
                this.validationPreview=false
-              }else{
-                  this.$toasted.show(`${product.name}-${product.product_code}-Stock Out`, {
-                  type: "error",
-                  position: "top-center",
-                  duration: 4000,
-                });
-              }
+              // }else{
+              //   //   this.$toasted.show(`${product.name}-${product.product_code}-Stock Out`, {
+              //   //   type: "error",
+              //   //   position: "top-center",
+              //   //   duration: 4000,
+              //   // });
+              // }
             }else{
                  this.$toasted.show(`${this.search}-Not Found`, {
                   type: "error",
