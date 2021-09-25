@@ -3,47 +3,56 @@
     <admin-main></admin-main>
     <div class="content-wrapper">
       <section class="content-header">
-          <h1 class="order_statistic">
+            <div class="order_statistic">
 
-          <router-link :to="{ name: 'NewOrder' }" class="btn btn-sm "
-            >New <sup> {{ order_count.new_order }} </sup>
-            </router-link >
-          <router-link
-            :to="{ name: 'PendingOrder' }"
-            class="btn btn-sm "
-            >Pending <sup> {{ order_count.pending_order }} </sup> </router-link
-          >
-          <router-link
-            :to="{ name: 'ApprovedOrder' }"
-            class="btn btn-sm "
-            >Ready To Ship  <sup> {{ order_count.approved_order }} </sup>  </router-link
-          >
-          <router-link
-            :to="{ name: 'ShipmentOrder' }"
-            class="btn btn-sm "
-            >Shipment  <sup> {{ order_count.shipment_order }} </sup> </router-link
-          >
-          <router-link
-            :to="{ name: 'DeliveredOrder' }"
-            class="btn btn-sm "
-            >Delivered <sup> {{ order_count.delivered_order }} </sup> </router-link
-          >
-          <router-link
-            :to="{ name: 'ReturnOrder' }"
-            class="btn btn-sm "
-            >Return  <sup> {{ order_count.return_order }} </sup>  </router-link
-          >
-          <router-link
-            :to="{ name: 'CancelOrder' }"
-            class="btn btn-sm"
-            >Cancel  <sup> {{ order_count.cancel_order }} </sup>  </router-link
-          >
-          <router-link
-            :to="{ name: 'order' }"
-            class="btn btn-sm "
-            >All</router-link>
+            <router-link :to="{ name: 'NewOrder' }" class="statistic_item " >
+              <h2> {{ order_count.new_order }} </h2>
+               <p> New </p>
+           </router-link >
 
-        </h1>
+        <router-link :to="{ name: 'PendingOrder' }" class="statistic_item " >
+            <h2> {{ order_count.pending_order }} </h2>
+            <p>Pending</p>
+        </router-link>
+
+
+        <router-link :to="{ name: 'ApprovedOrder' }" class="statistic_item " >
+         <h2>  {{ order_count.approved_order }} </h2>
+         <p> Ready To Ship </p>
+        </router-link>
+
+
+
+        <router-link :to="{ name: 'ShipmentOrder' }" class="statistic_item " >
+         <h2>  {{ order_count.shipment_order }} </h2>
+         <p> Shipment  </p>
+        </router-link>
+
+
+        <router-link :to="{ name: 'DeliveredOrder' }" class="statistic_item " >
+         <h2>  {{ order_count.delivered_order }} </h2>
+         <p> Delivered  </p>
+        </router-link>
+
+
+        <router-link :to="{ name: 'ReturnOrder' }" class="statistic_item " >
+         <h2>  {{ order_count.return_order }} </h2>
+         <p> Return  </p>
+        </router-link>
+
+        <router-link :to="{ name: 'CancelOrder' }" class="statistic_item " >
+         <h2>  {{ order_count.cancel_order }} </h2>
+         <p> Cancel  </p>
+        </router-link>
+
+        <router-link :to="{ name: 'order' }" class="statistic_item " >
+         <h2>  {{ order_count.total }} </h2>
+         <p> All  </p>
+        </router-link>
+
+
+
+        </div>
       </section>
       <section class="content">
         <div class="container">
@@ -102,6 +111,7 @@
 
                         <option value="LABEL PRINT">Label Print</option>
                         <option value="INVOICE PRINT">Invoice Print</option>
+                        <option value="EXPORT SELECTED ITEM">Export Selected Item</option>
                       </select>
                     </div>
 
@@ -353,10 +363,11 @@
                           ></i>
                         </td>
                         <td>
-                        <button class="btn "
+                          <button class="btn "
                             @click="comment(order.id)"
                             >Comment</button
                           >
+                          <span  style="font-size:12px;"  v-if=" order.order_note.length > 0" > {{ order.order_note[0].note }} </span>
                         </td>
                       </tr>
                     </tbody>
@@ -1011,6 +1022,12 @@ export default {
         window.open("/order/invoice/print/" + this.select_order_id, "_blank");
       }
 
+
+      if (action_type == "EXPORT SELECTED ITEM") {
+        window.open("/export/selected/item/" + this.select_order_id, "_blank");
+      }
+
+
       if (action_type == "PENDING ALL") {
         if (confirm("are you sure")) {
           this.pendingAll(this.select_order_id);
@@ -1240,9 +1257,5 @@ export default {
 
 
 
-      .router-link-active {
-        border: 1.5px dashed !important ;
-        color:#000 !important
-     }
 
 </style>

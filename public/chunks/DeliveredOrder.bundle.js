@@ -366,10 +366,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.ordersList();
@@ -1093,114 +1089,127 @@ var render = function() {
       _c("div", { staticClass: "content-wrapper" }, [
         _c("section", { staticClass: "content-header" }, [
           _c(
-            "h1",
+            "div",
             { staticClass: "order_statistic" },
             [
               _c(
                 "router-link",
                 {
-                  staticClass: "btn btn-sm ",
+                  staticClass: "statistic_item ",
                   attrs: { to: { name: "NewOrder" } }
                 },
                 [
-                  _vm._v("New "),
-                  _c("sup", [
+                  _c("h2", [
                     _vm._v(" " + _vm._s(_vm.order_count.new_order) + " ")
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(" New ")])
                 ]
               ),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
-                  staticClass: "btn btn-sm ",
+                  staticClass: "statistic_item ",
                   attrs: { to: { name: "PendingOrder" } }
                 },
                 [
-                  _vm._v("Pending "),
-                  _c("sup", [
+                  _c("h2", [
                     _vm._v(" " + _vm._s(_vm.order_count.pending_order) + " ")
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Pending")])
                 ]
               ),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
-                  staticClass: "btn btn-sm ",
+                  staticClass: "statistic_item ",
                   attrs: { to: { name: "ApprovedOrder" } }
                 },
                 [
-                  _vm._v("Ready To Ship  "),
-                  _c("sup", [
-                    _vm._v(" " + _vm._s(_vm.order_count.approved_order) + " ")
-                  ])
+                  _c("h2", [
+                    _vm._v("  " + _vm._s(_vm.order_count.approved_order) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(" Ready To Ship ")])
                 ]
               ),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
-                  staticClass: "btn btn-sm ",
+                  staticClass: "statistic_item ",
                   attrs: { to: { name: "ShipmentOrder" } }
                 },
                 [
-                  _vm._v("Shipment  "),
-                  _c("sup", [
-                    _vm._v(" " + _vm._s(_vm.order_count.shipment_order) + " ")
-                  ])
+                  _c("h2", [
+                    _vm._v("  " + _vm._s(_vm.order_count.shipment_order) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(" Shipment  ")])
                 ]
               ),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
-                  staticClass: "btn btn-sm ",
+                  staticClass: "statistic_item ",
                   attrs: { to: { name: "DeliveredOrder" } }
                 },
                 [
-                  _vm._v("Delivered "),
-                  _c("sup", [
-                    _vm._v(" " + _vm._s(_vm.order_count.delivered_order) + " ")
-                  ])
+                  _c("h2", [
+                    _vm._v("  " + _vm._s(_vm.order_count.delivered_order) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(" Delivered  ")])
                 ]
               ),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
-                  staticClass: "btn btn-sm ",
+                  staticClass: "statistic_item ",
                   attrs: { to: { name: "ReturnOrder" } }
                 },
                 [
-                  _vm._v("Return  "),
-                  _c("sup", [
-                    _vm._v(" " + _vm._s(_vm.order_count.return_order) + " ")
-                  ])
+                  _c("h2", [
+                    _vm._v("  " + _vm._s(_vm.order_count.return_order) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(" Return  ")])
                 ]
               ),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
-                  staticClass: "btn btn-sm",
+                  staticClass: "statistic_item ",
                   attrs: { to: { name: "CancelOrder" } }
                 },
                 [
-                  _vm._v("Cancel  "),
-                  _c("sup", [
-                    _vm._v(" " + _vm._s(_vm.order_count.cancel_order) + " ")
-                  ])
+                  _c("h2", [
+                    _vm._v("  " + _vm._s(_vm.order_count.cancel_order) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(" Cancel  ")])
                 ]
               ),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
-                  staticClass: "btn btn-sm ",
+                  staticClass: "statistic_item ",
                   attrs: { to: { name: "order" } }
                 },
-                [_vm._v("All")]
+                [
+                  _c("h2", [
+                    _vm._v("  " + _vm._s(_vm.order_count.total) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(" All  ")])
+                ]
               )
             ],
             1
@@ -1336,7 +1345,7 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-lg-4" }, [
+                      _c("div", { staticClass: "col-lg-6" }, [
                         _c("input", {
                           directives: [
                             {
@@ -1348,7 +1357,7 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           attrs: {
-                            placeholder: "Enter Invoice, customer phone"
+                            placeholder: "Enter Invoice, customer name, phone"
                           },
                           domProps: { value: _vm.search },
                           on: {
@@ -1361,65 +1370,6 @@ var render = function() {
                             }
                           }
                         })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-lg-2" }, [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.bulkActionType,
-                                expression: "bulkActionType"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.bulkActionType = $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              }
-                            }
-                          },
-                          [
-                            _c(
-                              "option",
-                              {
-                                attrs: {
-                                  value: "0",
-                                  selected: "",
-                                  disabled: ""
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                        Select Action\n                      "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "LABEL PRINT" } }, [
-                              _vm._v("Label Print")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "option",
-                              { attrs: { value: "INVOICE PRINT" } },
-                              [_vm._v("Invoice Print")]
-                            )
-                          ]
-                        )
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-lg-2" }, [

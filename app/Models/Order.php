@@ -40,13 +40,14 @@ class Order extends Model
     public function orderItem(){
       return  $this->hasMany('App\Models\OrderItem','order_id');
 
+    }
+
+    public  function OrderNote(){
+
+      return  $this->hasMany('App\Models\OrderNote','order_id') ;
 
     }
-    public static function orderQuantity(){
-        return $abc="aaa";
 
-
-    }
     public function resellerOrderDetails(){
       return $this->hasOne('App\Models\ResellerOrderDetails','order_id');
     }
@@ -67,12 +68,12 @@ class Order extends Model
           if($request->status!="all"){
                 if($request->type=="all"){
                  $orders=Order::orderBy('id','DESC')
-                            ->with(['createAdmin','courier','reseller','orderItem.product'])
+                            ->with(['createAdmin','courier','reseller','OrderNote','orderItem.product'])
                             ->where('status',$request->status)
                             ->paginate($paginate);
               }else{
                 $orders=Order::orderBy('id','DESC')
-                             ->with(['createAdmin','courier','reseller','orderItem.product'])
+                             ->with(['createAdmin','courier','reseller','OrderNote','orderItem.product'])
                             ->where('status',$request->status)
                             ->where('order_type',$request->type)
                             ->paginate($paginate);
@@ -80,10 +81,10 @@ class Order extends Model
             }else{
                if($request->type=="all"){
                  $orders=Order::orderBy('id','DESC')
-                                 ->with(['createAdmin','courier','reseller','orderItem.product'])
+                                 ->with(['createAdmin','courier','reseller','OrderNote','orderItem.product'])
                                 ->paginate($paginate);
               }else{
-                $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','reseller','orderItem.product'])->where('order_type',$request->type)->paginate($paginate);
+                $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','reseller','OrderNote','orderItem.product'])->where('order_type',$request->type)->paginate($paginate);
               }
             }
             return \response()->json([
@@ -99,13 +100,13 @@ class Order extends Model
              if($request->status!="all"){
                 if($request->type=="all"){
                  $orders=Order::orderBy('id','DESC')
-                           ->with(['createAdmin','courier','reseller'])
+                           ->with(['createAdmin','courier','reseller','OrderNote'])
                             ->where('status',$request->status)
                             ->whereDate('created_at','=',$request->start_date)
                             ->paginate($paginate);
               }else{
                 $orders=Order::orderBy('id','DESC')
-                            ->with(['createAdmin','courier','reseller'])
+                            ->with(['createAdmin','courier','reseller','OrderNote'])
                             ->where('status',$request->status)
                             ->where('order_type',$request->type)
                             ->whereDate('created_at','=',$request->start_date)
@@ -115,11 +116,11 @@ class Order extends Model
 
                if($request->type=="all"){
                  $orders=Order::orderBy('id','DESC')
-                                 ->with(['createAdmin','courier','reseller'])
+                                 ->with(['createAdmin','courier','reseller','OrderNote'])
                                 ->whereDate('created_at','=',$request->start_date)
                                 ->paginate($paginate);
               }else{
-                $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier'])
+                $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','OrderNote'])
                                ->where('order_type',$request->type)
                                ->whereDate('created_at','=',$request->start_date)
                                ->paginate($paginate);
@@ -138,14 +139,14 @@ class Order extends Model
              if($request->status!="all"){
                 if($request->type=="all"){
                  $orders=Order::orderBy('id','DESC')
-                            ->with(['createAdmin','courier','reseller'])
+                            ->with(['createAdmin','courier','reseller','OrderNote'])
                             ->where('status',$request->status)
                             ->whereDate('created_at','>=',$request->start_date)
                             ->whereDate('created_at','<=',$request->end_date)
                             ->paginate($paginate);
               }else{
                 $orders=Order::orderBy('id','DESC')
-                            ->with(['createAdmin','courier','reseller'])
+                            ->with(['createAdmin','courier','reseller','OrderNote'])
                             ->where('status',$request->status)
                             ->where('order_type',$request->type)
                             ->whereDate('created_at','>=',$request->start_date)
@@ -156,12 +157,12 @@ class Order extends Model
 
                if($request->type=="all"){
                  $orders=Order::orderBy('id','DESC')
-                                 ->with(['createAdmin','courier','reseller'])
+                                 ->with(['createAdmin','courier','reseller','OrderNote'])
                                 ->whereDate('created_at','>=',$request->start_date)
                                  ->whereDate('created_at','<=',$request->end_date)
                                 ->paginate($paginate);
               }else{
-                $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','reseller'])
+                $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','reseller','OrderNote'])
                                ->where('order_type',$request->type)
                                ->whereDate('created_at','>=',$request->start_date)
                               ->whereDate('created_at','<=',$request->end_date)
@@ -181,13 +182,13 @@ class Order extends Model
 
             if($request->status!="all"){
                 $orders=Order::orderBy('id','DESC')
-                            ->with(['createAdmin','courier','reseller'])
+                            ->with(['createAdmin','courier','reseller','OrderNote'])
                             ->where('status',$request->status)
                             ->whereDate('created_at','=',$request->start_date)
                             ->where('courier_id',$request->courier_id)
                             ->paginate($paginate);
               }else{
-               $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','reseller'])
+               $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','reseller','OrderNote'])
                             ->whereDate('created_at','=',$request->start_date)
                             ->where('courier_id',$request->courier_id)
                             ->paginate($paginate);
@@ -197,14 +198,14 @@ class Order extends Model
         elseif(!empty($request->start_date) && !empty($request->end_date)){
               if($request->status!="all"){
                 $orders=Order::orderBy('id','DESC')
-                             ->with(['createAdmin','courier','reseller'])
+                             ->with(['createAdmin','courier','reseller','OrderNote'])
                             ->where('status',$request->status)
                             ->whereDate('created_at','>=',$request->start_date)
                             ->whereDate('created_at','<=',$request->end_date)
                             ->where('courier_id',$request->courier_id)
                             ->paginate($paginate);
               }else{
-               $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier'])
+               $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','OrderNote'])
                             ->whereDate('created_at','>=',$request->start_date)
                             ->whereDate('created_at','<=',$request->end_date)
                             ->where('courier_id',$request->courier_id)
@@ -214,12 +215,12 @@ class Order extends Model
         }else{
             if($request->status!="all"){
                 $orders=Order::orderBy('id','DESC')
-                             ->with(['createAdmin','courier','reseller'])
+                             ->with(['createAdmin','courier','reseller','OrderNote'])
                             ->where('status',$request->status)
                             ->where('courier_id',$request->courier_id)
                             ->paginate($paginate);
               }else{
-               $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','reseller'])
+               $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','reseller','OrderNote'])
                              ->where('courier_id',$request->courier_id)
                             ->paginate($paginate);
              }

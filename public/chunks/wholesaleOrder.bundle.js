@@ -408,6 +408,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     var _this = this;
@@ -1068,114 +1077,127 @@ var render = function() {
       _c("div", { staticClass: "content-wrapper" }, [
         _c("section", { staticClass: "content-header" }, [
           _c(
-            "h1",
+            "div",
             { staticClass: "order_statistic" },
             [
               _c(
                 "router-link",
                 {
-                  staticClass: "btn btn-sm ",
+                  staticClass: "statistic_item ",
                   attrs: { to: { name: "NewOrder" } }
                 },
                 [
-                  _vm._v("New "),
-                  _c("sup", [
+                  _c("h2", [
                     _vm._v(" " + _vm._s(_vm.order_count.new_order) + " ")
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(" New ")])
                 ]
               ),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
-                  staticClass: "btn btn-sm ",
+                  staticClass: "statistic_item ",
                   attrs: { to: { name: "PendingOrder" } }
                 },
                 [
-                  _vm._v("Pending "),
-                  _c("sup", [
+                  _c("h2", [
                     _vm._v(" " + _vm._s(_vm.order_count.pending_order) + " ")
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("Pending")])
                 ]
               ),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
-                  staticClass: "btn btn-sm ",
+                  staticClass: "statistic_item ",
                   attrs: { to: { name: "ApprovedOrder" } }
                 },
                 [
-                  _vm._v("Ready To Ship  "),
-                  _c("sup", [
-                    _vm._v(" " + _vm._s(_vm.order_count.approved_order) + " ")
-                  ])
+                  _c("h2", [
+                    _vm._v("  " + _vm._s(_vm.order_count.approved_order) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(" Ready To Ship ")])
                 ]
               ),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
-                  staticClass: "btn btn-sm ",
+                  staticClass: "statistic_item ",
                   attrs: { to: { name: "ShipmentOrder" } }
                 },
                 [
-                  _vm._v("Shipment  "),
-                  _c("sup", [
-                    _vm._v(" " + _vm._s(_vm.order_count.shipment_order) + " ")
-                  ])
+                  _c("h2", [
+                    _vm._v("  " + _vm._s(_vm.order_count.shipment_order) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(" Shipment  ")])
                 ]
               ),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
-                  staticClass: "btn btn-sm ",
+                  staticClass: "statistic_item ",
                   attrs: { to: { name: "DeliveredOrder" } }
                 },
                 [
-                  _vm._v("Delivered "),
-                  _c("sup", [
-                    _vm._v(" " + _vm._s(_vm.order_count.delivered_order) + " ")
-                  ])
+                  _c("h2", [
+                    _vm._v("  " + _vm._s(_vm.order_count.delivered_order) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(" Delivered  ")])
                 ]
               ),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
-                  staticClass: "btn btn-sm ",
+                  staticClass: "statistic_item ",
                   attrs: { to: { name: "ReturnOrder" } }
                 },
                 [
-                  _vm._v("Return  "),
-                  _c("sup", [
-                    _vm._v(" " + _vm._s(_vm.order_count.return_order) + " ")
-                  ])
+                  _c("h2", [
+                    _vm._v("  " + _vm._s(_vm.order_count.return_order) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(" Return  ")])
                 ]
               ),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
-                  staticClass: "btn btn-sm",
+                  staticClass: "statistic_item ",
                   attrs: { to: { name: "CancelOrder" } }
                 },
                 [
-                  _vm._v("Cancel  "),
-                  _c("sup", [
-                    _vm._v(" " + _vm._s(_vm.order_count.cancel_order) + " ")
-                  ])
+                  _c("h2", [
+                    _vm._v("  " + _vm._s(_vm.order_count.cancel_order) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(" Cancel  ")])
                 ]
               ),
               _vm._v(" "),
               _c(
                 "router-link",
                 {
-                  staticClass: "btn btn-sm ",
+                  staticClass: "statistic_item ",
                   attrs: { to: { name: "order" } }
                 },
-                [_vm._v("All")]
+                [
+                  _c("h2", [
+                    _vm._v("  " + _vm._s(_vm.order_count.total) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(" All  ")])
+                ]
               )
             ],
             1

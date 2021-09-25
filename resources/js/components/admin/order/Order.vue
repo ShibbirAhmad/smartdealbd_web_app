@@ -3,47 +3,56 @@
     <admin-main></admin-main>
     <div class="content-wrapper">
       <section class="content-header">
-        <h1 class="order_statistic">
+        <div class="order_statistic">
 
-          <router-link :to="{ name: 'NewOrder' }" class="btn btn-sm "
-            >New <sup> {{ order_count.new_order }} </sup>
-            </router-link >
-          <router-link
-            :to="{ name: 'PendingOrder' }"
-            class="btn btn-sm "
-            >Pending <sup> {{ order_count.pending_order }} </sup> </router-link
-          >
-          <router-link
-            :to="{ name: 'ApprovedOrder' }"
-            class="btn btn-sm "
-            >Ready To Ship  <sup> {{ order_count.approved_order }} </sup>  </router-link
-          >
-          <router-link
-            :to="{ name: 'ShipmentOrder' }"
-            class="btn btn-sm "
-            >Shipment  <sup> {{ order_count.shipment_order }} </sup> </router-link
-          >
-          <router-link
-            :to="{ name: 'DeliveredOrder' }"
-            class="btn btn-sm "
-            >Delivered <sup> {{ order_count.delivered_order }} </sup> </router-link
-          >
-          <router-link
-            :to="{ name: 'ReturnOrder' }"
-            class="btn btn-sm "
-            >Return  <sup> {{ order_count.return_order }} </sup>  </router-link
-          >
-          <router-link
-            :to="{ name: 'CancelOrder' }"
-            class="btn btn-sm"
-            >Cancel  <sup> {{ order_count.cancel_order }} </sup>  </router-link
-          >
-          <router-link
-            :to="{ name: 'order' }"
-            class="btn btn-sm "
-            >All</router-link>
+            <router-link :to="{ name: 'NewOrder' }" class="statistic_item " >
+              <h2> {{ order_count.new_order }} </h2>
+               <p> New </p>
+           </router-link >
 
-        </h1>
+        <router-link :to="{ name: 'PendingOrder' }" class="statistic_item " >
+            <h2> {{ order_count.pending_order }} </h2>
+            <p>Pending</p>
+        </router-link>
+
+
+        <router-link :to="{ name: 'ApprovedOrder' }" class="statistic_item " >
+         <h2>  {{ order_count.approved_order }} </h2>
+         <p> Ready To Ship </p>
+        </router-link>
+
+
+
+        <router-link :to="{ name: 'ShipmentOrder' }" class="statistic_item " >
+         <h2>  {{ order_count.shipment_order }} </h2>
+         <p> Shipment  </p>
+        </router-link>
+
+
+        <router-link :to="{ name: 'DeliveredOrder' }" class="statistic_item " >
+         <h2>  {{ order_count.delivered_order }} </h2>
+         <p> Delivered  </p>
+        </router-link>
+
+
+        <router-link :to="{ name: 'ReturnOrder' }" class="statistic_item " >
+         <h2>  {{ order_count.return_order }} </h2>
+         <p> Return  </p>
+        </router-link>
+
+        <router-link :to="{ name: 'CancelOrder' }" class="statistic_item " >
+         <h2>  {{ order_count.cancel_order }} </h2>
+         <p> Cancel  </p>
+        </router-link>
+
+        <router-link :to="{ name: 'order' }" class="statistic_item " >
+         <h2>  {{ order_count.total }} </h2>
+         <p> All  </p>
+        </router-link>
+
+
+
+        </div>
 
       </section>
       <section class="content">
@@ -85,7 +94,7 @@
                         <option value="6">Cancel</option>
                       </select>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                       <input
                         class="form-control"
                         @keyup="orderSearch"
@@ -94,19 +103,6 @@
                       />
                     </div>
 
-                      <div class="col-lg-2">
-                      <select
-                        v-model="bulkActionType"
-                        class="form-control"
-                      >
-                        <option value="0" selected disabled>
-                          Select Action
-                        </option>
-
-                        <option value="LABEL PRINT">Label Print</option>
-                        <option value="INVOICE PRINT">Invoice Print</option>
-                      </select>
-                    </div>
 
                     <div class="col-lg-2">
                       <select
@@ -143,10 +139,10 @@
                         </th>
                         <!-- <th scope="col">Host Name</th> -->
                         <th width="10%" >Customer</th>
-                        <th width="10%" >Address</th>
-                        <th width="15%" >Product</th>
-                        <th width="10%" >Invoice</th>
-                        <th width="10%" >Total</th>
+                        <th width="13%" >Address</th>
+                        <th width="12%" >Product</th>
+                        <th width="5%" >Invoice</th>
+                        <th width="15%" >Total</th>
                         <th width="5%" >Created</th>
                         <th width="5%" >Order_place</th>
                         <th width="5%" >Order_date</th>
@@ -200,7 +196,7 @@
                             </strong>
                             <strong> Paid: {{ parseInt(order.paid) }} </strong>
                             <strong>
-                              D:
+                              Due:
                               {{
                                 parseInt(order.total) -
                                 (parseInt(order.discount) +
@@ -346,6 +342,7 @@
                             @click="comment(order.id)"
                             >Comment</button
                           >
+                          <span  style="font-size:12px;"  v-if=" order.order_note.length > 0" > {{ order.order_note[0].note }} </span>
                         </td>
                       </tr>
                     </tbody>
@@ -1158,10 +1155,5 @@ export default {
     margin-left: 30%;
 }
 
-
-      .router-link-active {
-        border: 1.5px dashed !important ;
-        color:#000 !important
-     }
 
 </style>

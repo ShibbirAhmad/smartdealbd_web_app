@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use Picqer;
 use Carbon\Carbon;
+use App\Models\City;
 use App\Models\Sale;
 use App\Models\Order;
 use App\Models\Credit;
 use App\Models\Courier;
 use App\Models\Product;
+use App\Models\SubCity;
 use App\Models\Customer;
 use App\Models\OrderItem;
 use App\Models\OrderNote;
@@ -20,6 +22,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\ResellerOrderDetails;
+use Illuminate\Support\Facades\Response;
 
 
 
@@ -490,11 +493,11 @@ class OrderController extends Controller
             if($request->status!='all'){
                 $orders=Order::whereDate('created_at','=',$request->start_date)
                                ->where('status',$request->status)
-                              ->with(['customer','createAdmin','courier','reseller'])
+                              ->with(['customer','createAdmin','courier','reseller','OrderNote'])
                               ->paginate($paginate);
             }else{
                 $orders=Order::whereDate('created_at','=',$request->start_date)
-                              ->with(['customer','createAdmin','courier','reseller'])
+                              ->with(['customer','createAdmin','courier','reseller','OrderNote'])
                              ->paginate($paginate);
             }
 
@@ -505,12 +508,12 @@ class OrderController extends Controller
                 $orders=Order::whereDate('created_at', '>=', $request->start_date)
                                 ->whereDate('created_at', '<=', $request->end_date)
                                 ->where('status',$request->status)
-                                ->with(['customer','createAdmin','courier','reseller'])
+                                ->with(['customer','createAdmin','courier','reseller','OrderNote'])
                                 ->paginate($paginate);
             }else{
                 $orders=Order::whereDate('created_at', '>=', $request->start_date)
                                 ->whereDate('created_at', '<=', $request->end_date)
-                                ->with(['customer','createAdmin','courier','reseller'])
+                                ->with(['customer','createAdmin','courier','reseller','OrderNote'])
                                 ->paginate($paginate);
             }
 
@@ -528,7 +531,7 @@ class OrderController extends Controller
       //  return $request->all();
 
         $paginate=$request->item ?? 20;
-        $orders=Order::orderBy('id','DESC')->where('status',$request->status)->with(['customer','createAdmin','courier'])->paginate($paginate);
+        $orders=Order::orderBy('id','DESC')->where('status',$request->status)->with(['customer','createAdmin','courier','OrderNote'])->paginate($paginate);
 
         return \response()->json([
             'status'=>'SUCCESS',
@@ -548,7 +551,7 @@ class OrderController extends Controller
     $orders = Order::where('customer_phone','like', '%' . $search . '%')
                     ->where('status',$request->status)
                     ->orderBy('id', 'DESC')
-                    ->with(['customer','createAdmin','courier','reseller'])
+                    ->with(['customer','createAdmin','courier','reseller','OrderNote'])
                     ->paginate(30);
 
    }else{
@@ -556,7 +559,7 @@ class OrderController extends Controller
     $orders = Order::where('invoice_no', 'like', '%' . $search . '%')
                     ->where('status',$request->status)
                     ->orderBy('id', 'DESC')
-                   ->with(['customer','createAdmin','courier','reseller'])
+                   ->with(['customer','createAdmin','courier','reseller','OrderNote'])
                     ->paginate(30);
 
    }
@@ -573,12 +576,13 @@ class OrderController extends Controller
                             ->orWhere('customer_phone','like', '%' . $search . '%')
                             ->orWhere('customer_name','like', '%' . $search . '%')
                             ->orderBy('id', 'DESC')
-                            ->with(['customer','createAdmin','courier'])
+                            ->with(['customer','createAdmin','courier','OrderNote','orderItem.product','OrderNote'])
                             ->paginate(10);
 
               return response()->json([
                     'status'=>'SUCCESS',
-                    'orders'=>$orders
+                    'orders'=>$orders,
+                    'order_count'=> Order::orderCount(),
                 ]);
     }
 
@@ -595,7 +599,7 @@ class OrderController extends Controller
             $orders=Order::whereDate('created_at', '>=', $request->start_date)
                              ->whereDate('created_at', '<=', $request->end_date)
                             ->where('status',$request->status)
-                            ->with(['customer','createAdmin','courier','reseller'])
+                            ->with(['customer','createAdmin','courier','reseller','OrderNote'])
                             ->paginate(30);
          }
 
@@ -937,6 +941,53 @@ class OrderController extends Controller
               'status' => "OK",
               'message' => "added successfully"
           ]);
+
+    }
+
+
+
+
+    public function exportOrderSelectedItem($id){
+
+        $order_id = explode(',', $id);
+        $orders = Order::whereIn('id', $order_id)->get();
+        $filename = 'order-export-' . date('d-m-Y') . '-' . time() . '.csv';
+        $file = fopen($filename, "w");
+
+        fputcsv($file, array(
+            'ActualAmount' => "ActualAmount",
+            'CollectionAmount' => 'CollectionAmount',
+            'CustomerMobile' => 'CustomerMobile',
+            'District' => 'District',
+            'CustomerAddress' => 'CustomerAddress',
+            'CustomerName' => "CustomerName",
+            'CollectionName' => "CollectionName",
+        ));
+
+        foreach ($orders as $k => $line) {
+
+            $city = City::where('id', $line->city_id)->first();
+            $sub_city = SubCity::where('id', $line->sub_city_id)->first();
+            $g_total = (($line->total - $line->discount - $line->paid) + $line->shipping_cost);
+            $address=$line->customer_address;
+            if(!empty($sub_city->name)){
+                $address.=','.$sub_city->name;
+            }
+            if(!empty($city->name)){
+                $address.=','.$city->name;
+            }
+            fputcsv($file, array(
+                'ActualAmount' =>  $line->total - $line->discount,
+                'CollectionAmount' =>  $g_total,
+                'CustomerMobile' => $line->customer_phone,
+                'District' => $city->name ?? "",
+                'CustomerAddress' =>$address ,
+                'CustomerName' => $line->customer_name,
+                'CollectionName' => $line->+
+            ));
+        }
+        fclose($file);
+        return Response::download('./' . $filename);
 
     }
 
