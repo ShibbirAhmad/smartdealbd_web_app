@@ -88,21 +88,6 @@ class OrderController extends Controller
             'paid_by'=>'required',
         ]);
 
-        //check order status.product qauntity,and stock
-        if($request->status==3){
-            foreach($request->products as $item){
-                $product=Product::where('id',$item['id'])->first();
-                if($product->stock<=0){
-                    return \response()->json($product->product_code.'- Stock out');
-                }
-                else if($product->stock < $item['quantity']){
-                    return \response()->json("this product ".$product->product_code.' Stock Available-'.$product->stock.'. But request quantity ' .$item['quantity']);
-                }else{
-                    $product->stock=$product->stock-$item['quantity'];
-                    $product->save();
-                }
-            }
-        }
         DB::transaction(function() use($request){
         //save the order
         $max_id = Order::max('id') ?? 0;
@@ -189,8 +174,7 @@ class OrderController extends Controller
 
 
 
-   public function update(Request $request, $id)
-    {
+   public function update(Request $request, $id){
         //  return $request->all();
         $validatedData = $request->validate([
             'customer_mobile' => 'required|digits:11 ',
@@ -248,22 +232,12 @@ class OrderController extends Controller
               }
 
             $order_items=OrderItem::where('order_id',$order->id)->get();
-            //many of times when update order item, some item remove or some item add, so here we are delete previous item and insert new $rquest item
             foreach($order_items as $order_item){
             //update product stock befere delete items
-            //    $product_stock=Product::where('id',$order_item->product_id)->first();
-            //    $product_stock->stock=$product_stock->stock+$order_item->qty;
-            //    $product_stock->save();
                $order_item->delete();
             }
 
             foreach($request->products as $product){
-               // return $product['product_id'];
-                //update product stock before insert item
-                // $product_item=Product::where('id',$product['product_id'])->first();
-                // $product_item->stock;
-                // $product_item->stock=$product_item->stock - $product['quantity'];
-                // $product_item->save();
 
                 $details=new OrderItem();
                 $details->order_id=$order->id;
@@ -278,11 +252,10 @@ class OrderController extends Controller
 
             });
 
-                 return response()->json([
-                    'status'=>'SUCCESS',
-                    'message'=>'Order was updated successfully'
-                ]);
-
+            return response()->json([
+                'status'=>'SUCCESS',
+                'message'=>'Order was updated successfully'
+             ]);
 
     }
 
@@ -567,7 +540,8 @@ class OrderController extends Controller
 
         return response()->json([
                 'status'=>'SUCCESS',
-                'orders'=>$orders
+                'orders'=>$orders,
+                'order_count'=> Order::orderCount(),
         ]);
     }
     public function orderSearch($search){
@@ -576,7 +550,7 @@ class OrderController extends Controller
                             ->orWhere('customer_phone','like', '%' . $search . '%')
                             ->orWhere('customer_name','like', '%' . $search . '%')
                             ->orderBy('id', 'DESC')
-                            ->with(['customer','createAdmin','courier','OrderNote','orderItem.product','OrderNote'])
+                            ->with(['customer','createAdmin','courier','OrderNote','orderItem.product'])
                             ->paginate(10);
 
               return response()->json([
@@ -806,12 +780,16 @@ class OrderController extends Controller
 
         return \response()->json('Order successfully Canceld');
     }
+
     public function invoicePrint($id){
         $order_id=explode(',',$id);
         $orders=Order::whereIn('id',$order_id)->get();
-        $order=Order::findOrFail($id);
-        $order->print_status = 1 ;
-        $order->save();
+
+        foreach ($orders as $order) {
+            $order->print_status = 1 ;
+            $order->save();
+        }
+
         return view('admin.pdf.print.invoicePrint', compact('orders'));
     }
 
@@ -861,7 +839,6 @@ class OrderController extends Controller
             $order->save();
 
             //update product stock
-
             $product=Product::where('id',$item->product_id)->first();
             $product->stock=$product->stock+$item->quantity;
             $product->save();
@@ -945,6 +922,15 @@ class OrderController extends Controller
     }
 
 
+    public function orderStatistic(){
+
+            return response()->json([
+                'status'=>'OK',
+                'order_count'=> Order::orderCount(),
+            ]);
+    }
+
+
 
 
     public function exportOrderSelectedItem($id){
@@ -983,7 +969,7 @@ class OrderController extends Controller
                 'District' => $city->name ?? "",
                 'CustomerAddress' =>$address ,
                 'CustomerName' => $line->customer_name,
-                'CollectionName' => $line->+
+                'CollectionName' => $line->invoice_no
             ));
         }
         fclose($file);

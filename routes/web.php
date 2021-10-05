@@ -509,6 +509,7 @@ Route::group([
     Route::get('order/label/print/{id}', 'OrderController@labelPrint');
     Route::get('order/invoice/print/{id}', 'OrderController@invoicePrint');
     Route::get('export/selected/item/{id}', 'OrderController@exportOrderSelectedItem');
+    Route::get('api/get/order/statistic', 'OrderController@orderStatistic');
 
     Route::get('pending/all/order/{id}', 'OrderController@pendingAll');
     Route::get('approved/all/order/{id}', 'OrderController@approvedAll');

@@ -7,11 +7,12 @@ use App\Models\Admin;
 use App\Models\Order;
 use App\Models\Balance;
 use App\Models\Product;
+use App\Models\OrderItem;
 use App\Models\Purchaseitem;
 use Illuminate\Http\Request;
+use App\Models\BalanceInsertAdmin;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\BalanceInsertAdmin;
 
 class DashboardController extends Controller
 {
@@ -39,6 +40,12 @@ class DashboardController extends Controller
         $topSellinProductToday=Order::topSellingProductToday();
 
         $analysis=Order::analysis();
+        $today_shipped_orders=Order::where('status',4)
+                                   ->where('created_at', '>=', Carbon::today()->startOfDay())
+                                   ->where('created_at', '<=', Carbon::today()->endOfDay())
+                                   ->select('id','status')
+                                   ->with('orderItem.product')
+                                   ->get();
         $due=Order::due();
 
          $stock=array();
@@ -65,6 +72,7 @@ class DashboardController extends Controller
                 'stock'=>$stock,
                 'admin_order'=>$admin_order,
                 'top_selling_products_today'=>$topSellinProductToday,
+                'today_shipped_orders'=>$today_shipped_orders,
                 'due'=>$due,
                 'analysis'=>$analysis
             ]);

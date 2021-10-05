@@ -169,12 +169,13 @@
 
                 <table class="table table-bordered moha_tbl_inv" style="margin-top: 5px;">
 
-                    <tbody>
-
-                     {{-- <tr>
-                        <td colspan="7" class="text-left" style="text-transform: capitalize;"><b> Courier  :  </b>
+                <tbody>
+                    @if ($order->note)
+                     <tr>
+                        <td colspan="7" class="text-left" ><b> Note  : {{ $order->note }} </b>
                         </td>
-                    </tr> --}}
+                    </tr>
+                    @endif
 
                     <tr>
                         <th  style="background-color: #ddd !important;" class="text-left ">No</th>

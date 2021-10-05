@@ -454,6 +454,12 @@ export default {
   },
   methods: {
 
+   getOrderStatistic(){
+     axios.get('/api/get/order/statistic')
+     .then((resp)=>{
+          this.order_count = resp.data.order_count ;
+     })
+  },
 
  dateFormatter(created_time){
     var date=new Date(created_time);
@@ -574,6 +580,7 @@ export default {
               duration: 2000,
             });
             this.orders.data[index].status = 3;
+              this.getOrderStatistic();
           }
           //not resp success.....
           else {
@@ -615,6 +622,7 @@ export default {
               duration: 2000,
             });
             this.orders.data[index].status = 6;
+              this.getOrderStatistic();
           }
           //for any kind of error resp .......
           else {
@@ -657,6 +665,7 @@ export default {
               duration: 2000,
             });
             this.orders.data[index].status = 7;
+              this.getOrderStatistic();
           }
           //for any kind off error resp
           else {
@@ -737,6 +746,7 @@ export default {
               duration: 2000,
             });
             this.orders.data[index].status = 5;
+              this.getOrderStatistic();
           }
           //any kind of error resp
           else {
@@ -780,6 +790,7 @@ export default {
               duration: 2000,
             });
             this.orders.data[index].status = 4;
+              this.getOrderStatistic();
 
            this.$Progress.finish();
           }
@@ -809,6 +820,7 @@ export default {
               duration: 2000,
             });
             this.orders.data[index].status = 2;
+              this.getOrderStatistic();
           }
           //any kibd off error resp
           else {

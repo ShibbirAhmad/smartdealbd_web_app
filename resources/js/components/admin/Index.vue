@@ -667,6 +667,8 @@
             </div>
         </div>
         <div class="row" v-if="$can('view dashboard')">
+
+
           <h3 class="text-center text-uppercase">Top Sell Product Today</h3>
 
           <div class="col-lg-12">
@@ -695,15 +697,15 @@
                     </div>
                     <div class="caption">
                       <h6>
-                        <a :href="'/public/product/view/' + top_s_product.product.slug">{{
+                        <a :href="'/product/' + top_s_product.product.slug">{{
                           top_s_product.product.name +
                           "" +
                           top_s_product.product.product_code
                         }}</a>
                       </h6>
-                      <h4>
+                      <h5>
                         order today: <b>{{ top_s_product.total }} </b>
-                      </h4>
+                      </h5>
                     </div>
                   </div>
                 </carousel>
@@ -711,6 +713,62 @@
             </div>
           </div>
          </div>
+
+ <div class="row" v-if="$can('view dashboard')">
+
+
+       <h3 style=" color:#000;
+                    margin: 2rem auto;
+                    width: 100%;
+                    height: 40px;
+                    border-radius: 5px;
+                    position: relative;
+                    display: block;
+                    box-shadow: 0 0 10px -5px #000000;
+                    padding: 11px 10px;
+                    transition: 1s;"
+         class="text-center text-uppercase"> Today Shipped Order  <b> {{ today_shipped_orders.length }} </b></h3>
+
+
+          <div class="col-lg-12">
+            <div class="box box-primary">
+              <div class="bx-header with-border"></div>
+              <div class="box-body">
+                <carousel
+                  v-if="today_shipped_orders.length"
+                  :nav="false"
+                  :autoplay="true"
+                  :autoplayTimeout="4000"
+                  :responsive="{ 0: { items: 3 }, 600: { items: 7 } }"
+                >
+                  <div
+                    class="product-thumb clearfix"
+                    v-for="item in today_shipped_orders"
+                    :key="item.id"
+                  >
+                    <div class="image">
+                      <img
+                        :src="product_thumbnail_link+item.order_item[0].product.thumbnail_img"
+                        class="img-responsive"
+                      />
+                    </div>
+                    <div class="caption">
+                      <h6>
+                        <a :href="'/view/' + item.order_item[0].product.slug">{{
+                          item.order_item[0].product.name +
+                          "-" +
+                          item.order_item[0].product.product_code
+                        }}</a>
+                      </h6>
+
+                    </div>
+                  </div>
+                </carousel>
+              </div>
+            </div>
+          </div>
+         </div>
+
         </div>
 
       </section>
@@ -735,7 +793,9 @@ export default {
       admin_orders: "",
       top_selling_products_today: "",
       base_url: this.$store.state.image_base_link,
+      product_thumbnail_link: this.$store.state.image_thumbnail_link,
       analysis: "",
+      today_shipped_orders: 0,
       analysisshow: 1,
       admin_order_today:true,
       admin_order_yesterday:false,
@@ -791,6 +851,7 @@ export default {
         this.admin_orders = resp.data.admin_order;
         this.top_selling_products_today = resp.data.top_selling_products_today;
         this.analysis = resp.data.analysis;
+        this.today_shipped_orders = resp.data.today_shipped_orders;
         this.due = resp.data.due;
         this.load_more = true;
         this.$Progress.finish();

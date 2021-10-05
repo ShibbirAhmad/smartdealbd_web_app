@@ -56,8 +56,8 @@ const state = {
     //for check admin page view permisson
     view_permission:false,
 
-    image_base_link: '/../storage/',
-    image_thumbnail_link: '/../storage/images/product_thumbnail_img/',
+    image_base_link: '/../public/storage/',
+    image_thumbnail_link: '/../public/storage/images/product_thumbnail_img/',
 
     //general setting
     general_setting:"",
@@ -199,7 +199,6 @@ const actions = {
             .then((resp) => {
                 if (resp.data.status == "RUNNING") {
                     context.commit('admin', resp.data.admin)
-
                 }
 
                 //if session is expired, admin redirect ot login again

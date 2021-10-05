@@ -266,8 +266,8 @@ class Order extends Model
         $courier_name=$shipment->name;
         $memo_no=$order->memo_no;
         $total= (($order->total + $order->shipping_cost) - $order->paid ) ;
-        $customer_name=$order->customer->name;
-        $contacts=$order->cutomer_phone;
+        $customer_name=$order->customer_name;
+        $contacts=$order->customer_phone;
 
         $api_key = "C20085946114fda41c2886.82283615";
         $senderid = '8809612436808';

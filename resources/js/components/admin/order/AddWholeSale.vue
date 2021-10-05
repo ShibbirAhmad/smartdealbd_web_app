@@ -394,6 +394,14 @@ export default {
   //method initial for submit data
   methods: {
 
+   getOrderStatistic(){
+     axios.get('/api/get/order/statistic')
+     .then((resp)=>{
+          this.order_count = resp.data.order_count ;
+     })
+  },
+
+
   balanceList() {
       axios
         .get("/api/balance/list")
