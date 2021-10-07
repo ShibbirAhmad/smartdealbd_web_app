@@ -389,7 +389,7 @@ export default {
     return {
       orders: {},
       loading: true,
-      item: "10",
+      item: 30,
       courier: {
         order_id: "",
         courier_id: "",

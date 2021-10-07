@@ -41,8 +41,15 @@ class DashboardController extends Controller
 
         $analysis=Order::analysis();
         $today_shipped_orders=Order::where('status',4)
-                                   ->where('created_at', '>=', Carbon::today()->startOfDay())
-                                   ->where('created_at', '<=', Carbon::today()->endOfDay())
+                                   ->whereDate('shippment_date', '>=', Carbon::today()->startOfDay())
+                                   ->whereDate('shippment_date', '<=', Carbon::today()->endOfDay())
+                                   ->select('id','status')
+                                   ->with('orderItem.product')
+                                   ->get();
+
+        $today_confirmed_orders=Order::where('status',3)
+                                   ->whereDate('approved_date', '>=', Carbon::today()->startOfDay())
+                                   ->whereDate('approved_date', '<=', Carbon::today()->endOfDay())
                                    ->select('id','status')
                                    ->with('orderItem.product')
                                    ->get();
@@ -53,7 +60,7 @@ class DashboardController extends Controller
          $products=Product::where('stock','>',0)->get();
          $stock['total_quantity']=$products->sum('stock');
 
-       foreach($products as $product){
+        foreach($products as $product){
             $product_purchase_item=Purchaseitem::where('product_id',$product->id)->get();
              $price=0;
 
@@ -65,7 +72,7 @@ class DashboardController extends Controller
                 $stock['total_price'] += ($price/$product_purchase_item->sum('stock'))*$product->stock;
             }
 
-      }
+        }
 
 
        return response()->json([
@@ -73,6 +80,7 @@ class DashboardController extends Controller
                 'admin_order'=>$admin_order,
                 'top_selling_products_today'=>$topSellinProductToday,
                 'today_shipped_orders'=>$today_shipped_orders,
+                'today_confirmed_orders'=>$today_confirmed_orders,
                 'due'=>$due,
                 'analysis'=>$analysis
             ]);
