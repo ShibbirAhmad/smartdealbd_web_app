@@ -513,50 +513,9 @@
           </div>
         </div>
         <div class="row">
-          <h3 class="text-center text-uppercase">Create Analysis</h3>
-          <div class="col-lg-4 col-md-4">
-            <div class="box box-primary">
-              <div class="box-header with-border text-center">
-                <img
-                  :src="base_url + admin.image"
-                  class="img-circle small-image"
-                  :alt="admin.name"
-                  v-if="admin.image"
-                />
-                <img
-                  :src="base_url + 'images/static/user2-160x160.jpg'"
-                  class="img-circle small-image"
-                  :alt="admin.name"
-                  v-else
-                />
-                <h4 class="text-center">
-                  {{ "Hi " + admin.name + " see your order create history" }}
-                </h4>
-              </div>
-              <div class="box-body">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Date</th>
-                      <th>Total Create</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr
-                      v-for="(session_admin_order, index) in admin_orders.session_admin"
-                      :key="index"
-                    >
-                      <td>{{ index + 1 }}</td>
-                      <td>{{ session_admin_order.created_at}}</td>
-                      <td>{{ session_admin_order.total }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-            <div class="col-lg-8 col-md-8">
+          <h3 class="text-center text-uppercase">Admins Order Acitvity Analysis</h3>
+
+            <div class="col-lg-12 col-md-12 col-xs-12">
               <div class="box box-success">
                 <div class="box-header with-border text-center">
                    <ul class="admin_order_menu" >
@@ -579,7 +538,7 @@
 
                     <tbody v-if="admin_order_today" >
                       <tr
-                        v-for="(order_create_count, index) in admin_orders.today"
+                        v-for="(order_create_count, index) in admin_orders.today_create"
                         :key="index" >
                         <td>{{ index + 1 }}</td>
                         <td>
@@ -598,7 +557,7 @@
 
                     <tbody v-if="admin_order_yesterday" >
                       <tr
-                        v-for="(order_create_count, index) in admin_orders.yesterday"
+                        v-for="(order_create_count, index) in admin_orders.yesterday_create"
                         :key="index" >
                         <td>{{ index + 1 }}</td>
                         <td>
@@ -620,7 +579,7 @@
 
                     <tbody v-if="admin_order_this_week" >
                       <tr
-                        v-for="(order_create_count, index) in admin_orders.this_week"
+                        v-for="(order_create_count, index) in admin_orders.this_week_create"
                         :key="index" >
                         <td>{{ index + 1 }}</td>
                         <td>
@@ -641,7 +600,7 @@
 
                      <tbody v-if="admin_order_this_month" >
                       <tr
-                        v-for="(order_create_count, index) in admin_orders.this_month"
+                        v-for="(order_create_count, index) in admin_orders.this_month_create"
                         :key="index" >
                         <td>{{ index + 1 }}</td>
                         <td>
@@ -690,7 +649,7 @@
                     <div class="image">
                       <img
                         :src="
-                          base_url + top_s_product.product.product_image[0].product_image
+                          base_url + top_s_product.product.thumbnail_img
                         "
                         class="img-responsive"
                       />
@@ -727,13 +686,13 @@
                     box-shadow: 0 0 10px -5px #000000;
                     padding: 11px 10px;
                     transition: 1s;"
-         class="text-center text-uppercase"> Today Confirmed Order  <b> {{ today_confirmed_orders.length }} </b></h3>
+         class="text-center text-uppercase"> Today Confirmed Order  <b> {{ today_confirmed_orders }} </b></h3>
           <div class="col-lg-12">
             <div class="box box-primary">
               <div class="bx-header with-border"></div>
               <div class="box-body">
                 <carousel
-                  v-if="today_confirmed_orders.length"
+                  v-if="today_confirmed_orders_products.length"
                   :nav="false"
                   :autoplay="true"
                   :autoplayTimeout="4000"
@@ -741,24 +700,24 @@
                 >
                   <div
                     class="product-thumb clearfix"
-                    v-for="item in today_confirmed_orders"
+                    v-for="item in today_confirmed_orders_products"
                     :key="item.id"
                   >
                     <div class="image">
                       <img
-                        :src="product_thumbnail_link+item.order_item[0].product.thumbnail_img"
+                        :src="product_thumbnail_link+item.product.thumbnail_img"
                         class="img-responsive"
                       />
                     </div>
                     <div class="caption">
                       <h6>
-                        <a :href="'/view/' + item.order_item[0].product.slug">{{
-                          item.order_item[0].product.name +
+                        <a :href="'/product/' + item.product.slug">{{
+                          item.product.name +
                           "-" +
-                          item.order_item[0].product.product_code
+                          item.product.product_code
                         }}</a>
                       </h6>
-
+                      <h5> order items: {{ item.total }}  </h5>
                     </div>
                   </div>
                 </carousel>
@@ -780,13 +739,13 @@
                     box-shadow: 0 0 10px -5px #000000;
                     padding: 11px 10px;
                     transition: 1s;"
-         class="text-center text-uppercase"> Today Shipped Order  <b> {{ today_shipped_orders.length }} </b></h3>
+         class="text-center text-uppercase"> Today Shipped Order  <b> {{ today_shipped_orders }} </b></h3>
           <div class="col-lg-12">
             <div class="box box-primary">
               <div class="bx-header with-border"></div>
               <div class="box-body">
                 <carousel
-                  v-if="today_shipped_orders.length"
+                  v-if="today_shipped_orders_products.length"
                   :nav="false"
                   :autoplay="true"
                   :autoplayTimeout="4000"
@@ -794,24 +753,24 @@
                 >
                   <div
                     class="product-thumb clearfix"
-                    v-for="item in today_shipped_orders"
+                    v-for="item in today_shipped_orders_products"
                     :key="item.id"
                   >
                     <div class="image">
                       <img
-                        :src="product_thumbnail_link+item.order_item[0].product.thumbnail_img"
+                        :src="product_thumbnail_link+item.product.thumbnail_img"
                         class="img-responsive"
                       />
                     </div>
                     <div class="caption">
                       <h6>
-                        <a :href="'/view/' + item.order_item[0].product.slug">{{
-                          item.order_item[0].product.name +
+                        <a :href="'/product/' + item.product.slug">{{
+                          item.product.name +
                           "-" +
-                          item.order_item[0].product.product_code
+                          item.product.product_code
                         }}</a>
                       </h6>
-
+                      <h5> order items: {{ item.total }}  </h5>
                     </div>
                   </div>
                 </carousel>
@@ -849,7 +808,9 @@ export default {
       product_thumbnail_link: this.$store.state.image_thumbnail_link,
       analysis: "",
       today_shipped_orders: 0,
+      today_shipped_orders_products: 0,
       today_confirmed_orders: 0,
+      today_confirmed_orders_products: 0,
       analysisshow: 1,
       admin_order_today:true,
       admin_order_yesterday:false,
@@ -906,7 +867,9 @@ export default {
         this.top_selling_products_today = resp.data.top_selling_products_today;
         this.analysis = resp.data.analysis;
         this.today_shipped_orders = resp.data.today_shipped_orders;
+        this.today_shipped_orders_products = resp.data.today_shipped_orders_products;
         this.today_confirmed_orders = resp.data.today_confirmed_orders;
+        this.today_confirmed_orders_products = resp.data.today_confirmed_orders_products;
         this.due = resp.data.due;
         this.load_more = true;
         this.$Progress.finish();

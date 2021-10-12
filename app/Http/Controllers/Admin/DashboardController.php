@@ -39,20 +39,17 @@ class DashboardController extends Controller
         $admin_order=Order::adminOrderAnalysis();
         $topSellinProductToday=Order::topSellingProductToday();
 
-        $analysis=Order::analysis();
-        $today_shipped_orders=Order::where('status',4)
-                                   ->whereDate('shippment_date', '>=', Carbon::today()->startOfDay())
-                                   ->whereDate('shippment_date', '<=', Carbon::today()->endOfDay())
-                                   ->select('id','status')
-                                   ->with('orderItem.product')
-                                   ->get();
+       $analysis=Order::analysis();
 
-        $today_confirmed_orders=Order::where('status',3)
-                                   ->whereDate('approved_date', '>=', Carbon::today()->startOfDay())
-                                   ->whereDate('approved_date', '<=', Carbon::today()->endOfDay())
-                                   ->select('id','status')
-                                   ->with('orderItem.product')
-                                   ->get();
+       $today_shipped_orders=Order::where('status',4)->whereDate('shippment_date',Carbon::today()->format('Y-m-d'))->count();
+       $today_shipped_orders_id=Order::where('status',4)->whereDate('shippment_date',Carbon::today()->format('Y-m-d'))->select('id')->pluck('id');
+       $today_shipped_orders_products=OrderItem::whereIn('order_id',$today_shipped_orders_id)->select('product_id',DB::raw('Count(*) as total'))->groupBy('product_id')->with('product:id,name,slug,product_code,thumbnail_img')->get();
+
+
+       $today_confirmed_orders=Order::where('status',3)->whereDate('approved_date',Carbon::today()->format('Y-m-d'))->count();
+       $today_confirmed_orders_id=Order::where('status',3)->whereDate('approved_date',Carbon::today()->format('Y-m-d'))->select('id')->pluck('id');
+       $today_confirmed_orders_products=OrderItem::whereIn('order_id',$today_confirmed_orders_id)->select('product_id',DB::raw('Count(*) as total'))->groupBy('product_id')->with('product:id,name,slug,product_code,thumbnail_img')->get();
+
         $due=Order::due();
 
          $stock=array();
@@ -80,7 +77,9 @@ class DashboardController extends Controller
                 'admin_order'=>$admin_order,
                 'top_selling_products_today'=>$topSellinProductToday,
                 'today_shipped_orders'=>$today_shipped_orders,
+                'today_shipped_orders_products'=>$today_shipped_orders_products,
                 'today_confirmed_orders'=>$today_confirmed_orders,
+                'today_confirmed_orders_products'=>$today_confirmed_orders_products,
                 'due'=>$due,
                 'analysis'=>$analysis
             ]);

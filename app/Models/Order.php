@@ -292,16 +292,9 @@ class Order extends Model
 
 
     public static function adminOrderAnalysis(){
-       $admin_id=session()->get('admin')['id'];
-       $admin_order=array();
-       $admin_order['session_admin']=Order::where('create_admin_id',$admin_id)
-                        ->select(DB::raw('DATE(created_at) as created_at'),DB::raw('count(*) as total'))
-                        ->groupBy(DB::raw('DATE(created_at)'))
-                        ->orderBy('created_at','DESC')
-                        ->get();
 
-
-       $admin_order['today']=Order::whereNotNull('create_admin_id')
+      $admin_order=array();
+      $admin_order['today_create']=Order::whereNotNull('create_admin_id')
                          ->where('created_at', '>=', Carbon::today()->startOfDay())
                          ->where('created_at', '<=', Carbon::today()->endOfDay())
                          ->select('create_admin_id',DB::raw('count(*) as total'),DB::raw('SUM(total) as total_amount') )
@@ -310,7 +303,15 @@ class Order extends Model
                          ->with('createAdmin')
                          ->get();
 
-      $admin_order['yesterday']=Order::whereNotNull('create_admin_id')
+      $admin_order['today_approved']=Order::where('created_at', '>=', Carbon::today()->startOfDay())
+                         ->where('created_at', '<=', Carbon::today()->endOfDay())
+                         ->select('create_admin_id',DB::raw('count(*) as total'),DB::raw('SUM(total) as total_amount') )
+                         ->groupBy('create_admin_id')
+                         ->orderBy('total','DESC')
+                         ->with('createAdmin')
+                         ->get();
+
+      $admin_order['yesterday_create']=Order::whereNotNull('create_admin_id')
                   ->where('created_at', '>=', Carbon::yesterday()->startOfDay())
                   ->where('created_at', '<=', Carbon::yesterday()->endOfDay())
                   ->select('create_admin_id',DB::raw('count(*) as total'),DB::raw('SUM(total) as total_amount'))
@@ -319,7 +320,7 @@ class Order extends Model
                   ->with('createAdmin')
                   ->get();
 
-      $admin_order['this_week']=Order::whereNotNull('create_admin_id')
+      $admin_order['this_week_create']=Order::whereNotNull('create_admin_id')
                   ->where('created_at', '>=', Carbon::today()->subDays('7')->startOfDay())
                   ->where('created_at', '<=', Carbon::today()->endOfDay())
                   ->select('create_admin_id',DB::raw('count(*) as total'),DB::raw('SUM(total) as total_amount'))
@@ -328,7 +329,7 @@ class Order extends Model
                   ->with('createAdmin')
                   ->get();
 
-      $admin_order['this_month']=Order::whereNotNull('create_admin_id')
+      $admin_order['this_month_create']=Order::whereNotNull('create_admin_id')
                   ->where('created_at', '>=', Carbon::today()->subDays('30')->startOfDay())
                   ->where('created_at', '<=', Carbon::today()->endOfDay())
                   ->select('create_admin_id',DB::raw('count(*) as total'),DB::raw('SUM(total) as total_amount'))
@@ -348,8 +349,8 @@ class Order extends Model
                          ->select('product_id',DB::raw('count(*) as total'))
                          ->groupBy('product_id')
                          ->orderBy('total','DESC')
-                         ->with('product.productImage')
-                          ->get();
+                         ->with('product:id,name,slug,product_code,thumbnail_img')
+                         ->get();
 
      return $products;
     }
