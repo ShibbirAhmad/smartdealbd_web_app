@@ -215,12 +215,7 @@
                             Whole sale ||
                             <strong>{{ order.create_admin.name }}</strong>
                           </p>
-                          <p v-if="order.order_type == 4">
-                            Reseller
-                            <strong v-if="order.reseller.username">{{
-                              order.reseller.username
-                            }}</strong>
-                          </p>
+
                         </td>
                         <td class="two-percent">
                           <span class="badge" v-if="order.status == 1"
@@ -263,7 +258,15 @@
 
                          <div :id="'order_action_'+order.id" class="action_container">
 
-
+                          <router-link
+                            class="btn btn-sm btn-primary action-btn"
+                            style="color: #fff"
+                            :to="{
+                              name: 'viewOrder',
+                              params: { id: order.id },
+                            }"
+                            >view</router-link
+                          >
                           <button
                             class="btn btn-sm btn-success action-btn"
                             v-if="

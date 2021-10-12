@@ -91,7 +91,7 @@ class OrderController extends Controller
         DB::transaction(function() use($request){
         //save the order
         $max_id = Order::max('id') ?? 0;
-        $invoice = 1 + $max_id;
+        $invoice = rand(111,999) + $max_id;
         $order=new Order();
         $order->host_name=$request->getHttpHost();
         $order->invoice_no=$invoice;
@@ -113,16 +113,16 @@ class OrderController extends Controller
         //store who is approved
         if($request->status==3){
             $order->approved_admin_id=session()->get('admin')['id'];
-            $order->approved_date=Carbon::now();
+            $order->approved_date=date('Y-m-d');
         }
         //store who is update
         if($request->status==2){
-             $order->pending_admin_id=session()->get('admin')['id'];
-            $order->pending_date=Carbon::now();
+            $order->pending_admin_id=session()->get('admin')['id'];
+            $order->pending_date=date('Y-m-d');
         }
         $order->save();
         //if order save then save the order details
-            foreach($request->products as $product){
+        foreach($request->products as $product){
                 //update product stock
                 // $product_stock=Product::where('id',$product['id'])->first();
                 // $product_stock->stock=$product_stock->stock-$product['quantity'];
@@ -187,8 +187,8 @@ class OrderController extends Controller
         ]);
 
         $order=Order::findOrFail($id);
-        if($order->status!=1 && $order->status!=2){
-            return \response()->json('Order New Or Pending not now');
+        if($order->status==4){
+            return \response()->json('Order is still now shipment');
         }
         DB::transaction(function() use($request,$order){
       // return $customer->name;
@@ -197,8 +197,19 @@ class OrderController extends Controller
         $order->customer_address=$request->customer_address;
         $order->customer_phone=$request->customer_mobile;
         $order->city_id=$request->city;
+        $order->status=$request->status ;
         $order->note=$request->note ;
-        $order->status=$request->status;
+         //store who is approved
+        if($request->status==3){
+            $order->approved_admin_id=session()->get('admin')['id'];
+            $order->approved_date=date('Y-m-d');
+        }
+        //store who is update
+        if($request->status==2){
+            $order->pending_admin_id=session()->get('admin')['id'];
+            $order->pending_date=date('Y-m-d');
+        }
+
         $order->courier_id=$request->courier;
         $order->shipping_cost=$request->shipping_cost ?? 0;
         $order->discount=$request->discount ?? 0;
@@ -284,7 +295,7 @@ class OrderController extends Controller
             }
             $order->status=3;
             $order->approved_admin_id=session()->get('admin')['id'];
-            $order->approved_date=Carbon::now();
+            $order->approved_date=date('Y-m-d');
 
             if($order->save()){
                 return \response()->json([
@@ -300,7 +311,7 @@ class OrderController extends Controller
         if($order){
             $order->status=2;
             $order->pending_admin_id=session()->get('admin')['id'];
-            $order->pending_date=Carbon::now();
+            $order->pending_date=date('Y-m-d');
 
             if($order->save()){
                 return \response()->json([
@@ -322,7 +333,7 @@ class OrderController extends Controller
         DB::transaction(function() use($request,$order){
             $order->status=5;
             $order->delivered_admin_id=session()->get('admin')['id'];
-            $order->delivery_date=Carbon::now();
+            $order->delivery_date=date('Y-m-d');
             $order->save();
             //when order delievered,then order amount is created at a new credit.....
             $total=$order->total - ($order->paid+$order->discount) + $order->shipping_cost;
@@ -366,7 +377,7 @@ class OrderController extends Controller
             $order=Order::findOrFail($id);
             $order->status=4;
             $order->shipment_admin_id=session()->get('admin')['id'];
-            $order->shippment_date=Carbon::now();
+            $order->shippment_date=date('Y-m-d');
             $order->save();
              Order::sendShipmentMenssage($order);
              return \response()->json([
@@ -390,7 +401,7 @@ class OrderController extends Controller
 
             $order->status=7;
             $order->return_admin_id=session()->get('admin')['id'];
-            $order->return_date=Carbon::now();
+            $order->return_date=date('Y-m-d');
 
             if($order->save()){
 
@@ -422,7 +433,7 @@ class OrderController extends Controller
 
             $order->status=6;
             $order->cancel_admin_id=session()->get('admin')['id'];
-            $order->cancel_date=Carbon::now();
+            $order->cancel_date=date('Y-m-d');
 
             if($order->save()){
                 return \response()->json([
@@ -466,27 +477,28 @@ class OrderController extends Controller
             if($request->status!='all'){
                 $orders=Order::whereDate('created_at','=',$request->start_date)
                                ->where('status',$request->status)
-                              ->with(['customer','createAdmin','courier','reseller','OrderNote'])
+                              ->with(['customer','createAdmin','courier','OrderNote','orderItem.product'])
                               ->paginate($paginate);
             }else{
                 $orders=Order::whereDate('created_at','=',$request->start_date)
-                              ->with(['customer','createAdmin','courier','reseller','OrderNote'])
+                              ->with(['customer','createAdmin','courier','OrderNote','orderItem.product'])
                              ->paginate($paginate);
             }
 
         }
+
         if(!empty($request->end_date) && !empty($request->start_date)){
 
             if($request->status!='all'){
                 $orders=Order::whereDate('created_at', '>=', $request->start_date)
                                 ->whereDate('created_at', '<=', $request->end_date)
                                 ->where('status',$request->status)
-                                ->with(['customer','createAdmin','courier','reseller','OrderNote'])
+                                ->with(['customer','createAdmin','courier','OrderNote','orderItem.product'])
                                 ->paginate($paginate);
             }else{
                 $orders=Order::whereDate('created_at', '>=', $request->start_date)
                                 ->whereDate('created_at', '<=', $request->end_date)
-                                ->with(['customer','createAdmin','courier','reseller','OrderNote'])
+                                ->with(['customer','createAdmin','courier','OrderNote','orderItem.product'])
                                 ->paginate($paginate);
             }
 
@@ -504,7 +516,7 @@ class OrderController extends Controller
       //  return $request->all();
 
         $paginate=$request->item ?? 20;
-        $orders=Order::orderBy('id','DESC')->where('status',$request->status)->with(['customer','createAdmin','courier','OrderNote'])->paginate($paginate);
+        $orders=Order::orderBy('id','DESC')->where('status',$request->status)->with(['customer','createAdmin','courier','OrderNote','orderItem.product'])->paginate($paginate);
 
         return \response()->json([
             'status'=>'SUCCESS',
@@ -524,7 +536,7 @@ class OrderController extends Controller
     $orders = Order::where('customer_phone','like', '%' . $search . '%')
                     ->where('status',$request->status)
                     ->orderBy('id', 'DESC')
-                    ->with(['customer','createAdmin','courier','reseller','OrderNote'])
+                    ->with(['customer','createAdmin','courier','OrderNote','orderItem.product'])
                     ->paginate(30);
 
    }else{
@@ -532,7 +544,7 @@ class OrderController extends Controller
     $orders = Order::where('invoice_no', 'like', '%' . $search . '%')
                     ->where('status',$request->status)
                     ->orderBy('id', 'DESC')
-                   ->with(['customer','createAdmin','courier','reseller','OrderNote'])
+                   ->with(['customer','createAdmin','courier','OrderNote','orderItem.product'])
                     ->paginate(30);
 
    }
@@ -573,7 +585,7 @@ class OrderController extends Controller
             $orders=Order::whereDate('created_at', '>=', $request->start_date)
                              ->whereDate('created_at', '<=', $request->end_date)
                             ->where('status',$request->status)
-                            ->with(['customer','createAdmin','courier','reseller','OrderNote'])
+                            ->with(['customer','createAdmin','courier','OrderNote','orderItem.product'])
                             ->paginate(30);
          }
 
@@ -632,7 +644,7 @@ class OrderController extends Controller
 
             $order->status=3;
             $order->approved_admin_id=session()->get('admin')['id'];
-            $order->approved_date=Carbon::now();
+            $order->approved_date=date('Y-m-d');
             $order->save();
 
             return \response()->json([
@@ -650,7 +662,7 @@ class OrderController extends Controller
         foreach($orders as $order){
             $order->status=2;
             $order->pending_admin_id=session()->get('admin')['id'];
-            $order->pending_date=Carbon::now();
+            $order->pending_date=date('Y-m-d');
             $order->save();
         }
 
@@ -665,7 +677,7 @@ class OrderController extends Controller
          if(!empty($order->courier_id) && !empty($order->memo_no)){
                 $order->status=4;
                 $order->shipment_admin_id=session()->get('admin')['id'];
-                $order->shippment_date=Carbon::now();
+                $order->shippment_date=date('Y-m-d');
                 $order->save();
 
                 //add customer due if paid amountt smaller then  total amount......
@@ -700,7 +712,7 @@ class OrderController extends Controller
             }
             $order->status=5;
             $order->delivered_admin_id=session()->get('admin')['id'];
-            $order->delivery_date=Carbon::now();
+            $order->delivery_date=date('Y-m-d');
             $order->save();
 
             //when order delievered,then order amount is created at a new credit.....
@@ -736,7 +748,7 @@ class OrderController extends Controller
         foreach($orders as $order){
             $order->status=7;
             $order->return_admin_id=session()->get('admin')['id'];
-            $order->return_date=Carbon::now();
+            $order->return_date=date('Y-m-d');
             $order->save();
              $details=OrderItem::where('order_id',$order->id)->get();
 
@@ -772,7 +784,7 @@ class OrderController extends Controller
             }
             $order->status=6;
             $order->cancel_admin_id=session()->get('admin')['id'];
-            $order->cancel_date=Carbon::now();
+            $order->cancel_date=date('Y-m-d');
             $order->save();
 
 

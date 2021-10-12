@@ -47,7 +47,7 @@ class OrderController extends Controller
                 }
                 //save the order
                 $id = Order::max('id') ?? 0;
-                $invoice = 100 + $id;
+                $invoice = rand(111,999) + $id;
                 $order=new Order();
                 $order->host_name=$request->getHttpHost();
                 $order->customer_name=$request->name;
@@ -62,8 +62,8 @@ class OrderController extends Controller
                 $order->total=$total;
                 $order->status=1;
                 $order->sub_city_id=$request->sub_city ?? 0;
-                $order->save();
 
+               if ($order->save()) { 
                 foreach(Cart::content() as $product){
                     $details=new OrderItem();
                     $details->order_id=$order->id;
@@ -75,6 +75,7 @@ class OrderController extends Controller
                     $details->total=$product->qty*$product->price;
                     $details->save();
                 }
+             }
             //sending message
              $invoice=$order->invoice_no;
              $name=$request->name;

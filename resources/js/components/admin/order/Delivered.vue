@@ -75,24 +75,9 @@
                         <option value="1">Only Customer</option>
                       </select>
                     </div>
-                    <div class="col-lg-2">
-                      <select
-                        class="form-control"
-                        v-model="status"
-                        @change="ordersList"
-                      >
-                        <option value="all">All</option>
-                        <option value="1">New</option>
-                        <option value="2">Pending</option>
-                        <option value="3">Approved</option>
-                        <option value="4">Shipment</option>
-                        <option value="5">Delivired</option>
-                        <option value="7">Retrun</option>
-                        <option value="6">Cancel</option>
-                      </select>
-                    </div>
 
-                  <div class="col-lg-6">
+
+                  <div class="col-lg-4">
                       <input
                         class="form-control"
                         @keyup="orderSearch"
@@ -101,6 +86,35 @@
                       />
                     </div>
 
+                    <div class="col-lg-4">
+                      <form @submit.prevent="filterOrder">
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <date-picker
+                              autocomplete="off"
+                              v-model="start_date"
+                              placeholder="start-date"
+                              :config="options"
+                            ></date-picker>
+                          </div>
+                          <div class="col-lg-4" style="margin-left: -20px">
+                            <date-picker
+                              autocomplete="off"
+                              v-model="end_date"
+                              placeholder="end-date"
+                              :config="options"
+                            ></date-picker>
+                          </div>
+                          <div class="col-lg-4">
+                           <select class="form-control" v-model="courier_id" style="width:120px;">
+                             <option value="" selected disabled>Select Courier</option>
+                             <option v-for="courier in couriers" :value="courier.id" :key="courier.id">{{courier.name}}</option>
+                           </select>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    
                     <div class="col-lg-2">
                       <select
                         class="form-control"
@@ -194,12 +208,7 @@
                             Whole sale ||
                             <strong>{{ order.create_admin.name }}</strong>
                           </p>
-                          <p v-if="order.order_type == 4">
-                            Reseller
-                            <strong v-if="order.reseller.username">{{
-                              order.reseller.username
-                            }}</strong>
-                          </p>
+
                         </td>
                         <td class="two-percent">
                           <span class="badge" v-if="order.status == 1">New</span>

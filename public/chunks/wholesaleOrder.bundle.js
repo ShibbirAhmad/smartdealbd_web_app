@@ -414,9 +414,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     var _this = this;
@@ -1799,14 +1796,6 @@ var render = function() {
                                                 _vm._s(order.create_admin.name)
                                               )
                                             ])
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      order.order_type == 4
-                                        ? _c("p", [
-                                            _vm._v(
-                                              "\n                          Reseller\n                          "
-                                            )
                                           ])
                                         : _vm._e()
                                     ]),

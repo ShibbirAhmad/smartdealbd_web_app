@@ -217,10 +217,7 @@
                             Whole sale ||
                             <strong>{{ order.create_admin.name }}</strong>
                           </p>
-                          <p v-if="order.order_type == 4">
-                            Reseller
-                            <!-- <strong>{{order.create_admin.name}}</strong> -->
-                          </p>
+              
                         </td>
                         <td class="two-percent">
                           <span class="badge" v-if="order.status == 1"

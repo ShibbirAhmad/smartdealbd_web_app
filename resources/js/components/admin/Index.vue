@@ -513,16 +513,17 @@
           </div>
         </div>
         <div class="row">
-          <h3 class="text-center text-uppercase">Admins Order Acitvity Analysis</h3>
+          <h3 class="text-center text-uppercase">Admins Order Activity Analysis</h3>
 
-            <div class="col-lg-12 col-md-12 col-xs-12">
+            <div class="col-lg-6 col-md-6 col-xs-12">
               <div class="box box-success">
                 <div class="box-header with-border text-center">
+                   <h4>Create Analysis</h4>
                    <ul class="admin_order_menu" >
-                    <li @click="adminOrderToday"     :class="{ active_border : admin_order_today == true }">  Today </li>
-                    <li @click="adminOrderYesterday" :class="{ active_border : admin_order_yesterday == true }"> Yesterday </li>
-                    <li @click="adminOrderThisWeek"  :class="{ active_border : admin_order_this_week == true }"> This Week </li>
-                    <li @click="adminOrderThisMonth" :class="{ active_border : admin_order_this_month == true }">  This Month  </li>
+                    <li @click="adminOrderActivityToday"     :class="{ active_border : admin_order_today == true }">  Today </li>
+                    <li @click="adminOrderActivityYesterday" :class="{ active_border : admin_order_yesterday == true }"> Yesterday </li>
+                    <li @click="adminOrderActivityThisWeek"  :class="{ active_border : admin_order_this_week == true }"> This Week </li>
+                    <li @click="adminOrderActivityThisMonth" :class="{ active_border : admin_order_this_month == true }">  This Month  </li>
                   </ul>
                 </div>
                 <div class="box-body">
@@ -624,6 +625,113 @@
                 </div>
               </div>
             </div>
+
+              <div class="col-lg-6 col-md-6 col-xs-12">
+              <div class="box box-success">
+                <div class="box-header with-border text-center">
+                  <h4>Approved Analysis</h4>
+                   <ul class="admin_order_menu" >
+                    <li @click="adminOrderActivityToday"     :class="{ active_border : admin_order_today == true }">  Today </li>
+                    <li @click="adminOrderActivityYesterday" :class="{ active_border : admin_order_yesterday == true }"> Yesterday </li>
+                    <li @click="adminOrderActivityThisWeek"  :class="{ active_border : admin_order_this_week == true }"> This Week </li>
+                    <li @click="adminOrderActivityThisMonth" :class="{ active_border : admin_order_this_month == true }">  This Month  </li>
+                  </ul>
+                </div>
+                <div class="box-body">
+                  <table class="table table-bordered table-striped table-hover ">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Admin</th>
+                        <th>Total Approved</th>
+                        <th>Total Amount</th>
+                      </tr>
+                    </thead>
+
+                    <tbody v-if="admin_order_today" >
+                      <tr
+                        v-for="(order_approved_count, index) in admin_orders.today_approved"
+                        :key="index" >
+                        <td>{{ index + 1 }}</td>
+                        <td>
+                          <img
+                            :src="base_url + order_approved_count.approved_by.image "
+                            class="img-circle small-image"
+                            style="width:60px;height:60px"
+                            v-if="order_approved_count.approved_by.image"
+                          />
+                          {{ order_approved_count.approved_by.name }}
+                        </td>
+                        <td>{{ order_approved_count.total }}</td>
+                        <td> &#2547;{{ order_approved_count.total_amount }}</td>
+                      </tr>
+                    </tbody>
+
+                    <tbody v-if="admin_order_yesterday" >
+                      <tr
+                        v-for="(order_approved_count, index) in admin_orders.yesterday_approved"
+                        :key="index" >
+                        <td>{{ index + 1 }}</td>
+                        <td>
+                          <img
+                            :src="base_url + order_approved_count.approved_by.image "
+                            class="img-circle small-image"
+                            style="width:60px;height:60px"
+                            v-if="order_approved_count.approved_by.image"
+                          />
+                          {{ order_approved_count.approved_by.name }}
+                        </td>
+                        <td>{{ order_approved_count.total }}</td>
+                        <td> &#2547;{{ order_approved_count.total_amount }}</td>
+                      </tr>
+                    </tbody>
+
+
+                    <tbody v-if="admin_order_this_week" >
+                      <tr
+                        v-for="(order_approved_count, index) in admin_orders.this_week_approved"
+                        :key="index" >
+                        <td>{{ index + 1 }}</td>
+                        <td>
+                          <img
+                            :src="base_url + order_approved_count.approved_by.image "
+                            class="img-circle small-image"
+                            style="width:60px;height:60px"
+                            v-if="order_approved_count.approved_by.image"
+                          />
+                          {{ order_approved_count.approved_by.name }}
+                        </td>
+                        <td>{{ order_approved_count.total }}</td>
+                        <td> &#2547;{{ order_approved_count.total_amount }}</td>
+                      </tr>
+                    </tbody>
+
+                     <tbody v-if="admin_order_this_month" >
+                      <tr
+                        v-for="(order_approved_count, index) in admin_orders.this_month_approved"
+                        :key="index" >
+                        <td>{{ index + 1 }}</td>
+                        <td>
+                          <img
+                            :src="base_url + order_approved_count.approved_by.image "
+                            class="img-circle small-image"
+                            style="width:60px;height:60px"
+                            v-if="order_approved_count.approved_by.image"
+                          />
+                          {{ order_approved_count.approved_by.name }}
+                        </td>
+                        <td>{{ order_approved_count.total }}</td>
+                        <td> &#2547;{{ order_approved_count.total_amount }}</td>
+                      </tr>
+                    </tbody>
+
+                  </table>
+
+                </div>
+              </div>
+            </div>
+
+
         </div>
         <div class="row" v-if="$can('view dashboard')">
 
@@ -649,7 +757,7 @@
                     <div class="image">
                       <img
                         :src="
-                          base_url + top_s_product.product.thumbnail_img
+                          product_thumbnail_link + top_s_product.product.thumbnail_img
                         "
                         class="img-responsive"
                       />
@@ -825,21 +933,21 @@ export default {
   },
   methods: {
 
-  adminOrderToday(){
+  adminOrderActivityToday(){
        this.admin_order_today=true ;
        this.admin_order_yesterday=false ;
        this.admin_order_this_week=false ;
        this.admin_order_this_month=false ;
     },
 
-      adminOrderYesterday(){
+      adminOrderActivityYesterday(){
        this.admin_order_today=false ;
        this.admin_order_yesterday=true ;
        this.admin_order_this_week=false ;
        this.admin_order_this_month=false ;
     },
 
-     adminOrderThisWeek(){
+     adminOrderActivityThisWeek(){
        this.admin_order_today=false ;
        this.admin_order_yesterday=false ;
        this.admin_order_this_week=true ;
@@ -847,7 +955,7 @@ export default {
     },
 
 
-     adminOrderThisMonth(){
+     adminOrderActivityThisMonth(){
        this.admin_order_today=false ;
        this.admin_order_yesterday=false ;
        this.admin_order_this_week=false ;

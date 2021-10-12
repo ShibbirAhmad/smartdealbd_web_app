@@ -243,28 +243,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -566,12 +544,7 @@ var render = function() {
                               _c("strong", [
                                 _vm._v(" " + _vm._s(_vm.order.created_at))
                               ])
-                            ]),
-                            _vm._v(" "),
-                            _vm.order.order_type == 4 &&
-                            Object.keys(_vm.order.reseller_order_details).length
-                              ? _c("div", { staticClass: "form-group" })
-                              : _vm._e()
+                            ])
                           ]
                         ),
                         _vm._v(" "),

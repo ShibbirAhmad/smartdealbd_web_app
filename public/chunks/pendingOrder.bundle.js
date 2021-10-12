@@ -403,6 +403,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.ordersList();
@@ -1881,23 +1884,6 @@ var render = function() {
                                               )
                                             ])
                                           ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      order.order_type == 4
-                                        ? _c("p", [
-                                            _vm._v(
-                                              "\n                          Reseller\n                          "
-                                            ),
-                                            order.reseller.username
-                                              ? _c("strong", [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      order.reseller.username
-                                                    )
-                                                  )
-                                                ])
-                                              : _vm._e()
-                                          ])
                                         : _vm._e()
                                     ]),
                                     _vm._v(" "),
@@ -1998,6 +1984,22 @@ var render = function() {
                                           }
                                         },
                                         [
+                                          _c(
+                                            "router-link",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-primary action-btn",
+                                              staticStyle: { color: "#fff" },
+                                              attrs: {
+                                                to: {
+                                                  name: "viewOrder",
+                                                  params: { id: order.id }
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("view")]
+                                          ),
+                                          _vm._v(" "),
                                           order.status == 2 ||
                                           order.status == 1 ||
                                           order.status == 6

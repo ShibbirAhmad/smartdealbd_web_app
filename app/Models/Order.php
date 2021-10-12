@@ -20,10 +20,12 @@ class Order extends Model
     {
         return $this->belongsTo('App\Models\Customer','customer_id');
     }
+
     public function createAdmin()
     {
-        return $this->belongsTo('App\Models\Admin','create_admin_id');
+        return $this->belongsTo('App\Models\Admin','create_admin_id')->select(['id','name','image','email','status']);
     }
+
     public function courier()
     {
         return $this->belongsTo('App\Models\Courier','courier_id');
@@ -53,7 +55,7 @@ class Order extends Model
     }
 
     public function approvedBy(){
-        return $this->belongsTo('App\Models\Admin','approved_admin_id');
+        return $this->belongsTo('App\Models\Admin','approved_admin_id')->select(['id','name','image','email','status']);
     }
     public function orderBarcode(){
         return $this->hasOne('App\Models\OrderBarcode','order_id');
@@ -68,12 +70,12 @@ class Order extends Model
           if($request->status!="all"){
                 if($request->type=="all"){
                  $orders=Order::orderBy('id','DESC')
-                            ->with(['createAdmin','courier','reseller','OrderNote','orderItem.product'])
+                            ->with(['createAdmin','courier','OrderNote','orderItem.product'])
                             ->where('status',$request->status)
                             ->paginate($paginate);
               }else{
                 $orders=Order::orderBy('id','DESC')
-                             ->with(['createAdmin','courier','reseller','OrderNote','orderItem.product'])
+                             ->with(['createAdmin','courier','OrderNote','orderItem.product'])
                             ->where('status',$request->status)
                             ->where('order_type',$request->type)
                             ->paginate($paginate);
@@ -81,10 +83,10 @@ class Order extends Model
             }else{
                if($request->type=="all"){
                  $orders=Order::orderBy('id','DESC')
-                                 ->with(['createAdmin','courier','reseller','OrderNote','orderItem.product'])
+                                 ->with(['createAdmin','courier','OrderNote','orderItem.product'])
                                 ->paginate($paginate);
               }else{
-                $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','reseller','OrderNote','orderItem.product'])->where('order_type',$request->type)->paginate($paginate);
+                $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','OrderNote','orderItem.product'])->where('order_type',$request->type)->paginate($paginate);
               }
             }
             return \response()->json([
@@ -100,13 +102,13 @@ class Order extends Model
              if($request->status!="all"){
                 if($request->type=="all"){
                  $orders=Order::orderBy('id','DESC')
-                           ->with(['createAdmin','courier','reseller','OrderNote'])
+                           ->with(['createAdmin','courier','OrderNote','orderItem.product'])
                             ->where('status',$request->status)
                             ->whereDate('created_at','=',$request->start_date)
                             ->paginate($paginate);
               }else{
                 $orders=Order::orderBy('id','DESC')
-                            ->with(['createAdmin','courier','reseller','OrderNote'])
+                            ->with(['createAdmin','courier','OrderNote','orderItem.product'])
                             ->where('status',$request->status)
                             ->where('order_type',$request->type)
                             ->whereDate('created_at','=',$request->start_date)
@@ -116,11 +118,11 @@ class Order extends Model
 
                if($request->type=="all"){
                  $orders=Order::orderBy('id','DESC')
-                                 ->with(['createAdmin','courier','reseller','OrderNote'])
+                                 ->with(['createAdmin','courier','OrderNote','orderItem.product'])
                                 ->whereDate('created_at','=',$request->start_date)
                                 ->paginate($paginate);
               }else{
-                $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','OrderNote'])
+                $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','OrderNote','orderItem.product'])
                                ->where('order_type',$request->type)
                                ->whereDate('created_at','=',$request->start_date)
                                ->paginate($paginate);
@@ -139,14 +141,14 @@ class Order extends Model
              if($request->status!="all"){
                 if($request->type=="all"){
                  $orders=Order::orderBy('id','DESC')
-                            ->with(['createAdmin','courier','reseller','OrderNote'])
+                            ->with(['createAdmin','courier','OrderNote','orderItem.product'])
                             ->where('status',$request->status)
                             ->whereDate('created_at','>=',$request->start_date)
                             ->whereDate('created_at','<=',$request->end_date)
                             ->paginate($paginate);
               }else{
                 $orders=Order::orderBy('id','DESC')
-                            ->with(['createAdmin','courier','reseller','OrderNote'])
+                            ->with(['createAdmin','courier','OrderNote','orderItem.product'])
                             ->where('status',$request->status)
                             ->where('order_type',$request->type)
                             ->whereDate('created_at','>=',$request->start_date)
@@ -157,12 +159,12 @@ class Order extends Model
 
                if($request->type=="all"){
                  $orders=Order::orderBy('id','DESC')
-                                 ->with(['createAdmin','courier','reseller','OrderNote'])
+                                 ->with(['createAdmin','courier','OrderNote','orderItem.product'])
                                 ->whereDate('created_at','>=',$request->start_date)
                                  ->whereDate('created_at','<=',$request->end_date)
                                 ->paginate($paginate);
               }else{
-                $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','reseller','OrderNote'])
+                $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','OrderNote','orderItem.product'])
                                ->where('order_type',$request->type)
                                ->whereDate('created_at','>=',$request->start_date)
                               ->whereDate('created_at','<=',$request->end_date)
@@ -182,13 +184,13 @@ class Order extends Model
 
             if($request->status!="all"){
                 $orders=Order::orderBy('id','DESC')
-                            ->with(['createAdmin','courier','reseller','OrderNote'])
+                            ->with(['createAdmin','courier','OrderNote','orderItem.product'])
                             ->where('status',$request->status)
                             ->whereDate('created_at','=',$request->start_date)
                             ->where('courier_id',$request->courier_id)
                             ->paginate($paginate);
               }else{
-               $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','reseller','OrderNote'])
+               $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','OrderNote','orderItem.product'])
                             ->whereDate('created_at','=',$request->start_date)
                             ->where('courier_id',$request->courier_id)
                             ->paginate($paginate);
@@ -198,14 +200,14 @@ class Order extends Model
         elseif(!empty($request->start_date) && !empty($request->end_date)){
               if($request->status!="all"){
                 $orders=Order::orderBy('id','DESC')
-                             ->with(['createAdmin','courier','reseller','OrderNote'])
+                             ->with(['createAdmin','courier','OrderNote','orderItem.product'])
                             ->where('status',$request->status)
                             ->whereDate('created_at','>=',$request->start_date)
                             ->whereDate('created_at','<=',$request->end_date)
                             ->where('courier_id',$request->courier_id)
                             ->paginate($paginate);
               }else{
-               $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','OrderNote'])
+               $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','OrderNote','orderItem.product'])
                             ->whereDate('created_at','>=',$request->start_date)
                             ->whereDate('created_at','<=',$request->end_date)
                             ->where('courier_id',$request->courier_id)
@@ -215,12 +217,12 @@ class Order extends Model
         }else{
             if($request->status!="all"){
                 $orders=Order::orderBy('id','DESC')
-                             ->with(['createAdmin','courier','reseller','OrderNote'])
+                             ->with(['createAdmin','courier','OrderNote','orderItem.product'])
                             ->where('status',$request->status)
                             ->where('courier_id',$request->courier_id)
                             ->paginate($paginate);
               }else{
-               $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','reseller','OrderNote'])
+               $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','OrderNote','orderItem.product'])
                              ->where('courier_id',$request->courier_id)
                             ->paginate($paginate);
              }
@@ -303,12 +305,11 @@ class Order extends Model
                          ->with('createAdmin')
                          ->get();
 
-      $admin_order['today_approved']=Order::where('created_at', '>=', Carbon::today()->startOfDay())
-                         ->where('created_at', '<=', Carbon::today()->endOfDay())
-                         ->select('create_admin_id',DB::raw('count(*) as total'),DB::raw('SUM(total) as total_amount') )
-                         ->groupBy('create_admin_id')
+      $admin_order['today_approved']=Order::where('status',3)->whereDate('approved_date',Carbon::today()->format('Y-m-d'))
+                         ->select('approved_admin_id',DB::raw('count(*) as total'),DB::raw('SUM(total) as total_amount') )
+                         ->groupBy('approved_admin_id')
                          ->orderBy('total','DESC')
-                         ->with('createAdmin')
+                         ->with('approvedBy')
                          ->get();
 
       $admin_order['yesterday_create']=Order::whereNotNull('create_admin_id')
@@ -320,6 +321,13 @@ class Order extends Model
                   ->with('createAdmin')
                   ->get();
 
+      $admin_order['yesterday_approved']=Order::where('status',3)->whereDate('approved_date',Carbon::yesterday()->format('Y-m-d'))
+                    ->select('approved_admin_id',DB::raw('count(*) as total'),DB::raw('SUM(total) as total_amount') )
+                    ->groupBy('approved_admin_id')
+                    ->orderBy('total','DESC')
+                    ->with('approvedBy')
+                    ->get();
+
       $admin_order['this_week_create']=Order::whereNotNull('create_admin_id')
                   ->where('created_at', '>=', Carbon::today()->subDays('7')->startOfDay())
                   ->where('created_at', '<=', Carbon::today()->endOfDay())
@@ -329,6 +337,16 @@ class Order extends Model
                   ->with('createAdmin')
                   ->get();
 
+      $admin_order['this_week_approved']=Order::where('status',3)
+                                      ->whereNotNull('approved_admin_id')
+                                     ->where('created_at', '>=', Carbon::today()->subDays('30')->startOfDay())
+                                     ->where('created_at', '<=', Carbon::today()->endOfDay())
+                                     ->select('approved_admin_id',DB::raw('count(*) as total'),DB::raw('SUM(total) as total_amount') )
+                                     ->groupBy('approved_admin_id')
+                                     ->orderBy('total','DESC')
+                                     ->with('approvedBy')
+                                     ->get();
+
       $admin_order['this_month_create']=Order::whereNotNull('create_admin_id')
                   ->where('created_at', '>=', Carbon::today()->subDays('30')->startOfDay())
                   ->where('created_at', '<=', Carbon::today()->endOfDay())
@@ -337,6 +355,16 @@ class Order extends Model
                   ->orderBy('total','DESC')
                   ->with('createAdmin')
                   ->get();
+
+      $admin_order['this_month_approved']=Order::where('status',3)
+                                    ->whereNotNull('approved_admin_id')
+                                    ->where('created_at', '>=', Carbon::today()->subDays('30')->startOfDay())
+                                    ->where('created_at', '<=', Carbon::today()->endOfDay())
+                                    ->select('approved_admin_id',DB::raw('count(*) as total'),DB::raw('SUM(total) as total_amount') )
+                                    ->groupBy('approved_admin_id')
+                                    ->orderBy('total','DESC')
+                                    ->with('approvedBy')
+                                    ->get();
 
 
        return $admin_order;

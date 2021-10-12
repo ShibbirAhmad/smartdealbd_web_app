@@ -479,7 +479,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.ordersList();
@@ -1465,124 +1464,6 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-lg-2" }, [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.type,
-                                expression: "type"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            on: {
-                              change: [
-                                function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.type = $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                },
-                                _vm.ordersList
-                              ]
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { value: "all" } }, [
-                              _vm._v("All type")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "2" } }, [
-                              _vm._v("Onely Admin")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "1" } }, [
-                              _vm._v("Only Customer")
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-lg-2" }, [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.status,
-                                expression: "status"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            on: {
-                              change: [
-                                function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.status = $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                },
-                                _vm.ordersList
-                              ]
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { value: "all" } }, [
-                              _vm._v("All")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "1" } }, [
-                              _vm._v("New")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "2" } }, [
-                              _vm._v("Pending")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "3" } }, [
-                              _vm._v("Approved")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "4" } }, [
-                              _vm._v("Shipment")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "5" } }, [
-                              _vm._v("Delivired")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "7" } }, [
-                              _vm._v("Retrun")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "6" } }, [
-                              _vm._v("Cancel")
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
                       _c("div", { staticClass: "col-lg-4" }, [
                         _c("input", {
                           directives: [
@@ -1608,6 +1489,131 @@ var render = function() {
                             }
                           }
                         })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-lg-4" }, [
+                        _c(
+                          "form",
+                          {
+                            on: {
+                              submit: function($event) {
+                                $event.preventDefault()
+                                return _vm.filterOrder($event)
+                              }
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "row" }, [
+                              _c(
+                                "div",
+                                { staticClass: "col-lg-4" },
+                                [
+                                  _c("date-picker", {
+                                    attrs: {
+                                      autocomplete: "off",
+                                      placeholder: "start-date",
+                                      config: _vm.options
+                                    },
+                                    model: {
+                                      value: _vm.start_date,
+                                      callback: function($$v) {
+                                        _vm.start_date = $$v
+                                      },
+                                      expression: "start_date"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "col-lg-4",
+                                  staticStyle: { "margin-left": "-20px" }
+                                },
+                                [
+                                  _c("date-picker", {
+                                    attrs: {
+                                      autocomplete: "off",
+                                      placeholder: "end-date",
+                                      config: _vm.options
+                                    },
+                                    model: {
+                                      value: _vm.end_date,
+                                      callback: function($$v) {
+                                        _vm.end_date = $$v
+                                      },
+                                      expression: "end_date"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-lg-4" }, [
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.courier_id,
+                                        expression: "courier_id"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    staticStyle: { width: "120px" },
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.courier_id = $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "option",
+                                      {
+                                        attrs: {
+                                          value: "",
+                                          selected: "",
+                                          disabled: ""
+                                        }
+                                      },
+                                      [_vm._v("Select Courier")]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm._l(_vm.couriers, function(courier) {
+                                      return _c(
+                                        "option",
+                                        {
+                                          key: courier.id,
+                                          domProps: { value: courier.id }
+                                        },
+                                        [_vm._v(_vm._s(courier.name))]
+                                      )
+                                    })
+                                  ],
+                                  2
+                                )
+                              ])
+                            ])
+                          ]
+                        )
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-lg-2" }, [
@@ -2042,23 +2048,6 @@ var render = function() {
                                                 _vm._s(order.create_admin.name)
                                               )
                                             ])
-                                          ])
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      order.order_type == 4
-                                        ? _c("p", [
-                                            _vm._v(
-                                              "\n                          Reseller\n                          "
-                                            ),
-                                            order.reseller.username
-                                              ? _c("strong", [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      order.reseller.username
-                                                    )
-                                                  )
-                                                ])
-                                              : _vm._e()
                                           ])
                                         : _vm._e()
                                     ]),

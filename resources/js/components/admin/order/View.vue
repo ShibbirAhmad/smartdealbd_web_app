@@ -50,29 +50,7 @@
                        <p>
                         Date:<strong> {{ order.created_at}}</strong>
                       </p>
-                      <div
-                        class="form-group"
-                        v-if="
-                          order.order_type == 4 &&
-                          Object.keys(order.reseller_order_details).length
-                        "
-                      >
-                        <!-- <label for="">Reseller Commision</label>
-                        <div style="display: flex">
-                          <input
-                            type="text"
-                            id="reseller_order_commision"
-                            :value="order.reseller_order_details.total_amount"
-                            class="form-control"
-                          />
-                          <button
-                            class="btn btn-primary text-uppercase"
-                            @click="updateResellerCommision"
-                          >
-                            update
-                          </button>
-                        </div> -->
-                      </div>
+            
                     </div>
                     <div class="col-md-1 col-sm-1"></div>
                   </div>

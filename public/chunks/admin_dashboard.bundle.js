@@ -801,6 +801,114 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Index",
@@ -834,25 +942,25 @@ __webpack_require__.r(__webpack_exports__);
     this.dashboard();
   },
   methods: {
-    adminOrderToday: function adminOrderToday() {
+    adminOrderActivityToday: function adminOrderActivityToday() {
       this.admin_order_today = true;
       this.admin_order_yesterday = false;
       this.admin_order_this_week = false;
       this.admin_order_this_month = false;
     },
-    adminOrderYesterday: function adminOrderYesterday() {
+    adminOrderActivityYesterday: function adminOrderActivityYesterday() {
       this.admin_order_today = false;
       this.admin_order_yesterday = true;
       this.admin_order_this_week = false;
       this.admin_order_this_month = false;
     },
-    adminOrderThisWeek: function adminOrderThisWeek() {
+    adminOrderActivityThisWeek: function adminOrderActivityThisWeek() {
       this.admin_order_today = false;
       this.admin_order_yesterday = false;
       this.admin_order_this_week = true;
       this.admin_order_this_month = false;
     },
-    adminOrderThisMonth: function adminOrderThisMonth() {
+    adminOrderActivityThisMonth: function adminOrderActivityThisMonth() {
       this.admin_order_today = false;
       this.admin_order_yesterday = false;
       this.admin_order_this_week = false;
@@ -2483,12 +2591,12 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "row" }, [
                       _c("h3", { staticClass: "text-center text-uppercase" }, [
-                        _vm._v("Admins Order Acitvity Analysis")
+                        _vm._v("Admins Order Activity Analysis")
                       ]),
                       _vm._v(" "),
                       _c(
                         "div",
-                        { staticClass: "col-lg-12 col-md-12 col-xs-12" },
+                        { staticClass: "col-lg-6 col-md-6 col-xs-12" },
                         [
                           _c("div", { staticClass: "box box-success" }, [
                             _c(
@@ -2498,6 +2606,8 @@ var render = function() {
                                   "box-header with-border text-center"
                               },
                               [
+                                _c("h4", [_vm._v("Create Analysis")]),
+                                _vm._v(" "),
                                 _c("ul", { staticClass: "admin_order_menu" }, [
                                   _c(
                                     "li",
@@ -2506,7 +2616,7 @@ var render = function() {
                                         active_border:
                                           _vm.admin_order_today == true
                                       },
-                                      on: { click: _vm.adminOrderToday }
+                                      on: { click: _vm.adminOrderActivityToday }
                                     },
                                     [_vm._v("  Today ")]
                                   ),
@@ -2518,7 +2628,9 @@ var render = function() {
                                         active_border:
                                           _vm.admin_order_yesterday == true
                                       },
-                                      on: { click: _vm.adminOrderYesterday }
+                                      on: {
+                                        click: _vm.adminOrderActivityYesterday
+                                      }
                                     },
                                     [_vm._v(" Yesterday ")]
                                   ),
@@ -2530,7 +2642,9 @@ var render = function() {
                                         active_border:
                                           _vm.admin_order_this_week == true
                                       },
-                                      on: { click: _vm.adminOrderThisWeek }
+                                      on: {
+                                        click: _vm.adminOrderActivityThisWeek
+                                      }
                                     },
                                     [_vm._v(" This Week ")]
                                   ),
@@ -2542,7 +2656,9 @@ var render = function() {
                                         active_border:
                                           _vm.admin_order_this_month == true
                                       },
-                                      on: { click: _vm.adminOrderThisMonth }
+                                      on: {
+                                        click: _vm.adminOrderActivityThisMonth
+                                      }
                                     },
                                     [_vm._v("  This Month  ")]
                                   )
@@ -2812,6 +2928,354 @@ var render = function() {
                             ])
                           ])
                         ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-lg-6 col-md-6 col-xs-12" },
+                        [
+                          _c("div", { staticClass: "box box-success" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "box-header with-border text-center"
+                              },
+                              [
+                                _c("h4", [_vm._v("Approved Analysis")]),
+                                _vm._v(" "),
+                                _c("ul", { staticClass: "admin_order_menu" }, [
+                                  _c(
+                                    "li",
+                                    {
+                                      class: {
+                                        active_border:
+                                          _vm.admin_order_today == true
+                                      },
+                                      on: { click: _vm.adminOrderActivityToday }
+                                    },
+                                    [_vm._v("  Today ")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "li",
+                                    {
+                                      class: {
+                                        active_border:
+                                          _vm.admin_order_yesterday == true
+                                      },
+                                      on: {
+                                        click: _vm.adminOrderActivityYesterday
+                                      }
+                                    },
+                                    [_vm._v(" Yesterday ")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "li",
+                                    {
+                                      class: {
+                                        active_border:
+                                          _vm.admin_order_this_week == true
+                                      },
+                                      on: {
+                                        click: _vm.adminOrderActivityThisWeek
+                                      }
+                                    },
+                                    [_vm._v(" This Week ")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "li",
+                                    {
+                                      class: {
+                                        active_border:
+                                          _vm.admin_order_this_month == true
+                                      },
+                                      on: {
+                                        click: _vm.adminOrderActivityThisMonth
+                                      }
+                                    },
+                                    [_vm._v("  This Month  ")]
+                                  )
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "box-body" }, [
+                              _c(
+                                "table",
+                                {
+                                  staticClass:
+                                    "table table-bordered table-striped table-hover "
+                                },
+                                [
+                                  _vm._m(8),
+                                  _vm._v(" "),
+                                  _vm.admin_order_today
+                                    ? _c(
+                                        "tbody",
+                                        _vm._l(
+                                          _vm.admin_orders.today_approved,
+                                          function(
+                                            order_approved_count,
+                                            index
+                                          ) {
+                                            return _c("tr", { key: index }, [
+                                              _c("td", [
+                                                _vm._v(_vm._s(index + 1))
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                order_approved_count.approved_by
+                                                  .image
+                                                  ? _c("img", {
+                                                      staticClass:
+                                                        "img-circle small-image",
+                                                      staticStyle: {
+                                                        width: "60px",
+                                                        height: "60px"
+                                                      },
+                                                      attrs: {
+                                                        src:
+                                                          _vm.base_url +
+                                                          order_approved_count
+                                                            .approved_by.image
+                                                      }
+                                                    })
+                                                  : _vm._e(),
+                                                _vm._v(
+                                                  "\n                        " +
+                                                    _vm._s(
+                                                      order_approved_count
+                                                        .approved_by.name
+                                                    ) +
+                                                    "\n                      "
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    order_approved_count.total
+                                                  )
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _vm._v(
+                                                  " ৳" +
+                                                    _vm._s(
+                                                      order_approved_count.total_amount
+                                                    )
+                                                )
+                                              ])
+                                            ])
+                                          }
+                                        ),
+                                        0
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.admin_order_yesterday
+                                    ? _c(
+                                        "tbody",
+                                        _vm._l(
+                                          _vm.admin_orders.yesterday_approved,
+                                          function(
+                                            order_approved_count,
+                                            index
+                                          ) {
+                                            return _c("tr", { key: index }, [
+                                              _c("td", [
+                                                _vm._v(_vm._s(index + 1))
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                order_approved_count.approved_by
+                                                  .image
+                                                  ? _c("img", {
+                                                      staticClass:
+                                                        "img-circle small-image",
+                                                      staticStyle: {
+                                                        width: "60px",
+                                                        height: "60px"
+                                                      },
+                                                      attrs: {
+                                                        src:
+                                                          _vm.base_url +
+                                                          order_approved_count
+                                                            .approved_by.image
+                                                      }
+                                                    })
+                                                  : _vm._e(),
+                                                _vm._v(
+                                                  "\n                        " +
+                                                    _vm._s(
+                                                      order_approved_count
+                                                        .approved_by.name
+                                                    ) +
+                                                    "\n                      "
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    order_approved_count.total
+                                                  )
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _vm._v(
+                                                  " ৳" +
+                                                    _vm._s(
+                                                      order_approved_count.total_amount
+                                                    )
+                                                )
+                                              ])
+                                            ])
+                                          }
+                                        ),
+                                        0
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.admin_order_this_week
+                                    ? _c(
+                                        "tbody",
+                                        _vm._l(
+                                          _vm.admin_orders.this_week_approved,
+                                          function(
+                                            order_approved_count,
+                                            index
+                                          ) {
+                                            return _c("tr", { key: index }, [
+                                              _c("td", [
+                                                _vm._v(_vm._s(index + 1))
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                order_approved_count.approved_by
+                                                  .image
+                                                  ? _c("img", {
+                                                      staticClass:
+                                                        "img-circle small-image",
+                                                      staticStyle: {
+                                                        width: "60px",
+                                                        height: "60px"
+                                                      },
+                                                      attrs: {
+                                                        src:
+                                                          _vm.base_url +
+                                                          order_approved_count
+                                                            .approved_by.image
+                                                      }
+                                                    })
+                                                  : _vm._e(),
+                                                _vm._v(
+                                                  "\n                        " +
+                                                    _vm._s(
+                                                      order_approved_count
+                                                        .approved_by.name
+                                                    ) +
+                                                    "\n                      "
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    order_approved_count.total
+                                                  )
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _vm._v(
+                                                  " ৳" +
+                                                    _vm._s(
+                                                      order_approved_count.total_amount
+                                                    )
+                                                )
+                                              ])
+                                            ])
+                                          }
+                                        ),
+                                        0
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.admin_order_this_month
+                                    ? _c(
+                                        "tbody",
+                                        _vm._l(
+                                          _vm.admin_orders.this_month_approved,
+                                          function(
+                                            order_approved_count,
+                                            index
+                                          ) {
+                                            return _c("tr", { key: index }, [
+                                              _c("td", [
+                                                _vm._v(_vm._s(index + 1))
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                order_approved_count.approved_by
+                                                  .image
+                                                  ? _c("img", {
+                                                      staticClass:
+                                                        "img-circle small-image",
+                                                      staticStyle: {
+                                                        width: "60px",
+                                                        height: "60px"
+                                                      },
+                                                      attrs: {
+                                                        src:
+                                                          _vm.base_url +
+                                                          order_approved_count
+                                                            .approved_by.image
+                                                      }
+                                                    })
+                                                  : _vm._e(),
+                                                _vm._v(
+                                                  "\n                        " +
+                                                    _vm._s(
+                                                      order_approved_count
+                                                        .approved_by.name
+                                                    ) +
+                                                    "\n                      "
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    order_approved_count.total
+                                                  )
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _vm._v(
+                                                  " ৳" +
+                                                    _vm._s(
+                                                      order_approved_count.total_amount
+                                                    )
+                                                )
+                                              ])
+                                            ])
+                                          }
+                                        ),
+                                        0
+                                      )
+                                    : _vm._e()
+                                ]
+                              )
+                            ])
+                          ])
+                        ]
                       )
                     ]),
                     _vm._v(" "),
@@ -2867,7 +3331,7 @@ var render = function() {
                                                         "img-responsive",
                                                       attrs: {
                                                         src:
-                                                          _vm.base_url +
+                                                          _vm.product_thumbnail_link +
                                                           top_s_product.product
                                                             .thumbnail_img
                                                       }
@@ -3318,6 +3782,22 @@ var staticRenderFns = [
         _c("th", [_vm._v("Admin")]),
         _vm._v(" "),
         _c("th", [_vm._v("Total Create")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Total Amount")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Admin")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Total Approved")]),
         _vm._v(" "),
         _c("th", [_vm._v("Total Amount")])
       ])
