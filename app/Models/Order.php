@@ -403,6 +403,8 @@ public static function orderCount(){
                                 ->count();
         $order['wholesale']=Order::where('status',6)
         ->count();
+        $order['pending_memo']=Order::where('status',3)->where('print_status',0)
+                                  ->count();
        return $order;
 }
 

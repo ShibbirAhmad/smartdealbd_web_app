@@ -83,6 +83,9 @@
               ></router-link>
             </div>
           </div>
+
+   
+
           <div class="col-lg-3 col-sm-6 col-xs-6">
             <div class="small-box bg-yellow">
               <div class="inner">
@@ -95,6 +98,7 @@
               ></router-link>
             </div>
           </div>
+
           <div class="col-lg-3 col-sm-12 col-xs-12">
             <div class="small-box bg-red">
               <div class="inner">

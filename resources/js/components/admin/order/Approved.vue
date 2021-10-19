@@ -21,6 +21,11 @@
          <p> Ready To Ship </p>
         </router-link>
 
+      <router-link style="background:#f39c12" :to="{ name: 'ApprovedOrder' }" class="statistic_item  " >
+         <h2>  {{ order_count.pending_memo }} </h2>
+         <p> Memo Pending </p>
+        </router-link>
+
 
 
         <router-link :to="{ name: 'ShipmentOrder' }" class="statistic_item " >
@@ -64,7 +69,7 @@
                      <h3 class="box-title orders-heading">{{ heading }}</h3>
 
                   <div class="row">
-    
+
 
                     <div class="col-lg-4">
                       <input

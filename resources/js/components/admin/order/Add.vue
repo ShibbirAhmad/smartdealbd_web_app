@@ -109,7 +109,6 @@
                       class="form-control"
                       v-model="city_name"
                       @keyup="citySearch"
-                      @mouseenter="showCityBox"
                       autocomplete="off"
                     />
                     <ul
@@ -438,19 +437,14 @@ export default {
   //method initial for submit data
   methods: {
 
-    showCityBox(){
-      document.getElementById('city_name_container').style.display='block';
-    },
-
-     hideCityBox(){
-      document.getElementById('city_name_container').style.display='none';
-    },
 
     citySearch() {
       if (this.city_name.length > 0) {
         axios.get("/api/search/city/" + this.city_name).then((resp) => {
-          console.log(resp);
-          this.cities = resp.data.cities.data;
+          if (resp.data.cities.data.length > 0) {
+             document.getElementById('city_name_container').style.display='block';
+             this.cities = resp.data.cities.data;
+          }
         });
       }
     },
@@ -668,7 +662,7 @@ export default {
 
     //select city
     selectCity(city) {
-     document.getElementById('city_name_container').style.display='none';
+      document.getElementById('city_name_container').style.display='none';
       this.city_name=city.name ;
       this.form.city = city.id;
       this.cityWiseSubCity(city.id);
@@ -677,7 +671,7 @@ export default {
       this.totalCalculation();
 
     },
-    
+
     cityWiseSubCity(city_id) {
       let loader = this.$loading.show({
         // Optional parameters
