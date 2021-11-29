@@ -449,13 +449,9 @@ ul.side-nav li:hover>.left-sub-menu {
     padding: 10px;
     width: 100%;
     height: 200px;
-    transition: 1s;
+    transition: .3s;
 }
 
-/* .product-card-body img:hover{
-     transform: scale(1.5);
-
-} */
 
 .product-detail h4 {
     font-size: 12px;
@@ -1018,7 +1014,7 @@ img.site-logo {
 }
 
 .menu-item {
-    padding: 10px 15px;
+    padding: 10px 10px;
     font-size: 14px;
     transition: .5s;
 }
@@ -1920,6 +1916,7 @@ span.price-new {
             font-size: 16px;
             font-weight: bold;
     }
+    
     .incrementor_plus {
         cursor: pointer;
         position: absolute;
@@ -2232,7 +2229,7 @@ span.price-new {
         width: 100%;
         position: absolute;
         z-index: 999999999;
-        background: #F7F8FA;
+        background: #fff;
         justify-content: center;
         position: absolute;
         height: 45px;
@@ -2377,7 +2374,7 @@ span.price-new {
     .header_facebook {
         position: absolute;
         display: block;
-        left: 83%;
+        left: 86%;
         top: 34%;
         font-size: 18px;
         border: 1px dashed;
@@ -2471,7 +2468,7 @@ span.price-new {
        }
 
         .__footer_nav {
-            display: block;
+            display: none;
             position: fixed;
             bottom: 0;
             width: 90%;
@@ -2893,7 +2890,7 @@ span.price-new {
 
            .product-card {
             width:100%;
-            height: 240px;
+            height: 290px;
             background: #F4F1F0;
             border: 1px solid #ddd;
             text-align: center;
@@ -2915,9 +2912,10 @@ span.price-new {
             }
 
          .product-card-body img {
-            width: 95% !important;
-            height: 100% !important;
-            padding: 2px 0px !important;
+            width: 95% ;
+            height: 100% ;
+            padding: 2px 0px ;
+            min-height:200px;
         }
 
          .custom-box {
@@ -3094,14 +3092,14 @@ span.price-new {
 
 
         .search-input {
-            width: 84%;
+            width: 95%;
             left: -10%;
             margin-top: 60px;
         }
 
         .search-btn {
             top: 149%;
-            left: 76%;
+            left: 81%;
         }
 
        .search-content {
@@ -3202,6 +3200,22 @@ span.price-new {
 
 
 @media screen and (max-width: 450px) {
+    
+    
+     .input_qty {
+            padding: 10px 24% !important;
+    }
+    
+    .incrementor_plus {
+        margin-left: 20%;
+    }
+
+    .incrementor_minus {
+        margin-left: 68%;
+    }
+
+    
+    
 
     .small_width {
         width: 48% !important;
@@ -3436,6 +3450,21 @@ span.price-new {
 
 
 @media screen and (max-width:380px){
+    
+    
+     .input_qty {
+            padding: 10px 25% !important;
+    }
+    
+    .incrementor_plus {
+        margin-left: 21%;
+    }
+
+    .incrementor_minus {
+        margin-left: 73%;
+    }
+
+    
 
 
         #footer .f_info_right {

@@ -17,6 +17,7 @@ use App\Models\OrderNote;
 use App\Models\CustomerDue;
 use App\Models\OrderBarcode;
 use Illuminate\Http\Request;
+use App\Models\GeneralSetting;
 use App\Models\BalanceInsertAdmin;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\DB;
@@ -953,35 +954,41 @@ class OrderController extends Controller
         $file = fopen($filename, "w");
 
         fputcsv($file, array(
-            'ActualAmount' => "ActualAmount",
-            'CollectionAmount' => 'CollectionAmount',
-            'CustomerMobile' => 'CustomerMobile',
+            'Invoice' => "Invoice",
+            'Customer Name' => 'Customer Name',
+            'Contact No' => 'Contact No',
+            'Customer Address' => 'Customer Address',
             'District' => 'District',
-            'CustomerAddress' => 'CustomerAddress',
-            'CustomerName' => "CustomerName",
-            'CollectionName' => "CollectionName",
+            'Area' => "Area",
+            'Area ID' => "Area ID",
+            'Division' => "Division",
+            'Price' => "Price",
+            'Instruction' => "Instruction",
+            'Product Selling Price' => "Product Selling Price",
+            'Seller Name' => "Seller Name",
+            'Seller Phone' => "Seller Phone",
         ));
 
         foreach ($orders as $k => $line) {
 
             $city = City::where('id', $line->city_id)->first();
             $sub_city = SubCity::where('id', $line->sub_city_id)->first();
+            $general_setting = GeneralSetting::latest()->first();
             $g_total = (($line->total - $line->discount - $line->paid) + $line->shipping_cost);
-            $address=$line->customer_address;
-            if(!empty($sub_city->name)){
-                $address.=','.$sub_city->name;
-            }
-            if(!empty($city->name)){
-                $address.=','.$city->name;
-            }
-            fputcsv($file, array(
-                'ActualAmount' =>  $line->total - $line->discount,
-                'CollectionAmount' =>  $g_total,
-                'CustomerMobile' => $line->customer_phone,
-                'District' => $city->name ?? "",
-                'CustomerAddress' =>$address ,
-                'CustomerName' => $line->customer_name,
-                'CollectionName' => $line->invoice_no
+            fputcsv($file, array( 
+                'Invoice' =>  $line->invoice_no,
+                'Customer Name' => $line->customer_name,
+                'Contact No' => $line->customer_phone,
+                'Customer Address' => $line->customer_address,
+                'District' => ucwords($city->name) ?? "empty",
+                'Area' => ucwords($sub_city->name) ?? "empty",
+                'Area ID' => 44,
+                'Division' => "Division",
+                'Price' => $g_total,
+                'Instruction' => $line->note ?? 'None',
+                'Product Selling Price' => $g_total,
+                'Seller Name' => $general_setting->title,
+                'Seller Phone' =>  $general_setting->header_contact_number,
             ));
         }
         fclose($file);

@@ -154,9 +154,7 @@
                  <div class="call_now_container">
                        <p>  Have question about this product ? please call</p>
                       <h2> <a  :href="'tel:'+general_setting.header_contact_number"><i class="fa fa-phone "></i> {{ general_setting.header_contact_number }}</a> </h2>
-                      <h2> <a  href="tel:01945004004"><i class="fa fa-phone "></i> 01945004004 </a> </h2>
-                      <h2> <a  href="tel:01818357735"><i class="fa fa-phone "></i> 01818357735 </a> </h2>
-
+                   
                  </div>
             </div>
 

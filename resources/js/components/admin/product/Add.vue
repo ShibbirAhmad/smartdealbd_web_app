@@ -522,10 +522,10 @@ export default {
         });
         return;
       }
-       if(file.size/1024 > 300){
+       if(file.size/1024 > 1024){
         Swal.fire({
           type:'warning',
-          text:'File size can not be bigger then 300kb.Reference file size is'+file.size/1024 +'KB',
+          text:'File size can not be bigger then 1024kb.Reference file size is'+file.size/1024 +'KB',
         });
         return;
       }
