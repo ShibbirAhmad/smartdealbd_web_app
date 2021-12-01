@@ -2,7 +2,7 @@
   <div class="wrapper-wide">
     <loading :active.sync="isLoading" :can-cancel="true" :is-full-page="fullPage"></loading>
 
-    <frontend-header :categories="categories"></frontend-header>
+    <frontend-header ></frontend-header>
 
     <div id="container">
       <div class="container">

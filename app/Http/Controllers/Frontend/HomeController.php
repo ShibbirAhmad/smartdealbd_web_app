@@ -78,9 +78,9 @@ class HomeController extends Controller
     }
 
 
-    public function product(Request $request,$slug)
+    public function product($id)
     {
-        $product = Product::where('slug', $slug)->with(['productAttribute.attribute','productVariant.variant'])->first();
+        $product = Product::where('id',$id)->with(['productAttribute.attribute','productVariant.variant'])->first();
        if ($product) {
           return response()->json([
                 'status' => "SUCCESS",
@@ -89,9 +89,9 @@ class HomeController extends Controller
         }
     }
 
-    public function productImage($slug){
+    public function productImage($id){
 
-      $product = Product::where('slug', $slug)->first();
+      $product = Product::where('id', $id)->first();
       $product_images = ProductImage::where('product_id',$product->id)
                                         ->select('product_image')
                                         ->get();
@@ -100,8 +100,8 @@ class HomeController extends Controller
     }
 
     public function relatedProduct(Request $request){
-     $product_find=Product::where('slug',$request->product_slug)->first();
-     $products=Product::where('sub_sub_category_id',$product_find->sub_sub_category_id)->where('id','!=',$product_find->id)->paginate(5);
+     $product_find=Product::where('id',$request->product_id)->first();
+     $products=Product::where('category_id',$product_find->category_id)->where('id','!=',$product_find->id)->paginate(5);
     return response()->json($products);
  }
 

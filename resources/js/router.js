@@ -61,9 +61,9 @@ const routes = [
 
 
     {
-        path: '/product/:slug',
-        component: () => import(/* webpackChunkName: "single_product" */'./components/public/SingleProduct.vue'),
-        name: 'single',
+        path: '/product/:id',
+        component: () => import(/* webpackChunkName: "product_details" */'./components/public/SingleProduct.vue'),
+        name: 'product_details',
         props: true,
         meta: {
             title: 'product details'
@@ -2352,16 +2352,7 @@ router.beforeEach((to, from, next) => {
     }
 
 
-    // if (to.matched.some(record=>record.meta.progressbar)){
-    //     progress: {
-    //         func: [
-    //             {call: 'color', modifier: 'temp', argument: '#ffb000'},
-    //             {call: 'fail', modifier: 'temp', argument: '#6e0000'},
-    //             {call: 'location', modifier: 'temp', argument: 'top'},
-    //             {call: 'transition', modifier: 'temp', argument: {speed: '1.5s', opacity: '0.6s', termination: 400}}
-    //         ]
-    //     }
-    // }
+
 })
 
 export default router

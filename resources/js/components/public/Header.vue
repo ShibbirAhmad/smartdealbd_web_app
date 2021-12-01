@@ -33,7 +33,7 @@
                     :key="index"
                   >
                      <router-link
-                      :to="{ name: 'single', params: { slug: product.slug } }"
+                      :to="{ name: 'id', params: { id: product.id } }"
                       class="search-router-link"
                       >
                         <div class="__search_porducts_details">

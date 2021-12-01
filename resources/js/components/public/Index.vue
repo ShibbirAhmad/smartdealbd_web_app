@@ -46,8 +46,8 @@
                     <div class="new_arrival_card_body text-center">
                       <router-link
                         :to="{
-                          name: 'single',
-                          params: { slug: item.slug },
+                          name: 'product_details',
+                          params: { id: item.id },
                         }"
                       >
                         <img
@@ -57,8 +57,8 @@
                       <p class="arrival_link">
                         <router-link
                           :to="{
-                            name: 'single',
-                            params: { slug: item.slug },
+                            name: 'product_details',
+                            params: { id: item.id },
                           }"
                           >{{ item.name.substring(0, 20) }}
                           <span v-if="item.name.length > 20"> ... </span>
@@ -123,8 +123,8 @@
               <div class="image">
                 <router-link
                   :to="{
-                    name: 'single',
-                    params: { slug: campaign_product.slug },
+                    name: 'product_details',
+                    params: { id: campaign_product.id },
                   }"
                 >
                   <img
@@ -138,8 +138,8 @@
                 <h4>
                   <router-link
                     :to="{
-                      name: 'single',
-                      params: { slug: campaign_product.slug },
+                      name: 'product_details',
+                      params: { id: campaign_product.id },
                     }"
                     >{{ campaign_product.name.substring(0, 20) }}
                     <span v-if="product.name.length > 20"
@@ -205,7 +205,7 @@
                 <div class="product-card">
                   <div class="product-card-body">
                     <router-link
-                      :to="{ name: 'single', params: { slug: product.slug } }"
+                      :to="{ name: 'product_details', params: { id: product.id } }"
                     >
                       <img
                         :src="product_thumbnail_link + product.thumbnail_img"
@@ -216,8 +216,8 @@
                         <router-link
                           class="product-link"
                           :to="{
-                            name: 'single',
-                            params: { slug: product.slug },
+                            name: 'product_details',
+                            params: { id: product.id },
                           }"
                           >{{ product.name.substring(0, 20) }}
                           <span v-if="product.name.length > 20"
@@ -238,7 +238,7 @@
 
                   <div class="product-card-footer">
 
-                    <router-link  v-if="product.product_attribute" :to="{ name:'single',params:{ slug: product.slug }}"  class="btn btn-primary btnQuick" style="cursor: pointer" >
+                    <router-link  v-if="product.product_attribute" :to="{ name:'product_details',params:{ id: product.id }}"  class="btn btn-primary btnQuick" style="cursor: pointer" >
                       অর্ডার করুন
                     </router-link>
 

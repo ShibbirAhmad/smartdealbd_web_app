@@ -34,7 +34,7 @@
             <div class="product-card small-card">
               <div class="product-card-body">
                 <router-link
-                  :to="{ name: 'single', params: { slug: product.slug } }"
+                  :to="{ name: 'product_details', params: { id:product.id } }"
                 >
                    <img :src="  product_thumbnail_link + product.thumbnail_img "  :alt="product.name" />
                 </router-link>
@@ -42,7 +42,7 @@
                   <h4>
                     <router-link
                       class="product-link"
-                      :to="{ name: 'single', params: { slug: product.slug } }"
+                      :to="{ name: 'product_details', params: { id:product.id } }"
                       >{{ product.name.substring(0,20) }}
                          <span v-if="product.name.length > 20">...</span></router-link
                     >
@@ -58,7 +58,7 @@
                 </div>
               </div>
                 <div class="product-card-footer">
-                  <router-link  v-if="product.product_attribute" :to="{ name:'single',params:{ slug: product.slug }}"  class="btn btn-primary btnQuick" style="cursor: pointer" >
+                  <router-link  v-if="product.product_attribute" :to="{ name:'product_details',params:{ id:product.id }}"  class="btn btn-primary btnQuick" style="cursor: pointer" >
                   অর্ডার করুন
                 </router-link>
 

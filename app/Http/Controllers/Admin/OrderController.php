@@ -198,6 +198,7 @@ class OrderController extends Controller
         $order->customer_address=$request->customer_address;
         $order->customer_phone=$request->customer_mobile;
         $order->city_id=$request->city;
+        $order->sub_city_id=$request->sub_city ?? 0;
         $order->status=$request->status ;
         $order->note=$request->note ;
          //store who is approved
@@ -956,7 +957,7 @@ class OrderController extends Controller
         fputcsv($file, array(
             'Invoice' => "Invoice",
             'Customer Name' => 'Customer Name',
-            'Contact No' => 'Contact No',
+            'Contact No.' => 'Contact No.',
             'Customer Address' => 'Customer Address',
             'District' => 'District',
             'Area' => "Area",
@@ -978,7 +979,7 @@ class OrderController extends Controller
             fputcsv($file, array( 
                 'Invoice' =>  $line->invoice_no,
                 'Customer Name' => $line->customer_name,
-                'Contact No' => $line->customer_phone,
+                'Contact No.' => $line->customer_phone,
                 'Customer Address' => $line->customer_address,
                 'District' => ucwords($city->name) ?? "empty",
                 'Area' => ucwords($sub_city->name) ?? "empty",

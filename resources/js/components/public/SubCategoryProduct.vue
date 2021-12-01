@@ -71,11 +71,11 @@
             <div class="col-lg-3 custom_padding col-sm-6 col-md-3 col-xs-6 small_width " v-for="product in products" :key="product.id">
             <div class="product-card ">
               <div class="product-card-body">
-                <router-link :to="{name: 'single', params: { slug: product.slug } }">
+                <router-link :to="{name: 'product_details', params: { id:product.id } }">
                    <img :src="  product_thumbnail_link + product.thumbnail_img "  :alt="product.name" />
                 </router-link>
                 <div class="product-detail  ">
-                  <h4>   <router-link class="product-link" :to="{name: 'single', params: { slug: product.slug } }">{{ product.name.substring(0,20) }}
+                  <h4>   <router-link class="product-link" :to="{name: 'product_details', params: { id:product.id } }">{{ product.name.substring(0,20) }}
                          <span v-if="product.name.length > 20">...</span></router-link ></h4>
                   <p class="price">
                     <span class="price-new"> &#2547; {{
@@ -92,7 +92,7 @@
                 </div>
               </div>
               <div class="product-card-footer">
-                  <router-link  v-if="product.product_attribute" :to="{ name:'single',params:{ slug: product.slug }}"  class="btn btn-primary btnQuick" style="cursor: pointer" >
+                  <router-link  v-if="product.product_attribute" :to="{ name:'product_details',params:{ id:product.id }}"  class="btn btn-primary btnQuick" style="cursor: pointer" >
                   অর্ডার করুন
                 </router-link>
 

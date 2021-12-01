@@ -1,9 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+
 
 Route::get('/', function(){
 
-   $exitCode = Artisan::call('optimize:clear');
+  //  $exitCode = Artisan::call('optimize:clear');
 
 return view('frontend.master');
 
@@ -39,7 +42,7 @@ Route::group([
 
     //public product route
     Route::get('products', 'HomeController@products');
-    Route::get('product/{slug}', 'HomeController@product');
+    Route::get('product/{id}', 'HomeController@product');
     Route::get('product/id/wise/{id}', 'HomeController@productIdWise');
     Route::get('related/products', 'HomeController@relatedProduct');
 
@@ -78,7 +81,7 @@ Route::group([
     Route::get('offers', 'HomeController@offers');
     Route::get('product', 'HomeController@product');
     Route::get('search/products/{search}', 'HomeController@SearchProduct');
-    Route::get('product/images/{slug}', 'HomeController@productImage');
+    Route::get('product/images/{id}', 'HomeController@productImage');
 
     //sale campaign
     Route::get('api/display/sale/campaign', 'HomeController@saleCampaignProducts');

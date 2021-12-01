@@ -16,8 +16,8 @@ class Order extends Model
    public function getCreatedAtAttribute($attr) {
         return Carbon::parse($attr)->format('d-m-Y - h:ia');
     }
- public function customer()
-    {
+
+    public function customer(){
         return $this->belongsTo('App\Models\Customer','customer_id');
     }
 

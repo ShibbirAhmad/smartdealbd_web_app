@@ -195,13 +195,13 @@
              <div class="col-lg-2 col-md-2 col-xs-6 custom_width small_width" v-for="(product,index) in related_products" :key="index">
             <div class="product-card ">
               <div class="product-card-body">
-                <router-link :to="{name: 'single', params: { slug: product.slug } }">
+                <router-link :to="{name: 'product_details', params: { id: product.id } }">
 
                  <img :src="  product_thumbnail_link + product.thumbnail_img "  :alt="product.name" />
 
                 </router-link>
                 <div class="product-detail small-detail">
-                  <h4>   <router-link class="product-link" :to="{name: 'single', params: { slug: product.slug } }">{{ product.name.substring(0,20) }}
+                  <h4>   <router-link class="product-link" :to="{name: 'product_details', params: { id: product.id } }">{{ product.name.substring(0,20) }}
                          <span v-if="product.name.length > 20">...</span></router-link ></h4>
                   <p class="price">
                     <span class="price-new">&#2547;{{
@@ -216,7 +216,7 @@
                 </div>
               </div>
                <div class="product-card-footer">
-                    <router-link  :to="{ name:'single',params:{ slug: product.slug }}"  class="btn btn-primary btnQuick" style="cursor: pointer" >
+                    <router-link  :to="{ name:'product_details',params:{ id: product.id }}"  class="btn btn-primary btnQuick" style="cursor: pointer" >
                       অর্ডার করুন
                     </router-link>
               </div>
@@ -434,7 +434,7 @@ export default {
       axios
         .get("/_public/related/products/?page="+this.page, {
           params: {
-            product_slug: this.$route.params.slug,
+            product_id: this.$route.params.id,
           },
         })
         .then((resp) => {
@@ -461,8 +461,8 @@ export default {
 
   mounted() {
     this.getRelatedProducts();
-    this.$store.dispatch("product_images", this.$route.params.slug);
-    this.$store.dispatch("single_product", this.$route.params.slug);
+    this.$store.dispatch("product_images", this.$route.params.id);
+    this.$store.dispatch("single_product", this.$route.params.id);
     this.$store.dispatch("user");
 
   },
