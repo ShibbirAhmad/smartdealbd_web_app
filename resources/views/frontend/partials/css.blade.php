@@ -2,7 +2,6 @@
 <link rel="stylesheet" type="text/css" href="{{asset('frontend/js/bootstrap/css/bootstrap.min.css')}}" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/stylesheet.css')}}" />
-{{-- <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/owl.carousel.css')}}" /> --}}
 <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/owl.transitions.css')}}"/>
 <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/responsive.css')}}"/>
 <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/stylesheet-skin3.css')}}"/>
@@ -10,18 +9,11 @@
 <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/scrol.css')}}"/>
 <link rel="stylesheet" href="{{ asset('admin/css/sweetalert2.css') }}">
 <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
-
-
-{{-- <script type="text/javascript" src="{{asset('frontend/js/jquery-2.1.1.min.js')}}"></script> --}}
 <script src="{{asset('admin/js/objectToFormData.js')}}"></script>
-
-
-{{-- <script type="text/javascript" src="{{asset('frontend/js/custome.js')}}"></script> --}}
 <script src="{{ asset('admin/js/sweetalert2.all.js') }}"></script>
 <?php
 
 $color=App\Models\BackgroundAndColor::first();
-
 
 ?>
 <style>
@@ -435,7 +427,7 @@ ul.side-nav li:hover>.left-sub-menu {
 }
 .product-card {
     width: 100%;
-    height: 315px;
+    height: 285px;
     background: #F4F1F0;
     text-align: center;
     margin-bottom: 20px;
@@ -446,17 +438,31 @@ ul.side-nav li:hover>.left-sub-menu {
 }
 
 .product-card-body img {
-    padding: 10px;
+    padding: 5px;
     width: 100%;
     height: 200px;
     transition: .3s;
 }
 
+.product-detail  {
+   margin-top:-10px;
+}
 
 .product-detail h4 {
     font-size: 12px;
-    padding: 5px;
+    padding: 0px 5px;
 }
+
+.product-link {
+    color: #000;
+    transition: .3s;
+    font-size: 14px;
+}
+
+.product-detail p {
+    line-height:8px;
+}
+
 .product-card-footer {
     background: var(--primary-color);
     transition: .5s;
@@ -474,10 +480,7 @@ ul.side-nav li:hover>.left-sub-menu {
      border: 1px solid #eee;
      border-radius: 5px;
 }
-.product-link{
-    color: #000;
-    transition: .3s;
-}
+
 .product-link:hover {
     color: var(--primary-color);
 }
@@ -2353,8 +2356,29 @@ span.price-new {
 
 
 @media screen and (max-width: 768px) {
+    
+    
+    #container {
+        text-align: left;
+        margin-top: 75px;
+        margin-bottom: 20px;
+    }
+    
+    
+    .product-image-viewer{
+        width:100%;
+    }
+    
+    
+    .single_product_image {
+        width: 100%;
+        height: auto;
+        max-height: 400px;
+    }
+        
+        
 
-  .btn_buy_cart {
+    .btn_buy_cart {
         margin-top:10px;
     }
 
@@ -2551,9 +2575,9 @@ span.price-new {
 
 
         span.price-new {
-        color: var(--primary-color);
-        font-size:12px ;
-        margin-left:-5% ;
+            color: var(--primary-color);
+            font-size: 14px;
+            margin-left: -5%;
         }
 
         .single_p_price {
@@ -2890,7 +2914,7 @@ span.price-new {
 
            .product-card {
             width:100%;
-            height: 290px;
+            height: 280px;
             background: #F4F1F0;
             border: 1px solid #ddd;
             text-align: center;
@@ -2898,25 +2922,39 @@ span.price-new {
             margin-bottom: 15px;
             }
 
-
+            .product-detail {
+                margin-top: 10px;
+            }
 
             .product-card p {
-                    font-size: 13px;
-                    margin-top: -15px;
+                font-size: 14px;
+                margin-top: -8px;
             }
 
             .product-detail h4 {
                 font-size: 16px;
                 padding-bottom: 10px;
-                margin-top: -5px;
+                margin-top: 5px;
             }
-
-         .product-card-body img {
-            width: 95% ;
-            height: 100% ;
-            padding: 2px 0px ;
-            min-height:200px;
+        
+          .product-card-body img {
+            width: 95%;
+            height: 100%;
+            padding: 2px 0px;
+            min-height: 180px;
+            max-height: 180px;
+         }
+         
+         .product-detail p {
+            line-height: 12px;
         }
+         
+         .price-old {
+                color: #F00;
+                text-decoration: line-through;
+                font-weight: normal;
+                font-size: 14px;
+            }
 
          .custom-box {
             margin-top: 65px ;
@@ -2945,7 +2983,10 @@ span.price-new {
 
 
         /* single display product responsive isssue is start from here ; */
-
+        .custom_width {
+            padding-left: 1px !important;
+            padding-right: 5px !important;
+        }
 
 
         .product-details{
@@ -3123,7 +3164,7 @@ span.price-new {
     padding: 0px 5px;
     border-radius: 5px;
     height: auto;
-    margin-top: 100px;
+    margin-top: 45px;
 }
 
     .landing_page_all_p_row {
@@ -3218,7 +3259,7 @@ span.price-new {
     
 
     .small_width {
-        width: 48% !important;
+        width: 49% !important;
         padding-left: 15px;
         padding-right: 0px;
     }
@@ -3432,12 +3473,6 @@ span.price-new {
             height: 220px !important;
 
             }
-
-
-    .single_product_image {
-        width: 345px;
-        height: 350px;
-    }
 
 
 
