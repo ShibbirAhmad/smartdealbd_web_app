@@ -216,7 +216,7 @@ export default {
       axios
         .get("/_public/addToCart", {
           params: {
-            slug: this.quick_view_product.slug,
+            id: this.quick_view_product.id,
             attribute_id: this.cart.attrribute_id,
             variant_id: this.cart.variant_id,
             quantity: this.cart.quantity,

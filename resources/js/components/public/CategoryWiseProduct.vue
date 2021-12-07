@@ -143,7 +143,7 @@
                       অর্ডার করুন
                     </router-link>
 
-                    <button v-else @click="buyNow(product.slug)"  class="btn btn-primary btnQuick" style="cursor: pointer" >
+                    <button v-else @click="buyNow(product.id)"  class="btn btn-primary btnQuick" style="cursor: pointer" >
                       অর্ডার করুন
                     </button>
               </div>
@@ -193,11 +193,11 @@ export default {
   },
   methods: {
 
-    buyNow(slug) {
+    buyNow(id) {
       axios
         .get("/_public/addToCart", {
           params: {
-            slug:slug,
+            id:id,
             quantity: 1,
           },
         })

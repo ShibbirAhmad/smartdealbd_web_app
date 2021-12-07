@@ -14,7 +14,7 @@ class CartController extends Controller
 {
     public function addCart(Request $request){
 
-        $product=Product::where('slug',$request->slug)->first();
+        $product=Product::where('id',$request->id)->first();
          $product_attribute=ProductAttribute::where('product_id',$product->id)->get();
 
          if($product_attribute->count()>=1 && $request->attribute_id==null){

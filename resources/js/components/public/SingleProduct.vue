@@ -332,7 +332,7 @@ export default {
       axios
         .get("/_public/addToCart", {
           params: {
-            slug: this.$route.params.slug,
+            id: this.$route.params.id,
             attribute_id: this.cart.attrribute_id,
             variant_id: this.cart.variant_id,
             quantity: this.cart.quantity,
@@ -376,7 +376,7 @@ export default {
       axios
         .get("/_public/addToCart", {
           params: {
-            slug: this.$route.params.slug,
+            id: this.$route.params.id,
             attribute_id: this.cart.attrribute_id,
             variant_id: this.cart.variant_id,
             quantity: this.cart.quantity,
@@ -459,7 +459,7 @@ export default {
 
   },
 
-  mounted() {
+  created() {
     this.getRelatedProducts();
     this.$store.dispatch("product_images", this.$route.params.id);
     this.$store.dispatch("single_product", this.$route.params.id);

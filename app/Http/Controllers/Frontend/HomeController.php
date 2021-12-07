@@ -65,7 +65,8 @@ class HomeController extends Controller
         foreach($categories as $category){
              $category->{'products'}=Product::where('category_id',$category->id)
                                            ->where('status',1)
-                                           ->select('id','name','thumbnail_img','price','sale_price','slug','discount')
+                                           ->orderBy('product_position','asc')
+                                           ->select('id','name','thumbnail_img','price','sale_price','slug','discount','product_position')
                                           ->with('productAttribute')->get()
                                           ->take(24);
         }
@@ -101,7 +102,8 @@ class HomeController extends Controller
 
     public function relatedProduct(Request $request){
      $product_find=Product::where('id',$request->product_id)->first();
-     $products=Product::where('category_id',$product_find->category_id)->where('id','!=',$product_find->id)->paginate(5);
+     $products=Product::where('category_id',$product_find->category_id)->where('id','!=',$product_find->id)
+                             ->select('id','category_id','name','thumbnail_img','price','sale_price','slug','discount','product_position')->paginate(5);
     return response()->json($products);
  }
 
@@ -117,14 +119,18 @@ class HomeController extends Controller
     public function categoryWiseProduct(Request $request)
     {
       $category=Category::where('slug',$request->slug)->first();
-      $products=Product::where('category_id',$category->id)->with('productAttribute')->paginate(12);
+      $products=Product::where('category_id',$category->id)->where('status',1)
+                                           ->orderBy('product_position','asc')
+                                            ->select('id','category_id','name','thumbnail_img','price','sale_price','slug','discount','product_position')
+                                           ->with('productAttribute')->paginate(12);
       return response()->json($products);
     }
 
     public function categoryWiseProductPriceFilter(Request $request){
 
         $category=Category::where('slug',$request->slug)->first();
-        $products=Product::where('category_id',$category->id)->where('price','>=',$request->min_price)->where('price','<=',$request->max_price)->with('productAttribute')->paginate(20);
+        $products=Product::where('category_id',$category->id)->where('status',1)
+                                           ->orderBy('product_position','asc')->where('price','>=',$request->min_price)->where('price','<=',$request->max_price)->with('productAttribute')->paginate(20);
         return response()->json([
             "status" => "OK",
             "products" => $products ,
@@ -196,7 +202,8 @@ class HomeController extends Controller
 
     public function subCategoryWiseProduct(Request $request){
          $sub_category=SubCategory::where('slug',$request->slug)->first();
-        $products=Product::where('sub_category_id',$sub_category->id)->with('productAttribute')->paginate(8);
+        $products=Product::where('sub_category_id',$sub_category->id)->where('status',1)
+                                           ->orderBy('product_position','asc')->with('productAttribute')->paginate(8);
         return response()->json($products);
     }
 
@@ -222,7 +229,8 @@ class HomeController extends Controller
     public function subSubCategoryWiseProduct(Request $request){
 
         $sub_sub_category=SubSubCategory::where('slug',$request->slug)->first();
-        $products=Product::where('sub_sub_category_id',$sub_sub_category->id)->where('status',1)->with('productAttribute')->paginate(8);
+        $products=Product::where('sub_sub_category_id',$sub_sub_category->id)
+                                           ->orderBy('product_position','asc')->where('status',1)->with('productAttribute')->paginate(8);
         return response()->json($products);
     }
 
@@ -249,7 +257,8 @@ class HomeController extends Controller
             $orderBy='DESC';
         }
         $sub_category=SubCategory::where('slug',$request->slug)->first();
-        $products=Product::where('sub_category_id',$sub_category->id)->orderBy('price',$orderBy)->where('status',1)->with('productAttribute')->get();
+        $products=Product::where('sub_category_id',$sub_category->id)->orderBy('price',$orderBy)->where('status',1)
+                                           ->orderBy('product_position',asc)->with('productAttribute')->get();
         return response()->json([
                 "products" => $products ,
         ]);
@@ -307,28 +316,28 @@ class HomeController extends Controller
 
 
 
- public function sendOtpCode($number,$code){
+//  public function sendOtpCode($number,$code){
 
-     $api_key = "C2008151606a05deddbd63.40969555";
-        $contacts =$number;
-        $senderid = '8809612446732';
-        $sms = 'Dear Sir, '. 'Your one time pin code is '.$code.'. It will expire in 3 minute';
-        $URL = "http://bulk.fmsms.biz/smsapi?api_key=" . urlencode($api_key) . "&type=text&contacts=" . urlencode($contacts) . "&senderid=" . urlencode($senderid) . "&msg=" . urlencode($sms);
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $URL);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 0);
-        try {
-            $output = $content = curl_exec($ch);
-          //  print_r($output);
-        } catch (Exception $ex) {
-           return back();
-        }
-        return $output;
-            return \response()->json($code);
-        }
+//      $api_key = "C2008151606a05deddbd63.40969555";
+//         $contacts =$number;
+//         $senderid = '8809612446732';
+//         $sms = 'Dear Sir, '. 'Your one time pin code is '.$code.'. It will expire in 3 minute';
+//         $URL = "http://bulk.fmsms.biz/smsapi?api_key=" . urlencode($api_key) . "&type=text&contacts=" . urlencode($contacts) . "&senderid=" . urlencode($senderid) . "&msg=" . urlencode($sms);
+//         $ch = curl_init();
+//         curl_setopt($ch, CURLOPT_URL, $URL);
+//         curl_setopt($ch, CURLOPT_HEADER, 0);
+//         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+//         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//         curl_setopt($ch, CURLOPT_POST, 0);
+//         try {
+//             $output = $content = curl_exec($ch);
+//           //  print_r($output);
+//         } catch (Exception $ex) {
+//           return back();
+//         }
+//         return $output;
+//             return \response()->json($code);
+//         }
 
 
  public function verifyCodeOtp(Request $request)
