@@ -1,0 +1,9 @@
+  status list 
+  1. New/Processing
+  2. Pending/Payment Pending
+  3. Approved/Confirmed/ReadyToShip
+  4. Shipment/In Courier
+  5. Delivered
+  6. Cancle
+  7. Return
+  8. Demage

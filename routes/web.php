@@ -496,6 +496,8 @@ Route::group([
     Route::get('shipment/order/{id}', 'OrderController@shipment');
     Route::get('return/order/{id}', 'OrderController@return');
     Route::get('cancel/order/{id}', 'OrderController@cancel');
+    Route::get('api/demage/order/{id}', 'OrderController@DemageOrder');
+    Route::get('api/confimation/order/{id}', 'OrderController@CustomerConfimation');
 
     Route::post('order/courier/update/{id}', 'OrderController@OrderCoutierUpdate');
     Route::get('/order/search/{saerch}', 'OrderController@orderSearch');

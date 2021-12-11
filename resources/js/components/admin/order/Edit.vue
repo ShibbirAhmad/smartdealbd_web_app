@@ -184,7 +184,7 @@
                       class="form-control"
                     >
                       <option value="3">Confirmed</option>
-                      <option value="2">Pending</option>
+                      <option value="2">Payment Pending</option>
                     </select>
                   </div>
                 </div>
@@ -343,7 +343,7 @@
                           </tr>
                           <tr v-if="products.length > 0">
                             <td colspan="4"></td>
-                            <td>Shipping_charge</td>
+                            <td>Shipping charge</td>
                             <td colspan="2">{{ form.shipping_cost }}</td>
                           </tr>
                           <tr v-if="products.length > 0">

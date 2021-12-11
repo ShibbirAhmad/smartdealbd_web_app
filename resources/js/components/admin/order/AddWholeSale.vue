@@ -151,8 +151,8 @@
                       v-model="form.status"
                       class="form-control"
                     >
-                      <option value="3">Approved</option>
-                      <option value="2">Pending</option>
+                      <option value="3">Confirmed</option>
+                      <option value="2">Payment Pending</option>
                     </select>
                   </div>
 

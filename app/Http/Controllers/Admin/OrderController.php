@@ -142,7 +142,7 @@ class OrderController extends Controller
                 $phone=$order->customer_phone;
                 $name=$request->name;
                 $invoice=$order->invoice_no;
-                 Order::SendMessageCustomer($phone,$name,$invoice);
+                //  Order::SendMessageCustomer($phone,$name,$invoice);
               //create a credit
               if($order->paid>0){
                 $credit = new Credit();
@@ -276,37 +276,44 @@ class OrderController extends Controller
 
     public function approved($id){
 
-        $order=Order::find($id);
-        if($order){
-
-          $order_items=OrderItem::where('order_id',$order->id)->get();
-            //check product srock before order approved
-            foreach($order_items as $order_item){
-              $product=Product::where('id', $order_item->product_id)->first();
-                if($product->stock<=0){
-                    return \response()->json($product->product_code.'- Stock out');
-                }
-                else if($product->stock < $order_item->quantity){
-                    return \response()->json("this product ".$product->product_code.' Stock Available-'.$product->stock.'. But created quantity ' .$order_item->quantity);
-                }
-                else{
-                    $product->stock=$product->stock - $order_item->quantity;
-                    $product->save();
-                }
-
-            }
-            $order->status=3;
-            $order->approved_admin_id=session()->get('admin')['id'];
-            $order->approved_date=date('Y-m-d');
-
-            if($order->save()){
-                return \response()->json([
-                    'status'=>'SUCCESS',
-                    'message'=>'Order was approved  successfully'
-                ]);
-            }
-        }
+        $order=Order::findOrFail($id);
+        $order->status=3;
+        $order->approved_admin_id=session()->get('admin')['id'];
+        $order->approved_date=date('Y-m-d');
+        $order->save();
+            return response()->json([
+                'status'=>'SUCCESS',
+                'message'=>'Order  approved  successfully'
+            ]);
+    
     }
+
+
+
+    public function CustomerConfimation($id){
+
+        $order=Order::findOrFail($id);
+        $order->customer_confirmation=1;
+        $order->save();
+            return response()->json([
+                'status'=>'SUCCESS',
+                'message'=>'order confirmed by customer'
+            ]);
+    
+    }
+
+    public function DemageOrder($id){
+
+        $order=Order::findOrFail($id);
+        $order->status=8;
+        $order->save();
+            return response()->json([
+                'status'=>'SUCCESS',
+                'message'=>'Order  approved  successfully'
+            ]);
+    
+    }
+    
     public function pending($id){
 
         $order=Order::find($id);
@@ -377,14 +384,30 @@ class OrderController extends Controller
        public function shipment($id){
 
             $order=Order::findOrFail($id);
+            $order_items=OrderItem::where('order_id',$order->id)->get();
+            //check product srock before order approved
+            foreach($order_items as $order_item){
+              $product=Product::where('id', $order_item->product_id)->first();
+                if($product->stock<=0){
+                    return \response()->json($product->product_code.'- Stock out');
+                }
+                else if($product->stock < $order_item->quantity){
+                    return \response()->json("this product ".$product->product_code.' Stock Available-'.$product->stock.'. But created quantity ' .$order_item->quantity);
+                }
+                else{
+                    $product->stock=$product->stock - $order_item->quantity;
+                    $product->save();
+                }
+
+            }
             $order->status=4;
             $order->shipment_admin_id=session()->get('admin')['id'];
             $order->shippment_date=date('Y-m-d');
             $order->save();
-             Order::sendShipmentMenssage($order);
-             return \response()->json([
+            //  Order::sendShipmentMenssage($order);
+             return response()->json([
                     'status'=>'SUCCESS',
-                    'message'=>'Order was shiped successfully'
+                    'message'=>'Order shiped successfully'
                 ]);
     }
 
@@ -423,7 +446,6 @@ class OrderController extends Controller
     public function cancel($id){
 
         $order=Order::find($id);
-        if($order){
             $details=OrderItem::where('order_id',$order->id)->get();
            if($order->status !=1 &&  $order->status!=2){
                foreach($details as $detail){
@@ -436,14 +458,13 @@ class OrderController extends Controller
             $order->status=6;
             $order->cancel_admin_id=session()->get('admin')['id'];
             $order->cancel_date=date('Y-m-d');
-
-            if($order->save()){
+            $order->save();
                 return \response()->json([
                     'status'=>'SUCCESS',
                     'message'=>'Order was cancel successfully'
                 ]);
-            }
-        }
+            
+        
     }
 
     public function OrderCoutierUpdate(Request $request,$id){
@@ -954,7 +975,7 @@ class OrderController extends Controller
         $filename = 'order-export-' . date('d-m-Y') . '-' . time() . '.csv';
         $file = fopen($filename, "w");
 
-        fputcsv($file, array(
+        fputcsv($file, array( 
             'Invoice' => "Invoice",
             'Customer Name' => 'Customer Name',
             'Contact No.' => 'Contact No.',

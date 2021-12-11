@@ -1279,7 +1279,29 @@ const routes = [
             requiresAuthAdmin: true,
             title: 'Order'
         }
+    },
 
+    
+   {
+        path: '/backend/order/invoice/pending',
+        component: () => import(/* webpackChunkName: "invoice_pending" */'./components/admin/order/InvoicePending.vue'),
+        name: 'invoice_pending',
+        meta: {
+            requiresAuthAdmin: true,
+            title: 'invoice pending'
+        }
+    },
+
+
+    
+   {
+        path: '/backend/order/customer/confimation/pending',
+        component: () => import(/* webpackChunkName: "customer_confirmation_pending" */'./components/admin/order/CustomerConfirmation.vue'),
+        name: 'customer_confirmation_pending',
+        meta: {
+            requiresAuthAdmin: true,
+            title: 'customer confirmation pending'
+        }
     },
 
     {
@@ -1304,7 +1326,6 @@ const routes = [
         }
 
     },
-
     {
         path: '/backend/order/approved',
         component: () => import(/* webpackChunkName: "approvedOrder" */'./components/admin/order/Approved'),
@@ -1312,6 +1333,16 @@ const routes = [
         meta: {
             requiresAuthAdmin: true,
             title: 'Approved | Order'
+        }
+
+    },
+    {
+        path: '/backend/orders/stock/out',
+        component: () => import(/* webpackChunkName: "stock_out_order" */'./components/admin/order/StockOut.vue'),
+        name: 'stock_out_order',
+        meta: {
+            requiresAuthAdmin: true,
+            title: 'stock out order'
         }
 
     },

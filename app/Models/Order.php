@@ -73,7 +73,7 @@ class Order extends Model
                             ->with(['createAdmin','courier','OrderNote','orderItem.product'])
                             ->where('status',$request->status)
                             ->paginate($paginate);
-              }else{
+                }else{
                 $orders=Order::orderBy('id','DESC')
                              ->with(['createAdmin','courier','OrderNote','orderItem.product'])
                             ->where('status',$request->status)
@@ -89,7 +89,25 @@ class Order extends Model
                 $orders=Order::orderBy('id','DESC')->with(['createAdmin','courier','OrderNote','orderItem.product'])->where('order_type',$request->type)->paginate($paginate);
               }
             }
-            return \response()->json([
+
+                                    
+            if($request->print_status==0 && $request->status==3){
+              $orders=Order::orderBy('id','DESC')
+                        ->with(['createAdmin','courier','OrderNote','orderItem.product'])
+                        ->where('status',3)
+                        ->where('print_status',0)
+                        ->paginate($paginate);
+            }
+                                    
+            if($request->customer_confirmation==0 && $request->status==5){
+              $orders=Order::orderBy('id','DESC')
+                        ->with(['createAdmin','courier','OrderNote','orderItem.product'])
+                        ->where('status',5)
+                        ->where('customer_confirmation',0)
+                        ->paginate($paginate);
+            }
+
+            return response()->json([
                 'status'=>'SUCCESS',
                 'orders'=>$orders,
                 'order_count'=> self::orderCount(),
@@ -384,7 +402,7 @@ class Order extends Model
     }
 
 public static function orderCount(){
-       $order=array();
+        $order=array();
         $order['total']=Order::count();
 
         $order['new_order']=Order::where('status',1)
@@ -401,12 +419,31 @@ public static function orderCount(){
                                    ->count();
         $order['cancel_order']=Order::where('status',6)
                                 ->count();
-        $order['wholesale']=Order::where('status',6)
-        ->count();
-        $order['pending_memo']=Order::where('status',3)->where('print_status',0)
-                                  ->count();
+        $order['demage']=Order::where('status',8)->count();
+        $order['pending_memo']=Order::where('status',3)->where('print_status',0)->count();
+        $order['customer_confirmation']=Order::where('status',5)->where('customer_confirmation',0)->count();
+        $order['stock_out'] = self::StockOutOrderCounter() ;
+
        return $order;
 }
+
+
+public static function StockOutOrderCounter(){
+      $stock_out_item=0 ;
+      $orders=Order::where('status',3)->get();
+      foreach ($orders as $key => $order) {
+        $order_items=OrderItem::where('order_id',$order->id)->get();
+        foreach ($order_items as $key => $item) {
+             $product=Product::where('id',$item->product_id)->first();
+             if ($product->stock <=0) {
+                 $stock_out_item += 1 ;
+             }
+        }
+      }
+     return $stock_out_item ; 
+
+}
+
 
 public static function profite(){
   $profite=array();
@@ -417,9 +454,6 @@ public static function profite(){
                               ->map(function($value){
                                  return $value->price*$value->quantity;
                                 });
-
-
-
 
   return  $today_order_items;
 }

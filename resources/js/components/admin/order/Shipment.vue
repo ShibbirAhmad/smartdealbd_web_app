@@ -2,62 +2,11 @@
   <div>
     <admin-main></admin-main>
     <div class="content-wrapper">
-      <section class="content-header">
-        <div class="order_statistic">
-
-            <router-link :to="{ name: 'NewOrder' }" class="statistic_item " >
-              <h2> {{ order_count.new_order }} </h2>
-               <p> New </p>
-           </router-link >
-
-        <router-link :to="{ name: 'PendingOrder' }" class="statistic_item " >
-            <h2> {{ order_count.pending_order }} </h2>
-            <p>Pending</p>
-        </router-link>
-
-
-        <router-link :to="{ name: 'ApprovedOrder' }" class="statistic_item " >
-         <h2>  {{ order_count.approved_order }} </h2>
-         <p> Ready To Ship </p>
-        </router-link>
-
-
-
-        <router-link :to="{ name: 'ShipmentOrder' }" class="statistic_item " >
-         <h2>  {{ order_count.shipment_order }} </h2>
-         <p> Shipment  </p>
-        </router-link>
-
-
-        <router-link :to="{ name: 'DeliveredOrder' }" class="statistic_item " >
-         <h2>  {{ order_count.delivered_order }} </h2>
-         <p> Delivered  </p>
-        </router-link>
-
-
-        <router-link :to="{ name: 'ReturnOrder' }" class="statistic_item " >
-         <h2>  {{ order_count.return_order }} </h2>
-         <p> Return  </p>
-        </router-link>
-
-        <router-link :to="{ name: 'CancelOrder' }" class="statistic_item " >
-         <h2>  {{ order_count.cancel_order }} </h2>
-         <p> Cancel  </p>
-        </router-link>
-
-        <router-link :to="{ name: 'order' }" class="statistic_item " >
-         <h2>  {{ order_count.total }} </h2>
-         <p> All  </p>
-        </router-link>
-
-
-
-        </div>
-      </section>
+  <OrderStatus  :order_count="order_count" />
       <section class="content">
         <div class="container">
           <div class="row justify-content-center">
-            <div class="col-lg-11">
+            <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
               <div class="box box-primary">
                     <div class="box-header with-border ">
 
@@ -134,9 +83,14 @@
                         v-else
                         @change="ordersList"
                       >
-                        <option value="10">10</option>
+                       <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="300">300</option>
+                        <option value="400">400</option>
+                        <option value="500">500</option>
                       </select>
                     </div>
                   </div>
@@ -286,6 +240,13 @@
                           >
                             Return
                           </button>
+                           <button
+                            class="btn btn-sm btn-danger action-btn"
+                            v-if="order.status == 4"
+                            @click="DemageOrder(order, index)"
+                          >
+                            Demage
+                          </button>
 
                           <router-link
                           style="width:70px;"
@@ -409,10 +370,14 @@
 </template>
 
 <script>
+import OrderStatus from "./OrderStatus.vue"
 export default {
   created() {
     this.ordersList();
     this.others();
+  },   
+  components:{
+    OrderStatus
   },
   data() {
     return {
@@ -651,6 +616,36 @@ export default {
             duration: 4000,
           });
         });
+    },
+
+    DemageOrder(order, index) {
+      /////index initial for update order from orderLit or order arrow.
+      //start progress bar
+      this.$Progress.start();
+      axios
+        .get("/api/demage/order/"+order.id)
+        .then((resp) => {
+          //end progress bar after resp
+          this.$Progress.finish();
+          //only success resp .......
+          if (resp.data.status == "SUCCESS") {
+            this.$toasted.show(resp.data.message, {
+              type: "success",
+              position: "top-center",
+              duration: 2000,
+            });
+              this.getOrderStatistic();
+          }
+          //for any kind of error resp .......
+          else {
+            this.$toasted.show("someting went to wrong", {
+              type: "error",
+              position: "top-center",
+              duration: 2000,
+            });
+          }
+        })
+       
     },
 
     //initial method for order return

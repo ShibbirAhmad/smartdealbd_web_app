@@ -3,65 +3,14 @@
     <admin-main></admin-main>
     <div class="content-wrapper">
       <section class="content-header">
-        <div class="order_statistic">
-
-            <router-link :to="{ name: 'NewOrder' }" class="statistic_item " >
-              <h2> {{ order_count.new_order }} </h2>
-               <p> New </p>
-           </router-link >
-
-        <router-link :to="{ name: 'PendingOrder' }" class="statistic_item " >
-            <h2> {{ order_count.pending_order }} </h2>
-            <p>Pending</p>
-        </router-link>
-
-
-        <router-link :to="{ name: 'ApprovedOrder' }" class="statistic_item " >
-         <h2>  {{ order_count.approved_order }} </h2>
-         <p> Ready To Ship </p>
-        </router-link>
-
-        <router-link style="background:#f39c12" :to="{ name: 'ApprovedOrder' }" class="statistic_item  " >
-         <h2>  {{ order_count.pending_memo }} </h2>
-         <p> Memo Pending </p>
-        </router-link>
-
-        <router-link :to="{ name: 'ShipmentOrder' }" class="statistic_item " >
-         <h2>  {{ order_count.shipment_order }} </h2>
-         <p> Shipment  </p>
-        </router-link>
-
-
-        <router-link :to="{ name: 'DeliveredOrder' }" class="statistic_item " >
-         <h2>  {{ order_count.delivered_order }} </h2>
-         <p> Delivered  </p>
-        </router-link>
-
-
-        <router-link :to="{ name: 'ReturnOrder' }" class="statistic_item " >
-         <h2>  {{ order_count.return_order }} </h2>
-         <p> Return  </p>
-        </router-link>
-
-        <router-link :to="{ name: 'CancelOrder' }" class="statistic_item " >
-         <h2>  {{ order_count.cancel_order }} </h2>
-         <p> Cancel  </p>
-        </router-link>
-
-        <router-link :to="{ name: 'order' }" class="statistic_item " >
-         <h2>  {{ order_count.total }} </h2>
-         <p> All  </p>
-        </router-link>
-
-
-
-        </div>
+        
+        <OrderStatus  :order_count="order_count" />
 
       </section>
       <section class="content">
         <div class="container">
           <div class="row ">
-            <div class="col-lg-11 col-md-11">
+            <div class="col-lg-12 col-sm-12 col-xl-12 col-md-12">
               <div class="box box-primary">
                 <div class="box-header with-border ">
                      <router-link :to="{ name: 'addOrder' }" class="btn btn-primary">
@@ -142,6 +91,11 @@
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="300">300</option>
+                        <option value="400">400</option>
+                        <option value="500">500</option>
                       </select>
                     </div>
                   </div>
@@ -160,8 +114,8 @@
                         <th width="5%" >Invoice</th>
                         <th width="15%" >Total</th>
                         <th width="5%" >Created</th>
-                        <th width="5%" >Order_place</th>
-                        <th width="5%" >Order_date</th>
+                        <th width="5%" >Status</th>
+                        <th width="5%" >Date</th>
                         <th width="5%" >Action</th>
                         <th width="10%" >Courier</th>
                         <th width="10%" >Comment</th>
@@ -240,13 +194,13 @@
                             >New</span
                           >
                           <span class="badge" v-if="order.status == 2"
-                            >Pending</span
+                            >Payment Pending</span
                           >
 
                           <span
                             class="badge badge-success"
                             v-if="order.status == 3"
-                            >Approved</span
+                            >Confirmed</span
                           >
                           <span
                             class="badge badge-success"
@@ -285,14 +239,14 @@
                               "
                               @click="approved(order, index)"
                             >
-                              Approved
+                              Confirmed
                             </button>
                             <button
                               class="btn btn-sm btn-info action-btn"
                               v-if="order.status == 1 || order.status == 7"
                               @click="pending(order, index)"
                             >
-                              Pending
+                             Payment Pending
                             </button>
                             <button
                               class="btn btn-sm btn-success action-btn"
@@ -328,8 +282,8 @@
                             </button>
 
                           <router-link
-                            style="width:70px"
-                            class="btn btn-sm btn-warning"
+                          
+                            class="btn action-btn btn-sm btn-warning"
                             :to="{
                               name: 'orderEdit',
                               params: { id: order.id },
@@ -463,11 +417,14 @@
 </template>
 
 <script>
-
+import OrderStatus from "./OrderStatus.vue"
 export default {
   created() {
     this.ordersList();
     this.others();
+  },
+  components:{
+    OrderStatus
   },
   data() {
     return {
